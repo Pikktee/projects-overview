@@ -43,6 +43,6 @@ jobs:
 
       - name: Zu Railway deployen
         if: steps.token.outputs.vorhanden == 'true'
-        run: railway up --project f5e92342-ec8a-4e6b-be8d-f76049a3ebcd --service projects-overview --ci
+        run: railway up --project f5e92342-ec8a-4e6b-be8d-f76049a3ebcd --environment production --service projects-overview --ci
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
