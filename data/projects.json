@@ -14,18 +14,18 @@
     "accent": "#3d8bfd"
   },
   {
-    "slug": "hugur",
-    "name": "hugur",
-    "url": "https://hugur.henrikheil.net",
-    "description": "Hugur — dein zweites Gehirn. Notizen, Links, To-Dos und Ideen in einem durchsuchbaren Stream.",
-    "accent": "#5c8a72"
-  },
-  {
     "slug": "schnappster",
     "name": "Schnappster",
     "url": "https://schnappster.henrikheil.net",
     "description": "Dein persönlicher Angebote-Finder für Kleinanzeigen.de — Schnäppchen finden, ohne ständig zu suchen.",
     "accent": "#e07a2f"
+  },
+  {
+    "slug": "hugur",
+    "name": "hugur",
+    "url": "https://hugur.henrikheil.net",
+    "description": "Hugur — dein zweites Gehirn. Notizen, Links, To-Dos und Ideen in einem durchsuchbaren Stream.",
+    "accent": "#5c8a72"
   },
   {
     "slug": "tile-weave",
