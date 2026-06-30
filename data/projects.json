@@ -70,17 +70,17 @@
     "accent": "#2d6cdf"
   },
   {
-    "slug": "a11y-quiz",
-    "name": "A11y Quiz",
-    "url": "https://a11y-quiz.henrikheil.net",
-    "description": "Teste dein WCAG-Wissen im interaktiven Quiz — Barrierefreiheit spielerisch lernen.",
-    "accent": "#6b5ce7"
-  },
-  {
     "slug": "patina-kampagne",
     "name": "Patina-Kampagne",
     "url": "https://patina-kampagne.henrikheil.net",
     "description": "Social-Media-Kampagne für Patina — das Recherchewerkzeug für Autorinnen und Autoren historischer Romane.",
     "accent": "#a07850"
+  },
+  {
+    "slug": "a11y-quiz",
+    "name": "A11y Quiz",
+    "url": "https://a11y-quiz.henrikheil.net",
+    "description": "Teste dein WCAG-Wissen im interaktiven Quiz — Barrierefreiheit spielerisch lernen.",
+    "accent": "#6b5ce7"
   }
 ]
