@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
-const projects = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
+const { sections } = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
+const projects = sections.flatMap((s) => s.projects);
 
 const outDir = join(root, 'public/screenshots');
 mkdirSync(outDir, { recursive: true });

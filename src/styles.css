@@ -45,7 +45,7 @@ body {
 }
 
 .hero,
-.grid,
+.sections,
 .footer,
 .legal {
   position: relative;
@@ -89,13 +89,32 @@ body {
   color: var(--text-muted);
 }
 
+.sections {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gap) clamp(3rem, 6vw, 5rem);
+}
+
+.section--labeled {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--border);
+}
+
+.section__heading {
+  margin: 0 0 var(--gap);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  font-weight: 400;
+  font-style: italic;
+  color: #d4c4a8;
+  letter-spacing: -0.01em;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: var(--gap);
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: 0 var(--gap) clamp(3rem, 6vw, 5rem);
 }
 
 .card {

@@ -8,7 +8,8 @@ const publicDir = join(root, 'public');
 
 mkdirSync(publicDir, { recursive: true });
 
-const projects = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
+const { sections } = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
+const allProjects = sections.flatMap((s) => s.projects);
 
 for (const file of ['styles.css', 'app.js', 'favicon.svg', 'apple-touch-icon.png']) {
   copyFileSync(join(root, 'src', file), join(publicDir, file));
@@ -18,9 +19,8 @@ const headExtras = `  <link rel="icon" href="/favicon.svg" type="image/svg+xml" 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#0f1114" />`;
 
-const cards = projects
-  .map((p) => {
-    const hasShot = existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
+function renderCard(p) {
+  const hasShot = existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
   const img = hasShot
     ? `<img src="/screenshots/${p.slug}.png" alt="Screenshot von ${p.name}" loading="lazy" width="640" height="400" />`
     : `<div class="card__placeholder" style="--accent:${p.accent}" aria-hidden="true"><span>${p.name.charAt(0)}</span></div>`;
@@ -36,6 +36,20 @@ const cards = projects
         </div>
       </a>
     </article>`;
+}
+
+const sectionsHtml = sections
+  .map((section) => {
+    const heading = section.title
+      ? `<h2 class="section__heading">${section.title}</h2>`
+      : '';
+    const cards = section.projects.map(renderCard).join('\n');
+    return `
+  <section class="section${section.title ? ' section--labeled' : ''}">
+    ${heading}
+    <div class="grid">${cards}
+    </div>
+  </section>`;
   })
   .join('\n');
 
@@ -59,11 +73,12 @@ ${headExtras}
     <h1 class="hero__title">Aktuelle <em>Projekte</em></h1>
     <p class="hero__lead">Überblick über die Webprojekte, die ich derzeit entwickle und betreibe.</p>
   </header>
-  <main class="grid" id="projects">${cards}</main>
+  <main class="sections" id="projects">${sectionsHtml}
+  </main>
   <footer class="footer">
     <a href="/impressum.html">Impressum</a>
     <span class="footer__sep" aria-hidden="true">·</span>
-    <span>${projects.length} Projekte</span>
+    <span>${allProjects.length} Projekte</span>
   </footer>
   <script src="/app.js" defer></script>
 </body>
@@ -112,4 +127,4 @@ ${headExtras}
 
 writeFileSync(join(publicDir, 'index.html'), html);
 writeFileSync(join(publicDir, 'impressum.html'), impressum);
-console.log(`Built ${projects.length} project cards → public/`);
+console.log(`Built ${allProjects.length} project cards in ${sections.length} sections → public/`);
