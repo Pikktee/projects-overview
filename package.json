@@ -1,0 +1,15 @@
+{
+  "name": "projects-overview",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Übersicht über aktuelle Webprojekte von Henrik Heil",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "dev": "npx serve public -l 3000"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}

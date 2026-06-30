@@ -1,0 +1,86 @@
+[
+  {
+    "slug": "patina",
+    "name": "Patina",
+    "url": "https://patina.henrikheil.net",
+    "description": "Prüf- und Recherchewerkzeug für Autorinnen und Autoren historischer Romane.",
+    "accent": "#8b6f47"
+  },
+  {
+    "slug": "velosia",
+    "name": "Velosia",
+    "url": "https://velosia.henrikheil.net",
+    "description": "Routenplanung und Navigation für Radfahrerinnen und Radfahrer — mit Fokus auf schöne Wege statt nur schneller Straßen.",
+    "accent": "#3d8bfd"
+  },
+  {
+    "slug": "hugur",
+    "name": "hugur",
+    "url": "https://hugur.henrikheil.net",
+    "description": "Hugur — dein zweites Gehirn. Notizen, Links, To-Dos und Ideen in einem durchsuchbaren Stream.",
+    "accent": "#5c8a72"
+  },
+  {
+    "slug": "schnappster",
+    "name": "Schnappster",
+    "url": "https://schnappster.henrikheil.net",
+    "description": "Dein persönlicher Angebote-Finder für Kleinanzeigen.de — Schnäppchen finden, ohne ständig zu suchen.",
+    "accent": "#e07a2f"
+  },
+  {
+    "slug": "tile-weave",
+    "name": "Tile Weave",
+    "url": "https://tile-weave.henrikheil.net",
+    "description": "KI-Werkzeug zum Prüfen, Anpassen und Vergleichen nahtloser Stoffmuster für Kleidung.",
+    "accent": "#c45c8a"
+  },
+  {
+    "slug": "echt-oder-ki",
+    "name": "Echt oder KI?",
+    "url": "https://echt-oder-ki.henrikheil.net",
+    "description": "Trainiere dein Auge für künstliche Kunst — tägliche Challenge: Welches Werk ist die KI-Fälschung?",
+    "accent": "#9b7ede"
+  },
+  {
+    "slug": "komorebi",
+    "name": "Komorebi",
+    "url": "https://komorebi.henrikheil.net",
+    "description": "Finde deinen ökologischen Freiwilligendienst weltweit — Naturschutz, Artenschutz und Feldforschung.",
+    "accent": "#4a9b6d"
+  },
+  {
+    "slug": "suntino",
+    "name": "Suntino",
+    "url": "https://suntino.henrikheil.net",
+    "description": "Chrome-Erweiterung mit KI-Unterstützung — dieses Backend versorgt das Plugin mit intelligenten Antworten.",
+    "accent": "#f4b942"
+  },
+  {
+    "slug": "quality-touch",
+    "name": "Quality Touch",
+    "url": "https://quality-touch.henrikheil.net",
+    "description": "Ein achtsamer Verbindungsraum für Paare: bewusste Berührung, tiefe Gespräche und Nähe über jede Distanz.",
+    "accent": "#d4849a"
+  },
+  {
+    "slug": "cimdata-kurse",
+    "name": "CIMDATA Studienplaner",
+    "url": "https://cimdata-kurse.henrikheil.net",
+    "description": "CIMDATA-Weiterbildungen nach Starttermin durchsuchen, einen persönlichen Studienplan zusammenstellen und teilen.",
+    "accent": "#2d6cdf"
+  },
+  {
+    "slug": "a11y-quiz",
+    "name": "A11y Quiz",
+    "url": "https://a11y-quiz.henrikheil.net",
+    "description": "Teste dein WCAG-Wissen im interaktiven Quiz — Barrierefreiheit spielerisch lernen.",
+    "accent": "#6b5ce7"
+  },
+  {
+    "slug": "patina-kampagne",
+    "name": "Patina Kampagne",
+    "url": "https://patina-kampagne.henrikheil.net",
+    "description": "Landingpage und Kampagne für Patina — das Recherchewerkzeug für historische Romane.",
+    "accent": "#a07850"
+  }
+]

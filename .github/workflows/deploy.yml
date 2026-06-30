@@ -1,0 +1,48 @@
+name: Deploy zu Railway
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-railway
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Abhängigkeiten installieren
+        run: npm ci
+
+      - name: Statische Seite bauen
+        run: npm run build
+
+      - name: Railway CLI installieren
+        run: npm i -g @railway/cli
+
+      - name: RAILWAY_TOKEN prüfen
+        id: token
+        run: |
+          if [ -z "$RAILWAY_TOKEN" ]; then
+            echo "::warning::RAILWAY_TOKEN fehlt – Deploy wird übersprungen. Im Repo unter Settings → Secrets → Actions hinterlegen (Projekt-Token aus Railway)."
+            echo "vorhanden=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "vorhanden=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
+      - name: Zu Railway deployen
+        if: steps.token.outputs.vorhanden == 'true'
+        run: railway up --project f5e92342-ec8a-4e6b-be8d-f76049a3ebcd --service projects-overview --ci
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
