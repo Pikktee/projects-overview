@@ -52,7 +52,7 @@ const html = `<!DOCTYPE html>
   <header class="hero">
     <p class="hero__eyebrow">Henrik Heil</p>
     <h1 class="hero__title">Aktuelle <em>Projekte</em></h1>
-    <p class="hero__lead">Eine Sammlung laufender Web-Experimente, Werkzeuge und Ideen — von Recherchehilfen über Spiele bis zu achtsamen Verbindungsräumen.</p>
+    <p class="hero__lead">Eine Sammlung laufender Web-Experimente, Werkzeuge und Ideen.</p>
   </header>
   <main class="grid" id="projects">${cards}</main>
   <footer class="footer">
