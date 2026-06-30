@@ -57,7 +57,7 @@ ${headExtras}
   <header class="hero">
     <p class="hero__eyebrow">Henrik Heil</p>
     <h1 class="hero__title">Aktuelle <em>Projekte</em></h1>
-    <p class="hero__lead">Eine Sammlung laufender Web-Experimente, Werkzeuge und Ideen.</p>
+    <p class="hero__lead">Überblick über die Webprojekte, die ich derzeit entwickle und betreibe.</p>
   </header>
   <main class="grid" id="projects">${cards}</main>
   <footer class="footer">
