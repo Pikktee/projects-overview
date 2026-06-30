@@ -50,6 +50,13 @@
       "title": "Experimente",
       "projects": [
         {
+          "slug": "cimdata-kurse",
+          "name": "CIMDATA Studienplaner",
+          "url": "https://cimdata-kurse.henrikheil.net",
+          "description": "CIMDATA-Weiterbildungen nach Starttermin durchsuchen, einen persönlichen Studienplan zusammenstellen und teilen.",
+          "accent": "#2d6cdf"
+        },
+        {
           "slug": "echt-oder-ki",
           "name": "Echt oder KI?",
           "url": "https://echt-oder-ki.henrikheil.net",
@@ -76,13 +83,6 @@
           "url": "https://patina-kampagne.henrikheil.net",
           "description": "Social-Media-Kampagne für Patina — das Recherchewerkzeug für Autorinnen und Autoren historischer Romane.",
           "accent": "#a07850"
-        },
-        {
-          "slug": "cimdata-kurse",
-          "name": "CIMDATA Studienplaner",
-          "url": "https://cimdata-kurse.henrikheil.net",
-          "description": "CIMDATA-Weiterbildungen nach Starttermin durchsuchen, einen persönlichen Studienplan zusammenstellen und teilen.",
-          "accent": "#2d6cdf"
         },
         {
           "slug": "a11y-quiz",
