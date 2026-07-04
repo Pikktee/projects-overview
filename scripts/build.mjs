@@ -19,6 +19,7 @@ function mergeProject(p) {
   const c = copy[p.slug] || {};
   return {
     ...p,
+    facets: p.facets || [],
     github: m.github || p.github || null,
     description: c.summary || c.tagline || m.description || p.name,
     overview: c.overview || '',
@@ -69,10 +70,10 @@ function renderCard(p) {
     ? `<img src="/screenshots/${p.slug}.png" alt="" loading="lazy" width="640" height="400" />`
     : `<div class="card__placeholder" aria-hidden="true"><span>${escapeHtml(p.name.charAt(0))}</span></div>`;
 
-  const stackAttr = (p.stack || []).map((t) => t.toLowerCase()).join(',');
+  const facetAttr = (p.facets || []).join(',');
 
   return `
-    <article class="card" style="--accent:${p.accent}" data-slug="${p.slug}" data-stack="${escapeHtml(stackAttr)}">
+    <article class="card" style="--accent:${p.accent}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
       <button type="button" class="card__btn" data-open="${p.slug}" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false">
         <div class="card__media">${img}</div>
         <div class="card__body">
@@ -99,15 +100,41 @@ const sectionsHtml = sections
   })
   .join('\n');
 
-const allStacks = [...new Set(allProjects.flatMap((p) => p.stack || []))].sort((a, b) =>
-  a.localeCompare(b, 'de'),
-);
+// Kuratierte Merkmale (Reihenfolge = Anzeigereihenfolge). Icons sind schlichte
+// Inline-SVGs, damit die Leiste ohne Icon-Font auskommt.
+const FACETS = [
+  {
+    key: 'ai',
+    label: 'KI-gestützt',
+    icon: '<path d="M8 1.5 9.7 6.3 14.5 8 9.7 9.7 8 14.5 6.3 9.7 1.5 8 6.3 6.3 8 1.5Z"/>',
+  },
+  {
+    key: 'extension',
+    label: 'Chrome-Erweiterung',
+    icon: '<path d="M8 1.5a3 3 0 0 0-2.83 2H2.5v3.17a3 3 0 0 1 0 5.66V14.5h3.34a3 3 0 0 1 5.32 0H14.5v-3.34a3 3 0 0 0 0-5.32V2H10.83A3 3 0 0 0 8 1.5Z" fill="none" stroke="currentColor" stroke-width="1.3"/>',
+  },
+  {
+    key: 'android',
+    label: 'Android-App',
+    icon: '<path d="M4 6.5h8V12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5Zm-2 .5a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1Zm12 0a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1ZM5.5 13.5h2v1.5a1 1 0 1 1-2 0v-1.5Zm3 0h2V15a1 1 0 1 1-2 0v-1.5ZM5 3l-.8-1.3M11 3l.8-1.3M4.2 5.5C4.5 4 6.1 3 8 3s3.5 1 3.8 2.5H4.2Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>',
+  },
+  {
+    key: '3d',
+    label: '3D & Visualisierung',
+    icon: '<path d="M8 1.5 14 5v6l-6 3.5L2 11V5l6-3.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 5l6 3.5L14 5M8 8.5V14.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>',
+  },
+];
 
-const stackOverview = allStacks
-  .map((t) => {
-    const count = allProjects.filter((p) => p.stack?.includes(t)).length;
-    return `<button type="button" class="stack-pill" data-filter="${escapeHtml(t.toLowerCase())}" title="${count} Projekt${count !== 1 ? 'e' : ''}"><span class="stack-pill__name">${escapeHtml(t)}</span><span class="stack-pill__count">${count}</span></button>`;
-  })
+const facetOverview = FACETS.map((f) => {
+  const count = allProjects.filter((p) => (p.facets || []).includes(f.key)).length;
+  if (count === 0) return '';
+  return `<button type="button" class="facet-chip" data-filter="${escapeHtml(f.key)}">
+          <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">${f.icon}</svg>
+          <span class="facet-chip__label">${escapeHtml(f.label)}</span>
+          <span class="facet-chip__count">${count}</span>
+        </button>`;
+})
+  .filter(Boolean)
   .join('\n');
 
 const html = `<!DOCTYPE html>
@@ -135,16 +162,20 @@ ${headExtras}
   <main class="sections" id="projects">${sectionsHtml}
   </main>
 
-  <section class="stack-section" aria-labelledby="stack-heading">
-    <div class="stack-section__inner">
-      <h2 class="stack-section__heading" id="stack-heading">Tech-Stack <em>Übersicht</em></h2>
-      <p class="stack-section__status" id="filter-status" aria-live="polite" hidden>
+  <section class="facet-section" aria-labelledby="facet-heading">
+    <div class="facet-section__inner">
+      <h2 class="facet-section__heading" id="facet-heading">Nach <em>Merkmal</em> filtern</h2>
+      <div class="facet-bar" role="group" aria-label="Projekte nach Merkmal filtern">
+        <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" aria-pressed="true">
+          <span class="facet-chip__label">Alle</span>
+          <span class="facet-chip__count">${allProjects.length}</span>
+        </button>
+        ${facetOverview}
+      </div>
+      <p class="facet-section__status" id="filter-status" aria-live="polite" hidden>
         <span id="filter-count"></span>
         <button type="button" class="stack-reset" id="filter-reset">Alle anzeigen</button>
       </p>
-      <div class="stack-grid" role="group" aria-label="Technologie-Übersicht">
-        ${stackOverview}
-      </div>
     </div>
   </section>
 
@@ -235,5 +266,5 @@ ${headExtras}
 writeFileSync(join(publicDir, 'index.html'), html);
 writeFileSync(join(publicDir, 'impressum.html'), impressum);
 console.log(
-  `Built portfolio: ${allProjects.length} projects, ${allStacks.length} stack tags, metrics for ${Object.keys(metrics).length} slugs → public/`,
+  `Built portfolio: ${allProjects.length} projects, ${FACETS.filter((f) => allProjects.some((p) => (p.facets || []).includes(f.key))).length} facets, metrics for ${Object.keys(metrics).length} slugs → public/`,
 );

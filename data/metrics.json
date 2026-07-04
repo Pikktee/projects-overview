@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:40.512Z"
+    "analyzedAt": "2026-07-04T14:39:02.410Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T13:25:41.273Z"
+    "analyzedAt": "2026-07-04T14:39:02.598Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T13:25:43.101Z"
+    "analyzedAt": "2026-07-04T14:39:02.896Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T13:25:43.941Z"
+    "analyzedAt": "2026-07-04T14:39:03.066Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.047Z"
+    "analyzedAt": "2026-07-04T14:39:03.145Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T13:25:44.123Z"
+    "analyzedAt": "2026-07-04T14:39:03.210Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.331Z"
+    "analyzedAt": "2026-07-04T14:39:03.318Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.425Z"
+    "analyzedAt": "2026-07-04T14:39:03.415Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.535Z"
+    "analyzedAt": "2026-07-04T14:39:03.505Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.661Z"
+    "analyzedAt": "2026-07-04T14:39:03.630Z"
   },
   "patina-kampagne": {
     "slug": "patina-kampagne",
@@ -1061,7 +1061,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.733Z"
+    "analyzedAt": "2026-07-04T14:39:03.688Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1157,7 +1157,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.802Z"
+    "analyzedAt": "2026-07-04T14:39:03.743Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1187,18 +1187,20 @@
         "vite"
       ],
       "testing": [],
-      "other": []
+      "other": [
+        "@loaders.gl/mvt"
+      ]
     },
-    "dependencyCount": 7,
+    "dependencyCount": 8,
     "loc": {
-      "total": 5473,
-      "code": 4398,
-      "blank": 489,
-      "comment": 586,
+      "total": 5528,
+      "code": 4420,
+      "blank": 492,
+      "comment": 616,
       "byLanguage": {
-        "HTML": 230,
-        "JavaScript": 2784,
-        "CSS": 1384
+        "HTML": 228,
+        "JavaScript": 2804,
+        "CSS": 1388
       }
     },
     "locFormatted": "4.4k",
@@ -1210,9 +1212,9 @@
     },
     "coverage": null,
     "git": {
-      "commits": 5,
+      "commits": 7,
       "firstCommit": "2026-07-03 10:08:26 +0200",
-      "lastCommit": "2026-07-04 11:00:49 +0200"
+      "lastCommit": "2026-07-04 15:57:50 +0200"
     },
     "ux": {
       "uiFrameworks": [],
@@ -1225,6 +1227,6 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T13:25:44.867Z"
+    "analyzedAt": "2026-07-04T14:39:03.800Z"
   }
 }

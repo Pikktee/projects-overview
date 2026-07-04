@@ -6,7 +6,7 @@
   const filterCount = document.getElementById('filter-count');
   const filterReset = document.getElementById('filter-reset');
   const cards = document.querySelectorAll('.card');
-  const stackPills = document.querySelectorAll('.stack-pill');
+  const facetChips = document.querySelectorAll('.facet-chip');
   const openButtons = document.querySelectorAll('[data-open]');
   const tabs = document.querySelectorAll('.drawer__tab');
   const panels = {
@@ -20,6 +20,7 @@
   let lastFocus = null;
   let activeTab = 'overview';
   let closeTimer = null;
+  let activeFilter = 'all';
 
   const totalProjects = cards.length;
 
@@ -43,8 +44,11 @@
     btn.addEventListener('click', () => openDrawer(btn.dataset.open));
   });
 
-  stackPills.forEach((pill) => {
-    pill.addEventListener('click', () => setFilter(pill.dataset.filter));
+  facetChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const next = chip.dataset.filter;
+      setFilter(activeFilter === next && next !== 'all' ? 'all' : next);
+    });
   });
 
   filterReset?.addEventListener('click', () => setFilter('all'));
@@ -63,17 +67,20 @@
   function setFilter(filter) {
     let visible = 0;
     let filterLabel = '';
+    activeFilter = filter;
 
-    stackPills.forEach((pill) => {
-      pill.classList.toggle('stack-pill--active', filter !== 'all' && pill.dataset.filter === filter);
-      if (filter !== 'all' && pill.dataset.filter === filter) {
-        filterLabel = pill.querySelector('.stack-pill__name')?.textContent || filter;
+    facetChips.forEach((chip) => {
+      const isActive = chip.dataset.filter === filter;
+      chip.classList.toggle('is-active', isActive);
+      chip.setAttribute('aria-pressed', String(isActive));
+      if (filter !== 'all' && isActive) {
+        filterLabel = chip.querySelector('.facet-chip__label')?.textContent || filter;
       }
     });
 
     cards.forEach((card) => {
-      const stacks = (card.dataset.stack || '').split(',').filter(Boolean);
-      const show = filter === 'all' || stacks.includes(filter);
+      const facets = (card.dataset.facets || '').split(',').filter(Boolean);
+      const show = filter === 'all' || facets.includes(filter);
       card.classList.toggle('card--hidden', !show);
       if (show) visible++;
     });
@@ -361,6 +368,10 @@
       }
       activeSlug = slug;
       renderDrawer(project);
+
+      const scrollArea = drawer.querySelector('.drawer__scroll');
+      if (scrollArea) scrollArea.scrollTop = 0;
+      drawer.scrollTop = 0;
 
       drawer.inert = false;
       drawer.hidden = false;
