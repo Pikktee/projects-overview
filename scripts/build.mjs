@@ -5,18 +5,47 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
 const publicDir = join(root, 'public');
+const metricsPath = join(root, 'data/metrics.json');
 
 mkdirSync(publicDir, { recursive: true });
 
 const data = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
-const { sections } = data;
+const metrics = existsSync(metricsPath) ? JSON.parse(readFileSync(metricsPath, 'utf8')) : {};
+
+function mergeProject(p) {
+  const m = metrics[p.slug] || {};
+  return {
+    ...p,
+    github: m.github || p.github || null,
+    description: m.description || p.name,
+    longDescription: m.longDescription || m.description || '',
+    highlights: m.highlights || [],
+    stack: m.stack || [],
+    dependencies: m.dependencies || { ui: [], data: [], ai: [], infra: [], testing: [], other: [] },
+    dependencyCount: m.dependencyCount || 0,
+    loc: m.loc || null,
+    locFormatted: m.locFormatted || '—',
+    files: m.files || null,
+    coverage: m.coverage || null,
+    git: m.git || null,
+    ux: m.ux || null,
+    analyzedAt: m.analyzedAt || null,
+  };
+}
+
+const sections = data.sections.map((section) => ({
+  ...section,
+  projects: section.projects.map(mergeProject),
+}));
+
+const portfolio = { sections };
 const allProjects = sections.flatMap((s) => s.projects);
 
 for (const file of ['styles.css', 'app.js', 'favicon.svg', 'apple-touch-icon.png']) {
   copyFileSync(join(root, 'src', file), join(publicDir, file));
 }
 
-writeFileSync(join(publicDir, 'projects.json'), JSON.stringify(data));
+writeFileSync(join(publicDir, 'projects.json'), JSON.stringify(portfolio));
 
 const headExtras = `  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -31,6 +60,7 @@ function escapeHtml(str) {
 }
 
 function renderStackPreview(stack) {
+  if (!stack?.length) return '';
   const visible = stack.slice(0, 3);
   const rest = stack.length - visible.length;
   const tags = visible.map((t) => `<span class="tag tag--sm">${escapeHtml(t)}</span>`).join('');
@@ -38,16 +68,16 @@ function renderStackPreview(stack) {
   return `<div class="card__tags">${tags}${more}</div>`;
 }
 
-function renderCard(p, i) {
+function renderCard(p) {
   const hasShot = existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
   const img = hasShot
     ? `<img src="/screenshots/${p.slug}.png" alt="" loading="lazy" width="640" height="400" />`
     : `<div class="card__placeholder" aria-hidden="true"><span>${escapeHtml(p.name.charAt(0))}</span></div>`;
 
-  const stackAttr = p.stack.map((t) => t.toLowerCase()).join(',');
+  const stackAttr = (p.stack || []).map((t) => t.toLowerCase()).join(',');
 
   return `
-    <article class="card" style="--accent:${p.accent}" data-slug="${p.slug}" data-stack="${escapeHtml(stackAttr)}" data-section="${escapeHtml(p._section || '')}">
+    <article class="card" style="--accent:${p.accent}" data-slug="${p.slug}" data-stack="${escapeHtml(stackAttr)}">
       <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="${p.slug}">
         <div class="card__media">${img}</div>
         <div class="card__body">
@@ -60,19 +90,14 @@ function renderCard(p, i) {
     </article>`;
 }
 
-const sectionsWithMeta = sections.map((section) => ({
-  ...section,
-  projects: section.projects.map((p) => ({ ...p, _section: section.title || 'Hauptprojekte' })),
-}));
-
-const sectionsHtml = sectionsWithMeta
+const sectionsHtml = sections
   .map((section) => {
     const heading = section.title
       ? `<h2 class="section__heading" id="section-${section.title.toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(section.title)}</h2>`
       : '';
-    const cards = section.projects.map((p, i) => renderCard(p, i)).join('\n');
+    const cards = section.projects.map(renderCard).join('\n');
     return `
-  <section class="section${section.title ? ' section--labeled' : ''}" data-section="${escapeHtml(section.title || 'Hauptprojekte')}">
+  <section class="section${section.title ? ' section--labeled' : ''}">
     ${heading}
     <div class="grid">${cards}
     </div>
@@ -80,25 +105,13 @@ const sectionsHtml = sectionsWithMeta
   })
   .join('\n');
 
-const allStacks = [...new Set(allProjects.flatMap((p) => p.stack))].sort((a, b) => a.localeCompare(b, 'de'));
-
-const stackCounts = Object.fromEntries(
-  allStacks.map((t) => [t, allProjects.filter((p) => p.stack.includes(t)).length]),
+const allStacks = [...new Set(allProjects.flatMap((p) => p.stack || []))].sort((a, b) =>
+  a.localeCompare(b, 'de'),
 );
-const toolbarStacks = allStacks
-  .filter((t) => stackCounts[t] >= 2)
-  .sort((a, b) => stackCounts[b] - stackCounts[a] || a.localeCompare(b, 'de'));
-
-const filterChips = toolbarStacks
-  .map(
-    (t) =>
-      `<button type="button" class="filter-chip" data-filter="${escapeHtml(t.toLowerCase())}">${escapeHtml(t)}</button>`,
-  )
-  .join('\n');
 
 const stackOverview = allStacks
   .map((t) => {
-    const count = allProjects.filter((p) => p.stack.includes(t)).length;
+    const count = allProjects.filter((p) => p.stack?.includes(t)).length;
     return `<button type="button" class="stack-pill" data-filter="${escapeHtml(t.toLowerCase())}" title="${count} Projekt${count !== 1 ? 'e' : ''}"><span class="stack-pill__name">${escapeHtml(t)}</span><span class="stack-pill__count">${count}</span></button>`;
   })
   .join('\n');
@@ -122,18 +135,8 @@ ${headExtras}
   <header class="hero">
     <p class="hero__eyebrow">Henrik Heil</p>
     <h1 class="hero__title">Portfolio &amp; <em>Projekte</em></h1>
-    <p class="hero__lead">Web-Apps, KI-Tools und Experimente — gebaut mit Fokus auf Nutzerfreundlichkeit. Klicke ein Projekt für Details, Tech-Stack und Quellcode.</p>
+    <p class="hero__lead">Web-Apps, KI-Tools und Experimente — Klick auf ein Projekt für automatisch analysierte Details, UX-Signale und Tech-Stack.</p>
   </header>
-
-  <div class="toolbar" id="toolbar">
-    <div class="toolbar__inner">
-      <div class="toolbar__filters" role="group" aria-label="Nach Technologie filtern">
-        <button type="button" class="filter-chip filter-chip--active" data-filter="all">Alle</button>
-        ${filterChips}
-      </div>
-      <p class="toolbar__count" id="filter-count" aria-live="polite">${allProjects.length} Projekte</p>
-    </div>
-  </div>
 
   <main class="sections" id="projects">${sectionsHtml}
   </main>
@@ -141,7 +144,11 @@ ${headExtras}
   <section class="stack-section" aria-labelledby="stack-heading">
     <div class="stack-section__inner">
       <h2 class="stack-section__heading" id="stack-heading">Tech-Stack <em>Übersicht</em></h2>
-      <p class="stack-section__lead">Alle Technologien, die in diesen Projekten zum Einsatz kommen — klicken zum Filtern.</p>
+      <p class="stack-section__lead">Alle erkannten Technologien — klicken zum Filtern.</p>
+      <p class="stack-section__status" id="filter-status" aria-live="polite" hidden>
+        <span id="filter-count"></span>
+        <button type="button" class="stack-reset" id="filter-reset">Alle anzeigen</button>
+      </p>
       <div class="stack-grid" role="group" aria-label="Technologie-Übersicht">
         ${stackOverview}
       </div>
@@ -165,9 +172,17 @@ ${headExtras}
       <div class="drawer__media" id="drawer-media"></div>
       <div class="drawer__content">
         <h2 class="drawer__title" id="drawer-title"></h2>
-        <p class="drawer__desc" id="drawer-desc"></p>
-        <ul class="drawer__highlights" id="drawer-highlights"></ul>
-        <div class="drawer__stack" id="drawer-stack"></div>
+        <div class="drawer__stats" id="drawer-stats"></div>
+        <div class="drawer__tabs" role="tablist" aria-label="Projekt-Details">
+          <button type="button" class="drawer__tab drawer__tab--active" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" data-tab="overview">Überblick</button>
+          <button type="button" class="drawer__tab" role="tab" id="tab-ux" aria-selected="false" aria-controls="panel-ux" data-tab="ux">UX</button>
+          <button type="button" class="drawer__tab" role="tab" id="tab-tech" aria-selected="false" aria-controls="panel-tech" data-tab="tech">Technik</button>
+        </div>
+        <div class="drawer__panels">
+          <div class="drawer__panel drawer__panel--active" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview"></div>
+          <div class="drawer__panel" role="tabpanel" id="panel-ux" aria-labelledby="tab-ux" hidden></div>
+          <div class="drawer__panel" role="tabpanel" id="panel-tech" aria-labelledby="tab-tech" hidden></div>
+        </div>
         <div class="drawer__actions" id="drawer-actions"></div>
       </div>
     </div>
@@ -220,4 +235,6 @@ ${headExtras}
 
 writeFileSync(join(publicDir, 'index.html'), html);
 writeFileSync(join(publicDir, 'impressum.html'), impressum);
-console.log(`Built portfolio with ${allProjects.length} projects, ${allStacks.length} stack tags → public/`);
+console.log(
+  `Built portfolio: ${allProjects.length} projects, ${allStacks.length} stack tags, metrics for ${Object.keys(metrics).length} slugs → public/`,
+);

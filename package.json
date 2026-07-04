@@ -5,7 +5,9 @@
   "type": "module",
   "description": "Übersicht über aktuelle Webprojekte von Henrik Heil",
   "scripts": {
+    "metrics": "node scripts/collect-metrics.mjs",
     "build": "node scripts/build.mjs",
+    "prebuild": "node scripts/collect-metrics.mjs",
     "screenshots": "node scripts/capture-screenshots.mjs",
     "dev": "npx serve public -l 3000"
   },
