@@ -530,17 +530,17 @@ html.js .card.is-visible {
   transition:
     transform 0.35s var(--ease-out),
     border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    box-shadow 0.35s var(--ease-out);
 }
 
 .card__btn:hover,
 .card__btn:focus-visible,
 .card__btn:active {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.35),
-    0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+    0 0 0 2px color-mix(in srgb, var(--accent) 42%, transparent);
 }
 
 /* Dezenter Cursor-Effekt: nur ein schmales Leuchten auf der Kartenkante
@@ -554,10 +554,10 @@ html.js .card.is-visible {
     z-index: 3;
     pointer-events: none;
     border-radius: inherit;
-    padding: 1px;
+    padding: 2px;
     background: radial-gradient(
       240px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--accent) 75%, transparent),
+      color-mix(in srgb, var(--accent) 80%, transparent),
       transparent 70%
     );
     -webkit-mask:
