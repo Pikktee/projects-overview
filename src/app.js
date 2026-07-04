@@ -164,7 +164,7 @@
     return `
       ${renderProse(project.overview)}
       ${highlights}
-      ${project.stack?.length ? renderTagList('Erkannter Stack', project.stack) : ''}`;
+      ${project.stack?.length ? renderTagList('Tech-Stack', project.stack) : ''}`;
   }
 
   function renderUx(project) {
@@ -187,7 +187,6 @@
     const signalsHtml =
       blocks.length || fileStats.length
         ? `<div class="metric-block metric-block--subtle">
-            <h3 class="metric-block__title">Erkannte Signale</h3>
             ${blocks.join('')}
             ${
               fileStats.length

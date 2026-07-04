@@ -20,7 +20,7 @@ function mergeProject(p) {
   return {
     ...p,
     github: m.github || p.github || null,
-    description: c.tagline || m.description || p.name,
+    description: c.summary || c.tagline || m.description || p.name,
     overview: c.overview || '',
     uxNarrative: c.uxNarrative || '',
     highlights: c.highlights || m.highlights || [],
@@ -63,15 +63,6 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-function renderStackPreview(stack) {
-  if (!stack?.length) return '';
-  const visible = stack.slice(0, 3);
-  const rest = stack.length - visible.length;
-  const tags = visible.map((t) => `<span class="tag tag--sm">${escapeHtml(t)}</span>`).join('');
-  const more = rest > 0 ? `<span class="tag tag--sm tag--more">+${rest}</span>` : '';
-  return `<div class="card__tags">${tags}${more}</div>`;
-}
-
 function renderCard(p) {
   const hasShot = existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
   const img = hasShot
@@ -87,7 +78,6 @@ function renderCard(p) {
         <div class="card__body">
           <h2 class="card__title">${escapeHtml(p.name)}</h2>
           <p class="card__desc">${escapeHtml(p.description)}</p>
-          ${renderStackPreview(p.stack)}
           <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
       </button>
@@ -139,7 +129,7 @@ ${headExtras}
   <header class="hero">
     <p class="hero__eyebrow">Henrik Heil</p>
     <h1 class="hero__title">Portfolio &amp; <em>Projekte</em></h1>
-    <p class="hero__lead">Web-Apps, KI-Tools und Experimente — Klick auf ein Projekt für automatisch analysierte Details, UX-Signale und Tech-Stack.</p>
+    <p class="hero__lead">Aktuelle Web-Apps, KI-Tools und Experimente</p>
   </header>
 
   <main class="sections" id="projects">${sectionsHtml}
@@ -148,7 +138,6 @@ ${headExtras}
   <section class="stack-section" aria-labelledby="stack-heading">
     <div class="stack-section__inner">
       <h2 class="stack-section__heading" id="stack-heading">Tech-Stack <em>Übersicht</em></h2>
-      <p class="stack-section__lead">Alle erkannten Technologien — klicken zum Filtern.</p>
       <p class="stack-section__status" id="filter-status" aria-live="polite" hidden>
         <span id="filter-count"></span>
         <button type="button" class="stack-reset" id="filter-reset">Alle anzeigen</button>
