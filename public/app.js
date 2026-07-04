@@ -122,6 +122,11 @@
 
     renderProfileSections();
 
+    if (!activeSlug) {
+      const drawerTitle = document.getElementById('drawer-title');
+      if (drawerTitle) drawerTitle.textContent = t('drawer.defaultTitle');
+    }
+
     document.querySelectorAll('.lang-switch__btn').forEach((btn) => {
       const active = btn.dataset.lang === locale;
       btn.classList.toggle('is-active', active);
@@ -496,7 +501,7 @@
 
     const introActions = document.getElementById('drawer-intro-actions');
     introActions.innerHTML = `
-      <a class="drawer__visit" href="${esc(project.url)}" target="_blank" rel="noopener noreferrer">
+      <a class="drawer__visit" href="${esc(project.url)}" target="_blank" rel="noopener noreferrer" style="background-color:${esc(project.accentBtn || project.accent)}">
         <span>${esc(t('drawer.visit'))}</span>
         <span class="sr-only">${esc(t('a11y.externalHint'))}</span>
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -515,6 +520,7 @@
       : '';
 
     drawer.style.setProperty('--accent', project.accent);
+    drawer.style.setProperty('--accent-btn', project.accentBtn || project.accent);
   }
 
   let savedScrollY = 0;
@@ -633,6 +639,9 @@
     if (!activeSlug) return;
 
     cancelPendingClose();
+
+    const drawerTitle = document.getElementById('drawer-title');
+    if (drawerTitle) drawerTitle.textContent = t('drawer.defaultTitle');
 
     drawer.classList.remove('drawer--open');
     backdrop.classList.remove('drawer-backdrop--visible');

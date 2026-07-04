@@ -141,6 +141,7 @@
       },
       "drawer": {
         "close": "Schließen",
+        "defaultTitle": "Projektdetails",
         "tabsAria": "Projekt-Details",
         "overview": "Überblick",
         "ux": "UX",
@@ -257,6 +258,7 @@
       },
       "drawer": {
         "close": "Close",
+        "defaultTitle": "Project details",
         "tabsAria": "Project details",
         "overview": "Overview",
         "ux": "UX",

@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
+import { accessibleButtonBg, accessibleCtaColor } from './a11y-colors.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -22,6 +23,8 @@ function mergeProject(p) {
   const c = copy[p.slug] || {};
   return {
     ...p,
+    accentCta: accessibleCtaColor(p.accent),
+    accentBtn: accessibleButtonBg(p.accent),
     facets: p.facets || [],
     github: m.github || p.github || null,
     description: c.summary || c.tagline || m.description || p.name,
@@ -89,19 +92,19 @@ const heroLinkIcons = {
 function renderCard(p) {
   const hasShot = existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
   const img = hasShot
-    ? `<img src="/screenshots/${p.slug}.png" alt="" loading="lazy" width="640" height="400" />`
+    ? `<img src="/screenshots/${p.slug}.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" />`
     : `<div class="card__placeholder" aria-hidden="true"><span>${escapeHtml(p.name.charAt(0))}</span></div>`;
 
   const facetAttr = (p.facets || []).join(',');
 
   return `
-    <article class="card" style="--accent:${p.accent}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
+    <article class="card" style="--accent:${p.accent};--accent-cta:${p.accentCta};--accent-btn:${p.accentBtn}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
       <button type="button" class="card__btn" data-open="${p.slug}" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="${escapeHtml(`${p.name}: ${p.description}`)}">
         <div class="card__media">${img}</div>
         <div class="card__body">
           <h2 class="card__title">${escapeHtml(p.name)}</h2>
           <p class="card__desc" data-slug="${escapeHtml(p.slug)}" data-default-desc="${escapeHtml(p.description)}">${escapeHtml(p.description)}</p>
-          <span class="card__cta"><span data-i18n="card.details">${escapeHtml(tDe.card.details)}</span> <span aria-hidden="true">→</span></span>
+          <span class="card__cta" style="color:${p.accentCta}"><span data-i18n="card.details">${escapeHtml(tDe.card.details)}</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>`;
@@ -192,22 +195,30 @@ ${headExtras}
     <p class="hero__role" data-i18n="profile.role">${escapeHtml(tDe.profile.role)}</p>
     <p class="hero__bio" data-i18n="profile.bio">${escapeHtml(tDe.profile.bio)}</p>
     <nav class="hero__contact" id="kontakt" data-i18n-aria="a11y.contactAria" aria-label="${escapeHtml(tDe.a11y.contactAria)}">
-      <a class="hero__link" href="mailto:${escapeHtml(site.profile.email)}">
-        ${heroLinkIcons.email}
-        <span data-i18n="links.email">${escapeHtml(tDe.links.email)}</span>
-      </a>
-      <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
-        ${heroLinkIcons.github}
-        <span data-i18n="links.github">${escapeHtml(tDe.links.github)}</span>
-        ${heroLinkIcons.external}
-        <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
-      </a>
-      <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
-        ${heroLinkIcons.linkedin}
-        <span data-i18n="links.linkedin">${escapeHtml(tDe.links.linkedin)}</span>
-        ${heroLinkIcons.external}
-        <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
-      </a>
+      <ul class="hero__contact-list">
+        <li>
+          <a class="hero__link" href="mailto:${escapeHtml(site.profile.email)}">
+            ${heroLinkIcons.email}
+            <span data-i18n="links.email">${escapeHtml(tDe.links.email)}</span>
+          </a>
+        </li>
+        <li>
+          <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
+            ${heroLinkIcons.github}
+            <span data-i18n="links.github">${escapeHtml(tDe.links.github)}</span>
+            ${heroLinkIcons.external}
+            <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
+          </a>
+        </li>
+        <li>
+          <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
+            ${heroLinkIcons.linkedin}
+            <span data-i18n="links.linkedin">${escapeHtml(tDe.links.linkedin)}</span>
+            ${heroLinkIcons.external}
+            <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
+          </a>
+        </li>
+      </ul>
     </nav>
   </header>
 
@@ -260,7 +271,7 @@ ${headExtras}
       <div class="drawer__body">
         <div class="drawer__intro">
           <div class="drawer__head">
-            <h2 class="drawer__title" id="drawer-title"></h2>
+            <h2 class="drawer__title" id="drawer-title">${escapeHtml(tDe.drawer.defaultTitle)}</h2>
             <div class="drawer__intro-actions" id="drawer-intro-actions"></div>
           </div>
           <div class="drawer__stats" id="drawer-stats"></div>
