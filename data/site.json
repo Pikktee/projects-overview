@@ -74,10 +74,18 @@
         "contact": "Kontakt",
         "aria": "Seitennavigation"
       },
+      "a11y": {
+        "langSwitch": "Sprache wählen",
+        "skipLink": "Zum Hauptinhalt springen",
+        "externalHint": "(öffnet in neuem Tab)",
+        "credentialsAria": "Qualifikationen",
+        "contactAria": "Kontakt"
+      },
       "profile": {
         "role": "Medieninformatiker · Full-Stack · UX",
         "tagline": "Medieninformatiker — Code, UX und Video aus einer Hand.",
-        "bio": "Ich entwickle Web-Produkte von der Idee bis zur Live-URL — mit Fokus auf durchdachte Oberflächen, KI-Integration und saubere Umsetzung.",
+        "bio": "Web-Produkte von der Idee bis zur Live-URL — UX, KI und saubere Umsetzung.",
+        "more": "Schwerpunkte & Hintergrund",
         "credentials": ["PSM I", "Diplom Medieninformatik", "Frankfurt am Main"]
       },
       "skills": {
@@ -100,8 +108,8 @@
       },
       "sections": {
         "projects": {
-          "heading": "Was ich <em>gebaut</em> habe",
-          "lead": "Eigenständige Web-Apps und Experimente — jedes Projekt mit Live-Demo und Tech-Stack."
+          "heading": "Projekte",
+          "lead": "Nach Merkmal filtern oder Karte öffnen für Details, Live-Demo und Tech-Stack."
         },
         "experiments": "Experimente"
       },
@@ -109,7 +117,7 @@
         "details": "Details ansehen"
       },
       "facets": {
-        "heading": "Nach <em>Merkmal</em> filtern",
+        "heading": "Filter",
         "all": "Alle",
         "ai": "KI-gestützt",
         "extension": "Chrome-Erweiterung",
@@ -157,9 +165,6 @@
         "depOther": "Sonstige",
         "screenshotAlt": "Screenshot von {name}"
       },
-      "a11y": {
-        "langSwitch": "Sprache wählen"
-      },
       "legal": {
         "back": "← Zurück zum Portfolio"
       }
@@ -175,10 +180,18 @@
         "contact": "Contact",
         "aria": "Page navigation"
       },
+      "a11y": {
+        "langSwitch": "Choose language",
+        "skipLink": "Skip to main content",
+        "externalHint": "(opens in new tab)",
+        "credentialsAria": "Qualifications",
+        "contactAria": "Contact"
+      },
       "profile": {
         "role": "Media informatics · Full-stack · UX",
         "tagline": "Media informatics engineer — code, UX, and video from one source.",
-        "bio": "I build web products from idea to live URL — with a focus on thoughtful interfaces, AI integration, and solid engineering.",
+        "bio": "Web products from idea to live URL — UX, AI, and solid engineering.",
+        "more": "Focus areas & background",
         "credentials": ["PSM I", "M.Sc. Media Informatics", "Frankfurt am Main"]
       },
       "skills": {
@@ -201,8 +214,8 @@
       },
       "sections": {
         "projects": {
-          "heading": "What I've <em>built</em>",
-          "lead": "Independent web apps and experiments — each project with a live demo and tech stack."
+          "heading": "Projects",
+          "lead": "Filter by trait or open a card for details, live demo, and tech stack."
         },
         "experiments": "Experiments"
       },
@@ -210,7 +223,7 @@
         "details": "View details"
       },
       "facets": {
-        "heading": "Filter by <em>trait</em>",
+        "heading": "Filter",
         "all": "All",
         "ai": "AI-powered",
         "extension": "Chrome extension",
@@ -257,9 +270,6 @@
         "depTesting": "Testing",
         "depOther": "Other",
         "screenshotAlt": "Screenshot of {name}"
-      },
-      "a11y": {
-        "langSwitch": "Choose language"
       },
       "legal": {
         "back": "← Back to portfolio"
