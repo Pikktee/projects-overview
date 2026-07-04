@@ -6,8 +6,10 @@
   --text-muted: #b0aaa0;
   --border: rgba(236, 232, 225, 0.1);
   --focus-ring: #e8c88a;
-  --radius: 1.1rem;
-  --radius-sm: 0.55rem;
+  /* Bewusst kantenlos: Inhaltsflächen (Karten, Sheet, Tags) sind scharf,
+     nur Bedienelemente (Chips, Buttons) bleiben als Kontrast rund. */
+  --radius: 0;
+  --radius-sm: 0;
   --font-display: "Instrument Serif", Georgia, serif;
   --font-body: "Figtree", system-ui, sans-serif;
   --max: 1200px;
@@ -822,7 +824,6 @@ html.js .card.is-visible {
   flex-direction: column;
   background: var(--bg-card);
   border-left: 1px solid var(--border);
-  border-radius: 1.25rem 0 0 1.25rem;
   box-shadow:
     -28px 0 80px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(236, 232, 225, 0.04) inset;
@@ -1075,7 +1076,7 @@ html.js .card.is-visible {
   color: var(--text-muted);
   background: transparent;
   border: none;
-  border-radius: calc(var(--radius-sm) - 2px);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
@@ -1278,7 +1279,6 @@ html.js .card.is-visible {
   color: var(--text-muted);
   background: rgba(236, 232, 225, 0.05);
   border: 1px solid var(--border);
-  border-radius: 4px;
 }
 
 .drawer__actions {
@@ -1471,7 +1471,7 @@ html.js .card.is-visible {
     width: 100vw;
     max-width: 100%;
     border-left: none;
-    border-radius: 1.1rem 1.1rem 0 0;
+    border-top: 1px solid var(--border);
     top: auto;
     bottom: 0;
     height: min(94dvh, 100dvh);
