@@ -19,8 +19,8 @@
   let activeSlug = null;
   let lastFocus = null;
   let activeTab = 'overview';
+
   const totalProjects = cards.length;
-  let lastPointerUp = 0;
 
   const projectsReady = loadProjects();
 
@@ -37,6 +37,9 @@
   document.querySelectorAll('.card').forEach((card, i) => {
     card.style.setProperty('--i', i);
   });
+
+  bindStackPills();
+  filterReset?.addEventListener('click', () => setFilter('all'));
 
   async function loadProjects() {
     const res = await fetch('/projects.json');
@@ -378,45 +381,12 @@
     lastFocus?.focus({ preventScroll: true });
   }
 
-  function handleInteraction(event) {
-    if (activeSlug) return;
-
-    const openBtn = event.target.closest('[data-open]');
-    if (openBtn) {
-      openDrawer(openBtn.dataset.open);
-      return;
-    }
-
-    const pill = event.target.closest('.stack-pill');
-    if (pill?.dataset.filter) {
-      setFilter(pill.dataset.filter);
-      return;
-    }
-
-    if (event.target.closest('#filter-reset')) {
-      setFilter('all');
-    }
-  }
-
-  function handleHash() {
+  async function handleHash() {
+    await projectsReady;
     const slug = location.hash.slice(1);
-    if (slug && projects[slug]) openDrawer(slug);
+    if (!slug || !projects[slug] || activeSlug === slug) return;
+    openDrawer(slug);
   }
-
-  document.addEventListener(
-    'pointerup',
-    (event) => {
-      if (event.pointerType === 'mouse' && event.button !== 0) return;
-      lastPointerUp = Date.now();
-      handleInteraction(event);
-    },
-    true,
-  );
-
-  document.addEventListener('click', (event) => {
-    if (Date.now() - lastPointerUp < 400) return;
-    handleInteraction(event);
-  });
 
   closeBtn.addEventListener('click', closeDrawer);
   backdrop.addEventListener('click', closeDrawer);

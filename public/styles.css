@@ -163,6 +163,7 @@ body.drawer-open {
   height: 100%;
   padding: 0;
   text-align: left;
+  text-decoration: none;
   font-family: inherit;
   color: inherit;
   background: var(--bg-elevated);
@@ -171,7 +172,7 @@ body.drawer-open {
   overflow: hidden;
   cursor: pointer;
   touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(236, 232, 225, 0.08);
   transition:
     transform 0.35s var(--ease-out),
     border-color 0.35s ease,
@@ -444,10 +445,12 @@ body.drawer-open {
 .drawer:not(.drawer--open) {
   visibility: hidden;
   pointer-events: none !important;
+  clip-path: inset(100%);
 }
 
 .drawer.drawer--open {
   visibility: visible;
+  clip-path: none;
 }
 
 .drawer {
@@ -1105,12 +1108,23 @@ body.drawer-open {
   }
 
   .drawer:not(.drawer--open) {
+    width: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    opacity: 0 !important;
     pointer-events: none !important;
-    visibility: hidden;
+    visibility: hidden !important;
+    clip-path: inset(100%) !important;
   }
 
   .drawer.drawer--open {
-    visibility: visible;
+    width: 100vw !important;
+    max-width: 100% !important;
+    height: min(94dvh, 100dvh) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    clip-path: none !important;
   }
 
   .drawer__close {

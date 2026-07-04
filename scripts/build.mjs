@@ -73,14 +73,14 @@ function renderCard(p) {
 
   return `
     <article class="card" style="--accent:${p.accent}" data-slug="${p.slug}" data-stack="${escapeHtml(stackAttr)}">
-      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="${p.slug}">
+      <a class="card__btn" href="#${escapeHtml(p.slug)}" data-open="${p.slug}" role="button" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false">
         <div class="card__media">${img}</div>
         <div class="card__body">
           <h2 class="card__title">${escapeHtml(p.name)}</h2>
           <p class="card__desc">${escapeHtml(p.description)}</p>
           <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </button>
+      </a>
     </article>`;
 }
 

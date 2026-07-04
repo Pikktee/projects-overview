@@ -2,7 +2,7 @@
   "sections": [
     {
       "projects": [
-        { "slug": "patina", "name": "Patina", "url": "https://patina.henrikheil.net", "accent": "#D9A04C" },
+        { "slug": "patina", "name": "Patina", "url": "https://patina.henrikheil.net", "accent": "#8C939D" },
         { "slug": "velosia", "name": "Velosia", "url": "https://velosia.henrikheil.net", "accent": "#09b0b7" },
         { "slug": "schnappster", "name": "Schnappster", "url": "https://schnappster.henrikheil.net", "accent": "#F59E0B" },
         { "slug": "hugur", "name": "hugur", "url": "https://hugur.henrikheil.net", "accent": "#c8b06a" },
@@ -18,7 +18,7 @@
         { "slug": "echt-oder-ki", "name": "Echt oder KI?", "url": "https://echt-oder-ki.henrikheil.net", "accent": "#00FF9C" },
         { "slug": "komorebi", "name": "Komorebi", "url": "https://komorebi.henrikheil.net", "accent": "#43a26d" },
         { "slug": "quality-touch", "name": "Quality Touch", "url": "https://quality-touch.henrikheil.net", "accent": "#c2603f" },
-        { "slug": "patina-kampagne", "name": "Patina-Kampagne", "url": "https://patina-kampagne.henrikheil.net", "accent": "#D9A04C" },
+        { "slug": "patina-kampagne", "name": "Patina-Kampagne", "url": "https://patina-kampagne.henrikheil.net", "accent": "#8C939D" },
         { "slug": "a11y-quiz", "name": "A11y Quiz", "url": "https://a11y-quiz.henrikheil.net", "accent": "#2563eb" }
       ]
     }
