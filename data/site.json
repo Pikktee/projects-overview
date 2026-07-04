@@ -55,16 +55,14 @@
       "PSM I (Scrum.org) — Erfahrung als Scrum Master und Agile Coach",
       "Jahrelang selbstständig in Web-Entwicklung, Software-Architektur und Beratung",
       "Associate Partner Web Development bei ZMI-Transfer (TransMIT GmbH), Gießen",
-      "Produktentwicklung & Konzeption bei der Deutschen Bahn AG und Rhein-Main.Net",
-      "Aktuell: eigenständige Produktentwicklung — {count} veröffentlichte Web-Apps mit Live-Demo"
+      "Produktentwicklung & Konzeption bei der Deutschen Bahn AG und Rhein-Main.Net"
     ],
     "en": [
       "Graduate engineer in media informatics, Technische Hochschule Mittelhessen",
       "PSM I (Scrum.org) — experience as Scrum Master and agile coach",
       "Many years self-employed in web development, software architecture, and consulting",
       "Associate Partner Web Development at ZMI-Transfer (TransMIT GmbH), Gießen",
-      "Product development & concept design at Deutsche Bahn AG and Rhein-Main.Net",
-      "Currently: independent product development — {count} published web apps with live demos"
+      "Product development & concept design at Deutsche Bahn AG and Rhein-Main.Net"
     ]
   },
   "locales": ["de", "en"],
@@ -91,7 +89,7 @@
       "profile": {
         "role": "Medieninformatiker · Full-Stack · UX",
         "tagline": "Medieninformatiker — Code, UX und Video aus einer Hand.",
-        "bio": "Web-Produkte von der Idee bis zur Live-URL — UX, KI und saubere Umsetzung.",
+        "bio": "Konzeption, Code und Deployment — aus einer Hand.",
         "more": "Schwerpunkte & Hintergrund",
         "credentials": ["PSM I", "Diplom Medieninformatik", "Frankfurt am Main"]
       },
@@ -198,7 +196,7 @@
       "profile": {
         "role": "Media informatics · Full-stack · UX",
         "tagline": "Media informatics engineer — code, UX, and video from one source.",
-        "bio": "Web products from idea to live URL — UX, AI, and solid engineering.",
+        "bio": "Concept, code, and deployment — from one source.",
         "more": "Focus areas & background",
         "credentials": ["PSM I", "M.Sc. Media Informatics", "Frankfurt am Main"]
       },

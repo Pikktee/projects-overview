@@ -15,6 +15,7 @@
   --max: 1200px;
   --gap: clamp(1rem, 2.5vw, 1.75rem);
   --drawer-w: min(520px, 100vw);
+  --page-gutter: 0px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -834,6 +835,20 @@ html.js .card.is-visible {
 .drawer--open {
   transform: translateX(0);
   pointer-events: auto;
+}
+
+/* Überdeckt den reservierten Hauptfenster-Gutter (scrollbar-gutter: stable),
+   ohne ihn freizugeben — kein Layout-Shift, keine Doppel-Scrollleiste. */
+.drawer.drawer--open::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: var(--page-gutter);
+  height: 100dvh;
+  background: var(--bg-card);
+  z-index: 102;
+  pointer-events: none;
 }
 
 .drawer__scroll {

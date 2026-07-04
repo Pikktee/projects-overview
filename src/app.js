@@ -3,6 +3,14 @@
   // Scroll-Reveal initial versteckt (Fallback ohne JS: alles sichtbar).
   document.documentElement.classList.add('js');
 
+  function updatePageGutter() {
+    const gutter = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+    document.documentElement.style.setProperty('--page-gutter', `${gutter}px`);
+  }
+
+  updatePageGutter();
+  window.addEventListener('resize', updatePageGutter, { passive: true });
+
   const LANG_KEY = 'portfolio-lang';
 
   let locale = 'de';
@@ -515,8 +523,8 @@
     drawer.style.setProperty('--accent', project.accent);
   }
 
-  // Scrollleiste ist über `scrollbar-gutter: stable` (CSS) dauerhaft reserviert,
-  // daher genügt overflow:hidden ohne Padding-Kompensation — kein Layout-Shift.
+  // overflow:hidden sperrt das Scrollen; der reservierte Gutter bleibt (kein
+  // Layout-Shift) und wird per .drawer::after in Sheet-Farbe überdeckt.
   function lockBodyScroll() {
     document.documentElement.classList.add('drawer-open');
     document.body.classList.add('drawer-open');

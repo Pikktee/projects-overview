@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:50.442Z"
+    "analyzedAt": "2026-07-04T21:01:08.693Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T17:41:50.619Z"
+    "analyzedAt": "2026-07-04T21:01:08.927Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T17:41:50.874Z"
+    "analyzedAt": "2026-07-04T21:01:09.229Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T17:41:51.043Z"
+    "analyzedAt": "2026-07-04T21:01:09.421Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.129Z"
+    "analyzedAt": "2026-07-04T21:01:09.522Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T17:41:51.195Z"
+    "analyzedAt": "2026-07-04T21:01:09.602Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.276Z"
+    "analyzedAt": "2026-07-04T21:01:09.715Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.353Z"
+    "analyzedAt": "2026-07-04T21:01:09.814Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.425Z"
+    "analyzedAt": "2026-07-04T21:01:09.894Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.537Z"
+    "analyzedAt": "2026-07-04T21:01:10.019Z"
   },
   "patina-kampagne": {
     "slug": "patina-kampagne",
@@ -1061,7 +1061,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.598Z"
+    "analyzedAt": "2026-07-04T21:01:10.096Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1157,7 +1157,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.659Z"
+    "analyzedAt": "2026-07-04T21:01:10.179Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1168,6 +1168,7 @@
     "highlights": [],
     "stack": [
       "Vite",
+      "Three.js",
       "Docker",
       "MapLibre",
       "deck.gl"
@@ -1179,7 +1180,8 @@
         "@deck.gl/geo-layers",
         "@deck.gl/layers",
         "@deck.gl/mapbox",
-        "maplibre-gl"
+        "maplibre-gl",
+        "three"
       ],
       "data": [],
       "ai": [],
@@ -1189,24 +1191,25 @@
       ],
       "testing": [],
       "other": [
-        "@loaders.gl/mvt"
+        "@loaders.gl/mvt",
+        "3d-tiles-renderer"
       ]
     },
-    "dependencyCount": 9,
+    "dependencyCount": 11,
     "loc": {
-      "total": 6025,
-      "code": 4827,
-      "blank": 524,
-      "comment": 674,
+      "total": 6508,
+      "code": 5193,
+      "blank": 569,
+      "comment": 746,
       "byLanguage": {
         "HTML": 228,
-        "JavaScript": 3210,
+        "JavaScript": 3576,
         "CSS": 1389
       }
     },
-    "locFormatted": "4.8k",
+    "locFormatted": "5.2k",
     "files": {
-      "source": 19,
+      "source": 20,
       "components": 0,
       "tsx": 0,
       "tests": 0
@@ -1218,7 +1221,9 @@
       "lastCommit": "2026-07-04 17:22:20 +0200"
     },
     "ux": {
-      "uiFrameworks": [],
+      "uiFrameworks": [
+        "Three.js"
+      ],
       "a11yTools": [],
       "e2eTools": [],
       "unitTools": [],
@@ -1228,6 +1233,6 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T17:41:51.719Z"
+    "analyzedAt": "2026-07-04T21:01:10.244Z"
   }
 }
