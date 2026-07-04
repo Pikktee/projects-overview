@@ -5,26 +5,93 @@
     "github": "https://github.com/Pikktee",
     "linkedin": "https://www.linkedin.com/in/henrik-heil-553a1226/"
   },
-  "skills": {
-    "de": ["React", "TypeScript", "KI / LLMs", "Chrome-Extensions", "Android", "3D / WebGL", "UX & Barrierefreiheit"],
-    "en": ["React", "TypeScript", "AI / LLMs", "Chrome extensions", "Android", "3D / WebGL", "UX & accessibility"]
+  "skillGroups": [
+    {
+      "key": "development",
+      "items": {
+        "de": ["Full-Stack", "Backend", "React", "TypeScript", "REST-APIs", "Deployment"],
+        "en": ["Full-stack", "Backend", "React", "TypeScript", "REST APIs", "Deployment"]
+      }
+    },
+    {
+      "key": "product",
+      "items": {
+        "de": ["UX-Konzeption", "Usability", "Barrierefreiheit", "Prototyping"],
+        "en": ["UX design", "Usability", "Accessibility", "Prototyping"]
+      }
+    },
+    {
+      "key": "ai",
+      "items": {
+        "de": ["KI / LLMs", "Chrome-Extensions", "Android", "3D / WebGL"],
+        "en": ["AI / LLMs", "Chrome extensions", "Android", "3D / WebGL"]
+      }
+    },
+    {
+      "key": "media",
+      "items": {
+        "de": ["Video-Schnitt", "Videoproduktion", "Final Cut Pro", "Premiere"],
+        "en": ["Video editing", "Video production", "Final Cut Pro", "Premiere"]
+      }
+    },
+    {
+      "key": "methods",
+      "items": {
+        "de": ["Scrum", "Agile Coaching", "PSM I", "Workshops", "Technische Konzeption"],
+        "en": ["Scrum", "Agile coaching", "PSM I", "Workshops", "Technical design"]
+      }
+    }
+  ],
+  "background": {
+    "de": [
+      "Diplom-Ingenieur Medieninformatik, Technische Hochschule Mittelhessen",
+      "PSM I (Scrum.org) — Erfahrung als Scrum Master und Agile Coach",
+      "Jahrelang selbstständig in Web-Entwicklung, Software-Architektur und Beratung",
+      "Associate Partner Web Development bei ZMI-Transfer (TransMIT GmbH), Gießen",
+      "Web Development & Konzeption bei Rhein-Main.Net und Deutsche Bahn Training",
+      "Aktuell: eigenständige Produktentwicklung — {count} veröffentlichte Web-Apps mit Live-Demo"
+    ],
+    "en": [
+      "Graduate engineer in media informatics, Technische Hochschule Mittelhessen",
+      "PSM I (Scrum.org) — experience as Scrum Master and agile coach",
+      "Many years self-employed in web development, software architecture, and consulting",
+      "Associate Partner Web Development at ZMI-Transfer (TransMIT GmbH), Gießen",
+      "Web development & design at Rhein-Main.Net and Deutsche Bahn Training",
+      "Currently: independent product development — {count} published web apps with live demos"
+    ]
   },
   "locales": ["de", "en"],
   "defaultLocale": "de",
   "translations": {
     "de": {
       "meta": {
-        "title": "Henrik Heil · Portfolio",
-        "description": "Web-Apps, KI-Tools und Experimente von Henrik Heil — Patina, Velosia, hugur und mehr, alles live."
+        "title": "Henrik Heil · Medieninformatiker & Full-Stack-Entwickler",
+        "description": "Henrik Heil — Medieninformatiker, Full-Stack- und UX-Entwickler. Web-Apps, KI-Tools und Live-Demos: Patina, Velosia, hugur und mehr."
       },
-      "hero": {
-        "eyebrow": "Henrik Heil",
-        "title": "Web-Apps & <em>Experimente</em>",
-        "lead": "KI-Tools, Browser-Erweiterungen und Prototypen — alles mit Live-Demo."
+      "nav": {
+        "profile": "Profil",
+        "projects": "Projekte",
+        "contact": "Kontakt",
+        "aria": "Seitennavigation"
       },
-      "about": {
-        "heading": "Über mich",
-        "text": "Diplom-Ingenieur für Medieninformatik. UX-Denken, schnelle Prototypen und Features, die im Browser landen."
+      "profile": {
+        "role": "Medieninformatiker · Full-Stack · UX",
+        "tagline": "Medieninformatiker — Code, UX und Video aus einer Hand.",
+        "bio": "Ich entwickle Web-Produkte von der Idee bis zur Live-URL — mit Fokus auf durchdachte Oberflächen, KI-Integration und saubere Umsetzung.",
+        "credentials": ["PSM I", "Diplom Medieninformatik", "Frankfurt am Main"]
+      },
+      "skills": {
+        "heading": "Schwerpunkte",
+        "groups": {
+          "development": "Entwicklung",
+          "product": "Produkt & UX",
+          "ai": "KI & Tools",
+          "media": "Medien",
+          "methods": "Methoden"
+        }
+      },
+      "background": {
+        "heading": "Beruflicher Hintergrund"
       },
       "links": {
         "email": "E-Mail",
@@ -32,6 +99,10 @@
         "linkedin": "LinkedIn"
       },
       "sections": {
+        "projects": {
+          "heading": "Was ich <em>gebaut</em> habe",
+          "lead": "Eigenständige Web-Apps und Experimente — jedes Projekt mit Live-Demo und Tech-Stack."
+        },
         "experiments": "Experimente"
       },
       "card": {
@@ -95,17 +166,33 @@
     },
     "en": {
       "meta": {
-        "title": "Henrik Heil · Portfolio",
-        "description": "Web apps, AI tools, and experiments by Henrik Heil — Patina, Velosia, hugur, and more, all live."
+        "title": "Henrik Heil · Media Informatics & Full-Stack Developer",
+        "description": "Henrik Heil — media informatics engineer, full-stack and UX developer. Web apps, AI tools, and live demos: Patina, Velosia, hugur, and more."
       },
-      "hero": {
-        "eyebrow": "Henrik Heil",
-        "title": "Web apps & <em>experiments</em>",
-        "lead": "AI tools, browser extensions, and prototypes — each with a live demo."
+      "nav": {
+        "profile": "Profile",
+        "projects": "Projects",
+        "contact": "Contact",
+        "aria": "Page navigation"
       },
-      "about": {
-        "heading": "About",
-        "text": "Graduate engineer in media informatics. UX thinking, fast prototypes, and features that ship in the browser."
+      "profile": {
+        "role": "Media informatics · Full-stack · UX",
+        "tagline": "Media informatics engineer — code, UX, and video from one source.",
+        "bio": "I build web products from idea to live URL — with a focus on thoughtful interfaces, AI integration, and solid engineering.",
+        "credentials": ["PSM I", "M.Sc. Media Informatics", "Frankfurt am Main"]
+      },
+      "skills": {
+        "heading": "Focus areas",
+        "groups": {
+          "development": "Development",
+          "product": "Product & UX",
+          "ai": "AI & tools",
+          "media": "Media",
+          "methods": "Methods"
+        }
+      },
+      "background": {
+        "heading": "Professional background"
       },
       "links": {
         "email": "Email",
@@ -113,6 +200,10 @@
         "linkedin": "LinkedIn"
       },
       "sections": {
+        "projects": {
+          "heading": "What I've <em>built</em>",
+          "lead": "Independent web apps and experiments — each project with a live demo and tech stack."
+        },
         "experiments": "Experiments"
       },
       "card": {

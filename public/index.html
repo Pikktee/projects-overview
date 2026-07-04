@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="Web-Apps, KI-Tools und Experimente von Henrik Heil — Patina, Velosia, hugur und mehr, alles live." />
-  <title>Henrik Heil · Portfolio</title>
+  <meta name="description" content="Henrik Heil — Medieninformatiker, Full-Stack- und UX-Entwickler. Web-Apps, KI-Tools und Live-Demos: Patina, Velosia, hugur und mehr." />
+  <title>Henrik Heil · Medieninformatiker &amp; Full-Stack-Entwickler</title>
   <link rel="alternate" hreflang="de" href="https://www.henrikheil.net/" />
   <link rel="alternate" hreflang="en" href="https://www.henrikheil.net/?lang=en" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=d4aa7ce4" />
+  <link rel="stylesheet" href="/styles.css?v=d0a3ff91" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#0f1114" />
@@ -18,30 +18,66 @@
 <body>
   <div class="grain" aria-hidden="true"></div>
 
-  <header class="hero">
-    <div class="hero__top">
-      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Henrik Heil</p>
-      <nav class="lang-switch" aria-label="Sprache wählen" data-i18n-aria="a11y.langSwitch">
-        <button type="button" class="lang-switch__btn is-active" data-lang="de" aria-pressed="true">DE</button>
-        <button type="button" class="lang-switch__btn" data-lang="en" aria-pressed="false">EN</button>
-      </nav>
+  <nav class="site-nav" id="site-nav" aria-label="Seitennavigation" data-i18n-aria="nav.aria">
+    <a class="site-nav__brand" href="#">Henrik Heil</a>
+    <div class="site-nav__links">
+      <a class="site-nav__link" href="#profil" data-i18n="nav.profile">Profil</a>
+      <a class="site-nav__link" href="#projekte" data-i18n="nav.projects">Projekte</a>
+      <a class="site-nav__link" href="#kontakt" data-i18n="nav.contact">Kontakt</a>
     </div>
-    <h1 class="hero__title" data-i18n-html="hero.title">Web-Apps & <em>Experimente</em></h1>
-    <p class="hero__lead" data-i18n="hero.lead">KI-Tools, Browser-Erweiterungen und Prototypen — alles mit Live-Demo.</p>
-    <div class="hero__links">
-      <a class="hero__link" href="mailto:contact@henrikheil.net">E-Mail</a>
-      <a class="hero__link" href="https://github.com/Pikktee" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a class="hero__link" href="https://www.linkedin.com/in/henrik-heil-553a1226/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    </div>
-  </header>
+    <nav class="lang-switch" aria-label="Sprache wählen" data-i18n-aria="a11y.langSwitch">
+      <button type="button" class="lang-switch__btn is-active" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" class="lang-switch__btn" data-lang="en" aria-pressed="false">EN</button>
+    </nav>
+  </nav>
 
-  <section class="about" id="about" aria-labelledby="about-heading">
-    <h2 class="visually-hidden" id="about-heading" data-i18n="about.heading">Über mich</h2>
-    <p class="about__text" data-i18n="about.text">Diplom-Ingenieur für Medieninformatik. UX-Denken, schnelle Prototypen und Features, die im Browser landen.</p>
-    <ul class="about__skills" id="about-skills" aria-label="Skills"></ul>
+  <section class="profile" id="profil">
+    <div class="profile__card">
+      <header class="profile__header">
+        <h1 class="profile__name">Henrik Heil</h1>
+        <p class="profile__role" data-i18n="profile.role">Medieninformatiker · Full-Stack · UX</p>
+        <p class="profile__tagline" data-i18n="profile.tagline">Medieninformatiker — Code, UX und Video aus einer Hand.</p>
+      </header>
+
+      <p class="profile__bio" id="profile-bio" data-i18n="profile.bio">Ich entwickle Web-Produkte von der Idee bis zur Live-URL — mit Fokus auf durchdachte Oberflächen, KI-Integration und saubere Umsetzung.</p>
+
+      <ul class="profile__credentials" id="profile-credentials" aria-label="Qualifikationen">
+        <li class="profile__credential">PSM I</li>
+        <li class="profile__credential">Diplom Medieninformatik</li>
+        <li class="profile__credential">Frankfurt am Main</li>
+      </ul>
+
+      <div class="profile__actions" id="kontakt">
+        <a class="btn btn--primary" href="mailto:contact@henrikheil.net">
+          <span data-i18n="links.email">E-Mail</span>
+        </a>
+        <a class="btn btn--ghost" href="https://github.com/Pikktee" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="links.github">GitHub</span>
+        </a>
+        <a class="btn btn--ghost" href="https://www.linkedin.com/in/henrik-heil-553a1226/" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="links.linkedin">LinkedIn</span>
+        </a>
+      </div>
+
+      <div class="profile__skills">
+        <h2 class="profile__subheading" data-i18n="skills.heading">Schwerpunkte</h2>
+        <div class="skill-groups" id="profile-skills"></div>
+      </div>
+
+      <div class="profile__background">
+        <h2 class="profile__subheading" data-i18n="background.heading">Beruflicher Hintergrund</h2>
+        <ul class="profile__timeline" id="profile-background"></ul>
+      </div>
+    </div>
   </section>
 
-  <main class="sections" id="projects">
+  <div class="projects-band" id="projekte">
+    <header class="projects-band__header">
+      <h2 class="projects-band__title" data-i18n-html="sections.projects.heading">Was ich <em>gebaut</em> habe</h2>
+      <p class="projects-band__lead" data-i18n="sections.projects.lead">Eigenständige Web-Apps und Experimente — jedes Projekt mit Live-Demo und Tech-Stack.</p>
+    </header>
+
+    <main class="sections" id="projects">
   <section class="section">
     
     <div class="grid">
@@ -194,9 +230,9 @@
     </article>
     </div>
   </section>
-  </main>
+    </main>
 
-  <section class="facet-section" aria-labelledby="facet-heading">
+    <section class="facet-section" aria-labelledby="facet-heading">
     <div class="facet-section__inner">
       <h2 class="facet-section__heading" id="facet-heading" data-i18n-html="facets.heading">Nach <em>Merkmal</em> filtern</h2>
       <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="Projekte nach Merkmal filtern">
@@ -230,7 +266,8 @@
         <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">Alle anzeigen</button>
       </p>
     </div>
-  </section>
+    </section>
+  </div>
 
   <footer class="footer">
     <a href="/impressum.html" data-i18n="footer.impressum">Impressum</a>
@@ -271,7 +308,7 @@
     </div>
   </aside>
 
-  <script>window.__ASSET_V = "d4aa7ce4";</script>
-  <script src="/app.js?v=d4aa7ce4" defer></script>
+  <script>window.__ASSET_V = "d0a3ff91";</script>
+  <script src="/app.js?v=d0a3ff91" defer></script>
 </body>
 </html>

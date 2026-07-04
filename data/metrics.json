@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:29.979Z"
+    "analyzedAt": "2026-07-04T17:11:20.727Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T16:18:30.448Z"
+    "analyzedAt": "2026-07-04T17:11:20.902Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T16:18:30.715Z"
+    "analyzedAt": "2026-07-04T17:11:21.157Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T16:18:30.901Z"
+    "analyzedAt": "2026-07-04T17:11:21.331Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:31.642Z"
+    "analyzedAt": "2026-07-04T17:11:21.414Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T16:18:31.928Z"
+    "analyzedAt": "2026-07-04T17:11:21.481Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:32.108Z"
+    "analyzedAt": "2026-07-04T17:11:21.571Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:32.211Z"
+    "analyzedAt": "2026-07-04T17:11:21.650Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:32.295Z"
+    "analyzedAt": "2026-07-04T17:11:21.716Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:32.430Z"
+    "analyzedAt": "2026-07-04T17:11:21.829Z"
   },
   "patina-kampagne": {
     "slug": "patina-kampagne",
@@ -1061,7 +1061,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:32.495Z"
+    "analyzedAt": "2026-07-04T17:11:21.895Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1157,7 +1157,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:32.567Z"
+    "analyzedAt": "2026-07-04T17:11:21.955Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1194,13 +1194,13 @@
     },
     "dependencyCount": 9,
     "loc": {
-      "total": 5932,
-      "code": 4770,
-      "blank": 520,
-      "comment": 642,
+      "total": 6024,
+      "code": 4826,
+      "blank": 524,
+      "comment": 674,
       "byLanguage": {
         "HTML": 228,
-        "JavaScript": 3153,
+        "JavaScript": 3209,
         "CSS": 1389
       }
     },
@@ -1228,6 +1228,6 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T16:18:32.634Z"
+    "analyzedAt": "2026-07-04T17:11:22.014Z"
   }
 }

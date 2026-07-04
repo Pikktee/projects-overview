@@ -114,17 +114,51 @@
       footerCount.textContent = t('footer.projects', { count: totalProjects });
     }
 
-    const skillsEl = document.getElementById('about-skills');
-    if (skillsEl) {
-      const skills = site.skills?.[locale] || site.skills?.de || [];
-      skillsEl.innerHTML = skills.map((skill) => `<li class="about__skill">${esc(skill)}</li>`).join('');
-    }
+    renderProfileSections();
 
     document.querySelectorAll('.lang-switch__btn').forEach((btn) => {
       const active = btn.dataset.lang === locale;
       btn.classList.toggle('is-active', active);
       btn.setAttribute('aria-pressed', String(active));
     });
+  }
+
+  function renderProfileSections() {
+    const credentialsEl = document.getElementById('profile-credentials');
+    if (credentialsEl) {
+      const items = strings.profile?.credentials || [];
+      credentialsEl.innerHTML = items
+        .map((item) => `<li class="profile__credential">${esc(item)}</li>`)
+        .join('');
+    }
+
+    const skillsEl = document.getElementById('profile-skills');
+    if (skillsEl && site.skillGroups?.length) {
+      skillsEl.innerHTML = site.skillGroups
+        .map((group) => {
+          const label = t(`skills.groups.${group.key}`);
+          const items = group.items?.[locale] || group.items?.de || [];
+          return `
+            <div class="skill-group">
+              <h3 class="skill-group__title">${esc(label)}</h3>
+              <ul class="skill-group__list">
+                ${items.map((item) => `<li class="skill-group__item">${esc(item)}</li>`).join('')}
+              </ul>
+            </div>`;
+        })
+        .join('');
+    }
+
+    const backgroundEl = document.getElementById('profile-background');
+    if (backgroundEl) {
+      const items = site.background?.[locale] || site.background?.de || [];
+      backgroundEl.innerHTML = items
+        .map((item) => {
+          const text = item.replace(/\{count\}/g, String(totalProjects));
+          return `<li class="profile__timeline-item">${esc(text)}</li>`;
+        })
+        .join('');
+    }
   }
 
   async function loadSite() {
@@ -561,4 +595,11 @@
   });
 
   window.addEventListener('hashchange', handleHash);
+
+  const siteNav = document.getElementById('site-nav');
+  if (siteNav) {
+    const onScroll = () => siteNav.classList.toggle('is-scrolled', window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 })();

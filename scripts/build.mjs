@@ -167,37 +167,71 @@ ${headExtras}
 <body>
   <div class="grain" aria-hidden="true"></div>
 
-  <header class="hero">
-    <div class="hero__top">
-      <p class="hero__eyebrow" data-i18n="hero.eyebrow">${escapeHtml(tDe.hero.eyebrow)}</p>
-      <nav class="lang-switch" aria-label="${escapeHtml(tDe.a11y.langSwitch)}" data-i18n-aria="a11y.langSwitch">
-        ${site.locales
-          .map(
-            (code) =>
-              `<button type="button" class="lang-switch__btn${code === site.defaultLocale ? ' is-active' : ''}" data-lang="${code}" aria-pressed="${code === site.defaultLocale ? 'true' : 'false'}">${code.toUpperCase()}</button>`,
-          )
-          .join('\n        ')}
-      </nav>
+  <nav class="site-nav" id="site-nav" aria-label="${escapeHtml(tDe.nav.aria)}" data-i18n-aria="nav.aria">
+    <a class="site-nav__brand" href="#">${escapeHtml(site.profile.name)}</a>
+    <div class="site-nav__links">
+      <a class="site-nav__link" href="#profil" data-i18n="nav.profile">${escapeHtml(tDe.nav.profile)}</a>
+      <a class="site-nav__link" href="#projekte" data-i18n="nav.projects">${escapeHtml(tDe.nav.projects)}</a>
+      <a class="site-nav__link" href="#kontakt" data-i18n="nav.contact">${escapeHtml(tDe.nav.contact)}</a>
     </div>
-    <h1 class="hero__title" data-i18n-html="hero.title">${tDe.hero.title}</h1>
-    <p class="hero__lead" data-i18n="hero.lead">${escapeHtml(tDe.hero.lead)}</p>
-    <div class="hero__links">
-      <a class="hero__link" href="mailto:${escapeHtml(site.profile.email)}">${escapeHtml(tDe.links.email)}</a>
-      <a class="hero__link" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tDe.links.github)}</a>
-      <a class="hero__link" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tDe.links.linkedin)}</a>
-    </div>
-  </header>
+    <nav class="lang-switch" aria-label="${escapeHtml(tDe.a11y.langSwitch)}" data-i18n-aria="a11y.langSwitch">
+      ${site.locales
+        .map(
+          (code) =>
+            `<button type="button" class="lang-switch__btn${code === site.defaultLocale ? ' is-active' : ''}" data-lang="${code}" aria-pressed="${code === site.defaultLocale ? 'true' : 'false'}">${code.toUpperCase()}</button>`,
+        )
+        .join('\n      ')}
+    </nav>
+  </nav>
 
-  <section class="about" id="about" aria-labelledby="about-heading">
-    <h2 class="visually-hidden" id="about-heading" data-i18n="about.heading">${escapeHtml(tDe.about.heading)}</h2>
-    <p class="about__text" data-i18n="about.text">${escapeHtml(tDe.about.text)}</p>
-    <ul class="about__skills" id="about-skills" aria-label="Skills"></ul>
+  <section class="profile" id="profil">
+    <div class="profile__card">
+      <header class="profile__header">
+        <h1 class="profile__name">${escapeHtml(site.profile.name)}</h1>
+        <p class="profile__role" data-i18n="profile.role">${escapeHtml(tDe.profile.role)}</p>
+        <p class="profile__tagline" data-i18n="profile.tagline">${escapeHtml(tDe.profile.tagline)}</p>
+      </header>
+
+      <p class="profile__bio" id="profile-bio" data-i18n="profile.bio">${escapeHtml(tDe.profile.bio)}</p>
+
+      <ul class="profile__credentials" id="profile-credentials" aria-label="Qualifikationen">
+        ${tDe.profile.credentials.map((c) => `<li class="profile__credential">${escapeHtml(c)}</li>`).join('\n        ')}
+      </ul>
+
+      <div class="profile__actions" id="kontakt">
+        <a class="btn btn--primary" href="mailto:${escapeHtml(site.profile.email)}">
+          <span data-i18n="links.email">${escapeHtml(tDe.links.email)}</span>
+        </a>
+        <a class="btn btn--ghost" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="links.github">${escapeHtml(tDe.links.github)}</span>
+        </a>
+        <a class="btn btn--ghost" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="links.linkedin">${escapeHtml(tDe.links.linkedin)}</span>
+        </a>
+      </div>
+
+      <div class="profile__skills">
+        <h2 class="profile__subheading" data-i18n="skills.heading">${escapeHtml(tDe.skills.heading)}</h2>
+        <div class="skill-groups" id="profile-skills"></div>
+      </div>
+
+      <div class="profile__background">
+        <h2 class="profile__subheading" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h2>
+        <ul class="profile__timeline" id="profile-background"></ul>
+      </div>
+    </div>
   </section>
 
-  <main class="sections" id="projects">${sectionsHtml}
-  </main>
+  <div class="projects-band" id="projekte">
+    <header class="projects-band__header">
+      <h2 class="projects-band__title" data-i18n-html="sections.projects.heading">${tDe.sections.projects.heading}</h2>
+      <p class="projects-band__lead" data-i18n="sections.projects.lead">${escapeHtml(tDe.sections.projects.lead)}</p>
+    </header>
 
-  <section class="facet-section" aria-labelledby="facet-heading">
+    <main class="sections" id="projects">${sectionsHtml}
+    </main>
+
+    <section class="facet-section" aria-labelledby="facet-heading">
     <div class="facet-section__inner">
       <h2 class="facet-section__heading" id="facet-heading" data-i18n-html="facets.heading">${tDe.facets.heading}</h2>
       <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
@@ -212,7 +246,8 @@ ${headExtras}
         <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">${escapeHtml(tDe.filter.reset)}</button>
       </p>
     </div>
-  </section>
+    </section>
+  </div>
 
   <footer class="footer">
     <a href="/impressum.html" data-i18n="footer.impressum">${escapeHtml(tDe.footer.impressum)}</a>
