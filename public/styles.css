@@ -529,7 +529,8 @@ html.js .card.is-visible {
   -webkit-tap-highlight-color: rgba(236, 232, 225, 0.08);
   transition:
     transform 0.35s var(--ease-out),
-    border-color 0.35s ease,
+    border-color 0.3s ease,
+    border-width 0.3s ease,
     box-shadow 0.35s var(--ease-out);
 }
 
@@ -537,15 +538,15 @@ html.js .card.is-visible {
 .card__btn:focus-visible,
 .card__btn:active {
   transform: translateY(-4px);
-  border-color: color-mix(in srgb, var(--accent) 58%, transparent);
+  margin: -1px;
+  border-width: 2px;
+  border-color: var(--accent-cta, var(--accent));
   box-shadow:
-    0 20px 40px rgba(0, 0, 0, 0.35),
-    0 0 0 2px color-mix(in srgb, var(--accent) 42%, transparent);
+    0 22px 44px rgba(0, 0, 0, 0.42),
+    0 0 24px color-mix(in srgb, var(--accent-cta, var(--accent)) 22%, transparent);
 }
 
-/* Dezenter Cursor-Effekt: nur ein schmales Leuchten auf der Kartenkante
-   (1px-Ring per Mask), das der Mausposition folgt. Kein flächiger Glow über
-   dem Karteninhalt. Nur auf Geräten mit echtem Hover aktiv. */
+/* Dezentes Cursor-Leuchten auf der Kante — ergänzt den Rand, ersetzt ihn nicht. */
 @media (hover: hover) and (pointer: fine) {
   .card__btn::before {
     content: "";
@@ -556,9 +557,9 @@ html.js .card.is-visible {
     border-radius: inherit;
     padding: 2px;
     background: radial-gradient(
-      240px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--accent) 80%, transparent),
-      transparent 70%
+      180px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent-cta, var(--accent)) 55%, transparent),
+      transparent 72%
     );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -573,7 +574,7 @@ html.js .card.is-visible {
   }
 
   .card__btn:hover::before {
-    opacity: 0.85;
+    opacity: 0.55;
   }
 }
 
