@@ -62,6 +62,11 @@ body.drawer-open {
   z-index: 1;
 }
 
+.sections,
+.stack-section {
+  isolation: isolate;
+}
+
 /* ── Hero ── */
 
 .hero {
@@ -138,6 +143,8 @@ body.drawer-open {
 /* ── Cards ── */
 
 .card {
+  position: relative;
+  z-index: 1;
   animation: fadeUp 0.7s var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * 0.05s + 0.1s);
   transition:
@@ -431,6 +438,16 @@ body.drawer-open {
 .drawer[hidden] {
   display: none !important;
   pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+.drawer:not(.drawer--open) {
+  visibility: hidden;
+  pointer-events: none !important;
+}
+
+.drawer.drawer--open {
+  visibility: visible;
 }
 
 .drawer {
@@ -1088,7 +1105,12 @@ body.drawer-open {
   }
 
   .drawer:not(.drawer--open) {
-    pointer-events: none;
+    pointer-events: none !important;
+    visibility: hidden;
+  }
+
+  .drawer.drawer--open {
+    visibility: visible;
   }
 
   .drawer__close {

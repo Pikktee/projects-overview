@@ -20,6 +20,19 @@
   let lastFocus = null;
   let activeTab = 'overview';
   const totalProjects = cards.length;
+  let lastPointerUp = 0;
+
+  const projectsReady = loadProjects();
+
+  function ensureDrawerClosed() {
+    drawer.classList.remove('drawer--open');
+    backdrop.classList.remove('drawer-backdrop--visible');
+    drawer.hidden = true;
+    backdrop.hidden = true;
+    drawer.inert = true;
+  }
+
+  ensureDrawerClosed();
 
   document.querySelectorAll('.card').forEach((card, i) => {
     card.style.setProperty('--i', i);
@@ -309,37 +322,40 @@
   }
 
   function openDrawer(slug) {
-    const project = projects[slug];
-    if (!project) return;
+    return projectsReady.then(() => {
+      const project = projects[slug];
+      if (!project) return;
 
-    lastFocus = document.activeElement;
-    activeSlug = slug;
-    renderDrawer(project);
+      lastFocus = document.activeElement;
+      activeSlug = slug;
+      renderDrawer(project);
 
-    drawer.hidden = false;
-    backdrop.hidden = false;
-    requestAnimationFrame(() => {
+      drawer.inert = false;
+      drawer.hidden = false;
+      backdrop.hidden = false;
+      void drawer.offsetWidth;
       drawer.classList.add('drawer--open');
       backdrop.classList.add('drawer-backdrop--visible');
-    });
 
-    lockBodyScroll();
-    openButtons.forEach((btn) => {
-      btn.setAttribute('aria-expanded', btn.dataset.open === slug ? 'true' : 'false');
-    });
+      lockBodyScroll();
+      openButtons.forEach((btn) => {
+        btn.setAttribute('aria-expanded', btn.dataset.open === slug ? 'true' : 'false');
+      });
 
-    history.replaceState(null, '', `#${slug}`);
-    closeBtn.focus({ preventScroll: true });
+      history.replaceState(null, '', `#${slug}`);
+      closeBtn.focus({ preventScroll: true });
+    });
   }
 
   function closeDrawer() {
     drawer.classList.remove('drawer--open');
     backdrop.classList.remove('drawer-backdrop--visible');
+    backdrop.hidden = true;
+    drawer.inert = true;
 
     const finishClose = () => {
       if (drawer.hidden) return;
       drawer.hidden = true;
-      backdrop.hidden = true;
       drawer.removeEventListener('transitionend', onEnd);
     };
 
@@ -362,30 +378,44 @@
     lastFocus?.focus({ preventScroll: true });
   }
 
-  function handleHash() {
-    const slug = location.hash.slice(1);
-    if (slug && projects[slug]) openDrawer(slug);
-  }
+  function handleInteraction(event) {
+    if (activeSlug) return;
 
-  document.addEventListener('click', (event) => {
     const openBtn = event.target.closest('[data-open]');
     if (openBtn) {
-      event.preventDefault();
       openDrawer(openBtn.dataset.open);
       return;
     }
 
     const pill = event.target.closest('.stack-pill');
     if (pill?.dataset.filter) {
-      event.preventDefault();
       setFilter(pill.dataset.filter);
       return;
     }
 
     if (event.target.closest('#filter-reset')) {
-      event.preventDefault();
       setFilter('all');
     }
+  }
+
+  function handleHash() {
+    const slug = location.hash.slice(1);
+    if (slug && projects[slug]) openDrawer(slug);
+  }
+
+  document.addEventListener(
+    'pointerup',
+    (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      lastPointerUp = Date.now();
+      handleInteraction(event);
+    },
+    true,
+  );
+
+  document.addEventListener('click', (event) => {
+    if (Date.now() - lastPointerUp < 400) return;
+    handleInteraction(event);
   });
 
   closeBtn.addEventListener('click', closeDrawer);
@@ -400,6 +430,4 @@
   });
 
   window.addEventListener('hashchange', handleHash);
-
-  loadProjects();
 })();
