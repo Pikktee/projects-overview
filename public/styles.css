@@ -869,6 +869,7 @@ html.js .card.is-visible {
   overflow-y: auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: auto;
 }
 
 .drawer__hero {

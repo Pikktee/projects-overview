@@ -585,6 +585,15 @@
     drawer.removeEventListener('transitionend', onCloseTransitionEnd);
   }
 
+  function resetDrawerScroll() {
+    const scrollArea = drawer.querySelector('.drawer__scroll');
+    if (!scrollArea) return;
+    scrollArea.scrollTo(0, 0);
+    requestAnimationFrame(() => {
+      scrollArea.scrollTo(0, 0);
+    });
+  }
+
   function openDrawer(slug) {
     return projectsReady.then(() => {
       const project = projects[slug];
@@ -597,10 +606,7 @@
       }
       activeSlug = slug;
       renderDrawer(project);
-
-      const scrollArea = drawer.querySelector('.drawer__scroll');
-      if (scrollArea) scrollArea.scrollTop = 0;
-      drawer.scrollTop = 0;
+      resetDrawerScroll();
 
       drawer.inert = false;
       drawer.hidden = false;
@@ -609,13 +615,17 @@
       drawer.classList.add('drawer--open');
       backdrop.classList.add('drawer-backdrop--visible');
 
+      resetDrawerScroll();
       lockBodyScroll();
       openButtons.forEach((btn) => {
         btn.setAttribute('aria-expanded', btn.dataset.open === slug ? 'true' : 'false');
       });
 
       history.replaceState(null, '', `#${slug}`);
-      closeBtn.focus({ preventScroll: true });
+      requestAnimationFrame(() => {
+        resetDrawerScroll();
+        closeBtn.focus({ preventScroll: true });
+      });
     });
   }
 
@@ -628,6 +638,7 @@
     backdrop.classList.remove('drawer-backdrop--visible');
     backdrop.hidden = true;
     drawer.inert = true;
+    resetDrawerScroll();
 
     activeSlug = null;
 
