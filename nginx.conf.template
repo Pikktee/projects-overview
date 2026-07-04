@@ -1,5 +1,11 @@
 server {
     listen ${PORT};
+    server_name ${REDIRECT_HOST};
+    return 301 https://${CANONICAL_HOST}$request_uri;
+}
+
+server {
+    listen ${PORT};
     server_name _;
     root /usr/share/nginx/html;
     index index.html;
