@@ -5,8 +5,8 @@ server {
 }
 
 server {
-    listen ${PORT};
-    server_name _;
+    listen ${PORT} default_server;
+    server_name ${CANONICAL_HOST} _;
     root /usr/share/nginx/html;
     index index.html;
 
