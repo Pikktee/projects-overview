@@ -19,6 +19,7 @@
   let activeSlug = null;
   let lastFocus = null;
   let activeTab = 'overview';
+  let closeTimer = null;
 
   const totalProjects = cards.length;
 
@@ -314,21 +315,38 @@
     drawer.style.setProperty('--accent', project.accent);
   }
 
-  function getScrollbarWidth() {
-    return Math.max(0, window.innerWidth - document.documentElement.clientWidth);
-  }
-
+  // Scrollleiste ist über `scrollbar-gutter: stable` (CSS) dauerhaft reserviert,
+  // daher genügt overflow:hidden ohne Padding-Kompensation — kein Layout-Shift.
   function lockBodyScroll() {
-    const gutter = getScrollbarWidth();
-    if (gutter > 0) {
-      document.body.style.paddingRight = `${gutter}px`;
-    }
+    document.documentElement.classList.add('drawer-open');
     document.body.classList.add('drawer-open');
   }
 
   function unlockBodyScroll() {
-    document.body.style.paddingRight = '';
+    document.documentElement.classList.remove('drawer-open');
     document.body.classList.remove('drawer-open');
+  }
+
+  // Verbirgt den Drawer erst nach der Schließen-Animation. Bricht ab, falls
+  // inzwischen wieder ein Projekt geöffnet wurde (verhindert das „reinfahren
+  // und sofort verschwinden" bei schnellem Wechsel zwischen Karten).
+  function hideDrawerElements() {
+    if (activeSlug) return;
+    drawer.hidden = true;
+    drawer.removeEventListener('transitionend', onCloseTransitionEnd);
+  }
+
+  function onCloseTransitionEnd(event) {
+    if (event.target !== drawer || event.propertyName !== 'transform') return;
+    hideDrawerElements();
+  }
+
+  function cancelPendingClose() {
+    if (closeTimer !== null) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    drawer.removeEventListener('transitionend', onCloseTransitionEnd);
   }
 
   function openDrawer(slug) {
@@ -336,7 +354,11 @@
       const project = projects[slug];
       if (!project) return;
 
-      lastFocus = document.activeElement;
+      cancelPendingClose();
+
+      if (!activeSlug) {
+        lastFocus = document.activeElement;
+      }
       activeSlug = slug;
       renderDrawer(project);
 
@@ -358,27 +380,21 @@
   }
 
   function closeDrawer() {
+    if (!activeSlug) return;
+
+    cancelPendingClose();
+
     drawer.classList.remove('drawer--open');
     backdrop.classList.remove('drawer-backdrop--visible');
     backdrop.hidden = true;
     drawer.inert = true;
 
-    const finishClose = () => {
-      if (drawer.hidden) return;
-      drawer.hidden = true;
-      drawer.removeEventListener('transitionend', onEnd);
-    };
+    activeSlug = null;
 
-    const onEnd = (event) => {
-      if (event.target !== drawer || event.propertyName !== 'transform') return;
-      finishClose();
-    };
-
-    drawer.addEventListener('transitionend', onEnd);
-    window.setTimeout(finishClose, 500);
+    drawer.addEventListener('transitionend', onCloseTransitionEnd);
+    closeTimer = window.setTimeout(hideDrawerElements, 500);
 
     unlockBodyScroll();
-    activeSlug = null;
     openButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
 
     if (location.hash) {

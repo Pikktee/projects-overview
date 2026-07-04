@@ -39,6 +39,7 @@ body {
     var(--bg);
 }
 
+html.drawer-open,
 body.drawer-open {
   overflow: hidden;
 }
