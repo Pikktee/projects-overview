@@ -511,7 +511,10 @@ html.js .card.is-visible {
 }
 
 /* Spotlight, das dem Cursor folgt — nur auf Geräten mit echtem Hover,
-   rein dekorativ und ohne Einfluss auf Tastatur- oder Touch-Bedienung. */
+   rein dekorativ und ohne Einfluss auf Tastatur- oder Touch-Bedienung.
+   Zwei Ebenen: ein flächiger Glow im Karteninneren (::after) und ein
+   Leuchten auf der Kartenkante (::before), das auch über den hellen
+   Screenshots deutlich sichtbar bleibt. */
 @media (hover: hover) and (pointer: fine) {
   .card__btn::after {
     content: "";
@@ -521,14 +524,42 @@ html.js .card.is-visible {
     pointer-events: none;
     opacity: 0;
     background: radial-gradient(
-      340px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--accent) 13%, transparent),
-      transparent 65%
+      320px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, color-mix(in srgb, var(--accent) 70%, white) 26%, transparent),
+      transparent 62%
     );
     transition: opacity 0.35s ease;
   }
 
-  .card__btn:hover::after {
+  /* Kanten-Glow: Gradient liegt nur auf einem 2px-Ring (Mask blendet die
+     Innenfläche aus), wandert mit dem Cursor über die Kartenkante. */
+  .card__btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    border-radius: inherit;
+    padding: 2px;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent) 85%, white),
+      transparent 70%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .card__btn:hover::after,
+  .card__btn:hover::before {
     opacity: 1;
   }
 }
