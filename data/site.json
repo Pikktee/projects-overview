@@ -1,0 +1,195 @@
+{
+  "profile": {
+    "name": "Henrik Heil",
+    "email": "contact@henrikheil.net",
+    "github": "https://github.com/Pikktee",
+    "linkedin": "https://www.linkedin.com/in/henrik-heil-553a1226/"
+  },
+  "skills": {
+    "de": ["React", "TypeScript", "KI / LLMs", "Chrome-Extensions", "Android", "3D / WebGL", "UX & Barrierefreiheit"],
+    "en": ["React", "TypeScript", "AI / LLMs", "Chrome extensions", "Android", "3D / WebGL", "UX & accessibility"]
+  },
+  "locales": ["de", "en"],
+  "defaultLocale": "de",
+  "translations": {
+    "de": {
+      "meta": {
+        "title": "Henrik Heil · Portfolio",
+        "description": "Web-Apps, KI-Tools und Experimente von Henrik Heil — Patina, Velosia, hugur und mehr, alles live."
+      },
+      "hero": {
+        "eyebrow": "Henrik Heil",
+        "title": "Web-Apps & <em>Experimente</em>",
+        "lead": "KI-Tools, Browser-Erweiterungen und Prototypen — alles mit Live-Demo."
+      },
+      "about": {
+        "heading": "Über mich",
+        "text": "Diplom-Ingenieur für Medieninformatik. UX-Denken, schnelle Prototypen und Features, die im Browser landen."
+      },
+      "links": {
+        "email": "E-Mail",
+        "github": "GitHub",
+        "linkedin": "LinkedIn"
+      },
+      "sections": {
+        "experiments": "Experimente"
+      },
+      "card": {
+        "details": "Details ansehen"
+      },
+      "facets": {
+        "heading": "Nach <em>Merkmal</em> filtern",
+        "all": "Alle",
+        "ai": "KI-gestützt",
+        "extension": "Chrome-Erweiterung",
+        "android": "Android-App",
+        "3d": "3D & Visualisierung",
+        "filterAria": "Projekte nach Merkmal filtern"
+      },
+      "filter": {
+        "status": "{visible} von {total} Projekten · {label}",
+        "reset": "Alle anzeigen"
+      },
+      "footer": {
+        "impressum": "Impressum",
+        "projects": "{count} Projekte"
+      },
+      "drawer": {
+        "close": "Schließen",
+        "tabsAria": "Projekt-Details",
+        "overview": "Überblick",
+        "ux": "UX",
+        "tech": "Technik",
+        "visit": "Live ansehen",
+        "github": "GitHub",
+        "linesOfCode": "Zeilen Code",
+        "commits": "Commits",
+        "tests": "Tests",
+        "statsAria": "Projekt-Kennzahlen",
+        "coverage": "Testabdeckung",
+        "techStack": "Tech-Stack",
+        "uiFrameworks": "UI-Frameworks",
+        "a11y": "Barrierefreiheit",
+        "testing": "Testing",
+        "uxEmpty": "Für dieses Projekt liegt noch keine UX-Beschreibung vor.",
+        "codeByLang": "Code nach Sprache",
+        "lines": "Zeilen",
+        "git": "Git",
+        "firstCommit": "Erster Commit",
+        "lastCommit": "Letzter Commit",
+        "libraries": "Bibliotheken ({count})",
+        "depUi": "UI & Frontend",
+        "depData": "Daten & Backend",
+        "depAi": "KI & APIs",
+        "depInfra": "Infrastruktur",
+        "depTesting": "Testing",
+        "depOther": "Sonstige",
+        "screenshotAlt": "Screenshot von {name}"
+      },
+      "a11y": {
+        "langSwitch": "Sprache wählen"
+      },
+      "legal": {
+        "back": "← Zurück zum Portfolio"
+      }
+    },
+    "en": {
+      "meta": {
+        "title": "Henrik Heil · Portfolio",
+        "description": "Web apps, AI tools, and experiments by Henrik Heil — Patina, Velosia, hugur, and more, all live."
+      },
+      "hero": {
+        "eyebrow": "Henrik Heil",
+        "title": "Web apps & <em>experiments</em>",
+        "lead": "AI tools, browser extensions, and prototypes — each with a live demo."
+      },
+      "about": {
+        "heading": "About",
+        "text": "Graduate engineer in media informatics. UX thinking, fast prototypes, and features that ship in the browser."
+      },
+      "links": {
+        "email": "Email",
+        "github": "GitHub",
+        "linkedin": "LinkedIn"
+      },
+      "sections": {
+        "experiments": "Experiments"
+      },
+      "card": {
+        "details": "View details"
+      },
+      "facets": {
+        "heading": "Filter by <em>trait</em>",
+        "all": "All",
+        "ai": "AI-powered",
+        "extension": "Chrome extension",
+        "android": "Android app",
+        "3d": "3D & visualization",
+        "filterAria": "Filter projects by trait"
+      },
+      "filter": {
+        "status": "{visible} of {total} projects · {label}",
+        "reset": "Show all"
+      },
+      "footer": {
+        "impressum": "Legal notice",
+        "projects": "{count} projects"
+      },
+      "drawer": {
+        "close": "Close",
+        "tabsAria": "Project details",
+        "overview": "Overview",
+        "ux": "UX",
+        "tech": "Tech",
+        "visit": "View live",
+        "github": "GitHub",
+        "linesOfCode": "lines of code",
+        "commits": "commits",
+        "tests": "tests",
+        "statsAria": "Project metrics",
+        "coverage": "Test coverage",
+        "techStack": "Tech stack",
+        "uiFrameworks": "UI frameworks",
+        "a11y": "Accessibility",
+        "testing": "Testing",
+        "uxEmpty": "No UX description available for this project yet.",
+        "codeByLang": "Code by language",
+        "lines": "Lines",
+        "git": "Git",
+        "firstCommit": "First commit",
+        "lastCommit": "Last commit",
+        "libraries": "Libraries ({count})",
+        "depUi": "UI & frontend",
+        "depData": "Data & backend",
+        "depAi": "AI & APIs",
+        "depInfra": "Infrastructure",
+        "depTesting": "Testing",
+        "depOther": "Other",
+        "screenshotAlt": "Screenshot of {name}"
+      },
+      "a11y": {
+        "langSwitch": "Choose language"
+      },
+      "legal": {
+        "back": "← Back to portfolio"
+      }
+    }
+  },
+  "projectSummaries": {
+    "en": {
+      "patina": "Checks historical novels for anachronisms — with DWDS evidence and your final call.",
+      "velosia": "Snap a photo: AI drafts listings and fills Kleinanzeigen and Vinted via app or extension.",
+      "schnappster": "Monitors classified searches, scores new listings with AI, and alerts you to real bargains.",
+      "hugur": "Notes, links, and ideas in one searchable stream — browser, extension, and Android.",
+      "tile-weave": "Generate fabric patterns with AI, check tile seams, preview them on 3D garments.",
+      "suntino": "Chrome extension: summarize pages, YouTube, and PDFs in the side panel.",
+      "luhambo": "GPS routes as 3D flythroughs with photo stops — open map data, Relive-style.",
+      "cimdata-kurse": "Filter CIMDATA courses by start date, build a study plan, share via link.",
+      "echt-oder-ki": "Daily duel: spot AI fakes in text and images — three levels, leaderboards.",
+      "komorebi": "Find conservation roles worldwide — discover on a map, filter, apply directly.",
+      "quality-touch": "Guided connection space for couples — touch, deep talks, even at a distance.",
+      "patina-kampagne": "Campaign hub for Patina: podcast, season planning, and film concepts in one place.",
+      "a11y-quiz": "WCAG 2.2 quiz in ChatGPT with personal results and an accessible dashboard."
+    }
+  }
+}

@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:38.745Z"
+    "analyzedAt": "2026-07-04T16:18:29.979Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T15:08:38.944Z"
+    "analyzedAt": "2026-07-04T16:18:30.448Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T15:08:39.233Z"
+    "analyzedAt": "2026-07-04T16:18:30.715Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T15:08:39.424Z"
+    "analyzedAt": "2026-07-04T16:18:30.901Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:39.522Z"
+    "analyzedAt": "2026-07-04T16:18:31.642Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T15:08:39.598Z"
+    "analyzedAt": "2026-07-04T16:18:31.928Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:39.690Z"
+    "analyzedAt": "2026-07-04T16:18:32.108Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:39.771Z"
+    "analyzedAt": "2026-07-04T16:18:32.211Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:39.841Z"
+    "analyzedAt": "2026-07-04T16:18:32.295Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:39.964Z"
+    "analyzedAt": "2026-07-04T16:18:32.430Z"
   },
   "patina-kampagne": {
     "slug": "patina-kampagne",
@@ -1061,7 +1061,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:40.034Z"
+    "analyzedAt": "2026-07-04T16:18:32.495Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1157,7 +1157,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:40.098Z"
+    "analyzedAt": "2026-07-04T16:18:32.567Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1175,6 +1175,7 @@
     "dependencies": {
       "ui": [
         "@deck.gl/core",
+        "@deck.gl/extensions",
         "@deck.gl/geo-layers",
         "@deck.gl/layers",
         "@deck.gl/mapbox",
@@ -1191,30 +1192,30 @@
         "@loaders.gl/mvt"
       ]
     },
-    "dependencyCount": 8,
+    "dependencyCount": 9,
     "loc": {
-      "total": 5541,
-      "code": 4429,
-      "blank": 492,
-      "comment": 620,
+      "total": 5932,
+      "code": 4770,
+      "blank": 520,
+      "comment": 642,
       "byLanguage": {
         "HTML": 228,
-        "JavaScript": 2812,
+        "JavaScript": 3153,
         "CSS": 1389
       }
     },
-    "locFormatted": "4.4k",
+    "locFormatted": "4.8k",
     "files": {
-      "source": 18,
+      "source": 19,
       "components": 0,
       "tsx": 0,
       "tests": 0
     },
     "coverage": null,
     "git": {
-      "commits": 9,
+      "commits": 11,
       "firstCommit": "2026-07-03 10:08:26 +0200",
-      "lastCommit": "2026-07-04 17:02:14 +0200"
+      "lastCommit": "2026-07-04 17:22:20 +0200"
     },
     "ux": {
       "uiFrameworks": [],
@@ -1227,6 +1228,6 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T15:08:40.157Z"
+    "analyzedAt": "2026-07-04T16:18:32.634Z"
   }
 }

@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="Portfolio von Henrik Heil — Webprojekte, Tech-Stacks und Live-Demos: Patina, Velosia, hugur und mehr." />
-  <title>Portfolio · Henrik Heil</title>
+  <meta name="description" content="Web-Apps, KI-Tools und Experimente von Henrik Heil — Patina, Velosia, hugur und mehr, alles live." />
+  <title>Henrik Heil · Portfolio</title>
+  <link rel="alternate" hreflang="de" href="https://www.henrikheil.net/" />
+  <link rel="alternate" hreflang="en" href="https://www.henrikheil.net/?lang=en" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=d30f598c" />
+  <link rel="stylesheet" href="/styles.css?v=d4aa7ce4" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#0f1114" />
@@ -17,10 +19,27 @@
   <div class="grain" aria-hidden="true"></div>
 
   <header class="hero">
-    <p class="hero__eyebrow">Henrik Heil</p>
-    <h1 class="hero__title">Portfolio &amp; <em>Projekte</em></h1>
-    <p class="hero__lead">Aktuelle Web-Apps, KI-Tools und Experimente</p>
+    <div class="hero__top">
+      <p class="hero__eyebrow" data-i18n="hero.eyebrow">Henrik Heil</p>
+      <nav class="lang-switch" aria-label="Sprache wählen" data-i18n-aria="a11y.langSwitch">
+        <button type="button" class="lang-switch__btn is-active" data-lang="de" aria-pressed="true">DE</button>
+        <button type="button" class="lang-switch__btn" data-lang="en" aria-pressed="false">EN</button>
+      </nav>
+    </div>
+    <h1 class="hero__title" data-i18n-html="hero.title">Web-Apps & <em>Experimente</em></h1>
+    <p class="hero__lead" data-i18n="hero.lead">KI-Tools, Browser-Erweiterungen und Prototypen — alles mit Live-Demo.</p>
+    <div class="hero__links">
+      <a class="hero__link" href="mailto:contact@henrikheil.net">E-Mail</a>
+      <a class="hero__link" href="https://github.com/Pikktee" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="hero__link" href="https://www.linkedin.com/in/henrik-heil-553a1226/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
   </header>
+
+  <section class="about" id="about" aria-labelledby="about-heading">
+    <h2 class="visually-hidden" id="about-heading" data-i18n="about.heading">Über mich</h2>
+    <p class="about__text" data-i18n="about.text">Diplom-Ingenieur für Medieninformatik. UX-Denken, schnelle Prototypen und Features, die im Browser landen.</p>
+    <ul class="about__skills" id="about-skills" aria-label="Skills"></ul>
+  </section>
 
   <main class="sections" id="projects">
   <section class="section">
@@ -31,8 +50,8 @@
         <div class="card__media"><img src="/screenshots/patina.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Patina</h2>
-          <p class="card__desc">Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="patina" data-default-desc="Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende.">Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -42,8 +61,8 @@
         <div class="card__media"><img src="/screenshots/velosia.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Velosia</h2>
-          <p class="card__desc">Foto genügt: KI erstellt Anzeigen und füllt Kleinanzeigen und Vinted per App oder Erweiterung aus.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="velosia" data-default-desc="Foto genügt: KI erstellt Anzeigen und füllt Kleinanzeigen und Vinted per App oder Erweiterung aus.">Foto genügt: KI erstellt Anzeigen und füllt Kleinanzeigen und Vinted per App oder Erweiterung aus.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -53,8 +72,8 @@
         <div class="card__media"><img src="/screenshots/schnappster.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Schnappster</h2>
-          <p class="card__desc">Überwacht Kleinanzeigen-Suchen, bewertet neue Inserate per KI und meldet echte Schnäppchen.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="schnappster" data-default-desc="Überwacht Kleinanzeigen-Suchen, bewertet neue Inserate per KI und meldet echte Schnäppchen.">Überwacht Kleinanzeigen-Suchen, bewertet neue Inserate per KI und meldet echte Schnäppchen.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -64,8 +83,8 @@
         <div class="card__media"><img src="/screenshots/hugur.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">hugur</h2>
-          <p class="card__desc">Notizen, Links und Ideen in einem durchsuchbaren Stream — im Browser, per Erweiterung und auf Android.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="hugur" data-default-desc="Notizen, Links und Ideen in einem durchsuchbaren Stream — im Browser, per Erweiterung und auf Android.">Notizen, Links und Ideen in einem durchsuchbaren Stream — im Browser, per Erweiterung und auf Android.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -75,8 +94,8 @@
         <div class="card__media"><img src="/screenshots/tile-weave.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Tile Weave</h2>
-          <p class="card__desc">KI-Stoffmuster erzeugen, nahtlos prüfen und in 3D direkt am Kleid betrachten.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="tile-weave" data-default-desc="KI-Stoffmuster erzeugen, nahtlos prüfen und in 3D direkt am Kleid betrachten.">KI-Stoffmuster erzeugen, nahtlos prüfen und in 3D direkt am Kleid betrachten.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -86,8 +105,8 @@
         <div class="card__media"><img src="/screenshots/suntino.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Suntino</h2>
-          <p class="card__desc">Chrome-Erweiterung: Seiten, YouTube und PDFs im Side Panel sofort zusammenfassen.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="suntino" data-default-desc="Chrome-Erweiterung: Seiten, YouTube und PDFs im Side Panel sofort zusammenfassen.">Chrome-Erweiterung: Seiten, YouTube und PDFs im Side Panel sofort zusammenfassen.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -95,15 +114,15 @@
   </section>
 
   <section class="section section--labeled">
-    <h2 class="section__heading" id="section-experimente">Experimente</h2>
+    <h2 class="section__heading" id="section-experimente" data-i18n-section="experiments">Experimente</h2>
     <div class="grid">
     <article class="card" style="--accent:#f5a524" data-slug="luhambo" data-facets="3d">
       <button type="button" class="card__btn" data-open="luhambo" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false">
         <div class="card__media"><img src="/screenshots/luhambo.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Luhambo</h2>
-          <p class="card__desc">GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten, wie Relive.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="luhambo" data-default-desc="GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten, wie Relive.">GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten, wie Relive.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -113,8 +132,8 @@
         <div class="card__media"><img src="/screenshots/cimdata-kurse.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">CIMDATA Studienplaner</h2>
-          <p class="card__desc">CIMDATA-Kurse nach Startdatum filtern, Studienplan bauen und per Link teilen.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="cimdata-kurse" data-default-desc="CIMDATA-Kurse nach Startdatum filtern, Studienplan bauen und per Link teilen.">CIMDATA-Kurse nach Startdatum filtern, Studienplan bauen und per Link teilen.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -124,8 +143,8 @@
         <div class="card__media"><img src="/screenshots/echt-oder-ki.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Echt oder KI?</h2>
-          <p class="card__desc">Tägliches Duell: KI-Fälschung in Text und Bild erkennen — drei Stufen, Ranglisten.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="echt-oder-ki" data-default-desc="Tägliches Duell: KI-Fälschung in Text und Bild erkennen — drei Stufen, Ranglisten.">Tägliches Duell: KI-Fälschung in Text und Bild erkennen — drei Stufen, Ranglisten.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -135,8 +154,8 @@
         <div class="card__media"><img src="/screenshots/komorebi.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Komorebi</h2>
-          <p class="card__desc">Naturschutz-Stellen weltweit auf der Karte finden, filtern und direkt bewerben.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="komorebi" data-default-desc="Naturschutz-Stellen weltweit auf der Karte finden, filtern und direkt bewerben.">Naturschutz-Stellen weltweit auf der Karte finden, filtern und direkt bewerben.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -146,8 +165,8 @@
         <div class="card__media"><img src="/screenshots/quality-touch.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Quality Touch</h2>
-          <p class="card__desc">Geführter Verbindungsraum für Paare — Berührung, Tiefengespräche, auch auf Distanz.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="quality-touch" data-default-desc="Geführter Verbindungsraum für Paare — Berührung, Tiefengespräche, auch auf Distanz.">Geführter Verbindungsraum für Paare — Berührung, Tiefengespräche, auch auf Distanz.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -157,8 +176,8 @@
         <div class="card__media"><img src="/screenshots/patina-kampagne.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Patina-Kampagne</h2>
-          <p class="card__desc">Kampagnen-Hub für Patina: Podcast, Staffel-Planung und Film-Konzepte an einem Ort.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="patina-kampagne" data-default-desc="Kampagnen-Hub für Patina: Podcast, Staffel-Planung und Film-Konzepte an einem Ort.">Kampagnen-Hub für Patina: Podcast, Staffel-Planung und Film-Konzepte an einem Ort.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -168,8 +187,8 @@
         <div class="card__media"><img src="/screenshots/a11y-quiz.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">A11y Quiz</h2>
-          <p class="card__desc">WCAG-2.2-Quiz in ChatGPT mit persönlicher Auswertung und barrierefreiem Dashboard.</p>
-          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
+          <p class="card__desc" data-slug="a11y-quiz" data-default-desc="WCAG-2.2-Quiz in ChatGPT mit persönlicher Auswertung und barrierefreiem Dashboard.">WCAG-2.2-Quiz in ChatGPT mit persönlicher Auswertung und barrierefreiem Dashboard.</p>
+          <span class="card__cta"><span data-i18n="card.details">Details ansehen</span> <span aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -179,28 +198,28 @@
 
   <section class="facet-section" aria-labelledby="facet-heading">
     <div class="facet-section__inner">
-      <h2 class="facet-section__heading" id="facet-heading">Nach <em>Merkmal</em> filtern</h2>
-      <div class="facet-bar" role="group" aria-label="Projekte nach Merkmal filtern">
-        <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" aria-pressed="true">
+      <h2 class="facet-section__heading" id="facet-heading" data-i18n-html="facets.heading">Nach <em>Merkmal</em> filtern</h2>
+      <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="Projekte nach Merkmal filtern">
+        <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
           <span class="facet-chip__label">Alle</span>
           <span class="facet-chip__count">13</span>
         </button>
-        <button type="button" class="facet-chip" data-filter="ai">
+        <button type="button" class="facet-chip" data-filter="ai" data-i18n-facet="ai">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5 9.7 6.3 14.5 8 9.7 9.7 8 14.5 6.3 9.7 1.5 8 6.3 6.3 8 1.5Z"/></svg>
           <span class="facet-chip__label">KI-gestützt</span>
           <span class="facet-chip__count">9</span>
         </button>
-<button type="button" class="facet-chip" data-filter="extension">
+<button type="button" class="facet-chip" data-filter="extension" data-i18n-facet="extension">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a3 3 0 0 0-2.83 2H2.5v3.17a3 3 0 0 1 0 5.66V14.5h3.34a3 3 0 0 1 5.32 0H14.5v-3.34a3 3 0 0 0 0-5.32V2H10.83A3 3 0 0 0 8 1.5Z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
           <span class="facet-chip__label">Chrome-Erweiterung</span>
           <span class="facet-chip__count">4</span>
         </button>
-<button type="button" class="facet-chip" data-filter="android">
+<button type="button" class="facet-chip" data-filter="android" data-i18n-facet="android">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 6.5h8V12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5Zm-2 .5a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1Zm12 0a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1ZM5.5 13.5h2v1.5a1 1 0 1 1-2 0v-1.5Zm3 0h2V15a1 1 0 1 1-2 0v-1.5ZM5 3l-.8-1.3M11 3l.8-1.3M4.2 5.5C4.5 4 6.1 3 8 3s3.5 1 3.8 2.5H4.2Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span class="facet-chip__label">Android-App</span>
           <span class="facet-chip__count">2</span>
         </button>
-<button type="button" class="facet-chip" data-filter="3d">
+<button type="button" class="facet-chip" data-filter="3d" data-i18n-facet="3d">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5 14 5v6l-6 3.5L2 11V5l6-3.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 5l6 3.5L14 5M8 8.5V14.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
           <span class="facet-chip__label">3D &amp; Visualisierung</span>
           <span class="facet-chip__count">3</span>
@@ -208,15 +227,15 @@
       </div>
       <p class="facet-section__status" id="filter-status" aria-live="polite" hidden>
         <span id="filter-count"></span>
-        <button type="button" class="stack-reset" id="filter-reset">Alle anzeigen</button>
+        <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">Alle anzeigen</button>
       </p>
     </div>
   </section>
 
   <footer class="footer">
-    <a href="/impressum.html">Impressum</a>
+    <a href="/impressum.html" data-i18n="footer.impressum">Impressum</a>
     <span class="footer__sep" aria-hidden="true">·</span>
-    <span>13 Projekte</span>
+    <span id="footer-project-count" data-i18n-template="footer.projects">13 Projekte</span>
   </footer>
 
   <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
@@ -225,7 +244,7 @@
       <div class="drawer__hero">
         <div class="drawer__media" id="drawer-media"></div>
         <div class="drawer__hero-scrim" aria-hidden="true"></div>
-        <button type="button" class="drawer__close" id="drawer-close" aria-label="Schließen">
+        <button type="button" class="drawer__close" id="drawer-close" data-i18n-aria="drawer.close" aria-label="Schließen">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
         </button>
       </div>
@@ -237,10 +256,10 @@
           </div>
           <div class="drawer__stats" id="drawer-stats"></div>
         </div>
-        <div class="drawer__tabs" role="tablist" aria-label="Projekt-Details">
-          <button type="button" class="drawer__tab drawer__tab--active" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" data-tab="overview">Überblick</button>
-          <button type="button" class="drawer__tab" role="tab" id="tab-ux" aria-selected="false" aria-controls="panel-ux" data-tab="ux">UX</button>
-          <button type="button" class="drawer__tab" role="tab" id="tab-tech" aria-selected="false" aria-controls="panel-tech" data-tab="tech">Technik</button>
+        <div class="drawer__tabs" role="tablist" data-i18n-aria="drawer.tabsAria" aria-label="Projekt-Details">
+          <button type="button" class="drawer__tab drawer__tab--active" role="tab" id="tab-overview" aria-selected="true" aria-controls="panel-overview" data-tab="overview" data-i18n="drawer.overview">Überblick</button>
+          <button type="button" class="drawer__tab" role="tab" id="tab-ux" aria-selected="false" aria-controls="panel-ux" data-tab="ux" data-i18n="drawer.ux">UX</button>
+          <button type="button" class="drawer__tab" role="tab" id="tab-tech" aria-selected="false" aria-controls="panel-tech" data-tab="tech" data-i18n="drawer.tech">Technik</button>
         </div>
         <div class="drawer__panels">
           <div class="drawer__panel drawer__panel--active" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview"></div>
@@ -252,7 +271,7 @@
     </div>
   </aside>
 
-  <script>window.__ASSET_V = "d30f598c";</script>
-  <script src="/app.js?v=d30f598c" defer></script>
+  <script>window.__ASSET_V = "d4aa7ce4";</script>
+  <script src="/app.js?v=d4aa7ce4" defer></script>
 </body>
 </html>
