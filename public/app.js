@@ -54,7 +54,8 @@
   filterReset?.addEventListener('click', () => setFilter('all'));
 
   async function loadProjects() {
-    const res = await fetch('/projects.json');
+    const v = window.__ASSET_V ? `?v=${window.__ASSET_V}` : '';
+    const res = await fetch(`/projects.json${v}`);
     const data = await res.json();
     for (const section of data.sections) {
       for (const p of section.projects) {

@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { createHash } from 'crypto';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -50,7 +51,17 @@ for (const file of ['styles.css', 'app.js', 'favicon.svg', 'apple-touch-icon.png
   copyFileSync(join(root, 'src', file), join(publicDir, file));
 }
 
-writeFileSync(join(publicDir, 'projects.json'), JSON.stringify(portfolio));
+const projectsJsonStr = JSON.stringify(portfolio);
+writeFileSync(join(publicDir, 'projects.json'), projectsJsonStr);
+
+// Cache-Busting: kurzer Hash über app.js + styles.css + projects.json. Ändert
+// sich der Inhalt, ändert sich die URL — der Browser lädt garantiert frisch.
+const assetVersion = createHash('sha1')
+  .update(readFileSync(join(root, 'src/app.js')))
+  .update(readFileSync(join(root, 'src/styles.css')))
+  .update(projectsJsonStr)
+  .digest('hex')
+  .slice(0, 8);
 
 const headExtras = `  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -147,7 +158,7 @@ const html = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
 </head>
 <body>
@@ -218,7 +229,8 @@ ${headExtras}
     </div>
   </aside>
 
-  <script src="/app.js" defer></script>
+  <script>window.__ASSET_V = "${assetVersion}";</script>
+  <script src="/app.js?v=${assetVersion}" defer></script>
 </body>
 </html>`;
 
@@ -231,7 +243,7 @@ const impressum = `<!DOCTYPE html>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
 </head>
 <body class="page-legal">

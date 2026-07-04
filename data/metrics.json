@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:02.410Z"
+    "analyzedAt": "2026-07-04T15:08:38.745Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T14:39:02.598Z"
+    "analyzedAt": "2026-07-04T15:08:38.944Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T14:39:02.896Z"
+    "analyzedAt": "2026-07-04T15:08:39.233Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T14:39:03.066Z"
+    "analyzedAt": "2026-07-04T15:08:39.424Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.145Z"
+    "analyzedAt": "2026-07-04T15:08:39.522Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T14:39:03.210Z"
+    "analyzedAt": "2026-07-04T15:08:39.598Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.318Z"
+    "analyzedAt": "2026-07-04T15:08:39.690Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.415Z"
+    "analyzedAt": "2026-07-04T15:08:39.771Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.505Z"
+    "analyzedAt": "2026-07-04T15:08:39.841Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.630Z"
+    "analyzedAt": "2026-07-04T15:08:39.964Z"
   },
   "patina-kampagne": {
     "slug": "patina-kampagne",
@@ -1061,7 +1061,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.688Z"
+    "analyzedAt": "2026-07-04T15:08:40.034Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1157,7 +1157,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.743Z"
+    "analyzedAt": "2026-07-04T15:08:40.098Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1193,14 +1193,14 @@
     },
     "dependencyCount": 8,
     "loc": {
-      "total": 5528,
-      "code": 4420,
+      "total": 5541,
+      "code": 4429,
       "blank": 492,
-      "comment": 616,
+      "comment": 620,
       "byLanguage": {
         "HTML": 228,
-        "JavaScript": 2804,
-        "CSS": 1388
+        "JavaScript": 2812,
+        "CSS": 1389
       }
     },
     "locFormatted": "4.4k",
@@ -1212,9 +1212,9 @@
     },
     "coverage": null,
     "git": {
-      "commits": 7,
+      "commits": 9,
       "firstCommit": "2026-07-03 10:08:26 +0200",
-      "lastCommit": "2026-07-04 15:57:50 +0200"
+      "lastCommit": "2026-07-04 17:02:14 +0200"
     },
     "ux": {
       "uiFrameworks": [],
@@ -1227,6 +1227,6 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T14:39:03.800Z"
+    "analyzedAt": "2026-07-04T15:08:40.157Z"
   }
 }
