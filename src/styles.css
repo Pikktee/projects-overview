@@ -23,6 +23,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -532,6 +533,62 @@ body.drawer-open {
   outline: none;
 }
 
+.drawer__hero-actions {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 3;
+}
+
+.drawer__hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem 0.55rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  background: rgba(8, 10, 12, 0.48);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.2s var(--ease-out),
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.drawer__hero-link svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+  transition: transform 0.2s var(--ease-out);
+}
+
+.drawer__hero-link:hover,
+.drawer__hero-link:focus-visible {
+  color: #fff;
+  background: color-mix(in srgb, var(--accent, #d4c4a8) 42%, rgba(8, 10, 12, 0.72));
+  border-color: color-mix(in srgb, var(--accent, #d4c4a8) 55%, rgba(255, 255, 255, 0.2));
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.28),
+    0 0 0 1px color-mix(in srgb, var(--accent, #d4c4a8) 25%, transparent);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.drawer__hero-link:hover svg,
+.drawer__hero-link:focus-visible svg {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
 .drawer__body {
   position: relative;
   margin-top: -1.5rem;
@@ -980,6 +1037,11 @@ body.drawer-open {
   .drawer__close {
     top: 0.85rem;
     right: 0.85rem;
+  }
+
+  .drawer__hero-actions {
+    left: 0.85rem;
+    bottom: 0.85rem;
   }
 
   .drawer__body {

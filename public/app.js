@@ -270,6 +270,16 @@
     media.innerHTML = `<img src="${shot}" alt="Screenshot von ${esc(project.name)}" onerror="this.parentElement.classList.add('drawer__media--fallback');this.remove()" />`;
     media.classList.remove('drawer__media--fallback');
 
+    const heroActions = document.getElementById('drawer-hero-actions');
+    heroActions.innerHTML = `
+      <a class="drawer__hero-link" href="${esc(project.url)}" target="_blank" rel="noopener noreferrer">
+        <span>Live ansehen</span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M5.5 3.5H12.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3.5 12.5L12 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </a>`;
+
     const actions = document.getElementById('drawer-actions');
     actions.innerHTML = `
       <a class="btn btn--primary" href="${esc(project.url)}" target="_blank" rel="noopener noreferrer">
@@ -287,6 +297,23 @@
     drawer.style.setProperty('--accent', project.accent);
   }
 
+  function getScrollbarWidth() {
+    return Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+  }
+
+  function lockBodyScroll() {
+    const gutter = getScrollbarWidth();
+    if (gutter > 0) {
+      document.body.style.paddingRight = `${gutter}px`;
+    }
+    document.body.classList.add('drawer-open');
+  }
+
+  function unlockBodyScroll() {
+    document.body.style.paddingRight = '';
+    document.body.classList.remove('drawer-open');
+  }
+
   function openDrawer(slug) {
     const project = projects[slug];
     if (!project) return;
@@ -302,7 +329,7 @@
       backdrop.classList.add('drawer-backdrop--visible');
     });
 
-    document.body.classList.add('drawer-open');
+    lockBodyScroll();
     openButtons.forEach((btn) => {
       btn.setAttribute('aria-expanded', btn.dataset.open === slug ? 'true' : 'false');
     });
@@ -322,7 +349,7 @@
     };
     drawer.addEventListener('transitionend', onEnd);
 
-    document.body.classList.remove('drawer-open');
+    unlockBodyScroll();
     activeSlug = null;
     openButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
 
