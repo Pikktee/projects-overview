@@ -88,19 +88,20 @@
     }
   }
 
-  function renderStatCards(project) {
-    const stats = [
-      { label: 'Codezeilen', value: project.locFormatted || '—' },
-      { label: 'Bibliotheken', value: project.dependencyCount ?? '—' },
-      { label: 'Komponenten', value: project.files?.components ?? project.ux?.componentCount ?? '—' },
-      { label: 'Commits', value: project.git?.commits ?? '—' },
-    ];
-    return `<div class="stat-grid">${stats
-      .map(
-        (s) =>
-          `<div class="stat-card"><span class="stat-card__value">${esc(String(s.value))}</span><span class="stat-card__label">${esc(s.label)}</span></div>`,
-      )
-      .join('')}</div>`;
+  function renderStatLine(project) {
+    const parts = [];
+    if (project.locFormatted && project.locFormatted !== '—') {
+      parts.push(`<span class="stat-inline__item"><strong>${esc(project.locFormatted)}</strong> Zeilen Code</span>`);
+    }
+    if (project.git?.commits) {
+      parts.push(`<span class="stat-inline__item"><strong>${project.git.commits}</strong> Commits</span>`);
+    }
+    const tests = project.ux?.testFiles ?? project.files?.tests;
+    if (tests > 0) {
+      parts.push(`<span class="stat-inline__item"><strong>${tests}</strong> Tests</span>`);
+    }
+    if (!parts.length) return '';
+    return `<p class="stat-inline" aria-label="Projekt-Kennzahlen">${parts.join('<span class="stat-inline__sep" aria-hidden="true">·</span>')}</p>`;
   }
 
   function renderCoverage(coverage) {
@@ -258,7 +259,7 @@
 
   function renderDrawer(project) {
     document.getElementById('drawer-title').textContent = project.name;
-    document.getElementById('drawer-stats').innerHTML = renderStatCards(project);
+    document.getElementById('drawer-stats').innerHTML = renderStatLine(project);
     panels.overview.innerHTML = renderOverview(project);
     panels.ux.innerHTML = renderUx(project);
     panels.tech.innerHTML = renderTech(project);
