@@ -512,29 +512,10 @@ html.js .card.is-visible {
     0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
-/* Spotlight, das dem Cursor folgt — nur auf Geräten mit echtem Hover,
-   rein dekorativ und ohne Einfluss auf Tastatur- oder Touch-Bedienung.
-   Zwei Ebenen: ein flächiger Glow im Karteninneren (::after) und ein
-   Leuchten auf der Kartenkante (::before), das auch über den hellen
-   Screenshots deutlich sichtbar bleibt. */
+/* Dezenter Cursor-Effekt: nur ein schmales Leuchten auf der Kartenkante
+   (1px-Ring per Mask), das der Mausposition folgt. Kein flächiger Glow über
+   dem Karteninhalt. Nur auf Geräten mit echtem Hover aktiv. */
 @media (hover: hover) and (pointer: fine) {
-  .card__btn::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-    opacity: 0;
-    background: radial-gradient(
-      320px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, color-mix(in srgb, var(--accent) 70%, white) 26%, transparent),
-      transparent 62%
-    );
-    transition: opacity 0.35s ease;
-  }
-
-  /* Kanten-Glow: Gradient liegt nur auf einem 2px-Ring (Mask blendet die
-     Innenfläche aus), wandert mit dem Cursor über die Kartenkante. */
   .card__btn::before {
     content: "";
     position: absolute;
@@ -542,10 +523,10 @@ html.js .card.is-visible {
     z-index: 3;
     pointer-events: none;
     border-radius: inherit;
-    padding: 2px;
+    padding: 1px;
     background: radial-gradient(
-      260px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--accent) 85%, white),
+      240px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent) 75%, transparent),
       transparent 70%
     );
     -webkit-mask:
@@ -560,9 +541,8 @@ html.js .card.is-visible {
     transition: opacity 0.35s ease;
   }
 
-  .card__btn:hover::after,
   .card__btn:hover::before {
-    opacity: 1;
+    opacity: 0.85;
   }
 }
 
@@ -893,13 +873,22 @@ html.js .card.is-visible {
   min-height: 200px;
 }
 
+/* Das Bild bleibt vollflächig unangetastet; nur das untere Viertel läuft mit
+   weich abgestuften Stops (angenäherte Ease-Kurve, keine sichtbare Kante)
+   in den Sheet-Hintergrund aus. */
 .drawer__hero-scrim {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.14) 0%, transparent 16%),
-    linear-gradient(to top, var(--bg-card) 0%, rgba(26, 30, 36, 0.85) 14%, transparent 42%);
+  background: linear-gradient(
+    to top,
+    var(--bg-card) 0%,
+    rgba(26, 30, 36, 0.87) 8%,
+    rgba(26, 30, 36, 0.55) 16%,
+    rgba(26, 30, 36, 0.25) 23%,
+    rgba(26, 30, 36, 0.08) 29%,
+    transparent 34%
+  );
 }
 
 .drawer__close {
