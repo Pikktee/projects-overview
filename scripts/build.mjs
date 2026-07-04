@@ -11,15 +11,19 @@ mkdirSync(publicDir, { recursive: true });
 
 const data = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
 const metrics = existsSync(metricsPath) ? JSON.parse(readFileSync(metricsPath, 'utf8')) : {};
+const copyPath = join(root, 'data/project-copy.json');
+const copy = existsSync(copyPath) ? JSON.parse(readFileSync(copyPath, 'utf8')) : {};
 
 function mergeProject(p) {
   const m = metrics[p.slug] || {};
+  const c = copy[p.slug] || {};
   return {
     ...p,
     github: m.github || p.github || null,
-    description: m.description || p.name,
-    longDescription: m.longDescription || m.description || '',
-    highlights: m.highlights || [],
+    description: c.tagline || m.description || p.name,
+    overview: c.overview || '',
+    uxNarrative: c.uxNarrative || '',
+    highlights: c.highlights || m.highlights || [],
     stack: m.stack || [],
     dependencies: m.dependencies || { ui: [], data: [], ai: [], infra: [], testing: [], other: [] },
     dependencyCount: m.dependencyCount || 0,

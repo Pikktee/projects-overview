@@ -190,7 +190,8 @@ const STACK_DETECTORS = [
   { name: 'Railway', test: (deps, files) => files.some((f) => basename(f) === 'railway.toml' || basename(f) === 'railway.json') },
   { name: 'Vercel', test: (deps, files) => files.some((f) => basename(f) === 'vercel.json') },
   { name: 'GSAP', test: (deps) => deps.has('gsap') },
-  { name: 'Leaflet', test: (deps) => deps.has('leaflet') },
+  { name: 'MapLibre', test: (deps) => deps.has('maplibre-gl') },
+  { name: 'deck.gl', test: (deps, files, all) => all.some((d) => d.startsWith('@deck.gl')) },
   { name: 'TipTap', test: (deps, files, all) => all.some((d) => d.startsWith('@tiptap')) },
   { name: 'Turso', test: (deps, files, all) => all.some((d) => d.includes('turso') || d.includes('@libsql')) },
 ];

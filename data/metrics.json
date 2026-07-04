@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:01.590Z"
+    "analyzedAt": "2026-07-04T09:48:28.691Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T09:25:01.687Z"
+    "analyzedAt": "2026-07-04T09:48:28.897Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T09:25:01.821Z"
+    "analyzedAt": "2026-07-04T09:48:29.147Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T09:25:01.889Z"
+    "analyzedAt": "2026-07-04T09:48:29.310Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:01.942Z"
+    "analyzedAt": "2026-07-04T09:48:29.394Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T09:25:01.993Z"
+    "analyzedAt": "2026-07-04T09:48:29.457Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:02.048Z"
+    "analyzedAt": "2026-07-04T09:48:29.539Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:02.097Z"
+    "analyzedAt": "2026-07-04T09:48:29.610Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -810,8 +810,7 @@
       "Python",
       "Docker",
       "Vitest",
-      "Mantine",
-      "Leaflet"
+      "Mantine"
     ],
     "dependencies": {
       "ui": [
@@ -905,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:02.145Z"
+    "analyzedAt": "2026-07-04T09:48:29.678Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -990,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:02.262Z"
+    "analyzedAt": "2026-07-04T09:48:29.787Z"
   },
   "patina-kampagne": {
     "slug": "patina-kampagne",
@@ -1062,7 +1061,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:02.311Z"
+    "analyzedAt": "2026-07-04T09:48:29.846Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1158,6 +1157,74 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T09:25:02.361Z"
+    "analyzedAt": "2026-07-04T09:48:29.903Z"
+  },
+  "luhambo": {
+    "slug": "luhambo",
+    "localPath": "journey",
+    "github": "https://github.com/Pikktee/journey",
+    "description": "Luhambo (Siswati für „Reise“) ist eine App für Relive-artige 3D-Kamerafahrten über eine GPS-Route mit automatischen Foto-Stopps — vollständig auf freien Kartendaten. Aktuell Vanilla JS + Vite, gerendert mit MapLibre GL J",
+    "longDescription": "Luhambo (Siswati für „Reise“) ist eine App für Relive-artige 3D-Kamerafahrten über eine GPS-Route mit automatischen Foto-Stopps — vollständig auf freien Kartendaten. Aktuell Vanilla JS + Vite, gerendert mit MapLibre GL JS; derzeit ohne Framework, ohne Tests, ohne Backend. Luhambo wird von einem Prototyp zu einem echten Produkt ausgebaut — größere Architektur-Investitionen (z. B. echter 3D-Renderer für Dächer/Schatten, eigene aufbereitete Gebäude-Tiles, Tests, Backend) sind daher eingeplant, werden aber inkrementell angegangen statt als Big-Bang-Rewrite.",
+    "highlights": [],
+    "stack": [
+      "Vite",
+      "Docker",
+      "MapLibre",
+      "deck.gl"
+    ],
+    "dependencies": {
+      "ui": [
+        "@deck.gl/core",
+        "@deck.gl/geo-layers",
+        "@deck.gl/layers",
+        "@deck.gl/mapbox",
+        "maplibre-gl"
+      ],
+      "data": [],
+      "ai": [],
+      "infra": [
+        "puppeteer-core",
+        "vite"
+      ],
+      "testing": [],
+      "other": []
+    },
+    "dependencyCount": 7,
+    "loc": {
+      "total": 5246,
+      "code": 4188,
+      "blank": 481,
+      "comment": 577,
+      "byLanguage": {
+        "HTML": 222,
+        "JavaScript": 2678,
+        "CSS": 1288
+      }
+    },
+    "locFormatted": "4.2k",
+    "files": {
+      "source": 18,
+      "components": 0,
+      "tsx": 0,
+      "tests": 0
+    },
+    "coverage": null,
+    "git": {
+      "commits": 5,
+      "firstCommit": "2026-07-03 10:08:26 +0200",
+      "lastCommit": "2026-07-04 11:00:49 +0200"
+    },
+    "ux": {
+      "uiFrameworks": [],
+      "a11yTools": [],
+      "e2eTools": [],
+      "unitTools": [],
+      "componentCount": 0,
+      "tsxFiles": 0,
+      "testFiles": 0,
+      "hasResponsiveCss": true,
+      "hasManifestExtension": false
+    },
+    "analyzedAt": "2026-07-04T09:48:29.957Z"
   }
 }

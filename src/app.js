@@ -146,6 +146,14 @@
       </div>`;
   }
 
+  function renderProse(text) {
+    if (!text) return '';
+    return `<div class="drawer__prose">${text
+      .split(/\n\n+/)
+      .map((p) => `<p>${esc(p.trim())}</p>`)
+      .join('')}</div>`;
+  }
+
   function renderOverview(project) {
     const highlights =
       project.highlights?.length > 0
@@ -153,13 +161,14 @@
         : '';
 
     return `
-      <p class="drawer__desc">${esc(project.longDescription || project.description)}</p>
+      ${renderProse(project.overview)}
       ${highlights}
       ${project.stack?.length ? renderTagList('Erkannter Stack', project.stack) : ''}`;
   }
 
   function renderUx(project) {
     const ux = project.ux || {};
+    const narrative = renderProse(project.uxNarrative);
     const blocks = [];
 
     if (ux.uiFrameworks?.length) blocks.push(renderTagList('UI-Frameworks', ux.uiFrameworks));
@@ -174,18 +183,24 @@
       ['Test-Dateien', ux.testFiles],
     ].filter(([, v]) => v > 0);
 
-    const fileHtml = fileStats.length
-      ? `<div class="metric-block">
-          <h3 class="metric-block__title">UI-Umfang</h3>
-          <dl class="kv-list">${fileStats.map(([k, v]) => `<div class="kv-row"><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('')}</dl>
-        </div>`
-      : '';
+    const signalsHtml =
+      blocks.length || fileStats.length
+        ? `<div class="metric-block metric-block--subtle">
+            <h3 class="metric-block__title">Erkannte Signale</h3>
+            ${blocks.join('')}
+            ${
+              fileStats.length
+                ? `<dl class="kv-list">${fileStats.map(([k, v]) => `<div class="kv-row"><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('')}</dl>`
+                : ''
+            }
+          </div>`
+        : '';
 
-    if (!blocks.length && !fileHtml) {
-      return `<p class="drawer__empty">Keine UX-Signale automatisch erkannt — README und Dependencies liefern hier noch wenig strukturierte Daten.</p>`;
+    if (!narrative && !signalsHtml) {
+      return `<p class="drawer__empty">Für dieses Projekt liegt noch keine UX-Beschreibung vor.</p>`;
     }
 
-    return blocks.join('') + fileHtml;
+    return narrative + signalsHtml;
   }
 
   function renderTech(project) {
@@ -216,9 +231,9 @@
     const depHtml = `
       <div class="metric-block">
         <h3 class="metric-block__title">Bibliotheken (${project.dependencyCount || 0})</h3>
-        ${renderDepGroup('UI &amp; Frontend', deps.ui)}
-        ${renderDepGroup('Daten &amp; Backend', deps.data)}
-        ${renderDepGroup('KI &amp; APIs', deps.ai)}
+        ${renderDepGroup('UI & Frontend', deps.ui)}
+        ${renderDepGroup('Daten & Backend', deps.data)}
+        ${renderDepGroup('KI & APIs', deps.ai)}
         ${renderDepGroup('Infrastruktur', deps.infra)}
         ${renderDepGroup('Testing', deps.testing)}
         ${renderDepGroup('Sonstige', deps.other)}
