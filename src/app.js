@@ -139,11 +139,9 @@
           const label = t(`skills.groups.${group.key}`);
           const items = group.items?.[locale] || group.items?.de || [];
           return `
-            <div class="skill-group">
-              <h3 class="skill-group__title">${esc(label)}</h3>
-              <ul class="skill-group__list">
-                ${items.map((item) => `<li class="skill-group__item">${esc(item)}</li>`).join('')}
-              </ul>
+            <div class="skill-list__row">
+              <dt class="skill-list__term">${esc(label)}</dt>
+              <dd class="skill-list__items">${items.map(esc).join(' · ')}</dd>
             </div>`;
         })
         .join('');
@@ -155,7 +153,7 @@
       backgroundEl.innerHTML = items
         .map((item) => {
           const text = item.replace(/\{count\}/g, String(totalProjects));
-          return `<li class="sidebar__timeline-item">${esc(text)}</li>`;
+          return `<li class="about__timeline-item">${esc(text)}</li>`;
         })
         .join('');
     }
@@ -260,7 +258,7 @@
     }
 
     if (filter !== 'all') {
-      document.getElementById('work-area')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
@@ -615,11 +613,4 @@
   });
 
   window.addEventListener('hashchange', handleHash);
-
-  const siteHeader = document.querySelector('.site-header');
-  if (siteHeader) {
-    const onScroll = () => siteHeader.classList.toggle('is-scrolled', window.scrollY > 12);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
 })();

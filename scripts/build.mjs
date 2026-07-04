@@ -165,17 +165,12 @@ const html = `<!DOCTYPE html>
 ${headExtras}
 </head>
 <body>
-  <a class="skip-link" href="#work-area" data-i18n="a11y.skipLink">${escapeHtml(tDe.a11y.skipLink)}</a>
+  <a class="skip-link" href="#projects" data-i18n="a11y.skipLink">${escapeHtml(tDe.a11y.skipLink)}</a>
   <div class="grain" aria-hidden="true"></div>
 
-  <header class="site-header">
-    <nav class="site-nav" id="site-nav" aria-label="${escapeHtml(tDe.nav.aria)}" data-i18n-aria="nav.aria">
-      <a class="site-nav__brand" href="#">${escapeHtml(site.profile.name)}</a>
-      <div class="site-nav__links">
-        <a class="site-nav__link" href="#profil" data-i18n="nav.profile">${escapeHtml(tDe.nav.profile)}</a>
-        <a class="site-nav__link" href="#work-area" data-i18n="nav.projects">${escapeHtml(tDe.nav.projects)}</a>
-        <a class="site-nav__link" href="#kontakt" data-i18n="nav.contact">${escapeHtml(tDe.nav.contact)}</a>
-      </div>
+  <header class="hero" id="profil">
+    <div class="hero__bar">
+      <p class="hero__eyebrow">Portfolio</p>
       <div class="lang-switch" role="group" aria-label="${escapeHtml(tDe.a11y.langSwitch)}" data-i18n-aria="a11y.langSwitch">
         ${site.locales
           .map(
@@ -184,72 +179,54 @@ ${headExtras}
           )
           .join('\n        ')}
       </div>
+    </div>
+    <h1 class="hero__name">${escapeHtml(site.profile.name)}</h1>
+    <p class="hero__role" data-i18n="profile.role">${escapeHtml(tDe.profile.role)}</p>
+    <p class="hero__bio" data-i18n="profile.bio">${escapeHtml(tDe.profile.bio)}</p>
+    <nav class="hero__contact" id="kontakt" data-i18n-aria="a11y.contactAria" aria-label="${escapeHtml(tDe.a11y.contactAria)}">
+      <a class="hero__link" href="mailto:${escapeHtml(site.profile.email)}">
+        <span data-i18n="links.email">${escapeHtml(tDe.links.email)}</span>
+      </a>
+      <a class="hero__link" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
+        <span data-i18n="links.github">${escapeHtml(tDe.links.github)}</span>
+        <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
+      </a>
+      <a class="hero__link" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
+        <span data-i18n="links.linkedin">${escapeHtml(tDe.links.linkedin)}</span>
+        <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
+      </a>
     </nav>
   </header>
 
-  <div class="layout">
-    <aside class="sidebar" id="profil" aria-labelledby="profile-name">
-      <div class="sidebar__inner">
-        <h1 class="sidebar__name" id="profile-name">${escapeHtml(site.profile.name)}</h1>
-        <p class="sidebar__role" data-i18n="profile.role">${escapeHtml(tDe.profile.role)}</p>
-        <p class="sidebar__tagline" data-i18n="profile.tagline">${escapeHtml(tDe.profile.tagline)}</p>
-        <p class="sidebar__bio" data-i18n="profile.bio">${escapeHtml(tDe.profile.bio)}</p>
-
-        <ul class="sidebar__credentials" id="profile-credentials" data-i18n-aria="a11y.credentialsAria" aria-label="${escapeHtml(tDe.a11y.credentialsAria)}">
-          ${tDe.profile.credentials.map((c) => `<li class="sidebar__credential">${escapeHtml(c)}</li>`).join('\n          ')}
-        </ul>
-
-        <nav class="sidebar__contact" id="kontakt" data-i18n-aria="a11y.contactAria" aria-label="${escapeHtml(tDe.a11y.contactAria)}">
-          <a class="contact-link contact-link--primary" href="mailto:${escapeHtml(site.profile.email)}">
-            <span data-i18n="links.email">${escapeHtml(tDe.links.email)}</span>
-          </a>
-          <a class="contact-link" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
-            <span data-i18n="links.github">${escapeHtml(tDe.links.github)}</span>
-            <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
-          </a>
-          <a class="contact-link" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
-            <span data-i18n="links.linkedin">${escapeHtml(tDe.links.linkedin)}</span>
-            <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
-          </a>
-        </nav>
-
-        <details class="sidebar__details">
-          <summary class="sidebar__details-summary" data-i18n="profile.more">${escapeHtml(tDe.profile.more)}</summary>
-          <div class="sidebar__details-body">
-            <h2 class="sidebar__subheading" data-i18n="skills.heading">${escapeHtml(tDe.skills.heading)}</h2>
-            <div class="skill-groups" id="profile-skills"></div>
-            <h2 class="sidebar__subheading" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h2>
-            <ul class="sidebar__timeline" id="profile-background"></ul>
-          </div>
-        </details>
-      </div>
-    </aside>
-
-    <div class="work-area" id="work-area">
-      <header class="work-area__header">
-        <h2 class="work-area__title" data-i18n="sections.projects.heading">${escapeHtml(tDe.sections.projects.heading)}</h2>
-        <p class="work-area__lead" data-i18n="sections.projects.lead">${escapeHtml(tDe.sections.projects.lead)}</p>
-      </header>
-
-      <section class="work-area__filters" aria-labelledby="facet-heading">
-        <h3 class="work-area__filter-label" id="facet-heading" data-i18n="facets.heading">${escapeHtml(tDe.facets.heading)}</h3>
-        <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
-          <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
-            <span class="facet-chip__label">${escapeHtml(tDe.facets.all)}</span>
-            <span class="facet-chip__count">${allProjects.length}</span>
-          </button>
-          ${facetOverview}
-        </div>
-        <p class="work-area__filter-status" id="filter-status" aria-live="polite" hidden>
-          <span id="filter-count"></span>
-          <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">${escapeHtml(tDe.filter.reset)}</button>
-        </p>
-      </section>
-
-      <main class="sections" id="projects">${sectionsHtml}
-      </main>
+  <main class="work" id="projects">
+    <h2 class="visually-hidden" data-i18n="sections.projects.heading">${escapeHtml(tDe.sections.projects.heading)}</h2>
+    <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
+      <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
+        <span class="facet-chip__label">${escapeHtml(tDe.facets.all)}</span>
+        <span class="facet-chip__count">${allProjects.length}</span>
+      </button>
+      ${facetOverview}
     </div>
-  </div>
+    <p class="filter-status" id="filter-status" aria-live="polite" hidden>
+      <span id="filter-count"></span>
+      <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">${escapeHtml(tDe.filter.reset)}</button>
+    </p>
+    <div class="sections">${sectionsHtml}
+    </div>
+  </main>
+
+  <section class="about" aria-label="${escapeHtml(tDe.nav.profile)}">
+    <div class="about__grid">
+      <div class="about__col">
+        <h2 class="about__heading" data-i18n="skills.heading">${escapeHtml(tDe.skills.heading)}</h2>
+        <dl class="skill-list" id="profile-skills"></dl>
+      </div>
+      <div class="about__col">
+        <h2 class="about__heading" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h2>
+        <ul class="about__timeline" id="profile-background"></ul>
+      </div>
+    </div>
+  </section>
 
   <footer class="footer">
     <a href="/impressum.html" data-i18n="footer.impressum">${escapeHtml(tDe.footer.impressum)}</a>
