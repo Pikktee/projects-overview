@@ -6,42 +6,96 @@
           "slug": "patina",
           "name": "Patina",
           "url": "https://patina.henrikheil.net",
+          "github": "https://github.com/Pikktee/patina",
           "description": "Prüf- und Recherchewerkzeug für Autorinnen und Autoren historischer Romane.",
+          "longDescription": "Patina unterstützt Autorinnen und Autoren historischer Romane beim Schreiben: Eine KI nominiert Anachronismus-Verdachtsfälle im Manuskript, das DWDS-Sprachkorpus belegt sie mit Wortverlaufskurven — der Mensch entscheidet am Ende. So entsteht ein Workflow, der KI-Geschwindigkeit mit philologischer Sorgfalt verbindet.",
+          "highlights": [
+            "KI-nominierte Anachronismus-Verdachtsfälle",
+            "DWDS-Korpus mit Wortverlaufskurven",
+            "Projekt- und Kapitelverwaltung für lange Manuskripte",
+            "Admin-Workflow für Nutzerverwaltung"
+          ],
+          "stack": ["Next.js", "React", "TypeScript", "SQLite", "Drizzle ORM", "OpenRouter", "Railway", "Docker"],
           "accent": "#8b6f47"
         },
         {
           "slug": "velosia",
           "name": "Velosia",
           "url": "https://velosia.henrikheil.net",
+          "github": "https://github.com/Pikktee/velosia",
           "description": "KI-Listing für Second-Hand: Artikel fotografieren, Details und Preis automatisch erkennen lassen — und Anzeigen direkt bei Kleinanzeigen und Vinted einstellen.",
+          "longDescription": "Velosia automatisiert den Verkauf auf Second-Hand-Plattformen: Fotos aufnehmen, Vision-KI erkennt Artikel, schlägt Titel, Beschreibung, Kategorie und Preis vor — und füllt Kleinanzeigen sowie Vinted per Browser-Extension oder Android-App automatisch aus. Inklusive Live-Preisabschätzung aus vergleichbaren Angeboten.",
+          "highlights": [
+            "Vision-KI für Titel, Beschreibung und Kategorie",
+            "Autofill für Kleinanzeigen und Vinted",
+            "Chrome-Extension und Android-WebView",
+            "Median-Preisabschätzung aus Live-Suchergebnissen"
+          ],
+          "stack": ["React", "Vite", "TypeScript", "Python", "FastAPI", "PostgreSQL", "Google Gemini", "Railway"],
           "accent": "#3d8bfd"
         },
         {
           "slug": "schnappster",
           "name": "Schnappster",
           "url": "https://schnappster.henrikheil.net",
+          "github": "https://github.com/Pikktee/schnappster",
           "description": "Dein persönlicher Angebote-Finder für Kleinanzeigen.de — Schnäppchen finden, ohne ständig zu suchen.",
+          "longDescription": "Schnappster überwacht Kleinanzeigen.de nach deinen Suchprofilen und meldet neue Treffer, bevor andere zuschlagen. Die Oberfläche ist auf schnelles Scannen und Entscheiden ausgelegt — mit KI-gestützter Bewertung, ob ein Angebot wirklich ein Schnäppchen ist.",
+          "highlights": [
+            "Automatische Überwachung von Suchprofilen",
+            "KI-Bewertung von Angeboten",
+            "Web-Dashboard und MCP-Integration",
+            "Benachrichtigungen bei neuen Treffern"
+          ],
+          "stack": ["Next.js", "React", "Tailwind CSS", "Python", "FastAPI", "SQLite", "OpenRouter", "Vercel", "Railway"],
           "accent": "#e07a2f"
         },
         {
           "slug": "hugur",
           "name": "hugur",
           "url": "https://hugur.henrikheil.net",
+          "github": "https://github.com/Pikktee/hugur",
           "description": "Hugur — dein zweites Gehirn. Notizen, Links, To-Dos und Ideen in einem durchsuchbaren Stream.",
+          "longDescription": "Hugur ist ein persönlicher Wissens-Stream: Notizen, Links, Aufgaben und Ideen fließen in eine chronologische Timeline, die sich volltext durchsuchen lässt. Rich-Text-Editor, Tags und eine Android-App machen es zum Alltags-Werkzeug für alles, was man nicht vergessen will.",
+          "highlights": [
+            "Chronologischer Stream aus Notizen, Links und To-Dos",
+            "Rich-Text mit TipTap",
+            "Volltextsuche und Tag-Organisation",
+            "Web-App und Android-Client"
+          ],
+          "stack": ["React", "Vite", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "TipTap", "Railway", "Android"],
           "accent": "#5c8a72"
         },
         {
           "slug": "tile-weave",
           "name": "Tile Weave",
           "url": "https://tile-weave.henrikheil.net",
+          "github": "https://github.com/Pikktee/tile-weave",
           "description": "KI-Werkzeug zum Prüfen, Anpassen und Vergleichen nahtloser Stoffmuster für Kleidung.",
+          "longDescription": "Tile Weave hilft beim Design nahtloser Stoffmuster: Muster hochladen, KI-generierte Varianten erzeugen, nahtlose Kachelung prüfen und Muster nebeneinander in 3D vergleichen. Gedacht für Schneiderinnen, Modedesignerinnen und alle, die wiederholbare Prints brauchen.",
+          "highlights": [
+            "KI-Generierung und -Anpassung von Mustern",
+            "Nahtlosigkeits-Prüfung für Kachelung",
+            "3D-Vorschau mit Three.js",
+            "Vergleichsansicht mehrerer Varianten"
+          ],
+          "stack": ["React", "Vite", "TypeScript", "Three.js", "Express", "Node.js", "fal.ai", "OpenRouter"],
           "accent": "#c45c8a"
         },
         {
           "slug": "suntino",
           "name": "Suntino",
           "url": "https://suntino.henrikheil.net",
+          "github": "https://github.com/Pikktee/suntino",
           "description": "Kostenlose Chrome-Erweiterung: Webseiten, YouTube-Videos und PDFs automatisch zusammenfassen — mit Stilwahl, über 35 Sprachen, Vorlesen und Rückfragen.",
+          "longDescription": "Suntino fasst Webseiten, YouTube-Videos und PDFs per Chrome-Extension zusammen — mit wählbarem Stil (kurz, ausführlich, bullet points), über 35 Sprachen, Vorlesefunktion und der Möglichkeit, Rückfragen zum Inhalt zu stellen. Ein schlankes Backend kümmert sich um die KI-Anfragen.",
+          "highlights": [
+            "Zusammenfassung von Web, YouTube und PDF",
+            "Stilwahl und mehrsprachige Ausgabe",
+            "Vorlesen und Rückfragen zum Inhalt",
+            "Kostenlose Chrome-Extension (Manifest V3)"
+          ],
+          "stack": ["Chrome Extension", "Manifest V3", "Express", "Node.js", "OpenRouter", "Railway"],
           "accent": "#f4b942"
         }
       ]
@@ -53,42 +107,96 @@
           "slug": "cimdata-kurse",
           "name": "CIMDATA Studienplaner",
           "url": "https://cimdata-kurse.henrikheil.net",
+          "github": "https://github.com/Pikktee/cimdata-courses",
           "description": "CIMDATA-Weiterbildungen nach Starttermin durchsuchen, einen persönlichen Studienplan zusammenstellen und teilen.",
+          "longDescription": "Der CIMDATA Studienplaner scraped Kursangebote der CIMDATA-Akademie, filtert nach Startterminen und Modulen und erlaubt das Zusammenstellen eines persönlichen Studienplans — inklusive Teilen per Link. Entstanden als praktisches Werkzeug während der eigenen Weiterbildung.",
+          "highlights": [
+            "Durchsuchbare Kursdatenbank mit Filtern",
+            "Persönlicher Studienplan zum Zusammenstellen",
+            "Teilbare Pläne per Link",
+            "Automatischer Kurs-Scraper mit Playwright"
+          ],
+          "stack": ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Supabase", "Playwright", "Vercel"],
           "accent": "#2d6cdf"
         },
         {
           "slug": "echt-oder-ki",
           "name": "Echt oder KI?",
           "url": "https://echt-oder-ki.henrikheil.net",
+          "github": "https://github.com/Pikktee/ki-duell",
           "description": "Trainiere dein Auge für künstliche Kunst — tägliche Challenge: Welches Werk ist die KI-Fälschung?",
+          "longDescription": "Echt oder KI? ist ein tägliches Stil-Duell: Sechs Runden Text und Bild — erkennst du die KI-Fälschung? Drei Schwierigkeitsstufen, Tages-Leaderboards und ein globales Ranking. Das Backend generiert die Challenges serverseitig und schützt die API-Keys.",
+          "highlights": [
+            "Tägliche Challenge mit 6 Runden (Text + Bild)",
+            "Drei Schwierigkeitsstufen mit verschiedenen KI-Modellen",
+            "Tages- und Global-Leaderboards",
+            "Firebase-Backend mit serverseitiger Auswertung"
+          ],
+          "stack": ["React", "Vite", "TypeScript", "Tailwind CSS", "Firebase", "Firestore", "Cloud Functions", "OpenRouter", "Replicate"],
           "accent": "#9b7ede"
         },
         {
           "slug": "komorebi",
           "name": "Komorebi",
           "url": "https://komorebi.henrikheil.net",
+          "github": "https://github.com/Pikktee/komorebi",
           "description": "Finde deinen ökologischen Freiwilligendienst weltweit — Naturschutz, Artenschutz und Feldforschung.",
+          "longDescription": "Komorebi (japanisch für Sonnenlicht durch Blätter) ist eine Karte und Datenbank für ökologische Freiwilligendienste weltweit — von Naturschutz über Artenschutz bis Feldforschung. Ein Python-Scraper pflegt die Daten, die React-Oberfläche macht sie auf einer interaktiven Karte durchsuchbar.",
+          "highlights": [
+            "Interaktive Weltkarte mit Leaflet",
+            "Kategorien: Naturschutz, Artenschutz, Forschung",
+            "Automatisierte Daten-Pipeline in Python",
+            "Filter nach Region, Dauer und Thema"
+          ],
+          "stack": ["React", "Vite", "TypeScript", "Mantine", "Leaflet", "Python", "Railway", "Vitest"],
           "accent": "#4a9b6d"
         },
         {
           "slug": "quality-touch",
           "name": "Quality Touch",
           "url": "https://quality-touch.henrikheil.net",
+          "github": "https://github.com/Pikktee/quality-touch",
           "description": "Ein achtsamer Verbindungsraum für Paare: bewusste Berührung, tiefe Gespräche und Nähe über jede Distanz.",
+          "longDescription": "Quality Touch ist ein digitaler Raum für Paare, die bewusste Berührung und tiefe Gespräche pflegen wollen — auch über Distanz. Mit geführten Übungen, 3D-Visualisierungen und Web-Push-Benachrichtigungen für gemeinsame Momente.",
+          "highlights": [
+            "Geführte Berührungs- und Gesprächsübungen",
+            "3D-Visualisierungen mit Three.js und GSAP",
+            "Web-Push für Erinnerungen",
+            "Fernbeziehungs-freundliches Design"
+          ],
+          "stack": ["Next.js", "React", "TypeScript", "SQLite", "Three.js", "GSAP", "Radix UI", "Web Push", "Railway"],
           "accent": "#d4849a"
         },
         {
           "slug": "patina-kampagne",
           "name": "Patina-Kampagne",
           "url": "https://patina-kampagne.henrikheil.net",
+          "github": "https://github.com/Pikktee/patina-kampagne",
           "description": "Social-Media-Kampagne für Patina — das Recherchewerkzeug für Autorinnen und Autoren historischer Romane.",
+          "longDescription": "Abschlussprojekt des CIMDATA-Kurses Social Media Content für Kampagnen mit KI-Tools: Eine Social-Media-Kampagne rund um Patina — mit Podcast-Pilotfolge, Produktfilm, Storyboard und diesem Web-Hub, der alle Kampagnen-Inhalte bündelt.",
+          "highlights": [
+            "Podcast-Player für die Pilotfolge Zeitfehler",
+            "Eingebetteter Produktfilm",
+            "Staffel-Guide und Produktions-Setup",
+            "Deploy auf Railway mit SQLite-Backend"
+          ],
+          "stack": ["React", "Vite", "Express", "Node.js", "SQLite", "Docker", "Railway"],
           "accent": "#a07850"
         },
         {
           "slug": "a11y-quiz",
           "name": "A11y Quiz",
           "url": "https://a11y-quiz.henrikheil.net",
+          "github": "https://github.com/Pikktee/a11y-quiz",
           "description": "Teste dein WCAG-Wissen im interaktiven Quiz — Barrierefreiheit spielerisch lernen.",
+          "longDescription": "Das A11y Quiz macht WCAG-Wissen spielerisch erlernbar: Interaktive Fragen zu Barrierefreiheit, Auswertung mit Statistiken und Fortschrittsverfolgung. Gebaut mit dem Anspruch, selbst barrierefrei zu sein — Practice what you preach.",
+          "highlights": [
+            "WCAG-Fragen in verschiedenen Schwierigkeiten",
+            "Statistiken und Fortschrittsverfolgung",
+            "Barrierefreie UI mit Radix UI",
+            "Edge-Datenbank mit Turso/libSQL"
+          ],
+          "stack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Drizzle ORM", "Turso", "Radix UI", "Recharts", "Railway"],
           "accent": "#6b5ce7"
         }
       ]

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Übersicht über aktuelle Webprojekte von Henrik Heil — Patina, Velosia, hugur und mehr." />
-  <title>Projekte · Henrik Heil</title>
+  <meta name="description" content="Portfolio von Henrik Heil — Webprojekte, Tech-Stacks und Live-Demos: Patina, Velosia, hugur und mehr." />
+  <title>Portfolio · Henrik Heil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
@@ -15,158 +15,269 @@
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
+
   <header class="hero">
     <p class="hero__eyebrow">Henrik Heil</p>
-    <h1 class="hero__title">Aktuelle <em>Projekte</em></h1>
+    <h1 class="hero__title">Portfolio &amp; <em>Projekte</em></h1>
+    <p class="hero__lead">Web-Apps, KI-Tools und Experimente — gebaut mit Fokus auf Nutzerfreundlichkeit. Klicke ein Projekt für Details, Tech-Stack und Quellcode.</p>
   </header>
+
+  <div class="toolbar" id="toolbar">
+    <div class="toolbar__inner">
+      <div class="toolbar__filters" role="group" aria-label="Nach Technologie filtern">
+        <button type="button" class="filter-chip filter-chip--active" data-filter="all">Alle</button>
+        <button type="button" class="filter-chip" data-filter="react">React</button>
+<button type="button" class="filter-chip" data-filter="railway">Railway</button>
+<button type="button" class="filter-chip" data-filter="typescript">TypeScript</button>
+<button type="button" class="filter-chip" data-filter="vite">Vite</button>
+<button type="button" class="filter-chip" data-filter="next.js">Next.js</button>
+<button type="button" class="filter-chip" data-filter="openrouter">OpenRouter</button>
+<button type="button" class="filter-chip" data-filter="sqlite">SQLite</button>
+<button type="button" class="filter-chip" data-filter="tailwind css">Tailwind CSS</button>
+<button type="button" class="filter-chip" data-filter="express">Express</button>
+<button type="button" class="filter-chip" data-filter="node.js">Node.js</button>
+<button type="button" class="filter-chip" data-filter="postgresql">PostgreSQL</button>
+<button type="button" class="filter-chip" data-filter="python">Python</button>
+<button type="button" class="filter-chip" data-filter="docker">Docker</button>
+<button type="button" class="filter-chip" data-filter="drizzle orm">Drizzle ORM</button>
+<button type="button" class="filter-chip" data-filter="fastapi">FastAPI</button>
+<button type="button" class="filter-chip" data-filter="radix ui">Radix UI</button>
+<button type="button" class="filter-chip" data-filter="supabase">Supabase</button>
+<button type="button" class="filter-chip" data-filter="three.js">Three.js</button>
+<button type="button" class="filter-chip" data-filter="vercel">Vercel</button>
+      </div>
+      <p class="toolbar__count" id="filter-count" aria-live="polite">12 Projekte</p>
+    </div>
+  </div>
+
   <main class="sections" id="projects">
-  <section class="section">
+  <section class="section" data-section="Hauptprojekte">
     
     <div class="grid">
-    <article class="card" style="--accent:#8b6f47">
-      <a class="card__link" href="https://patina.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/patina.png" alt="Screenshot von Patina" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#8b6f47" data-slug="patina" data-stack="next.js,react,typescript,sqlite,drizzle orm,openrouter,railway,docker" data-section="Hauptprojekte">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="patina">
+        <div class="card__media"><img src="/screenshots/patina.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Patina</h2>
           <p class="card__desc">Prüf- und Recherchewerkzeug für Autorinnen und Autoren historischer Romane.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">Next.js</span><span class="tag tag--sm">React</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+5</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#3d8bfd">
-      <a class="card__link" href="https://velosia.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/velosia.png" alt="Screenshot von Velosia" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#3d8bfd" data-slug="velosia" data-stack="react,vite,typescript,python,fastapi,postgresql,google gemini,railway" data-section="Hauptprojekte">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="velosia">
+        <div class="card__media"><img src="/screenshots/velosia.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Velosia</h2>
           <p class="card__desc">KI-Listing für Second-Hand: Artikel fotografieren, Details und Preis automatisch erkennen lassen — und Anzeigen direkt bei Kleinanzeigen und Vinted einstellen.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">React</span><span class="tag tag--sm">Vite</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+5</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#e07a2f">
-      <a class="card__link" href="https://schnappster.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/schnappster.png" alt="Screenshot von Schnappster" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#e07a2f" data-slug="schnappster" data-stack="next.js,react,tailwind css,python,fastapi,sqlite,openrouter,vercel,railway" data-section="Hauptprojekte">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="schnappster">
+        <div class="card__media"><img src="/screenshots/schnappster.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Schnappster</h2>
           <p class="card__desc">Dein persönlicher Angebote-Finder für Kleinanzeigen.de — Schnäppchen finden, ohne ständig zu suchen.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">Next.js</span><span class="tag tag--sm">React</span><span class="tag tag--sm">Tailwind CSS</span><span class="tag tag--sm tag--more">+6</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#5c8a72">
-      <a class="card__link" href="https://hugur.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/hugur.png" alt="Screenshot von hugur" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#5c8a72" data-slug="hugur" data-stack="react,vite,typescript,tailwind css,supabase,postgresql,tiptap,railway,android" data-section="Hauptprojekte">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="hugur">
+        <div class="card__media"><img src="/screenshots/hugur.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">hugur</h2>
           <p class="card__desc">Hugur — dein zweites Gehirn. Notizen, Links, To-Dos und Ideen in einem durchsuchbaren Stream.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">React</span><span class="tag tag--sm">Vite</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+6</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#c45c8a">
-      <a class="card__link" href="https://tile-weave.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/tile-weave.png" alt="Screenshot von Tile Weave" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#c45c8a" data-slug="tile-weave" data-stack="react,vite,typescript,three.js,express,node.js,fal.ai,openrouter" data-section="Hauptprojekte">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="tile-weave">
+        <div class="card__media"><img src="/screenshots/tile-weave.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Tile Weave</h2>
           <p class="card__desc">KI-Werkzeug zum Prüfen, Anpassen und Vergleichen nahtloser Stoffmuster für Kleidung.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">React</span><span class="tag tag--sm">Vite</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+5</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#f4b942">
-      <a class="card__link" href="https://suntino.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/suntino.png" alt="Screenshot von Suntino" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#f4b942" data-slug="suntino" data-stack="chrome extension,manifest v3,express,node.js,openrouter,railway" data-section="Hauptprojekte">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="suntino">
+        <div class="card__media"><img src="/screenshots/suntino.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Suntino</h2>
           <p class="card__desc">Kostenlose Chrome-Erweiterung: Webseiten, YouTube-Videos und PDFs automatisch zusammenfassen — mit Stilwahl, über 35 Sprachen, Vorlesen und Rückfragen.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">Chrome Extension</span><span class="tag tag--sm">Manifest V3</span><span class="tag tag--sm">Express</span><span class="tag tag--sm tag--more">+3</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
     </div>
   </section>
 
-  <section class="section section--labeled">
-    <h2 class="section__heading">Experimente</h2>
+  <section class="section section--labeled" data-section="Experimente">
+    <h2 class="section__heading" id="section-experimente">Experimente</h2>
     <div class="grid">
-    <article class="card" style="--accent:#2d6cdf">
-      <a class="card__link" href="https://cimdata-kurse.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/cimdata-kurse.png" alt="Screenshot von CIMDATA Studienplaner" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#2d6cdf" data-slug="cimdata-kurse" data-stack="next.js,react,typescript,prisma,postgresql,supabase,playwright,vercel" data-section="Experimente">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="cimdata-kurse">
+        <div class="card__media"><img src="/screenshots/cimdata-kurse.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">CIMDATA Studienplaner</h2>
           <p class="card__desc">CIMDATA-Weiterbildungen nach Starttermin durchsuchen, einen persönlichen Studienplan zusammenstellen und teilen.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">Next.js</span><span class="tag tag--sm">React</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+5</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#9b7ede">
-      <a class="card__link" href="https://echt-oder-ki.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/echt-oder-ki.png" alt="Screenshot von Echt oder KI?" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#9b7ede" data-slug="echt-oder-ki" data-stack="react,vite,typescript,tailwind css,firebase,firestore,cloud functions,openrouter,replicate" data-section="Experimente">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="echt-oder-ki">
+        <div class="card__media"><img src="/screenshots/echt-oder-ki.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Echt oder KI?</h2>
           <p class="card__desc">Trainiere dein Auge für künstliche Kunst — tägliche Challenge: Welches Werk ist die KI-Fälschung?</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">React</span><span class="tag tag--sm">Vite</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+6</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#4a9b6d">
-      <a class="card__link" href="https://komorebi.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/komorebi.png" alt="Screenshot von Komorebi" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#4a9b6d" data-slug="komorebi" data-stack="react,vite,typescript,mantine,leaflet,python,railway,vitest" data-section="Experimente">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="komorebi">
+        <div class="card__media"><img src="/screenshots/komorebi.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Komorebi</h2>
           <p class="card__desc">Finde deinen ökologischen Freiwilligendienst weltweit — Naturschutz, Artenschutz und Feldforschung.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">React</span><span class="tag tag--sm">Vite</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+5</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#d4849a">
-      <a class="card__link" href="https://quality-touch.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/quality-touch.png" alt="Screenshot von Quality Touch" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#d4849a" data-slug="quality-touch" data-stack="next.js,react,typescript,sqlite,three.js,gsap,radix ui,web push,railway" data-section="Experimente">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="quality-touch">
+        <div class="card__media"><img src="/screenshots/quality-touch.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Quality Touch</h2>
           <p class="card__desc">Ein achtsamer Verbindungsraum für Paare: bewusste Berührung, tiefe Gespräche und Nähe über jede Distanz.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">Next.js</span><span class="tag tag--sm">React</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+6</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#a07850">
-      <a class="card__link" href="https://patina-kampagne.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/patina-kampagne.png" alt="Screenshot von Patina-Kampagne" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#a07850" data-slug="patina-kampagne" data-stack="react,vite,express,node.js,sqlite,docker,railway" data-section="Experimente">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="patina-kampagne">
+        <div class="card__media"><img src="/screenshots/patina-kampagne.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Patina-Kampagne</h2>
           <p class="card__desc">Social-Media-Kampagne für Patina — das Recherchewerkzeug für Autorinnen und Autoren historischer Romane.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">React</span><span class="tag tag--sm">Vite</span><span class="tag tag--sm">Express</span><span class="tag tag--sm tag--more">+4</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
 
-    <article class="card" style="--accent:#6b5ce7">
-      <a class="card__link" href="https://a11y-quiz.henrikheil.net" target="_blank" rel="noopener noreferrer">
-        <div class="card__media"><img src="/screenshots/a11y-quiz.png" alt="Screenshot von A11y Quiz" loading="lazy" width="640" height="400" /></div>
+    <article class="card" style="--accent:#6b5ce7" data-slug="a11y-quiz" data-stack="next.js,react,typescript,tailwind css,drizzle orm,turso,radix ui,recharts,railway" data-section="Experimente">
+      <button type="button" class="card__btn" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" data-open="a11y-quiz">
+        <div class="card__media"><img src="/screenshots/a11y-quiz.png" alt="" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">A11y Quiz</h2>
           <p class="card__desc">Teste dein WCAG-Wissen im interaktiven Quiz — Barrierefreiheit spielerisch lernen.</p>
-          <span class="card__cta">Öffnen <span aria-hidden="true">↗</span></span>
+          <div class="card__tags"><span class="tag tag--sm">Next.js</span><span class="tag tag--sm">React</span><span class="tag tag--sm">TypeScript</span><span class="tag tag--sm tag--more">+6</span></div>
+          <span class="card__cta">Details ansehen <span aria-hidden="true">→</span></span>
         </div>
-      </a>
+      </button>
     </article>
     </div>
   </section>
   </main>
+
+  <section class="stack-section" aria-labelledby="stack-heading">
+    <div class="stack-section__inner">
+      <h2 class="stack-section__heading" id="stack-heading">Tech-Stack <em>Übersicht</em></h2>
+      <p class="stack-section__lead">Alle Technologien, die in diesen Projekten zum Einsatz kommen — klicken zum Filtern.</p>
+      <div class="stack-grid" role="group" aria-label="Technologie-Übersicht">
+        <button type="button" class="stack-pill" data-filter="android" title="1 Projekt"><span class="stack-pill__name">Android</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="chrome extension" title="1 Projekt"><span class="stack-pill__name">Chrome Extension</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="cloud functions" title="1 Projekt"><span class="stack-pill__name">Cloud Functions</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="docker" title="2 Projekte"><span class="stack-pill__name">Docker</span><span class="stack-pill__count">2</span></button>
+<button type="button" class="stack-pill" data-filter="drizzle orm" title="2 Projekte"><span class="stack-pill__name">Drizzle ORM</span><span class="stack-pill__count">2</span></button>
+<button type="button" class="stack-pill" data-filter="express" title="3 Projekte"><span class="stack-pill__name">Express</span><span class="stack-pill__count">3</span></button>
+<button type="button" class="stack-pill" data-filter="fal.ai" title="1 Projekt"><span class="stack-pill__name">fal.ai</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="fastapi" title="2 Projekte"><span class="stack-pill__name">FastAPI</span><span class="stack-pill__count">2</span></button>
+<button type="button" class="stack-pill" data-filter="firebase" title="1 Projekt"><span class="stack-pill__name">Firebase</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="firestore" title="1 Projekt"><span class="stack-pill__name">Firestore</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="google gemini" title="1 Projekt"><span class="stack-pill__name">Google Gemini</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="gsap" title="1 Projekt"><span class="stack-pill__name">GSAP</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="leaflet" title="1 Projekt"><span class="stack-pill__name">Leaflet</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="manifest v3" title="1 Projekt"><span class="stack-pill__name">Manifest V3</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="mantine" title="1 Projekt"><span class="stack-pill__name">Mantine</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="next.js" title="5 Projekte"><span class="stack-pill__name">Next.js</span><span class="stack-pill__count">5</span></button>
+<button type="button" class="stack-pill" data-filter="node.js" title="3 Projekte"><span class="stack-pill__name">Node.js</span><span class="stack-pill__count">3</span></button>
+<button type="button" class="stack-pill" data-filter="openrouter" title="5 Projekte"><span class="stack-pill__name">OpenRouter</span><span class="stack-pill__count">5</span></button>
+<button type="button" class="stack-pill" data-filter="playwright" title="1 Projekt"><span class="stack-pill__name">Playwright</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="postgresql" title="3 Projekte"><span class="stack-pill__name">PostgreSQL</span><span class="stack-pill__count">3</span></button>
+<button type="button" class="stack-pill" data-filter="prisma" title="1 Projekt"><span class="stack-pill__name">Prisma</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="python" title="3 Projekte"><span class="stack-pill__name">Python</span><span class="stack-pill__count">3</span></button>
+<button type="button" class="stack-pill" data-filter="radix ui" title="2 Projekte"><span class="stack-pill__name">Radix UI</span><span class="stack-pill__count">2</span></button>
+<button type="button" class="stack-pill" data-filter="railway" title="9 Projekte"><span class="stack-pill__name">Railway</span><span class="stack-pill__count">9</span></button>
+<button type="button" class="stack-pill" data-filter="react" title="11 Projekte"><span class="stack-pill__name">React</span><span class="stack-pill__count">11</span></button>
+<button type="button" class="stack-pill" data-filter="recharts" title="1 Projekt"><span class="stack-pill__name">Recharts</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="replicate" title="1 Projekt"><span class="stack-pill__name">Replicate</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="sqlite" title="4 Projekte"><span class="stack-pill__name">SQLite</span><span class="stack-pill__count">4</span></button>
+<button type="button" class="stack-pill" data-filter="supabase" title="2 Projekte"><span class="stack-pill__name">Supabase</span><span class="stack-pill__count">2</span></button>
+<button type="button" class="stack-pill" data-filter="tailwind css" title="4 Projekte"><span class="stack-pill__name">Tailwind CSS</span><span class="stack-pill__count">4</span></button>
+<button type="button" class="stack-pill" data-filter="three.js" title="2 Projekte"><span class="stack-pill__name">Three.js</span><span class="stack-pill__count">2</span></button>
+<button type="button" class="stack-pill" data-filter="tiptap" title="1 Projekt"><span class="stack-pill__name">TipTap</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="turso" title="1 Projekt"><span class="stack-pill__name">Turso</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="typescript" title="9 Projekte"><span class="stack-pill__name">TypeScript</span><span class="stack-pill__count">9</span></button>
+<button type="button" class="stack-pill" data-filter="vercel" title="2 Projekte"><span class="stack-pill__name">Vercel</span><span class="stack-pill__count">2</span></button>
+<button type="button" class="stack-pill" data-filter="vite" title="6 Projekte"><span class="stack-pill__name">Vite</span><span class="stack-pill__count">6</span></button>
+<button type="button" class="stack-pill" data-filter="vitest" title="1 Projekt"><span class="stack-pill__name">Vitest</span><span class="stack-pill__count">1</span></button>
+<button type="button" class="stack-pill" data-filter="web push" title="1 Projekt"><span class="stack-pill__name">Web Push</span><span class="stack-pill__count">1</span></button>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <a href="/impressum.html">Impressum</a>
     <span class="footer__sep" aria-hidden="true">·</span>
     <span>12 Projekte</span>
   </footer>
+
+  <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
+  <aside class="drawer" id="project-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
+    <div class="drawer__header">
+      <button type="button" class="drawer__close" id="drawer-close" aria-label="Schließen">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="drawer__scroll">
+      <div class="drawer__media" id="drawer-media"></div>
+      <div class="drawer__content">
+        <h2 class="drawer__title" id="drawer-title"></h2>
+        <p class="drawer__desc" id="drawer-desc"></p>
+        <ul class="drawer__highlights" id="drawer-highlights"></ul>
+        <div class="drawer__stack" id="drawer-stack"></div>
+        <div class="drawer__actions" id="drawer-actions"></div>
+      </div>
+    </div>
+  </aside>
+
   <script src="/app.js" defer></script>
 </body>
 </html>
