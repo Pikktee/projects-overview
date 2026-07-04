@@ -64,6 +64,64 @@ body.drawer-open {
   overflow: hidden;
 }
 
+/* Sanft driftende Farbflächen hinter dem Inhalt. Rein dekorativ; bei
+   prefers-reduced-motion stehen sie still (globale Animation-Bremse). */
+.aurora {
+  pointer-events: none;
+  position: fixed;
+  inset: -25%;
+  z-index: 0;
+  filter: blur(80px);
+  opacity: 0.45;
+}
+
+.aurora span {
+  position: absolute;
+  width: 44vmax;
+  height: 44vmax;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.aurora span:nth-child(1) {
+  top: 2%;
+  left: 12%;
+  background: radial-gradient(circle, rgba(139, 111, 71, 0.5), transparent 65%);
+  animation: aurora-drift-a 34s ease-in-out infinite alternate;
+}
+
+.aurora span:nth-child(2) {
+  top: 8%;
+  right: 6%;
+  background: radial-gradient(circle, rgba(61, 139, 253, 0.22), transparent 65%);
+  animation: aurora-drift-b 42s ease-in-out infinite alternate;
+}
+
+.aurora span:nth-child(3) {
+  bottom: 4%;
+  left: 34%;
+  background: radial-gradient(circle, rgba(212, 196, 168, 0.16), transparent 65%);
+  animation: aurora-drift-a 50s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes aurora-drift-a {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(9%, 6%) scale(1.12);
+  }
+}
+
+@keyframes aurora-drift-b {
+  from {
+    transform: translate(0, 0) scale(1.08);
+  }
+  to {
+    transform: translate(-8%, 9%) scale(0.94);
+  }
+}
+
 .grain {
   pointer-events: none;
   position: fixed;
@@ -154,6 +212,12 @@ body.drawer-open {
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.025em;
+  /* Beide Gradient-Töne bleiben weit über 7:1 Kontrast auf dem dunklen Grund. */
+  background: linear-gradient(115deg, #f6f1e7 0%, #ece8e1 45%, #d4c4a8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #ece8e1;
 }
 
 .hero__role {
@@ -360,6 +424,9 @@ body.drawer-open {
 }
 
 .section__heading {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   margin: 0 0 var(--gap);
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 3.5vw, 2.1rem);
@@ -367,6 +434,13 @@ body.drawer-open {
   font-style: italic;
   color: #d4c4a8;
   letter-spacing: -0.01em;
+}
+
+.section__heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, color-mix(in srgb, #d4c4a8 35%, transparent), transparent);
 }
 
 .grid {
@@ -380,11 +454,22 @@ body.drawer-open {
 .card {
   position: relative;
   z-index: 1;
-  animation: fadeUp 0.7s var(--ease-out) both;
-  animation-delay: calc(var(--i, 0) * 0.05s + 0.1s);
+}
+
+/* Scroll-Reveal: nur wenn JS läuft (html.js) werden Karten initial versteckt
+   und per IntersectionObserver eingeblendet — ohne JS bleibt alles sichtbar. */
+html.js .card {
+  opacity: 0;
+  transform: translateY(22px);
   transition:
-    opacity 0.35s ease,
-    transform 0.35s ease;
+    opacity 0.6s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  transition-delay: calc(var(--stagger, 0) * 60ms);
+}
+
+html.js .card.is-visible {
+  opacity: 1;
+  transform: none;
 }
 
 .card--hidden {
@@ -392,6 +477,7 @@ body.drawer-open {
 }
 
 .card__btn {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -422,6 +508,29 @@ body.drawer-open {
   box-shadow:
     0 20px 40px rgba(0, 0, 0, 0.35),
     0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+/* Spotlight, das dem Cursor folgt — nur auf Geräten mit echtem Hover,
+   rein dekorativ und ohne Einfluss auf Tastatur- oder Touch-Bedienung. */
+@media (hover: hover) and (pointer: fine) {
+  .card__btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+      340px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent) 13%, transparent),
+      transparent 65%
+    );
+    transition: opacity 0.35s ease;
+  }
+
+  .card__btn:hover::after {
+    opacity: 1;
+  }
 }
 
 .card__media {
@@ -505,6 +614,16 @@ body.drawer-open {
   letter-spacing: 0.02em;
 }
 
+.card__cta [aria-hidden] {
+  display: inline-block;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.card__btn:hover .card__cta [aria-hidden],
+.card__btn:focus-visible .card__cta [aria-hidden] {
+  transform: translateX(4px);
+}
+
 /* ── Tags ── */
 
 .tag {
@@ -571,6 +690,7 @@ body.drawer-open {
 .facet-chip:focus-visible {
   color: var(--text);
   border-color: rgba(236, 232, 225, 0.22);
+  transform: translateY(-1px);
 }
 
 .facet-chip:active {
@@ -582,6 +702,7 @@ body.drawer-open {
   background: linear-gradient(180deg, #e6d4b0, #d4c4a8);
   border-color: transparent;
   font-weight: 600;
+  box-shadow: 0 4px 18px rgba(212, 196, 168, 0.22);
 }
 
 .facet-chip.is-active .facet-chip__icon {
@@ -745,8 +866,8 @@ body.drawer-open {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, transparent 28%),
-    linear-gradient(to top, var(--bg-card) 0%, rgba(26, 30, 36, 0.92) 18%, transparent 52%);
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.14) 0%, transparent 16%),
+    linear-gradient(to top, var(--bg-card) 0%, rgba(26, 30, 36, 0.85) 14%, transparent 42%);
 }
 
 .drawer__close {

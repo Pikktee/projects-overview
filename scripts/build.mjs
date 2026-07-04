@@ -166,6 +166,7 @@ ${headExtras}
 </head>
 <body>
   <a class="skip-link" href="#projects" data-i18n="a11y.skipLink">${escapeHtml(tDe.a11y.skipLink)}</a>
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="grain" aria-hidden="true"></div>
 
   <header class="hero" id="profil">

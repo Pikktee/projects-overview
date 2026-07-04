@@ -16,8 +16,15 @@
     {
       "key": "product",
       "items": {
-        "de": ["UX-Konzeption", "Usability", "Barrierefreiheit", "Prototyping"],
-        "en": ["UX design", "Usability", "Accessibility", "Prototyping"]
+        "de": ["UX-Konzeption", "Usability", "Prototyping"],
+        "en": ["UX design", "Usability", "Prototyping"]
+      }
+    },
+    {
+      "key": "accessibility",
+      "items": {
+        "de": ["WCAG 2.2", "ARIA", "Tastaturbedienung", "Screenreader-Tests", "Kontrast & Reduced Motion"],
+        "en": ["WCAG 2.2", "ARIA", "Keyboard support", "Screen reader testing", "Contrast & reduced motion"]
       }
     },
     {
@@ -93,6 +100,7 @@
         "groups": {
           "development": "Entwicklung",
           "product": "Produkt & UX",
+          "accessibility": "Barrierefreiheit",
           "ai": "KI & Tools",
           "media": "Medien",
           "methods": "Methoden"
@@ -199,6 +207,7 @@
         "groups": {
           "development": "Development",
           "product": "Product & UX",
+          "accessibility": "Accessibility",
           "ai": "AI & tools",
           "media": "Media",
           "methods": "Methods"

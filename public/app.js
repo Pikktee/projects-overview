@@ -1,4 +1,8 @@
 (() => {
+  // Signalisiert dem CSS, dass JS läuft — erst dann werden Karten für den
+  // Scroll-Reveal initial versteckt (Fallback ohne JS: alles sichtbar).
+  document.documentElement.classList.add('js');
+
   const LANG_KEY = 'portfolio-lang';
 
   let locale = 'de';
@@ -190,9 +194,37 @@
 
   Promise.all([siteReady, projectsReady]).then(() => handleHash());
 
-  document.querySelectorAll('.card').forEach((card, i) => {
-    card.style.setProperty('--i', i);
-  });
+  // Scroll-Reveal: Karten tauchen gestaffelt auf, sobald sie in den Viewport
+  // kommen. Ohne IntersectionObserver werden alle sofort sichtbar.
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries
+          .filter((entry) => entry.isIntersecting)
+          .forEach((entry, i) => {
+            entry.target.style.setProperty('--stagger', String(Math.min(i, 5)));
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          });
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.1 },
+    );
+    cards.forEach((card) => revealObserver.observe(card));
+  } else {
+    cards.forEach((card) => card.classList.add('is-visible'));
+  }
+
+  // Spotlight: Cursorposition als CSS-Variablen für den radialen Glow auf den
+  // Karten. Nur bei echtem Hover-Gerät aktiv, Touch/Tastatur bleiben unberührt.
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.card__btn').forEach((btn) => {
+      btn.addEventListener('pointermove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        btn.style.setProperty('--mx', `${e.clientX - rect.left}px`);
+        btn.style.setProperty('--my', `${e.clientY - rect.top}px`);
+      });
+    });
+  }
 
   openButtons.forEach((btn) => {
     btn.addEventListener('click', () => openDrawer(btn.dataset.open));
