@@ -38,7 +38,14 @@
     card.style.setProperty('--i', i);
   });
 
-  bindStackPills();
+  openButtons.forEach((btn) => {
+    btn.addEventListener('click', () => openDrawer(btn.dataset.open));
+  });
+
+  stackPills.forEach((pill) => {
+    pill.addEventListener('click', () => setFilter(pill.dataset.filter));
+  });
+
   filterReset?.addEventListener('click', () => setFilter('all'));
 
   async function loadProjects() {

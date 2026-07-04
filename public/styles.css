@@ -439,18 +439,10 @@ body.drawer-open {
 .drawer[hidden] {
   display: none !important;
   pointer-events: none !important;
-  visibility: hidden !important;
 }
 
 .drawer:not(.drawer--open) {
-  visibility: hidden;
   pointer-events: none !important;
-  clip-path: inset(100%);
-}
-
-.drawer.drawer--open {
-  visibility: visible;
-  clip-path: none;
 }
 
 .drawer {
@@ -1105,26 +1097,6 @@ body.drawer-open {
   .drawer--open {
     transform: translateY(0);
     pointer-events: auto;
-  }
-
-  .drawer:not(.drawer--open) {
-    width: 0 !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    visibility: hidden !important;
-    clip-path: inset(100%) !important;
-  }
-
-  .drawer.drawer--open {
-    width: 100vw !important;
-    max-width: 100% !important;
-    height: min(94dvh, 100dvh) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    clip-path: none !important;
   }
 
   .drawer__close {
