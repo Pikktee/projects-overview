@@ -172,7 +172,16 @@
         "screenshotAlt": "Screenshot von {name}"
       },
       "legal": {
-        "back": "← Zurück zum Portfolio"
+        "back": "← Zurück zum Portfolio",
+        "pageTitle": "Impressum · Henrik Heil",
+        "heading": "Impressum",
+        "providerHeading": "Angaben gemäß § 5 TMG",
+        "contactHeading": "Kontakt",
+        "contactLine": "E-Mail: <a href=\"mailto:contact@henrikheil.net\">contact@henrikheil.net</a>",
+        "liabilityContentHeading": "Haftung für Inhalte",
+        "liabilityContentBody": "Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.",
+        "liabilityLinksHeading": "Haftung für Links",
+        "liabilityLinksBody": "Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich."
       }
     },
     "en": {
@@ -279,7 +288,16 @@
         "screenshotAlt": "Screenshot of {name}"
       },
       "legal": {
-        "back": "← Back to portfolio"
+        "back": "← Back to portfolio",
+        "pageTitle": "Legal notice · Henrik Heil",
+        "heading": "Legal notice",
+        "providerHeading": "Information pursuant to § 5 TMG",
+        "contactHeading": "Contact",
+        "contactLine": "Email: <a href=\"mailto:contact@henrikheil.net\">contact@henrikheil.net</a>",
+        "liabilityContentHeading": "Liability for content",
+        "liabilityContentBody": "As service provider I am responsible for my own content on these pages in accordance with § 7 (1) TMG (German Telemedia Act) under general law. However, pursuant to §§ 8 to 10 TMG, I am not obliged as service provider to monitor transmitted or stored third-party information or to investigate circumstances indicating illegal activity.",
+        "liabilityLinksHeading": "Liability for links",
+        "liabilityLinksBody": "This site contains links to external third-party websites over whose content I have no influence. The respective provider is always responsible for the content of linked pages."
       }
     }
   },
@@ -296,7 +314,6 @@
       "echt-oder-ki": "Daily duel: spot AI fakes in text and images — three levels, leaderboards.",
       "komorebi": "Find conservation roles worldwide — discover on a map, filter, apply directly.",
       "quality-touch": "Guided connection space for couples — touch, deep talks, even at a distance.",
-      "patina-kampagne": "Campaign hub for Patina: podcast, season planning, and film concepts in one place.",
       "a11y-quiz": "WCAG 2.2 quiz in ChatGPT with personal results and an accessible dashboard."
     }
   }

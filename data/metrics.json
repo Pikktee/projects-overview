@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:08.693Z"
+    "analyzedAt": "2026-07-04T21:40:46.088Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T21:01:08.927Z"
+    "analyzedAt": "2026-07-04T21:40:46.316Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T21:01:09.229Z"
+    "analyzedAt": "2026-07-04T21:40:46.605Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T21:01:09.421Z"
+    "analyzedAt": "2026-07-04T21:40:46.804Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:09.522Z"
+    "analyzedAt": "2026-07-04T21:40:46.897Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-04T21:01:09.602Z"
+    "analyzedAt": "2026-07-04T21:40:46.966Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:09.715Z"
+    "analyzedAt": "2026-07-04T21:40:47.051Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:09.814Z"
+    "analyzedAt": "2026-07-04T21:40:47.129Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:09.894Z"
+    "analyzedAt": "2026-07-04T21:40:47.213Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,79 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:10.019Z"
-  },
-  "patina-kampagne": {
-    "slug": "patina-kampagne",
-    "localPath": "konzepte/projekt-socialmediakurs/staffel-guide-app",
-    "github": "https://github.com/Pikktee/patina-kampagne",
-    "description": "Leichtgewichtige Planungs-App für die Podcast-Staffeln von Zeitfehler (Produkt im Hintergrund: *Patina*). Staffeln & Episoden anlegen, bearbeiten, per Drag & Drop sortieren und zwischen Staffeln / Ideenpool verschieben, ",
-    "longDescription": "Leichtgewichtige Planungs-App für die Podcast-Staffeln von Zeitfehler (Produkt im Hintergrund: *Patina*). Staffeln & Episoden anlegen, bearbeiten, per Drag & Drop sortieren und zwischen Staffeln / Ideenpool verschieben, Status setzen (Idee → Geplant → In Arbeit → Produziert) und die Hörprobe markieren. - Frontend: React + Vite (statischer Build) - Backend: ein einziger Express-Server mit better-sqlite3 - Datenbank: SQLite-Datei (data/zeitfehler.db) - Ein Prozess, ein Port — der Server liefert in Produktion sowohl die API (/api/*) als auch das gebaute Frontend aus.",
-    "highlights": [],
-    "stack": [
-      "React",
-      "Vite",
-      "Express",
-      "SQLite",
-      "Docker"
-    ],
-    "dependencies": {
-      "ui": [
-        "@vitejs/plugin-react",
-        "react",
-        "react-dom",
-        "react-router-dom"
-      ],
-      "data": [
-        "better-sqlite3"
-      ],
-      "ai": [],
-      "infra": [
-        "express",
-        "vite"
-      ],
-      "testing": [],
-      "other": [
-        "concurrently"
-      ]
-    },
-    "dependencyCount": 8,
-    "loc": {
-      "total": 4522,
-      "code": 4017,
-      "blank": 390,
-      "comment": 115,
-      "byLanguage": {
-        "HTML": 20,
-        "JavaScript": 2657,
-        "CSS": 1340
-      }
-    },
-    "locFormatted": "4k",
-    "files": {
-      "source": 23,
-      "components": 5,
-      "tsx": 0,
-      "tests": 0
-    },
-    "coverage": null,
-    "git": {
-      "commits": 10,
-      "firstCommit": "2026-06-30 09:55:06 +0200",
-      "lastCommit": "2026-07-02 14:06:47 +0200"
-    },
-    "ux": {
-      "uiFrameworks": [],
-      "a11yTools": [],
-      "e2eTools": [],
-      "unitTools": [],
-      "componentCount": 5,
-      "tsxFiles": 0,
-      "testFiles": 0,
-      "hasResponsiveCss": true,
-      "hasManifestExtension": false
-    },
-    "analyzedAt": "2026-07-04T21:01:10.096Z"
+    "analyzedAt": "2026-07-04T21:40:47.328Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1157,7 +1085,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:10.179Z"
+    "analyzedAt": "2026-07-04T21:40:47.396Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1197,17 +1125,17 @@
     },
     "dependencyCount": 11,
     "loc": {
-      "total": 6508,
-      "code": 5193,
-      "blank": 569,
-      "comment": 746,
+      "total": 6597,
+      "code": 5258,
+      "blank": 572,
+      "comment": 767,
       "byLanguage": {
         "HTML": 228,
-        "JavaScript": 3576,
+        "JavaScript": 3641,
         "CSS": 1389
       }
     },
-    "locFormatted": "5.2k",
+    "locFormatted": "5.3k",
     "files": {
       "source": 20,
       "components": 0,
@@ -1233,6 +1161,6 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-04T21:01:10.244Z"
+    "analyzedAt": "2026-07-04T21:40:47.479Z"
   }
 }

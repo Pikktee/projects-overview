@@ -119,18 +119,6 @@
       "Lokal-first: Verbindungsprofil und Fortschritt bleiben im eigenen Browser"
     ]
   },
-  "patina-kampagne": {
-    "tagline": "Kampagnen-Hub für Patina: Podcast-Hörprobe, Produktfilm-Konzepte und Staffel-Planung an einem Ort.",
-    "summary": "Kampagnen-Hub für Patina: Podcast, Staffel-Planung und Film-Konzepte an einem Ort.",
-    "overview": "Patina-Kampagne ist das zentrale Schaufenster für die Social-Media-Kampagne rund um Patina — das Prüf- und Recherchewerkzeug für Autorinnen und Autoren historischer Romane. Statt verstreuter Dateien und Einzel-Links bündelt die App alle Kampagnen-Werkzeuge unter einem warmen, papierartigen Design-Vokabular.\n\nIm Podcast-Bereich wartet die Pilotfolge Bevor es Blau gab des Formats Zeitfehler: zum Anhören im eingebauten Player, als Video-Podcast und zum Download. Der Staffel-Guide dahinter ist eine echte Planungs-App — Staffeln und Episoden anlegen, per Drag & Drop sortieren, Produktionsstatus verfolgen und Hörproben markieren.\n\nIm Film-Bereich liegen Video-Strategie, Storyboard und Skript für zielgruppenspezifische Produktvideos bereit — von Querformat-Workflow-Demos bis zu Kurzclip-Konzepten. Alles in einem schlanken React-Vite-Frontend mit Express-Backend und persistenter SQLite-Datenbank.",
-    "uxNarrative": "Die Startseite strukturiert die Kampagne wie ein gut kuratierter Schreibtisch: drei Bereiche — Podcast, Film, Dateien — mit klaren Tool-Karten, die sofort zeigen, was live ist und was noch kommt. Jede Unterseite führt mit Breadcrumb zurück zur Übersicht, sodass man sich in einer Präsentation wie in einem Werkzeugkasten zugleich bewegen kann.\n\nDer Podcast-Player und die Film-Deck-Navigation sind bewusst editorial gestaltet — weniger Dashboard, mehr Magazin. Die Patina-Farben und Typografie vermitteln Handwerk und Vertrauen; wer die Pilotfolge hört oder das Storyboard durchblättert, soll das Produkt Patina emotional greifen können, bevor er es je ausprobiert hat.",
-    "highlights": [
-      "Podcast-Hörprobe Bevor es Blau gab mit Audio-Player, Video und Download",
-      "Staffel-Guide: Episoden planen, sortieren, Status führen und Hörproben markieren",
-      "Video-Strategie und Storyboard für zielgruppenspezifische Patina-Produktfilme",
-      "Ein Prozess, ein Port: React-Frontend, Express-API und SQLite in einem Container"
-    ]
-  },
   "a11y-quiz": {
     "tagline": "WCAG-2.2-Wissenscheck mit ChatGPT-Quiz, persönlicher Auswertung und barrierefreiem Ergebnis-Dashboard.",
     "summary": "WCAG-2.2-Quiz in ChatGPT mit persönlicher Auswertung und barrierefreiem Dashboard.",

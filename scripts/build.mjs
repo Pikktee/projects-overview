@@ -79,6 +79,13 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+const heroLinkIcons = {
+  email: `<svg class="hero__link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  github: `<svg class="hero__link-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>`,
+  linkedin: `<svg class="hero__link-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.66H9.34V9h3.42v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.26 2.37 4.26 5.45v6.29zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>`,
+  external: `<svg class="hero__link-external" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 3.5H12.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 12.5L12 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+};
+
 function renderCard(p) {
   const hasShot = existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
   const img = hasShot
@@ -186,14 +193,19 @@ ${headExtras}
     <p class="hero__bio" data-i18n="profile.bio">${escapeHtml(tDe.profile.bio)}</p>
     <nav class="hero__contact" id="kontakt" data-i18n-aria="a11y.contactAria" aria-label="${escapeHtml(tDe.a11y.contactAria)}">
       <a class="hero__link" href="mailto:${escapeHtml(site.profile.email)}">
+        ${heroLinkIcons.email}
         <span data-i18n="links.email">${escapeHtml(tDe.links.email)}</span>
       </a>
-      <a class="hero__link" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
+      <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
+        ${heroLinkIcons.github}
         <span data-i18n="links.github">${escapeHtml(tDe.links.github)}</span>
+        ${heroLinkIcons.external}
         <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
       </a>
-      <a class="hero__link" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
+      <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
+        ${heroLinkIcons.linkedin}
         <span data-i18n="links.linkedin">${escapeHtml(tDe.links.linkedin)}</span>
+        ${heroLinkIcons.external}
         <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
       </a>
     </nav>
@@ -299,9 +311,9 @@ ${headExtras}
           .join('\n        ')}
       </nav>
     </div>
-    <h1>Impressum</h1>
+    <h1 data-i18n="legal.heading">${escapeHtml(tDe.legal.heading)}</h1>
     <section>
-      <h2>Angaben gemäß § 5 TMG</h2>
+      <h2 data-i18n="legal.providerHeading">${escapeHtml(tDe.legal.providerHeading)}</h2>
       <p>
         Henrik Heil<br />
         Westendstraße 100<br />
@@ -309,16 +321,16 @@ ${headExtras}
       </p>
     </section>
     <section>
-      <h2>Kontakt</h2>
-      <p>E-Mail: <a href="mailto:contact@henrikheil.net">contact@henrikheil.net</a></p>
+      <h2 data-i18n="legal.contactHeading">${escapeHtml(tDe.legal.contactHeading)}</h2>
+      <p data-i18n-html="legal.contactLine">${tDe.legal.contactLine}</p>
     </section>
     <section>
-      <h2>Haftung für Inhalte</h2>
-      <p>Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p>
+      <h2 data-i18n="legal.liabilityContentHeading">${escapeHtml(tDe.legal.liabilityContentHeading)}</h2>
+      <p data-i18n="legal.liabilityContentBody">${escapeHtml(tDe.legal.liabilityContentBody)}</p>
     </section>
     <section>
-      <h2>Haftung für Links</h2>
-      <p>Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p>
+      <h2 data-i18n="legal.liabilityLinksHeading">${escapeHtml(tDe.legal.liabilityLinksHeading)}</h2>
+      <p data-i18n="legal.liabilityLinksBody">${escapeHtml(tDe.legal.liabilityLinksBody)}</p>
     </section>
   </main>
   <script>window.__ASSET_V = "${assetVersion}";</script>

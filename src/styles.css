@@ -15,7 +15,6 @@
   --max: 1200px;
   --gap: clamp(1rem, 2.5vw, 1.75rem);
   --drawer-w: min(520px, 100vw);
-  --page-gutter: 0px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -27,7 +26,6 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-gutter: stable;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -62,9 +60,16 @@ body {
     var(--bg);
 }
 
-html.drawer-open,
+html.drawer-open {
+  overflow: hidden;
+}
+
 body.drawer-open {
   overflow: hidden;
+  position: fixed;
+  left: 0;
+  right: 0;
+  padding-right: var(--scrollbar-width, 0px);
 }
 
 /* Sanft driftende Farbflächen hinter dem Inhalt. Rein dekorativ; bei
@@ -249,6 +254,7 @@ body.drawer-open {
 .hero__link {
   display: inline-flex;
   align-items: center;
+  gap: 0.45rem;
   min-height: 2.75rem;
   font-size: 0.95rem;
   font-weight: 600;
@@ -258,9 +264,31 @@ body.drawer-open {
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
+.hero__link-icon {
+  flex-shrink: 0;
+  opacity: 0.72;
+  transition: opacity 0.2s ease;
+}
+
+.hero__link-external {
+  flex-shrink: 0;
+  margin-left: -0.1rem;
+  opacity: 0.55;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
 .hero__link:hover {
   color: #d4c4a8;
   border-color: #d4c4a8;
+}
+
+.hero__link:hover .hero__link-icon,
+.hero__link:hover .hero__link-external {
+  opacity: 1;
+}
+
+.hero__link--external:hover .hero__link-external {
+  transform: translate(1px, -1px);
 }
 
 .lang-switch {
@@ -394,7 +422,6 @@ body.drawer-open {
 
 .about__timeline-item:last-child {
   padding-bottom: 0;
-  color: var(--text);
 }
 
 .visually-hidden {
@@ -835,20 +862,6 @@ html.js .card.is-visible {
 .drawer--open {
   transform: translateX(0);
   pointer-events: auto;
-}
-
-/* Überdeckt den reservierten Hauptfenster-Gutter (scrollbar-gutter: stable),
-   ohne ihn freizugeben — kein Layout-Shift, keine Doppel-Scrollleiste. */
-.drawer.drawer--open::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: var(--page-gutter);
-  height: 100dvh;
-  background: var(--bg-card);
-  z-index: 102;
-  pointer-events: none;
 }
 
 .drawer__scroll {

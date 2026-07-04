@@ -3,14 +3,6 @@
   // Scroll-Reveal initial versteckt (Fallback ohne JS: alles sichtbar).
   document.documentElement.classList.add('js');
 
-  function updatePageGutter() {
-    const gutter = Math.max(0, window.innerWidth - document.documentElement.clientWidth);
-    document.documentElement.style.setProperty('--page-gutter', `${gutter}px`);
-  }
-
-  updatePageGutter();
-  window.addEventListener('resize', updatePageGutter, { passive: true });
-
   const LANG_KEY = 'portfolio-lang';
 
   let locale = 'de';
@@ -89,7 +81,9 @@
 
   function applyI18n() {
     document.documentElement.lang = locale;
-    document.title = t('meta.title');
+    document.title = document.body.classList.contains('page-legal')
+      ? t('legal.pageTitle')
+      : t('meta.title');
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', t('meta.description'));
 
@@ -523,16 +517,50 @@
     drawer.style.setProperty('--accent', project.accent);
   }
 
-  // overflow:hidden sperrt das Scrollen; der reservierte Gutter bleibt (kein
-  // Layout-Shift) und wird per .drawer::after in Sheet-Farbe überdeckt.
+  let savedScrollY = 0;
+
+  function getScrollbarWidth() {
+    return Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+  }
+
+  // Scroll sperren ohne Layout-Shift: Scrollbar-Breite per Padding ausgleichen,
+  // Scroll-Position per position:fixed + top beibehalten.
   function lockBodyScroll() {
+    if (document.body.classList.contains('drawer-open')) return;
+
+    savedScrollY = window.scrollY;
+    const scrollbarWidth = getScrollbarWidth();
+    document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
     document.documentElement.classList.add('drawer-open');
     document.body.classList.add('drawer-open');
+    document.body.style.top = `-${savedScrollY}px`;
   }
 
   function unlockBodyScroll() {
-    document.documentElement.classList.remove('drawer-open');
+    if (!document.body.classList.contains('drawer-open')) return;
+
+    const scrollY = savedScrollY;
+    const html = document.documentElement;
+    const previousScrollBehavior = html.style.scrollBehavior;
+
+    html.style.scrollBehavior = 'auto';
+    document.body.style.top = '';
     document.body.classList.remove('drawer-open');
+    html.classList.remove('drawer-open');
+    html.style.removeProperty('--scrollbar-width');
+    window.scrollTo(0, scrollY);
+    html.style.scrollBehavior = previousScrollBehavior;
+  }
+
+  function finishDrawerClose() {
+    if (activeSlug) return;
+    if (closeTimer !== null) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    drawer.removeEventListener('transitionend', onCloseTransitionEnd);
+    hideDrawerElements();
+    unlockBodyScroll();
   }
 
   // Verbirgt den Drawer erst nach der Schließen-Animation. Bricht ab, falls
@@ -546,7 +574,7 @@
 
   function onCloseTransitionEnd(event) {
     if (event.target !== drawer || event.propertyName !== 'transform') return;
-    hideDrawerElements();
+    finishDrawerClose();
   }
 
   function cancelPendingClose() {
@@ -604,9 +632,8 @@
     activeSlug = null;
 
     drawer.addEventListener('transitionend', onCloseTransitionEnd);
-    closeTimer = window.setTimeout(hideDrawerElements, 500);
+    closeTimer = window.setTimeout(finishDrawerClose, 500);
 
-    unlockBodyScroll();
     openButtons.forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
 
     if (location.hash) {
