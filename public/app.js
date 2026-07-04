@@ -329,19 +329,27 @@
     });
 
     history.replaceState(null, '', `#${slug}`);
-    closeBtn.focus();
+    closeBtn.focus({ preventScroll: true });
   }
 
   function closeDrawer() {
     drawer.classList.remove('drawer--open');
     backdrop.classList.remove('drawer-backdrop--visible');
 
-    const onEnd = () => {
+    const finishClose = () => {
+      if (drawer.hidden) return;
       drawer.hidden = true;
       backdrop.hidden = true;
       drawer.removeEventListener('transitionend', onEnd);
     };
+
+    const onEnd = (event) => {
+      if (event.target !== drawer || event.propertyName !== 'transform') return;
+      finishClose();
+    };
+
     drawer.addEventListener('transitionend', onEnd);
+    window.setTimeout(finishClose, 500);
 
     unlockBodyScroll();
     activeSlug = null;
@@ -351,7 +359,7 @@
       history.replaceState(null, '', location.pathname + location.search);
     }
 
-    lastFocus?.focus();
+    lastFocus?.focus({ preventScroll: true });
   }
 
   function handleHash() {
@@ -359,8 +367,25 @@
     if (slug && projects[slug]) openDrawer(slug);
   }
 
-  openButtons.forEach((btn) => {
-    btn.addEventListener('click', () => openDrawer(btn.dataset.open));
+  document.addEventListener('click', (event) => {
+    const openBtn = event.target.closest('[data-open]');
+    if (openBtn) {
+      event.preventDefault();
+      openDrawer(openBtn.dataset.open);
+      return;
+    }
+
+    const pill = event.target.closest('.stack-pill');
+    if (pill?.dataset.filter) {
+      event.preventDefault();
+      setFilter(pill.dataset.filter);
+      return;
+    }
+
+    if (event.target.closest('#filter-reset')) {
+      event.preventDefault();
+      setFilter('all');
+    }
   });
 
   closeBtn.addEventListener('click', closeDrawer);
@@ -369,12 +394,6 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && activeSlug) closeDrawer();
   });
-
-  stackPills.forEach((pill) => {
-    pill.addEventListener('click', () => setFilter(pill.dataset.filter));
-  });
-
-  filterReset?.addEventListener('click', () => setFilter('all'));
 
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => switchTab(tab.dataset.tab));

@@ -163,6 +163,8 @@ body.drawer-open {
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     transform 0.35s var(--ease-out),
     border-color 0.35s ease,
@@ -170,7 +172,8 @@ body.drawer-open {
 }
 
 .card__btn:hover,
-.card__btn:focus-visible {
+.card__btn:focus-visible,
+.card__btn:active {
   transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--accent) 45%, transparent);
   box-shadow:
@@ -196,7 +199,8 @@ body.drawer-open {
 }
 
 .card__btn:hover .card__media img,
-.card__btn:focus-visible .card__media img {
+.card__btn:focus-visible .card__media img,
+.card__btn:active .card__media img {
   transform: scale(1.03);
 }
 
@@ -326,7 +330,8 @@ body.drawer-open {
 }
 
 .stack-reset {
-  padding: 0.3rem 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 0.9rem;
   font-family: inherit;
   font-size: 0.8rem;
   font-weight: 500;
@@ -335,13 +340,16 @@ body.drawer-open {
   border: 1px solid var(--border);
   border-radius: 999px;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     background 0.2s,
     border-color 0.2s;
 }
 
 .stack-reset:hover,
-.stack-reset:focus-visible {
+.stack-reset:focus-visible,
+.stack-reset:active {
   background: rgba(236, 232, 225, 0.06);
   border-color: rgba(236, 232, 225, 0.15);
   outline: none;
@@ -357,7 +365,8 @@ body.drawer-open {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.45rem 0.85rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.95rem;
   font-family: inherit;
   font-size: 0.82rem;
   font-weight: 500;
@@ -366,6 +375,8 @@ body.drawer-open {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     color 0.2s,
     border-color 0.2s,
@@ -373,7 +384,8 @@ body.drawer-open {
 }
 
 .stack-pill:hover,
-.stack-pill:focus-visible {
+.stack-pill:focus-visible,
+.stack-pill:active {
   color: var(--text);
   border-color: rgba(236, 232, 225, 0.18);
   outline: none;
@@ -406,11 +418,19 @@ body.drawer-open {
   z-index: 100;
   background: rgba(0, 0, 0, 0.55);
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.4s var(--ease-out);
 }
 
 .drawer-backdrop--visible {
   opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer-backdrop[hidden],
+.drawer[hidden] {
+  display: none !important;
+  pointer-events: none !important;
 }
 
 .drawer {
@@ -429,6 +449,7 @@ body.drawer-open {
     -28px 0 80px rgba(0, 0, 0, 0.5),
     0 0 0 1px rgba(236, 232, 225, 0.04) inset;
   transform: translateX(100%);
+  pointer-events: none;
   transition: transform 0.45s var(--ease-out);
   overflow: hidden;
 }
@@ -453,6 +474,7 @@ body.drawer-open {
 
 .drawer--open {
   transform: translateX(0);
+  pointer-events: auto;
 }
 
 .drawer__scroll {
@@ -508,14 +530,16 @@ body.drawer-open {
   z-index: 3;
   display: grid;
   place-items: center;
-  width: 2.35rem;
-  height: 2.35rem;
+  width: 2.75rem;
+  height: 2.75rem;
   padding: 0;
   color: rgba(255, 255, 255, 0.92);
   background: rgba(8, 10, 12, 0.42);
   border: none;
   border-radius: 999px;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
@@ -665,6 +689,7 @@ body.drawer-open {
 
 .drawer__tab {
   flex: 1;
+  min-height: 2.75rem;
   padding: 0.5rem 0.65rem;
   font-family: inherit;
   font-size: 0.82rem;
@@ -674,11 +699,14 @@ body.drawer-open {
   border: none;
   border-radius: calc(var(--radius-sm) - 2px);
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition: color 0.2s, background 0.2s;
 }
 
 .drawer__tab:hover,
-.drawer__tab:focus-visible {
+.drawer__tab:focus-visible,
+.drawer__tab:active {
   color: var(--text);
   outline: none;
 }
@@ -1028,18 +1056,39 @@ body.drawer-open {
 /* ── Responsive ── */
 
 @media (max-width: 640px) {
+  .hero {
+    padding-top: clamp(2rem, 6vw, 3rem);
+  }
+
+  .sections {
+    padding-bottom: 1.5rem;
+  }
+
+  .stack-section {
+    position: relative;
+    z-index: 2;
+    padding-bottom: max(2.5rem, env(safe-area-inset-bottom, 0px));
+  }
+
   .drawer {
     width: 100vw;
+    max-width: 100%;
     border-left: none;
     border-radius: 1.1rem 1.1rem 0 0;
     top: auto;
     bottom: 0;
     height: min(94dvh, 100dvh);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
     transform: translateY(100%);
   }
 
   .drawer--open {
     transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .drawer:not(.drawer--open) {
+    pointer-events: none;
   }
 
   .drawer__close {
@@ -1099,7 +1148,7 @@ body.drawer-open {
     transition-duration: 0.01ms !important;
   }
 
-  .drawer {
+  .drawer.drawer--open {
     transform: none;
   }
 
@@ -1108,8 +1157,8 @@ body.drawer-open {
   }
 
   @media (max-width: 640px) {
-    .drawer:not(.drawer--open) {
-      transform: translateY(100%);
+    .drawer.drawer--open {
+      transform: none;
     }
   }
 }
