@@ -111,15 +111,16 @@ function renderCard(p) {
 }
 
 const sectionsHtml = sections
-  .map((section) => {
+  .map((section, index) => {
     const sectionKey = section.sectionKey || null;
     const sectionLabel = sectionKey ? tDe.sections[sectionKey] : section.title;
     const heading = sectionLabel
       ? `<h2 class="section__heading" id="section-${sectionKey || section.title.toLowerCase().replace(/\s+/g, '-')}"${sectionKey ? ` data-i18n-section="${sectionKey}"` : ''}>${escapeHtml(sectionLabel)}</h2>`
       : '';
     const cards = section.projects.map(renderCard).join('\n');
+    const labeled = sectionLabel && index > 0;
     return `
-  <section class="section${sectionLabel ? ' section--labeled' : ''}">
+  <section class="section${labeled ? ' section--labeled' : ''}">
     ${heading}
     <div class="grid">${cards}
     </div>
@@ -229,7 +230,6 @@ ${headExtras}
 
   <main class="work" id="projects">
     <h2 class="visually-hidden" data-i18n="sections.projects.heading">${escapeHtml(tDe.sections.projects.heading)}</h2>
-    <p class="work__lead" data-i18n="sections.projects.lead">${escapeHtml(tDe.sections.projects.lead)}</p>
     <div class="work__catalog">
     <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
       <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
