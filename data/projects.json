@@ -17,8 +17,7 @@
         { "slug": "cimdata-kurse", "name": "CIMDATA Studienplaner", "url": "https://cimdata-kurse.henrikheil.net", "accent": "#6366f1", "facets": [] },
         { "slug": "echt-oder-ki", "name": "Echt oder KI?", "url": "https://echt-oder-ki.henrikheil.net", "accent": "#00FF9C", "facets": ["ai"] },
         { "slug": "komorebi", "name": "Komorebi", "url": "https://komorebi.henrikheil.net", "accent": "#43a26d", "facets": ["ai"] },
-        { "slug": "quality-touch", "name": "Quality Touch", "url": "https://quality-touch.henrikheil.net", "accent": "#c2603f", "facets": ["3d"] },
-        { "slug": "a11y-quiz", "name": "A11y Quiz", "url": "https://a11y-quiz.henrikheil.net", "accent": "#2563eb", "facets": ["ai"] }
+        { "slug": "quality-touch", "name": "Quality Touch", "url": "https://quality-touch.henrikheil.net", "accent": "#c2603f", "facets": ["3d"] }
       ]
     }
   ]
