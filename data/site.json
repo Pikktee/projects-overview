@@ -9,8 +9,8 @@
     {
       "key": "development",
       "items": {
-        "de": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST-APIs", "Deployment"],
-        "en": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST APIs", "Deployment"]
+        "de": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST-APIs", "Deployment", "Spec-Driven Development"],
+        "en": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST APIs", "Deployment", "Spec-driven development"]
       }
     },
     {
@@ -40,13 +40,6 @@
         "de": ["Video-Schnitt", "Videoproduktion", "Final Cut Pro", "Premiere"],
         "en": ["Video editing", "Video production", "Final Cut Pro", "Premiere"]
       }
-    },
-    {
-      "key": "methods",
-      "items": {
-        "de": ["Scrum", "Spec-Driven Development", "Clean Code"],
-        "en": ["Scrum", "Spec-driven development", "Clean code"]
-      }
     }
   ],
   "background": {
@@ -55,14 +48,16 @@
       "Jahrelang selbstständig: Software-Architektur, Systemengineering und technische Beratung — von der Konzeption bis zum produktiven System",
       "Associate Partner Web Development bei ZMI-Transfer (TransMIT GmbH), Uni Gießen",
       "Deutsche Bahn AG — Prüfungsdatenbank für Fragen und Prüfungen, von der Architektur bis zur Umsetzung in eigener Verantwortung",
-      "Rhein-Main.Net — Lead Developer, ein halbes Jahr"
+      "Rhein-Main.Net — Lead Developer, ein halbes Jahr",
+      "Scrum in Software-Teams — kurze Iterationen, Reviews und stetige Verbesserung"
     ],
     "en": [
       "Graduate engineer in media informatics, Technische Hochschule Mittelhessen",
       "Many years self-employed: software architecture, system engineering, and technical consulting — from concept to production",
       "Associate Partner Web Development at ZMI-Transfer (TransMIT GmbH), Uni Gießen",
       "Deutsche Bahn AG — exam database for questions and exam workflows, architecture through delivery, my responsibility throughout",
-      "Rhein-Main.Net — lead developer for six months"
+      "Rhein-Main.Net — lead developer for six months",
+      "Scrum in software teams — short iterations, reviews, and continuous improvement"
     ]
   },
   "locales": ["de", "en"],
@@ -100,8 +95,7 @@
           "product": "Produkt & UX",
           "accessibility": "Barrierefreiheit",
           "ai": "KI & Automatisierung",
-          "media": "Medien",
-          "methods": "Methoden"
+          "media": "Medien"
         }
       },
       "background": {
@@ -220,8 +214,7 @@
           "product": "Product & UX",
           "accessibility": "Accessibility",
           "ai": "AI & automation",
-          "media": "Media",
-          "methods": "Methods"
+          "media": "Media"
         }
       },
       "background": {
