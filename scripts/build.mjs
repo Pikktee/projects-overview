@@ -122,7 +122,7 @@ function renderCard(p) {
         <div class="card__body">
           <h2 class="card__title">${escapeHtml(p.name)}</h2>
           <p class="card__desc" data-slug="${escapeHtml(p.slug)}" data-default-desc="${escapeHtml(p.description)}">${escapeHtml(p.description)}</p>
-          <span class="card__cta" style="color:${p.accentCta}"><span data-i18n="card.details">${escapeHtml(tDe.card.details)}</span> <span aria-hidden="true">→</span></span>
+          <span class="card__cta" style="color:${p.accentCta}"><span class="card__cta-label" data-i18n-template="card.details" data-name="${escapeHtml(p.name)}">${escapeHtml(tDe.card.details.replace('{name}', p.name))}</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>`;

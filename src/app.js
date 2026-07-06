@@ -108,6 +108,11 @@
       el.textContent = t(`sections.${el.dataset.i18nSection}`);
     });
 
+    document.querySelectorAll('.card__cta-label[data-i18n-template]').forEach((el) => {
+      const name = el.dataset.name || el.closest('.card')?.querySelector('.card__title')?.textContent || '';
+      el.textContent = t(el.dataset.i18nTemplate, { name });
+    });
+
     document.querySelectorAll('.card__desc[data-slug]').forEach((el) => {
       const slug = el.dataset.slug;
       const p = projects[slug];
@@ -586,6 +591,7 @@
 
     drawer.style.setProperty('--accent', project.accent);
     drawer.style.setProperty('--accent-btn', project.accentBtn || project.accent);
+    backdrop.style.setProperty('--accent', project.accent);
   }
 
   let savedScrollY = 0;

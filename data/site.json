@@ -113,7 +113,7 @@
         "apps": "Apps & Tools"
       },
       "card": {
-        "details": "Details ansehen"
+        "details": "Mehr über {name}"
       },
       "facets": {
         "heading": "Filter",
@@ -236,7 +236,7 @@
         "apps": "Apps & tools"
       },
       "card": {
-        "details": "View details"
+        "details": "More about {name}"
       },
       "facets": {
         "heading": "Filter",
