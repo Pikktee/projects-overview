@@ -167,7 +167,10 @@
         "depOther": "Sonstige",
         "screenshotAlt": "Screenshot von {name}",
         "aiBadge": "KI",
-        "aiGenerated": "KI-generiert"
+        "aiGenerated": "KI-generiert",
+        "tsxFiles": "React-Komponenten (.tsx)",
+        "componentFolders": "Komponenten-Ordner",
+        "testFiles": "Test-Dateien"
       },
       "legal": {
         "back": "← Zurück zum Portfolio",
@@ -288,7 +291,10 @@
         "depOther": "Other",
         "screenshotAlt": "Screenshot of {name}",
         "aiBadge": "AI",
-        "aiGenerated": "AI-generated"
+        "aiGenerated": "AI-generated",
+        "tsxFiles": "React components (.tsx)",
+        "componentFolders": "Component folders",
+        "testFiles": "Test files"
       },
       "legal": {
         "back": "← Back to portfolio",

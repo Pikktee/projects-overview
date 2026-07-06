@@ -110,9 +110,24 @@
 
     document.querySelectorAll('.card__desc[data-slug]').forEach((el) => {
       const slug = el.dataset.slug;
-      const enSummary = site.projectSummaries?.en?.[slug];
+      const p = projects[slug];
+      const enSummary =
+        p?.copy?.en?.summary || p?.copy?.en?.tagline || site.projectSummaries?.en?.[slug];
       el.textContent =
         locale === 'en' && enSummary ? enSummary : el.dataset.defaultDesc || el.textContent;
+    });
+
+    document.querySelectorAll('[data-open]').forEach((btn) => {
+      const slug = btn.dataset.open;
+      const p = projects[slug];
+      if (!p) return;
+      const desc =
+        locale === 'en'
+          ? p.copy?.en?.summary || p.copy?.en?.tagline || btn.dataset.enAria?.split(': ').slice(1).join(': ')
+          : p.copy?.de?.summary || p.copy?.de?.tagline || btn.dataset.defaultAria?.split(': ').slice(1).join(': ');
+      if (desc) btn.setAttribute('aria-label', `${p.name}: ${desc}`);
+      else if (locale === 'en' && btn.dataset.enAria) btn.setAttribute('aria-label', btn.dataset.enAria);
+      else if (btn.dataset.defaultAria) btn.setAttribute('aria-label', btn.dataset.defaultAria);
     });
 
     const footerCount = document.getElementById('footer-project-count');
@@ -376,6 +391,15 @@
       </div>`;
   }
 
+  function localizedCopy(project) {
+    const block = project.copy?.[locale] || project.copy?.de || {};
+    return {
+      overview: block.overview || project.overview || '',
+      uxNarrative: block.uxNarrative || project.uxNarrative || '',
+      highlights: block.highlights?.length ? block.highlights : project.highlights || [],
+    };
+  }
+
   function renderAiBadge() {
     return `<span class="drawer__ai-badge" title="${esc(t('drawer.aiGenerated'))}">
       <span aria-hidden="true">${esc(t('drawer.aiBadge'))}</span>
@@ -397,22 +421,24 @@
   }
 
   function renderOverview(project) {
+    const copy = localizedCopy(project);
     const highlights =
-      project.highlights?.length > 0
-        ? `<ul class="drawer__highlights">${project.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>`
+      copy.highlights.length > 0
+        ? `<ul class="drawer__highlights">${copy.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>`
         : '';
 
-    const prose = renderProse(project.overview);
-    const copy = prose || highlights ? renderAiCopy(`${prose}${highlights}`) : '';
+    const prose = renderProse(copy.overview);
+    const copyHtml = prose || highlights ? renderAiCopy(`${prose}${highlights}`) : '';
 
     return `
-      ${copy}
+      ${copyHtml}
       ${project.stack?.length ? renderTagList(t('drawer.techStack'), project.stack) : ''}`;
   }
 
   function renderUx(project) {
     const ux = project.ux || {};
-    const narrative = project.uxNarrative ? renderAiCopy(renderProse(project.uxNarrative)) : '';
+    const { uxNarrative } = localizedCopy(project);
+    const narrative = uxNarrative ? renderAiCopy(renderProse(uxNarrative)) : '';
     const blocks = [];
 
     if (ux.uiFrameworks?.length) blocks.push(renderTagList(t('drawer.uiFrameworks'), ux.uiFrameworks));
@@ -422,9 +448,9 @@
     if (testing.length) blocks.push(renderTagList(t('drawer.testing'), testing));
 
     const fileStats = [
-      ['React-Komponenten (.tsx)', ux.tsxFiles],
-      ['Komponenten-Ordner', ux.componentCount],
-      ['Test-Dateien', ux.testFiles],
+      [t('drawer.tsxFiles'), ux.tsxFiles],
+      [t('drawer.componentFolders'), ux.componentCount],
+      [t('drawer.testFiles'), ux.testFiles],
     ].filter(([, v]) => v > 0);
 
     const signalsHtml =

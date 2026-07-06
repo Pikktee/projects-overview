@@ -15,22 +15,40 @@ const data = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
 const site = JSON.parse(readFileSync(join(root, 'data/site.json'), 'utf8'));
 const metrics = existsSync(metricsPath) ? JSON.parse(readFileSync(metricsPath, 'utf8')) : {};
 const copyPath = join(root, 'data/project-copy.json');
-const copy = existsSync(copyPath) ? JSON.parse(readFileSync(copyPath, 'utf8')) : {};
+const copyEnPath = join(root, 'data/project-copy.en.json');
+const copyDe = existsSync(copyPath) ? JSON.parse(readFileSync(copyPath, 'utf8')) : {};
+const copyEn = existsSync(copyEnPath) ? JSON.parse(readFileSync(copyEnPath, 'utf8')) : {};
 const tDe = site.translations.de;
+
+function projectCopyBlock(slug, lang) {
+  const source = lang === 'en' ? copyEn : copyDe;
+  const c = source[slug] || {};
+  return {
+    tagline: c.tagline || '',
+    summary: c.summary || '',
+    overview: c.overview || '',
+    uxNarrative: c.uxNarrative || '',
+    highlights: c.highlights || [],
+  };
+}
 
 function mergeProject(p) {
   const m = metrics[p.slug] || {};
-  const c = copy[p.slug] || {};
+  const de = projectCopyBlock(p.slug, 'de');
+  const en = projectCopyBlock(p.slug, 'en');
+  const copy = { de, en };
   return {
     ...p,
     accentCta: accessibleCtaColor(p.accent),
     accentBtn: accessibleButtonBg(p.accent),
     facets: p.facets || [],
     github: m.github || p.github || null,
-    description: c.summary || c.tagline || m.description || p.name,
-    overview: c.overview || '',
-    uxNarrative: c.uxNarrative || '',
-    highlights: c.highlights || m.highlights || [],
+    copy,
+    description: de.summary || de.tagline || m.description || p.name,
+    descriptionEn: en.summary || en.tagline || site.projectSummaries?.en?.[p.slug] || '',
+    overview: de.overview || '',
+    uxNarrative: de.uxNarrative || '',
+    highlights: de.highlights.length ? de.highlights : m.highlights || [],
     stack: m.stack || [],
     dependencies: m.dependencies || { ui: [], data: [], ai: [], infra: [], testing: [], other: [] },
     dependencyCount: m.dependencyCount || 0,
@@ -99,7 +117,7 @@ function renderCard(p) {
 
   return `
     <article class="card" style="--accent:${p.accent};--accent-cta:${p.accentCta};--accent-btn:${p.accentBtn}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
-      <button type="button" class="card__btn" data-open="${p.slug}" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="${escapeHtml(`${p.name}: ${p.description}`)}">
+      <button type="button" class="card__btn" data-open="${p.slug}" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="${escapeHtml(`${p.name}: ${p.description}`)}" data-default-aria="${escapeHtml(`${p.name}: ${p.description}`)}"${p.descriptionEn ? ` data-en-aria="${escapeHtml(`${p.name}: ${p.descriptionEn}`)}"` : ''}>
         <div class="card__media">${img}</div>
         <div class="card__body">
           <h2 class="card__title">${escapeHtml(p.name)}</h2>
