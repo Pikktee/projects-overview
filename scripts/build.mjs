@@ -280,8 +280,6 @@ ${headExtras}
 
   <footer class="footer">
     <a href="/impressum.html" data-i18n="footer.impressum">${escapeHtml(tDe.footer.impressum)}</a>
-    <span class="footer__sep" aria-hidden="true">·</span>
-    <span id="footer-project-count" data-i18n-template="footer.projects">${escapeHtml(tDe.footer.projects.replace('{count}', String(allProjects.length)))}</span>
   </footer>
 
   <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>

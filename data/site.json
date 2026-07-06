@@ -130,8 +130,7 @@
         "reset": "Alle anzeigen"
       },
       "footer": {
-        "impressum": "Impressum",
-        "projects": "{count} Projekte"
+        "impressum": "Impressum"
       },
       "drawer": {
         "close": "Schließen",
@@ -254,8 +253,7 @@
         "reset": "Show all"
       },
       "footer": {
-        "impressum": "Legal notice",
-        "projects": "{count} projects"
+        "impressum": "Legal notice"
       },
       "drawer": {
         "close": "Close",

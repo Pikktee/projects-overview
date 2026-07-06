@@ -130,11 +130,6 @@
       else if (btn.dataset.defaultAria) btn.setAttribute('aria-label', btn.dataset.defaultAria);
     });
 
-    const footerCount = document.getElementById('footer-project-count');
-    if (footerCount) {
-      footerCount.textContent = t('footer.projects', { count: totalProjects });
-    }
-
     renderProfileSections();
 
     if (!activeSlug) {
