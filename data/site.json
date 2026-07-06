@@ -54,13 +54,15 @@
       "Diplom-Ingenieur Medieninformatik, Technische Hochschule Mittelhessen",
       "Jahrelang selbstständig: Software-Architektur, Systemengineering und technische Beratung — von der Konzeption bis zum produktiven System",
       "Associate Partner Web Development bei ZMI-Transfer (TransMIT GmbH), Uni Gießen",
-      "Architektur und Entwicklung einer Prüfungsdatenbank bei der Deutschen Bahn AG; Konzeption bei Rhein-Main.Net"
+      "Deutsche Bahn AG — Prüfungsdatenbank für Fragen und Prüfungen, von der Architektur bis zur Umsetzung in eigener Verantwortung",
+      "Rhein-Main.Net — Lead Developer, ein halbes Jahr"
     ],
     "en": [
       "Graduate engineer in media informatics, Technische Hochschule Mittelhessen",
       "Many years self-employed: software architecture, system engineering, and technical consulting — from concept to production",
       "Associate Partner Web Development at ZMI-Transfer (TransMIT GmbH), Uni Gießen",
-      "Architecture and development of an exam database at Deutsche Bahn AG; concept design at Rhein-Main.Net"
+      "Deutsche Bahn AG — exam database for questions and exam workflows, architecture through delivery, my responsibility throughout",
+      "Rhein-Main.Net — lead developer for six months"
     ]
   },
   "locales": ["de", "en"],
