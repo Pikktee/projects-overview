@@ -229,6 +229,8 @@ ${headExtras}
 
   <main class="work" id="projects">
     <h2 class="visually-hidden" data-i18n="sections.projects.heading">${escapeHtml(tDe.sections.projects.heading)}</h2>
+    <p class="work__lead" data-i18n="sections.projects.lead">${escapeHtml(tDe.sections.projects.lead)}</p>
+    <div class="work__catalog">
     <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
       <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
         <span class="facet-chip__label">${escapeHtml(tDe.facets.all)}</span>
@@ -241,6 +243,7 @@ ${headExtras}
       <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">${escapeHtml(tDe.filter.reset)}</button>
     </p>
     <div class="sections">${sectionsHtml}
+    </div>
     </div>
   </main>
 

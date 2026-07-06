@@ -334,11 +334,26 @@ body.drawer-open {
 .work {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 var(--gap) clamp(2rem, 4vw, 3rem);
+  padding: clamp(2rem, 4vw, 3rem) var(--gap) clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--border);
+}
+
+.work__lead {
+  margin: 0 0 1.15rem;
+  max-width: 38rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.work__catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
 .filter-status {
-  margin: 0.85rem 0 0;
+  margin: 0;
   font-size: 0.88rem;
   color: var(--text-muted);
 }
@@ -443,7 +458,7 @@ body.drawer-open {
 
 .sections {
   margin: 0;
-  padding: clamp(1.25rem, 3vw, 1.75rem) 0 0;
+  padding: 0;
 }
 
 .section--labeled {
