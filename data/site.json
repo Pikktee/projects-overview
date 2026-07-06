@@ -127,7 +127,8 @@
         "ai": "KI-gestützt",
         "extension": "Chrome-Erweiterung",
         "android": "Android-App",
-        "3d": "3D & Visualisierung",
+        "macos": "macOS-App",
+        "3d": "3D & WebGL",
         "filterAria": "Projekte nach Merkmal filtern"
       },
       "filter": {
@@ -246,7 +247,8 @@
         "ai": "AI-powered",
         "extension": "Chrome extension",
         "android": "Android app",
-        "3d": "3D & visualization",
+        "macos": "macOS app",
+        "3d": "3D & WebGL",
         "filterAria": "Filter projects by trait"
       },
       "filter": {

@@ -143,6 +143,10 @@ const FACETS = [
     icon: '<path d="M4 6.5h8V12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5Zm-2 .5a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1Zm12 0a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1ZM5.5 13.5h2v1.5a1 1 0 1 1-2 0v-1.5Zm3 0h2V15a1 1 0 1 1-2 0v-1.5ZM5 3l-.8-1.3M11 3l.8-1.3M4.2 5.5C4.5 4 6.1 3 8 3s3.5 1 3.8 2.5H4.2Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>',
   },
   {
+    key: 'macos',
+    icon: '<path d="M2.5 4.5h11a1 1 0 0 1 1 1v6.5H1.5V5.5a1 1 0 0 1 1-1Zm-1 9h13v1.5H1.5V13.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>',
+  },
+  {
     key: '3d',
     icon: '<path d="M8 1.5 14 5v6l-6 3.5L2 11V5l6-3.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 5l6 3.5L14 5M8 8.5V14.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>',
   },
