@@ -534,6 +534,10 @@ html.js .card.is-visible {
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(236, 232, 225, 0.08);
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --lift: 0px;
+  transform: perspective(900px) translateY(var(--lift)) rotateX(var(--tilt-y)) rotateY(var(--tilt-x));
   transition:
     transform 0.35s var(--ease-out),
     border-color 0.3s ease,
@@ -543,7 +547,7 @@ html.js .card.is-visible {
 .card__btn:hover,
 .card__btn:focus-visible,
 .card__btn:active {
-  transform: translateY(-4px);
+  --lift: -4px;
   border-color: var(--accent-cta, var(--accent));
   box-shadow:
     0 22px 44px rgba(0, 0, 0, 0.42),
@@ -552,6 +556,11 @@ html.js .card.is-visible {
 
 /* Dezentes Cursor-Leuchten auf der Kante — ergänzt den Rand, ersetzt ihn nicht. */
 @media (hover: hover) and (pointer: fine) {
+  .card__btn {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
   .card__btn::before {
     content: "";
     position: absolute;
@@ -579,6 +588,14 @@ html.js .card.is-visible {
 
   .card__btn:hover::before {
     opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card__btn {
+    --tilt-x: 0deg !important;
+    --tilt-y: 0deg !important;
+    transform: translateY(var(--lift));
   }
 }
 
@@ -865,7 +882,51 @@ html.js .card.is-visible {
     transparent
   );
   z-index: 4;
+  opacity: 0;
+  transition: opacity 0.45s var(--ease-out) 0.08s;
+}
+
+.drawer::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 52%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 130% 90% at 50% -8%,
+    color-mix(in srgb, var(--accent, #d4c4a8) 16%, transparent),
+    transparent 68%
+  );
+  opacity: 0;
+  transition: opacity 0.55s var(--ease-out);
+}
+
+.drawer--open::before {
   opacity: 0.9;
+}
+
+.drawer--open::after {
+  opacity: 1;
+  animation: drawer-accent-breathe 5.5s ease-in-out infinite;
+}
+
+@keyframes drawer-accent-breathe {
+  0%,
+  100% {
+    opacity: 0.82;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drawer--open::after {
+    animation: none;
+    opacity: 0.88;
+  }
 }
 
 .drawer--open {
@@ -874,6 +935,8 @@ html.js .card.is-visible {
 }
 
 .drawer__scroll {
+  position: relative;
+  z-index: 1;
   flex: 1;
   overflow-y: auto;
   overscroll-behavior: contain;

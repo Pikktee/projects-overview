@@ -231,15 +231,33 @@
     cards.forEach((card) => card.classList.add('is-visible'));
   }
 
-  // Spotlight: Cursorposition als CSS-Variablen für den radialen Glow auf den
-  // Karten. Nur bei echtem Hover-Gerät aktiv, Touch/Tastatur bleiben unberührt.
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  // Spotlight + 3D-Kipp: Cursorposition auf den Karten. Nur bei echtem Hover-Gerät,
+  // Touch/Tastatur bleiben unberührt; bei prefers-reduced-motion nur Spotlight.
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (finePointer) {
     document.querySelectorAll('.card__btn').forEach((btn) => {
+      const resetTilt = () => {
+        btn.style.setProperty('--tilt-x', '0deg');
+        btn.style.setProperty('--tilt-y', '0deg');
+      };
+
       btn.addEventListener('pointermove', (e) => {
         const rect = btn.getBoundingClientRect();
         btn.style.setProperty('--mx', `${e.clientX - rect.left}px`);
         btn.style.setProperty('--my', `${e.clientY - rect.top}px`);
+
+        if (!reduceMotion) {
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          const max = 7;
+          btn.style.setProperty('--tilt-x', `${(x * max * 2).toFixed(2)}deg`);
+          btn.style.setProperty('--tilt-y', `${(-y * max * 2).toFixed(2)}deg`);
+        }
       });
+
+      btn.addEventListener('pointerleave', resetTilt);
     });
   }
 
