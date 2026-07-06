@@ -925,6 +925,74 @@ html.js .card.is-visible {
   );
 }
 
+.drawer__hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.drawer__hero-overlay:empty {
+  display: none;
+}
+
+.drawer__video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem;
+  color: #fff;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: transform 0.2s var(--ease-out);
+}
+
+.drawer__video:hover,
+.drawer__video:focus-visible {
+  transform: scale(1.04);
+  outline: none;
+}
+
+.drawer__video-play {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  padding-left: 0.15rem;
+  background: rgba(8, 10, 12, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.drawer__video:hover .drawer__video-play,
+.drawer__video:focus-visible .drawer__video-play {
+  background: rgba(8, 10, 12, 0.72);
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+}
+
+.drawer__video-label {
+  padding: 0.3rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+  background: rgba(8, 10, 12, 0.45);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 .drawer__close {
   position: absolute;
   top: 1rem;

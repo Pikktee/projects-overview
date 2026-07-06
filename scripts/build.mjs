@@ -264,6 +264,7 @@ ${headExtras}
       <div class="drawer__hero">
         <div class="drawer__media" id="drawer-media"></div>
         <div class="drawer__hero-scrim" aria-hidden="true"></div>
+        <div class="drawer__hero-overlay" id="drawer-hero-overlay"></div>
         <button type="button" class="drawer__close" id="drawer-close" data-i18n-aria="drawer.close" aria-label="${escapeHtml(tDe.drawer.close)}">
           <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
         </button>
