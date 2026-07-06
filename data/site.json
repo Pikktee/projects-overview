@@ -165,7 +165,9 @@
         "depInfra": "Infrastruktur",
         "depTesting": "Testing",
         "depOther": "Sonstige",
-        "screenshotAlt": "Screenshot von {name}"
+        "screenshotAlt": "Screenshot von {name}",
+        "aiBadge": "KI",
+        "aiGenerated": "KI-generiert"
       },
       "legal": {
         "back": "← Zurück zum Portfolio",
@@ -284,7 +286,9 @@
         "depInfra": "Infrastructure",
         "depTesting": "Testing",
         "depOther": "Other",
-        "screenshotAlt": "Screenshot of {name}"
+        "screenshotAlt": "Screenshot of {name}",
+        "aiBadge": "AI",
+        "aiGenerated": "AI-generated"
       },
       "legal": {
         "back": "← Back to portfolio",

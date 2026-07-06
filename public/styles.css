@@ -1203,6 +1203,33 @@ html.js .card.is-visible {
   display: none;
 }
 
+.drawer__copy {
+  margin-bottom: 1.25rem;
+}
+
+.drawer__ai-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  padding: 0.18rem 0.45rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: #b4a0f0;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.22);
+  border-radius: 4px;
+}
+
+.drawer__copy .drawer__prose {
+  margin-bottom: 0;
+}
+
+.drawer__copy .drawer__highlights {
+  margin-top: 1rem;
+}
+
 .drawer__prose {
   margin-bottom: 1.25rem;
 }

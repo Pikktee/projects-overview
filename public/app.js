@@ -376,6 +376,13 @@
       </div>`;
   }
 
+  function renderAiBadge() {
+    return `<span class="drawer__ai-badge" title="${esc(t('drawer.aiGenerated'))}">
+      <span aria-hidden="true">${esc(t('drawer.aiBadge'))}</span>
+      <span class="sr-only">${esc(t('drawer.aiGenerated'))}</span>
+    </span>`;
+  }
+
   function renderProse(text) {
     if (!text) return '';
     return `<div class="drawer__prose">${text
@@ -384,21 +391,28 @@
       .join('')}</div>`;
   }
 
+  function renderAiCopy(innerHtml) {
+    if (!innerHtml) return '';
+    return `<div class="drawer__copy">${renderAiBadge()}${innerHtml}</div>`;
+  }
+
   function renderOverview(project) {
     const highlights =
       project.highlights?.length > 0
         ? `<ul class="drawer__highlights">${project.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>`
         : '';
 
+    const prose = renderProse(project.overview);
+    const copy = prose || highlights ? renderAiCopy(`${prose}${highlights}`) : '';
+
     return `
-      ${renderProse(project.overview)}
-      ${highlights}
+      ${copy}
       ${project.stack?.length ? renderTagList(t('drawer.techStack'), project.stack) : ''}`;
   }
 
   function renderUx(project) {
     const ux = project.ux || {};
-    const narrative = renderProse(project.uxNarrative);
+    const narrative = project.uxNarrative ? renderAiCopy(renderProse(project.uxNarrative)) : '';
     const blocks = [];
 
     if (ux.uiFrameworks?.length) blocks.push(renderTagList(t('drawer.uiFrameworks'), ux.uiFrameworks));
