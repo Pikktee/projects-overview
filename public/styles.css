@@ -521,7 +521,7 @@ html.js .card.is-visible {
   font-family: inherit;
   color: inherit;
   background: var(--bg-elevated);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
@@ -530,7 +530,6 @@ html.js .card.is-visible {
   transition:
     transform 0.35s var(--ease-out),
     border-color 0.3s ease,
-    border-width 0.3s ease,
     box-shadow 0.35s var(--ease-out);
 }
 
@@ -538,8 +537,6 @@ html.js .card.is-visible {
 .card__btn:focus-visible,
 .card__btn:active {
   transform: translateY(-4px);
-  margin: -1px;
-  border-width: 2px;
   border-color: var(--accent-cta, var(--accent));
   box-shadow:
     0 22px 44px rgba(0, 0, 0, 0.42),
