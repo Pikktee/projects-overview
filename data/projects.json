@@ -5,9 +5,9 @@
         { "slug": "patina", "name": "Patina", "url": "https://patina.henrikheil.net", "productVideo": "https://www.youtube.com/watch?v=mPjWqg0oyiw", "accent": "#8C939D", "facets": ["ai"] },
         { "slug": "velosia", "name": "Velosia", "url": "https://velosia.henrikheil.net", "accent": "#09b0b7", "facets": ["ai", "extension", "android"] },
         { "slug": "schnappster", "name": "Schnappster", "url": "https://schnappster.henrikheil.net", "accent": "#F59E0B", "facets": ["ai", "extension"] },
-        { "slug": "hugur", "name": "hugur", "url": "https://hugur.henrikheil.net", "accent": "#c8b06a", "facets": ["ai", "extension", "android"] },
         { "slug": "tile-weave", "name": "Tile Weave", "url": "https://tile-weave.henrikheil.net", "accent": "#f45b69", "facets": ["ai", "3d"] },
-        { "slug": "suntino", "name": "Suntino", "url": "https://suntino.henrikheil.net", "accent": "#6d5efc", "facets": ["ai", "extension"] }
+        { "slug": "suntino", "name": "Suntino", "url": "https://suntino.henrikheil.net", "accent": "#6d5efc", "facets": ["ai", "extension"] },
+        { "slug": "hugur", "name": "hugur", "url": "https://hugur.henrikheil.net", "accent": "#c8b06a", "facets": ["ai", "extension", "android"] }
       ]
     },
     {
