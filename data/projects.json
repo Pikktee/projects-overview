@@ -1,6 +1,7 @@
 {
   "sections": [
     {
+      "sectionKey": "apps",
       "projects": [
         { "slug": "patina", "name": "Patina", "url": "https://patina.henrikheil.net", "productVideo": "https://www.youtube.com/watch?v=mPjWqg0oyiw", "accent": "#8C939D", "facets": ["ai"] },
         { "slug": "velosia", "name": "Velosia", "url": "https://velosia.henrikheil.net", "accent": "#09b0b7", "facets": ["ai", "extension", "android"] },
@@ -10,7 +11,7 @@
       ]
     },
     {
-      "title": "Experimente",
+      "sectionKey": "experiments",
       "projects": [
         { "slug": "luhambo", "name": "Luhambo", "url": "https://luhambo.henrikheil.net", "accent": "#f5a524", "facets": ["3d"] },
         { "slug": "quality-touch", "name": "Quality Touch", "url": "https://quality-touch.henrikheil.net", "accent": "#c2603f", "facets": ["3d"] },

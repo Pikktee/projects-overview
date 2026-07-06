@@ -112,13 +112,14 @@ function renderCard(p) {
 
 const sectionsHtml = sections
   .map((section) => {
-    const sectionKey = section.title === 'Experimente' ? 'experiments' : null;
-    const heading = section.title
-      ? `<h2 class="section__heading" id="section-${section.title.toLowerCase().replace(/\s+/g, '-')}"${sectionKey ? ` data-i18n-section="${sectionKey}"` : ''}>${escapeHtml(section.title)}</h2>`
+    const sectionKey = section.sectionKey || null;
+    const sectionLabel = sectionKey ? tDe.sections[sectionKey] : section.title;
+    const heading = sectionLabel
+      ? `<h2 class="section__heading" id="section-${sectionKey || section.title.toLowerCase().replace(/\s+/g, '-')}"${sectionKey ? ` data-i18n-section="${sectionKey}"` : ''}>${escapeHtml(sectionLabel)}</h2>`
       : '';
     const cards = section.projects.map(renderCard).join('\n');
     return `
-  <section class="section${section.title ? ' section--labeled' : ''}">
+  <section class="section${sectionLabel ? ' section--labeled' : ''}">
     ${heading}
     <div class="grid">${cards}
     </div>

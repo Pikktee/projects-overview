@@ -115,7 +115,8 @@
           "heading": "Projekte",
           "lead": "Nach Merkmal filtern oder Karte öffnen für Details, Live-Demo und Tech-Stack."
         },
-        "experiments": "Experimente"
+        "experiments": "Experimente",
+        "apps": "Apps & Tools"
       },
       "card": {
         "details": "Details ansehen"
@@ -233,7 +234,8 @@
           "heading": "Projects",
           "lead": "Filter by trait or open a card for details, live demo, and tech stack."
         },
-        "experiments": "Experiments"
+        "experiments": "Experiments",
+        "apps": "Apps & tools"
       },
       "card": {
         "details": "View details"
