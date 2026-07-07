@@ -646,6 +646,8 @@
     if (activeSlug) return;
     drawer.hidden = true;
     drawer.removeEventListener('transitionend', onCloseTransitionEnd);
+    const drawerTitle = document.getElementById('drawer-title');
+    if (drawerTitle) drawerTitle.textContent = t('drawer.defaultTitle');
   }
 
   function onCloseTransitionEnd(event) {
@@ -709,9 +711,6 @@
     if (!activeSlug) return;
 
     cancelPendingClose();
-
-    const drawerTitle = document.getElementById('drawer-title');
-    if (drawerTitle) drawerTitle.textContent = t('drawer.defaultTitle');
 
     drawer.classList.remove('drawer--open');
     backdrop.classList.remove('drawer-backdrop--visible');
