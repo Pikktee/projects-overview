@@ -554,7 +554,7 @@ html.js .card.is-visible {
     0 0 24px color-mix(in srgb, var(--accent-cta, var(--accent)) 22%, transparent);
 }
 
-/* Dezentes Cursor-Leuchten auf der Kante — ergänzt den Rand, ersetzt ihn nicht. */
+/* Cursor-Licht + leichtes 3D-Kippen — folgen derselben Mausposition. */
 @media (hover: hover) and (pointer: fine) {
   .card__btn {
     transform-style: preserve-3d;
@@ -570,9 +570,9 @@ html.js .card.is-visible {
     border-radius: inherit;
     padding: 2px;
     background: radial-gradient(
-      180px circle at var(--mx, 50%) var(--my, 50%),
-      color-mix(in srgb, var(--accent-cta, var(--accent)) 55%, transparent),
-      transparent 72%
+      220px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent-cta, var(--accent)) 62%, transparent),
+      transparent 70%
     );
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
@@ -586,8 +586,9 @@ html.js .card.is-visible {
     transition: opacity 0.35s ease;
   }
 
-  .card__btn:hover::before {
-    opacity: 0.55;
+  .card__btn:hover::before,
+  .card__btn:focus-visible::before {
+    opacity: 0.62;
   }
 }
 
@@ -600,10 +601,34 @@ html.js .card.is-visible {
 }
 
 .card__media {
+  position: relative;
   aspect-ratio: 16 / 10;
   overflow: hidden;
   background: #0a0c0e;
   border-bottom: 1px solid var(--border);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: radial-gradient(
+      260px circle at var(--mx, 50%) var(--my, 50%),
+      color-mix(in srgb, var(--accent-cta, var(--accent)) 14%, rgba(255, 255, 255, 0.1)),
+      transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    mix-blend-mode: soft-light;
+  }
+
+  .card__btn:hover .card__media::after,
+  .card__btn:focus-visible .card__media::after {
+    opacity: 1;
+  }
 }
 
 .card__media img {

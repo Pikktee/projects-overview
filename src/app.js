@@ -236,8 +236,7 @@
     cards.forEach((card) => card.classList.add('is-visible'));
   }
 
-  // Spotlight + 3D-Kipp: Cursorposition auf den Karten. Nur bei echtem Hover-Gerät,
-  // Touch/Tastatur bleiben unberührt; bei prefers-reduced-motion nur Spotlight.
+  // Cursor-Licht + 3D-Kipp: gemeinsame Mausposition auf den Karten.
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
