@@ -217,13 +217,13 @@ const langSwitchHtml = (tag = 'div') => `<${tag} class="lang-switch" role="group
           .join('\n        ')}
       </${tag}>`;
 
-// Skizzierter Pfeil (Signatur-Element): ein durchgehender Pfad (Schaft + Spitze),
-// damit keine Lücke an der Spitze entsteht. Strichstärke 1.5 wie Rolle, Überschriften
-// und Label-Wellen. pathLength="1" erlaubt die Zeichen-Animation im CSS.
+// Skizzierter Pfeil (Signatur-Element, nur Desktop): Schaft und Spitze getrennt,
+// damit keine Lücke an der Spitze entsteht. Auf Mobilgeräten per CSS ausgeblendet.
 const heroAnnotationHtml = `<a class="hero__me" href="#ueber-mich">
         <span class="hero__me-main">
           <svg class="hero__arrow" viewBox="0 0 182 34" fill="none" aria-hidden="true" focusable="false">
-            <path class="hero__arrow-path" pathLength="1" d="M4 20 C 28 22, 50 13, 74 15 S 122 21, 148 16 C 158 14, 166 13, 174 14 C 168 9, 163 7, 159 4 C 163 7, 168 9, 174 14 C 169 18, 166 22, 164 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero__arrow-line" pathLength="1" d="M4 20 C 28 22, 50 13, 74 15 S 122 21, 148 16 C 158 14, 166 13, 174 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero__arrow-head" d="M159 4 C 163 7, 168 9, 174 14 C 169 18, 166 22, 164 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="hero__me-frame">
             <svg class="hero__me-ring" viewBox="0 0 116 116" fill="none" aria-hidden="true">
@@ -268,6 +268,11 @@ const skillsHtml = site.skillGroups
             </div>`,
   )
   .join('');
+
+const timelineLineSvg = `<svg class="about__timeline-line" aria-hidden="true" viewBox="0 0 16 100" preserveAspectRatio="none">
+            <path class="about__timeline-line__main" d="M7 0 C 9.8 3.2, 4.2 6.8, 7.2 10.5 S 4.5 17.2, 7 21 S 9.6 27.8, 4.8 31.2 S 7.2 38.2, 9.4 42 S 4.6 48.8, 7 52.5 S 9.8 59.2, 4.4 62.8 S 7.4 69.5, 9.2 73 S 4.8 80, 7 83.5 S 9.6 90, 5.2 93.8 S 6.8 97, 7 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="about__timeline-line__ghost" d="M6.3 0.5 C 9.2 3.8, 4.8 7.2, 6.8 11 S 5 17.8, 6.5 21.5 S 9.2 28.2, 5.2 31.8 S 6.8 38.8, 9 42.5 S 5.4 49.2, 6.5 53 S 9.4 59.8, 5 63.2 S 6.8 70, 8.8 73.5 S 5.4 80.5, 6.5 84 S 9.2 90.5, 5.6 94.2 S 6.2 97.5, 6.5 99.5" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>`;
 
 const backgroundHtml = (site.background || [])
   .map(
@@ -441,6 +446,7 @@ ${headExtras}
         <h3 class="about__label" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h3>
         <ul class="about__timeline" id="profile-background">
           ${backgroundHtml}
+          ${timelineLineSvg}
         </ul>
       </div>
     </div>

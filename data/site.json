@@ -189,13 +189,16 @@
         "eggHint": "— psst: startet ein kleines Snake-Spiel auf dieser Seite",
         "hint": "Pfeiltasten: steuern · Esc: beenden",
         "score": "Punkte",
-        "gameOver": "Game Over!",
+        "scoreShort": "PTS",
+        "level": "Level",
+        "levelShort": "LV",
+        "gameOver": "GAME OVER",
         "yourScore": "Deine Punkte",
-        "bestScore": "Rekord",
-        "newBest": "Neuer Rekord!",
+        "bestScore": "HI",
+        "newBest": "NEW!",
         "scoreboardAria": "Punktestand",
-        "playAgain": "Nochmal spielen",
-        "close": "Schließen"
+        "playAgain": "NOCHMAL",
+        "close": "ENDE"
       },
       "drawer": {
         "close": "Schließen",
@@ -340,13 +343,16 @@
         "eggHint": "— psst: starts a little Snake game on this page",
         "hint": "Arrow keys: steer · Esc: quit",
         "score": "Score",
-        "gameOver": "Game over!",
+        "scoreShort": "PTS",
+        "level": "Level",
+        "levelShort": "LV",
+        "gameOver": "GAME OVER",
         "yourScore": "Your score",
-        "bestScore": "Best",
-        "newBest": "New record!",
+        "bestScore": "HI",
+        "newBest": "NEW!",
         "scoreboardAria": "Score summary",
-        "playAgain": "Play again",
-        "close": "Close"
+        "playAgain": "RETRY",
+        "close": "QUIT"
       },
       "drawer": {
         "close": "Close",

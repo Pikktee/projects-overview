@@ -448,6 +448,9 @@
         strings: {
           hint: t('snake.hint'),
           score: t('snake.score'),
+          scoreShort: t('snake.scoreShort'),
+          level: t('snake.level'),
+          levelShort: t('snake.levelShort'),
           gameOver: t('snake.gameOver'),
           yourScore: t('snake.yourScore'),
           bestScore: t('snake.bestScore'),
