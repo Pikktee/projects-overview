@@ -35,7 +35,6 @@
     '.hero__bio',
     '.hero__contact-list a',
     '.facet-chip',
-    '.filter-status',
     '.section__heading',
     '.card__title',
     '.card__desc',
@@ -710,6 +709,7 @@
     for (let i = 0; i < BUG_COUNT; i++) spawnBug();
     fillBugs();
     document.body.append(canvas, hud);
+    trigger?.blur?.();
     document.addEventListener('keydown', onKey, true);
     window.addEventListener('resize', onResize);
 

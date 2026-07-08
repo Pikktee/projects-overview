@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=a83a1971" />
+  <link rel="stylesheet" href="/styles.css?v=1c8cef71" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)" />
@@ -48,7 +48,7 @@
             <svg class="hero__me-ring" viewBox="0 0 116 116" fill="none" aria-hidden="true">
               <path class="hero__me-ring-path" pathLength="1" d="M58 9 C 90 7, 108 30, 109 58 C 110 86, 86 109, 58 110 C 30 109, 7 86, 9 58 C 11 30, 30 11, 58 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
             </svg>
-            <img class="hero__me-photo" src="/me-thumb.jpg?v=a83a1971" alt="" width="106" height="106" />
+            <img class="hero__me-photo" src="/me-thumb.jpg?v=1c8cef71" alt="" width="106" height="106" />
           </span>
         </span>
         <span class="hero__me-note" data-i18n="hero.meNote">das bin ich</span>
@@ -89,14 +89,18 @@
   </header>
 
   <main class="work" id="projects">
-    <h2 class="visually-hidden" data-i18n="sections.projects.heading">Projekte</h2>
     <div class="work__catalog">
-    <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="Projekte nach Merkmal filtern">
-      <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
-        <span class="facet-chip__label">Alle</span>
-        <span class="facet-chip__count">11</span>
-      </button>
-      <button type="button" class="facet-chip" data-filter="ai" data-i18n-facet="ai">
+    <div class="sections">
+  <section class="section section--catalog">
+    <h2 class="section__heading" id="section-current" data-i18n-section="current">Aktuelle Projekte</h2>
+    
+    <div class="catalog-toolbar">
+      <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="Projekte nach Merkmal filtern">
+        <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
+          <span class="facet-chip__label">Alle</span>
+          <span class="facet-chip__count">11</span>
+        </button>
+        <button type="button" class="facet-chip" data-filter="ai" data-i18n-facet="ai">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5 9.7 6.3 14.5 8 9.7 9.7 8 14.5 6.3 9.7 1.5 8 6.3 6.3 8 1.5Z"/></svg>
           <span class="facet-chip__label">KI-gestützt</span>
           <span class="facet-chip__count">8</span>
@@ -121,14 +125,8 @@
           <span class="facet-chip__label">3D &amp; WebGL</span>
           <span class="facet-chip__count">2</span>
         </button>
+      </div>
     </div>
-    <p class="filter-status" id="filter-status" aria-live="polite" hidden>
-      <span id="filter-count"></span>
-      <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">Alle anzeigen</button>
-    </p>
-    <div class="sections">
-  <section class="section">
-    <h2 class="section__heading" id="section-apps" data-i18n-section="apps">Apps &amp; Tools</h2>
     <div class="grid">
     <article class="card" style="--accent:#8C939D;--accent-cta:#8c939d;--accent-cta-light:#6d727b;--accent-btn:#8c939d" data-slug="patina" data-facets="ai">
       <button type="button" class="card__btn" data-open="patina" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Patina: Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende." data-default-aria="Patina: Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende." data-en-aria="Patina: Checks historical novels for anachronisms, backed by DWDS evidence and your final editorial judgment.">
@@ -187,8 +185,9 @@
     </div>
   </section>
 
-  <section class="section section--labeled">
-    <h2 class="section__heading" id="section-experiments" data-i18n-section="experiments">Experimente</h2>
+  <section class="section section--appendix">
+    <h3 class="section__subheading" id="section-experiments" data-i18n-section="experiments">Experimente</h3>
+    
     <div class="grid">
     <article class="card" style="--accent:#f5a524;--accent-cta:#f5a524;--accent-cta-light:#976b28;--accent-btn:#f5a524" data-slug="luhambo" data-facets="3d">
       <button type="button" class="card__btn" data-open="luhambo" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Luhambo: GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten." data-default-aria="Luhambo: GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten." data-en-aria="Luhambo: GPS routes as cinematic 3D camera tours with photo stops — built on open map data.">
@@ -304,7 +303,7 @@
         </div>
         <div class="about__photo-swing">
           <div class="about__photo-card">
-            <img src="/me.jpg?v=a83a1971" alt="Porträt von Henrik Heil" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
+            <img src="/me.jpg?v=1c8cef71" alt="Porträt von Henrik Heil" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
             <figcaption>Henrik Heil</figcaption>
           </div>
         </div>
@@ -449,7 +448,7 @@
     </div>
   </div>
 
-  <script>window.__ASSET_V = "a83a1971";</script>
-  <script src="/app.js?v=a83a1971" defer></script>
+  <script>window.__ASSET_V = "1c8cef71";</script>
+  <script src="/app.js?v=1c8cef71" defer></script>
 </body>
 </html>

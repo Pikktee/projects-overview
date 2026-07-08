@@ -54,9 +54,6 @@
   const drawer = document.getElementById('project-drawer');
   const backdrop = document.getElementById('drawer-backdrop');
   const closeBtn = document.getElementById('drawer-close');
-  const filterStatus = document.getElementById('filter-status');
-  const filterCount = document.getElementById('filter-count');
-  const filterReset = document.getElementById('filter-reset');
   const cards = document.querySelectorAll('.card');
   const facetChips = document.querySelectorAll('.facet-chip');
   const openButtons = document.querySelectorAll('[data-open]');
@@ -462,8 +459,6 @@
     });
   });
 
-  filterReset?.addEventListener('click', () => setFilter('all'));
-
   // Easter Egg: „Video- & Brettspiele" lädt snake.js nach und startet das
   // Spiel. Die Strings kommen aus der aktiven Sprache. Auf Mobile (≤640px)
   // bleibt der Eintrag reiner Text — Snake ist dort nicht spielbar.
@@ -515,43 +510,29 @@
   }
 
   function setFilter(filter) {
-    let visible = 0;
-    let filterLabel = '';
     activeFilter = filter;
 
     facetChips.forEach((chip) => {
       const isActive = chip.dataset.filter === filter;
       chip.classList.toggle('is-active', isActive);
       chip.setAttribute('aria-pressed', String(isActive));
-      if (filter !== 'all' && isActive) {
-        filterLabel = chip.querySelector('.facet-chip__label')?.textContent || filter;
-      }
     });
 
     cards.forEach((card) => {
       const facets = (card.dataset.facets || '').split(',').filter(Boolean);
       const show = filter === 'all' || facets.includes(filter);
       card.classList.toggle('card--hidden', !show);
-      if (show) visible++;
     });
 
     document.querySelectorAll('.section').forEach((section) => {
       const sectionCards = section.querySelectorAll('.card:not(.card--hidden)');
-      section.classList.toggle('section--empty', sectionCards.length === 0);
-    });
-
-    if (filterStatus && filterCount) {
-      if (filter === 'all') {
-        filterStatus.hidden = true;
+      const isEmpty = sectionCards.length === 0;
+      if (section.classList.contains('section--catalog')) {
+        section.classList.toggle('section--grid-empty', isEmpty);
       } else {
-        filterStatus.hidden = false;
-        filterCount.textContent = t('filter.status', {
-          visible,
-          total: totalProjects,
-          label: filterLabel,
-        });
+        section.classList.toggle('section--empty', isEmpty);
       }
-    }
+    });
 
     if (filter !== 'all') {
       document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' });

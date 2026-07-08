@@ -159,24 +159,6 @@ function renderCard(p) {
     </article>`;
 }
 
-const sectionsHtml = sections
-  .map((section, index) => {
-    const sectionKey = section.sectionKey || null;
-    const sectionLabel = sectionKey ? tDe.sections[sectionKey] : section.title;
-    const heading = sectionLabel
-      ? `<h2 class="section__heading" id="section-${sectionKey || section.title.toLowerCase().replace(/\s+/g, '-')}"${sectionKey ? ` data-i18n-section="${sectionKey}"` : ''}>${escapeHtml(sectionLabel)}</h2>`
-      : '';
-    const cards = section.projects.map(renderCard).join('\n');
-    const labeled = sectionLabel && index > 0;
-    return `
-  <section class="section${labeled ? ' section--labeled' : ''}">
-    ${heading}
-    <div class="grid">${cards}
-    </div>
-  </section>`;
-  })
-  .join('\n');
-
 // Kuratierte Merkmale (Reihenfolge = Anzeigereihenfolge). Icons sind schlichte
 // Inline-SVGs, damit die Leiste ohne Icon-Font auskommt.
 const FACETS = [
@@ -212,6 +194,42 @@ const facetOverview = FACETS.map((f) => {
         </button>`;
 })
   .filter(Boolean)
+  .join('\n');
+
+const catalogToolbarHtml = `
+    <div class="catalog-toolbar">
+      <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
+        <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
+          <span class="facet-chip__label">${escapeHtml(tDe.facets.all)}</span>
+          <span class="facet-chip__count">${allProjects.length}</span>
+        </button>
+        ${facetOverview}
+      </div>
+    </div>`;
+
+const sectionsHtml = sections
+  .map((section) => {
+    const sectionKey = section.sectionKey || null;
+    const sectionLabel = sectionKey ? tDe.sections[sectionKey] : section.title;
+    const isAppendix = sectionKey === 'experiments';
+    const isCatalog = sectionKey === 'current';
+    const sectionId = `section-${sectionKey || section.title.toLowerCase().replace(/\s+/g, '-')}`;
+    const i18nAttr = sectionKey ? ` data-i18n-section="${sectionKey}"` : '';
+    let heading = '';
+    if (sectionLabel) {
+      heading = isAppendix
+        ? `<h3 class="section__subheading" id="${sectionId}"${i18nAttr}>${escapeHtml(sectionLabel)}</h3>`
+        : `<h2 class="section__heading" id="${sectionId}"${i18nAttr}>${escapeHtml(sectionLabel)}</h2>`;
+    }
+    const cards = section.projects.map(renderCard).join('\n');
+    return `
+  <section class="section${isCatalog ? ' section--catalog' : ''}${isAppendix ? ' section--appendix' : ''}">
+    ${heading}
+    ${isCatalog ? catalogToolbarHtml : ''}
+    <div class="grid">${cards}
+    </div>
+  </section>`;
+  })
   .join('\n');
 
 // Icons für den Theme-Toggle: das Icon zeigt jeweils das Ziel des Klicks.
@@ -387,19 +405,7 @@ ${headExtras}
   </header>
 
   <main class="work" id="projects">
-    <h2 class="visually-hidden" data-i18n="sections.projects.heading">${escapeHtml(tDe.sections.projects.heading)}</h2>
     <div class="work__catalog">
-    <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
-      <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
-        <span class="facet-chip__label">${escapeHtml(tDe.facets.all)}</span>
-        <span class="facet-chip__count">${allProjects.length}</span>
-      </button>
-      ${facetOverview}
-    </div>
-    <p class="filter-status" id="filter-status" aria-live="polite" hidden>
-      <span id="filter-count"></span>
-      <button type="button" class="stack-reset" id="filter-reset" data-i18n="filter.reset">${escapeHtml(tDe.filter.reset)}</button>
-    </p>
     <div class="sections">${sectionsHtml}
     </div>
     </div>

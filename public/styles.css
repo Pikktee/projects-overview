@@ -571,7 +571,7 @@ body.drawer-open {
 .hero__link > span:not(.sr-only) {
   text-decoration: underline dotted;
   text-decoration-thickness: 1px;
-  text-underline-offset: 4px;
+  text-underline-offset: 6px;
   text-decoration-color: color-mix(in srgb, var(--accent-ui) 75%, transparent);
   transition: text-decoration-color 0.2s ease;
 }
@@ -708,13 +708,18 @@ html:not(.js) .theme-toggle {
 .work__catalog {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
 }
 
-.filter-status {
-  margin: 0;
-  font-size: 0.88rem;
-  color: var(--text-muted);
+.catalog-toolbar {
+  margin: -0.2rem 0 var(--gap);
+}
+
+.section--catalog .section__heading {
+  margin-bottom: clamp(0.65rem, 1.5vw, 0.85rem);
+}
+
+.section--grid-empty .grid {
+  display: none;
 }
 
 /* ── About ── */
@@ -1046,8 +1051,42 @@ html:not(.js) .theme-toggle {
   margin-top: clamp(2.75rem, 5.5vw, 4.25rem);
 }
 
+.section--appendix {
+  margin-top: clamp(2.5rem, 5vw, 3.75rem);
+}
+
 .section--empty {
   display: none;
+}
+
+.section__subheading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.75rem, 2vw, 1.1rem);
+  margin: 0 0 clamp(1rem, 2.5vw, 1.35rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+  font-weight: 400;
+  font-style: italic;
+  color: color-mix(in srgb, var(--accent-text) 68%, var(--text-muted));
+  letter-spacing: -0.01em;
+}
+
+.section__subheading::before,
+.section__subheading::after {
+  content: "";
+  flex: 1 1 1.75rem;
+  max-width: 3.5rem;
+  height: 6px;
+  background: var(--accent-ui);
+  opacity: 0.24;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M0 5 C 14 2, 28 7, 42 4 S 70 2, 84 5 S 112 7, 126 4 S 154 2, 168 5 S 186 3, 200 4' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M0 5 C 14 2, 28 7, 42 4 S 70 2, 84 5 S 112 7, 126 4 S 154 2, 168 5 S 186 3, 200 4' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
+}
+
+.section__subheading::after {
+  transform: scaleX(-1);
 }
 
 .section__heading {
@@ -1436,32 +1475,6 @@ html.js .card.is-visible {
 .facet-chip.is-active .facet-chip__count {
   color: var(--chip-active-text);
   background: color-mix(in srgb, var(--chip-active-text) 14%, transparent);
-}
-
-.stack-reset {
-  min-height: 2.5rem;
-  padding: 0.4rem 0.9rem;
-  font-family: inherit;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text);
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  cursor: pointer;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  transition:
-    background 0.2s,
-    border-color 0.2s;
-}
-
-.stack-reset:hover,
-.stack-reset:focus-visible,
-.stack-reset:active {
-  background: color-mix(in srgb, var(--text) 6%, transparent);
-  border-color: var(--border-strong);
-  outline: none;
 }
 
 /* ── Drawer ── */
@@ -3009,14 +3022,52 @@ html[data-theme="light"] .btn--primary {
     font-size: 0.86rem;
   }
 
+  /* Über mich: einheitlicher Mobile-Rhythmus (1.25rem / 1.75rem). */
+  .about {
+    padding-top: 1.5rem;
+    padding-bottom: 1.75rem;
+  }
+
+  .about .section__heading {
+    margin-bottom: 1.25rem;
+  }
+
   .about__personal {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
   }
 
   .about__photo {
-    max-width: 240px;
-    margin: -0.75rem auto 0;
+    max-width: 220px;
+    margin: 0 auto;
+    padding-top: 2.65rem;
+  }
+
+  .about__intro {
+    margin-bottom: 1.25rem;
+  }
+
+  .about__label {
+    margin-bottom: 0.75rem;
+    gap: 0.65rem;
+  }
+
+  .about__interests {
+    gap: 0.5rem 1rem;
+    justify-content: center;
+  }
+
+  .about__grid {
+    gap: 1.75rem;
+  }
+
+  .skill-list {
+    gap: 0.95rem;
+  }
+
+  .about__timeline-item {
+    padding-bottom: 1rem;
   }
 
   .footer {

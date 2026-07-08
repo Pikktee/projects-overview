@@ -1,7 +1,7 @@
 {
   "sections": [
     {
-      "sectionKey": "apps",
+      "sectionKey": "current",
       "projects": [
         { "slug": "patina", "name": "Patina", "url": "https://patina.henrikheil.net", "productVideo": "https://www.youtube.com/watch?v=mPjWqg0oyiw", "accent": "#8C939D", "facets": ["ai"] },
         { "slug": "velosia", "name": "Velosia", "url": "https://velosia.henrikheil.net", "accent": "#09b0b7", "facets": ["ai", "extension", "android"] },

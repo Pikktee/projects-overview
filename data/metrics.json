@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:09.092Z"
+    "analyzedAt": "2026-07-08T23:09:10.616Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T22:45:09.254Z"
+    "analyzedAt": "2026-07-08T23:09:10.780Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T22:45:09.499Z"
+    "analyzedAt": "2026-07-08T23:09:11.020Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T22:45:09.651Z"
+    "analyzedAt": "2026-07-08T23:09:11.177Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:09.729Z"
+    "analyzedAt": "2026-07-08T23:09:11.254Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T22:45:09.791Z"
+    "analyzedAt": "2026-07-08T23:09:11.315Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:09.868Z"
+    "analyzedAt": "2026-07-08T23:09:11.393Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:09.941Z"
+    "analyzedAt": "2026-07-08T23:09:11.491Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:10.014Z"
+    "analyzedAt": "2026-07-08T23:09:11.581Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:10.136Z"
+    "analyzedAt": "2026-07-08T23:09:11.703Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1085,7 +1085,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:10.193Z"
+    "analyzedAt": "2026-07-08T23:09:11.764Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1162,6 +1162,6 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T22:45:10.272Z"
+    "analyzedAt": "2026-07-08T23:09:11.837Z"
   }
 }

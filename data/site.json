@@ -159,7 +159,7 @@
           "lead": "Nach Merkmal filtern oder Karte öffnen für Details, Live-Demo und Tech-Stack."
         },
         "experiments": "Experimente",
-        "apps": "Apps & Tools"
+        "current": "Aktuelle Projekte"
       },
       "card": {
         "details": "Mehr über {name}"
@@ -173,10 +173,6 @@
         "macos": "macOS-App",
         "3d": "3D & WebGL",
         "filterAria": "Projekte nach Merkmal filtern"
-      },
-      "filter": {
-        "status": "{visible} von {total} Projekten · {label}",
-        "reset": "Alle anzeigen"
       },
       "footer": {
         "impressum": "Impressum"
@@ -314,7 +310,7 @@
           "lead": "Filter by trait or open a card for details, live demo, and tech stack."
         },
         "experiments": "Experiments",
-        "apps": "Apps & tools"
+        "current": "Current projects"
       },
       "card": {
         "details": "More about {name}"
@@ -328,10 +324,6 @@
         "macos": "macOS app",
         "3d": "3D & WebGL",
         "filterAria": "Filter projects by trait"
-      },
-      "filter": {
-        "status": "{visible} of {total} projects · {label}",
-        "reset": "Show all"
       },
       "footer": {
         "impressum": "Legal notice"

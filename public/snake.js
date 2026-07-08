@@ -35,7 +35,6 @@
     '.hero__bio',
     '.hero__contact-list a',
     '.facet-chip',
-    '.filter-status',
     '.section__heading',
     '.card__title',
     '.card__desc',
