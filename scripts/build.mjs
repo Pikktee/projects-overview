@@ -71,7 +71,19 @@ const sections = data.sections.map((section) => ({
 const portfolio = { sections };
 const allProjects = sections.flatMap((s) => s.projects);
 
-for (const file of ['styles.css', 'app.js', 'snake.js', 'favicon.svg', 'apple-touch-icon.png', 'me.jpg', 'me-thumb.jpg']) {
+for (const file of [
+  'styles.css',
+  'app.js',
+  'snake.js',
+  'favicon.svg',
+  'favicon-arrow.svg',
+  'favicon-h.svg',
+  'apple-touch-icon.png',
+  'apple-touch-icon-arrow.png',
+  'apple-touch-icon-h.png',
+  'me.jpg',
+  'me-thumb.jpg',
+]) {
   copyFileSync(join(root, 'src', file), join(publicDir, file));
 }
 
@@ -342,7 +354,10 @@ ${headExtras}
       ${heroAnnotationHtml}
     </div>
     <p class="hero__role" data-i18n="profile.role">${escapeHtml(tDe.profile.role)}</p>
-    <p class="hero__bio" data-i18n="profile.bio">${escapeHtml(tDe.profile.bio)}</p>
+    <p class="hero__bio">
+      <span data-i18n="profile.bioLead">${escapeHtml(tDe.profile.bioLead)}</span>
+      <span class="hero__bio-detail" data-i18n="profile.bioDetail">${escapeHtml(tDe.profile.bioDetail)}</span>
+    </p>
     <nav class="hero__contact" id="kontakt" data-i18n-aria="a11y.contactAria" aria-label="${escapeHtml(tDe.a11y.contactAria)}">
       <ul class="hero__contact-list">
         <li>

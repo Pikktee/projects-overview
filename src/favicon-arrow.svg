@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Henrik Heil Portfolio">
+  <style>
+    .bg { fill: #0f1114; }
+    .arrow { fill: none; stroke: #e8c88a; }
+    .accent { fill: #3d8bfd; fill-opacity: 0.75; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #f4f1e9; }
+      .arrow { stroke: #75592a; }
+      .accent { fill: #3d8bfd; fill-opacity: 0.55; }
+    }
+  </style>
+  <rect class="bg" width="32" height="32"/>
+  <circle class="accent" cx="7" cy="7" r="1.4"/>
+  <path class="arrow" d="M5 22 C 9 20.5, 12 14, 16 15.5 S 22 17.5, 25 11" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="arrow" d="M21 5.5 C 23 7.5, 24.5 9, 25 11 C 23.5 12.5, 22.5 14.5, 21.5 16" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

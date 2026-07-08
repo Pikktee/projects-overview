@@ -120,7 +120,8 @@
       "profile": {
         "role": "UX-Engineer & Software-Entwickler",
         "tagline": "UX-Engineer & Software-Entwickler — Konzeption, Code und Video aus einer Hand.",
-        "bio": "Ich gestalte und entwickle digitale Produkte — von der ersten Skizze bis zum barrierefreien Produktivsystem.",
+        "bioLead": "Ich gestalte und entwickle digitale Produkte",
+        "bioDetail": "— von der ersten Skizze bis zum barrierefreien Produktivsystem.",
         "more": "Schwerpunkte & Hintergrund",
         "credentials": ["Dipl.-Ing. (FH) Medieninformatik", "Frankfurt am Main"]
       },
@@ -274,7 +275,8 @@
       "profile": {
         "role": "UX Engineer & Software Developer",
         "tagline": "UX engineer & software developer — concept, code, and video from one source.",
-        "bio": "I design and build digital products — from the first sketch to an accessible production system.",
+        "bioLead": "I design and build digital products",
+        "bioDetail": "— from the first sketch to an accessible production system.",
         "more": "Focus areas & background",
         "credentials": ["Dipl.-Ing. (FH) Media Informatics", "Frankfurt am Main"]
       },

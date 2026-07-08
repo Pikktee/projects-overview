@@ -1,39 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Henrik Heil — Portfolio">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Henrik Heil Portfolio">
   <style>
     .bg { fill: #0f1114; }
-    .glow-a { fill: #8b6f47; fill-opacity: 0.14; }
-    .glow-b { fill: #3d8bfd; fill-opacity: 0.1; }
-    .tile-a { fill: url(#sand-dark); }
-    .tile-b { fill: #d4c4a8; fill-opacity: 0.5; }
-    .tile-c { fill: #d4c4a8; fill-opacity: 0.76; }
-    .tile-d { fill: #e8c88a; fill-opacity: 0.92; }
+    .h { fill: url(#sand-dark); }
     @media (prefers-color-scheme: light) {
       .bg { fill: #f4f1e9; }
-      .glow-a { fill: #c4a46e; fill-opacity: 0.18; }
-      .glow-b { fill: #3d8bfd; fill-opacity: 0.06; }
-      .tile-a { fill: url(#ink-light); }
-      .tile-b { fill: #23252c; fill-opacity: 0.34; }
-      .tile-c { fill: #23252c; fill-opacity: 0.58; }
-      .tile-d { fill: #a8854a; fill-opacity: 0.96; }
+      .h { fill: url(#ink-light); }
     }
   </style>
-  <rect class="bg" width="32" height="32"/>
-  <circle class="glow-a" cx="7" cy="26" r="11"/>
-  <circle class="glow-b" cx="26" cy="7" r="9"/>
-  <rect class="tile-a" x="5" y="5" width="10" height="22"/>
-  <rect class="tile-b" x="17" y="5" width="10" height="9"/>
-  <rect class="tile-c" x="17" y="16" width="10" height="7"/>
-  <rect class="tile-d" x="17" y="25" width="10" height="2"/>
   <defs>
-    <linearGradient id="sand-dark" x1="5" y1="5" x2="15" y2="27" gradientUnits="userSpaceOnUse">
+    <linearGradient id="sand-dark" x1="6" y1="7" x2="26" y2="25" gradientUnits="userSpaceOnUse">
       <stop stop-color="#f6f1e7"/>
-      <stop offset="0.48" stop-color="#d4c4a8"/>
+      <stop offset="0.45" stop-color="#d4c4a8"/>
       <stop offset="1" stop-color="#a8854a"/>
     </linearGradient>
-    <linearGradient id="ink-light" x1="5" y1="5" x2="15" y2="27" gradientUnits="userSpaceOnUse">
+    <linearGradient id="ink-light" x1="6" y1="7" x2="26" y2="25" gradientUnits="userSpaceOnUse">
       <stop stop-color="#3a3d48"/>
-      <stop offset="0.48" stop-color="#23252c"/>
+      <stop offset="0.45" stop-color="#23252c"/>
       <stop offset="1" stop-color="#6d5527"/>
     </linearGradient>
   </defs>
+  <rect class="bg" width="32" height="32"/>
+  <path class="h" d="M6.5 8H11V9.5H8.5V22.5H11V24H6.5V22.5H9V9.5H6.5V8Z"/>
+  <rect class="h" x="8.5" y="14.25" width="15" height="3.5"/>
+  <path class="h" d="M21 8H25.5V9.5H23V22.5H25.5V24H21V22.5H23.5V9.5H21V8Z"/>
 </svg>

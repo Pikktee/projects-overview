@@ -514,6 +514,10 @@ body.drawer-open {
   color: var(--text-muted);
 }
 
+.hero__bio-detail {
+  display: block;
+}
+
 .hero__contact-list {
   display: flex;
   flex-wrap: wrap;
@@ -557,13 +561,19 @@ body.drawer-open {
   align-items: center;
   gap: 0.45rem;
   min-height: 2.75rem;
-  padding-bottom: 0.05rem;
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text);
   text-decoration: none;
-  border-bottom: 1px dotted color-mix(in srgb, var(--accent-ui) 75%, transparent);
-  transition: color 0.2s ease, border-color 0.2s ease;
+  transition: color 0.2s ease;
+}
+
+.hero__link > span:not(.sr-only) {
+  text-decoration: underline dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--accent-ui) 75%, transparent);
+  transition: text-decoration-color 0.2s ease;
 }
 
 .hero__link-icon {
@@ -582,8 +592,12 @@ body.drawer-open {
 .hero__link:hover,
 .hero__link:focus-visible {
   color: var(--accent-text);
-  border-bottom-style: solid;
-  border-bottom-color: var(--accent-ui);
+}
+
+.hero__link:hover > span:not(.sr-only),
+.hero__link:focus-visible > span:not(.sr-only) {
+  text-decoration-style: solid;
+  text-decoration-color: var(--accent-ui);
 }
 
 .hero__link:hover .hero__link-icon,
@@ -1399,24 +1413,6 @@ html.js .card.is-visible {
   border-color: transparent;
   font-weight: 600;
   box-shadow: var(--chip-active-shadow);
-  position: relative;
-}
-
-.facet-chip.is-active .facet-chip__label::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -0.15rem;
-  height: 5px;
-  background: currentColor;
-  opacity: 0.28;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 5'%3E%3Cpath d='M1 3.5 C 6 1, 11 4, 16 2.5 S 26 1.5, 31 3.5 S 40 4, 47 2' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 5'%3E%3Cpath d='M1 3.5 C 6 1, 11 4, 16 2.5 S 26 1.5, 31 3.5 S 40 4, 47 2' fill='none' stroke='black' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
-  pointer-events: none;
-}
-
-.facet-chip.is-active .facet-chip__label {
   position: relative;
 }
 
