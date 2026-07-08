@@ -2645,7 +2645,13 @@ html[data-theme="light"] .btn--primary {
   border: 3px solid transparent;
   border-radius: 0;
   box-shadow: 3px 3px 0 #000;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease,
+    filter 0.15s ease;
 }
 
 .snake-btn:active {
@@ -2665,12 +2671,27 @@ html[data-theme="light"] .btn--primary {
   border-color: color-mix(in srgb, var(--snake-accent) 50%, transparent);
 }
 
-.snake-btn--primary:hover,
+@media (hover: hover) and (pointer: fine) {
+  .snake-btn--primary:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #000;
+    filter: brightness(1.12);
+    border-color: #fff;
+  }
+
+  .snake-btn--ghost:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 #000;
+    color: #fff;
+    background: color-mix(in srgb, var(--snake-accent) 32%, #000 68%);
+    border-color: var(--snake-accent);
+  }
+}
+
 .snake-btn--primary:focus-visible,
-.snake-btn--ghost:hover,
 .snake-btn--ghost:focus-visible {
-  outline: none;
-  filter: brightness(1.08);
+  outline: 2px solid var(--snake-glow);
+  outline-offset: 3px;
 }
 
 /* ── Footer ── */
