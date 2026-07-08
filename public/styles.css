@@ -937,8 +937,8 @@ html:not(.js) .theme-toggle {
 .about__timeline-line {
   position: absolute;
   left: calc(var(--timeline-rail) / 2);
-  top: calc(0.06em + var(--timeline-dot) / 2 + 1px);
-  height: calc(100% - 0.12em - var(--timeline-dot) - 1px);
+  top: calc(0.06em + var(--timeline-dot) / 2 + 2px);
+  height: calc(100% - 0.12em - var(--timeline-dot) - 2px);
   width: 6px;
   transform: translateX(-50%);
   color: var(--accent-ui);
