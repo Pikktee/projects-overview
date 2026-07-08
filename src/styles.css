@@ -3078,6 +3078,17 @@ html[data-theme="light"] .btn--primary {
   .grid {
     grid-template-columns: 1fr;
   }
+
+  /* Snake-Easter-Egg: auf schmalen Viewports nicht spielbar — kein Link-Look. */
+  .about__interest-egg {
+    text-decoration: none;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .about__interest-egg .sr-only {
+    display: none;
+  }
 }
 
 @media (min-width: 900px) {

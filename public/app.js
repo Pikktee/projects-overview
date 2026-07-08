@@ -465,36 +465,43 @@
   filterReset?.addEventListener('click', () => setFilter('all'));
 
   // Easter Egg: „Video- & Brettspiele" lädt snake.js nach und startet das
-  // Spiel. Die Strings kommen aus der aktiven Sprache.
+  // Spiel. Die Strings kommen aus der aktiven Sprache. Auf Mobile (≤640px)
+  // bleibt der Eintrag reiner Text — Snake ist dort nicht spielbar.
   const eggBtn = document.getElementById('egg-snake');
-  eggBtn?.addEventListener('click', () => {
-    const start = () =>
-      window.__startSnake?.({
-        trigger: eggBtn,
-        strings: {
-          hint: t('snake.hint'),
-          score: t('snake.score'),
-          scoreShort: t('snake.scoreShort'),
-          level: t('snake.level'),
-          levelShort: t('snake.levelShort'),
-          gameOver: t('snake.gameOver'),
-          yourScore: t('snake.yourScore'),
-          bestScore: t('snake.bestScore'),
-          newBest: t('snake.newBest'),
-          scoreboardAria: t('snake.scoreboardAria'),
-          playAgain: t('snake.playAgain'),
-          close: t('snake.close'),
-        },
-      });
-    if (window.__startSnake) {
-      start();
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = `/snake.js${window.__ASSET_V ? `?v=${window.__ASSET_V}` : ''}`;
-    script.onload = start;
-    document.head.appendChild(script);
-  });
+  const snakeEggMobile = window.matchMedia('(max-width: 640px)');
+  if (eggBtn && snakeEggMobile.matches) {
+    eggBtn.setAttribute('tabindex', '-1');
+    eggBtn.setAttribute('aria-disabled', 'true');
+  } else if (eggBtn) {
+    eggBtn.addEventListener('click', () => {
+      const start = () =>
+        window.__startSnake?.({
+          trigger: eggBtn,
+          strings: {
+            hint: t('snake.hint'),
+            score: t('snake.score'),
+            scoreShort: t('snake.scoreShort'),
+            level: t('snake.level'),
+            levelShort: t('snake.levelShort'),
+            gameOver: t('snake.gameOver'),
+            yourScore: t('snake.yourScore'),
+            bestScore: t('snake.bestScore'),
+            newBest: t('snake.newBest'),
+            scoreboardAria: t('snake.scoreboardAria'),
+            playAgain: t('snake.playAgain'),
+            close: t('snake.close'),
+          },
+        });
+      if (window.__startSnake) {
+        start();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = `/snake.js${window.__ASSET_V ? `?v=${window.__ASSET_V}` : ''}`;
+      script.onload = start;
+      document.head.appendChild(script);
+    });
+  }
 
   async function loadProjects() {
     const v = window.__ASSET_V ? `?v=${window.__ASSET_V}` : '';
