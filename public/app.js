@@ -195,6 +195,26 @@
     });
   }
 
+  function syncTimelineLine() {
+    const wrap = document.querySelector('.about__timeline-wrap');
+    if (!wrap) return;
+    const line = wrap.querySelector('.about__timeline-line');
+    const items = wrap.querySelectorAll('.about__timeline-item');
+    if (!line || !items.length) return;
+
+    const wrapTop = wrap.getBoundingClientRect().top;
+    const firstDot = items[0].querySelector('.about__timeline-dot');
+    const lastDot = items[items.length - 1].querySelector('.about__timeline-dot');
+    if (!firstDot || !lastDot) return;
+
+    const firstRect = firstDot.getBoundingClientRect();
+    const lastRect = lastDot.getBoundingClientRect();
+    const start = firstRect.top + firstRect.height / 2 - wrapTop;
+    const end = lastRect.top + lastRect.height / 2 - wrapTop;
+    line.style.top = `${start}px`;
+    line.style.height = `${Math.max(0, end - start)}px`;
+  }
+
   // Das Markup der Über-mich-Sektion kommt vollständig aus dem Build (inkl.
   // Icons); hier werden beim Sprachwechsel nur die Texte ausgetauscht.
   function renderProfileSections() {
@@ -226,6 +246,8 @@
       const item = site.personalInterests?.find((i) => i.key === el.dataset.interestKey);
       if (item) el.textContent = item[locale] || item.de;
     });
+
+    requestAnimationFrame(syncTimelineLine);
   }
 
   async function loadSite() {
@@ -242,6 +264,10 @@
   }
 
   const siteReady = loadSite();
+
+  syncTimelineLine();
+  window.addEventListener('resize', syncTimelineLine, { passive: true });
+  document.fonts?.ready?.then(syncTimelineLine);
 
   const totalProjects = cards.length;
 

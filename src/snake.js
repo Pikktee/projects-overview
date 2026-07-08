@@ -7,18 +7,18 @@
 (() => {
   const CELL = 20;
   const START_LEN = 4;
-  const BUG_COUNT = 12;
+  const BUG_COUNT = 20;
   const BEST_KEY = 'portfolio-snake-best';
   const AUDIO_BASE = '/snake-audio';
-  const HIT_RADIUS = CELL * 0.28;
   const INTRO_BLINK_MS = 2600;
   const INTRO_DELAY_MS = 850;
-  const START_SPEED = 155;
+  const START_SPEED = 170;
   const BUGS_PER_LEVEL = 5;
-  const LEVEL_SPEED_FACTOR = 0.8;
-  const LEVEL_AUDIO_RATE = 1.2;
-  const MIN_SPEED = 55;
-  const MAX_PLAYBACK_RATE = 2.4;
+  const SPEED_DROP_PER_LEVEL = 6;
+  const AUDIO_BUMP_PER_LEVEL = 0.07;
+  const MIN_SPEED = 88;
+  const MAX_PLAYBACK_RATE = 1.85;
+  const CARD_BORDER_HIT = 5;
 
   // Nur Inhalts-Elemente — keine großen Container wie .card (Padding wäre sonst Hindernis).
   const CONTENT_SELECTOR = [
@@ -39,7 +39,9 @@
     '.section__heading',
     '.card__title',
     '.card__desc',
+    '.card__tags',
     '.card__media img',
+    '.card__placeholder span',
     '.card__cta',
     '.about__photo img',
     '.about__photo figcaption',
@@ -52,6 +54,10 @@
     '.about__timeline-item',
     '.footer a',
   ].join(',');
+  const CONTENT_SELECTORS = CONTENT_SELECTOR.split(',').map((s) => s.trim());
+  const IGNORE_LAYERS = '.snake-canvas,.snake-hud,.snake-overlay,.aurora,.grain,.skip-link';
+  const LAYOUT_CHROME =
+    'html,body,main,.work,.work__catalog,.facet-bar,.grid,.sections,.section,.about,.about__grid,.about__col,.about__personal,.about__personal-body,.about__photo-swing,.about__photo-card,.hero,.hero__bar,.hero__title-row,.hero__controls,.hero__contact,.hero__contact-list,.skill-list,.about__timeline,.card,.card__btn,.card__body,.card__media,.card__placeholder';
 
   window.__startSnake = function startSnake(opts = {}) {
     if (window.__snakeActive) return;
@@ -80,11 +86,11 @@
     }
 
     function speedForLevel(lvl) {
-      return Math.max(MIN_SPEED, Math.round(START_SPEED * LEVEL_SPEED_FACTOR ** (lvl - 1)));
+      return Math.max(MIN_SPEED, START_SPEED - (lvl - 1) * SPEED_DROP_PER_LEVEL);
     }
 
     function playbackRateForLevel(lvl) {
-      return Math.min(MAX_PLAYBACK_RATE, LEVEL_AUDIO_RATE ** (lvl - 1));
+      return Math.min(MAX_PLAYBACK_RATE, 1 + (lvl - 1) * AUDIO_BUMP_PER_LEVEL);
     }
 
     document.querySelectorAll('.card').forEach((c) => c.classList.add('is-visible'));
@@ -95,101 +101,127 @@
     const cols = Math.floor(doc.clientWidth / CELL);
     const rows = Math.floor(playBottom / CELL);
 
-    // Hindernisse als präzise Rechtecke (kein volles Raster) — Kollision nur bei
-    // echtem Überlappen des Schlangen-Körpers mit sichtbarem Inhalt.
-    const obstacleRects = [];
+    const cardZones = [...document.querySelectorAll('.card__btn')].map((btn) => {
+      const rect = btn.getBoundingClientRect();
+      return {
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+        right: rect.right + window.scrollX,
+        bottom: rect.bottom + window.scrollY,
+      };
+    });
 
-    function pushRect(left, top, right, bottom) {
-      if (right - left < 3 || bottom - top < 3) return;
-      obstacleRects.push({ left, top, right, bottom });
+    function insideCardZone(docX, docY) {
+      return cardZones.some(
+        (z) => docX >= z.left && docX <= z.right && docY >= z.top && docY <= z.bottom,
+      );
     }
 
-    function markBoxRect(rect, insetX, insetTop, insetBottom) {
-      if (rect.width < 2 || rect.height < 2) return;
-      const left = rect.left + window.scrollX + insetX;
-      const top = rect.top + window.scrollY + insetTop;
-      const right = rect.left + window.scrollX + rect.width - insetX;
-      const bottom = rect.top + window.scrollY + rect.height - insetBottom;
-      pushRect(left, top, right, bottom);
+    function hitsCardBoundary(docX, docY) {
+      const b = CARD_BORDER_HIT;
+      for (const z of cardZones) {
+        if (docX < z.left || docX > z.right || docY < z.top || docY > z.bottom) continue;
+        if (
+          docX <= z.left + b ||
+          docX >= z.right - b ||
+          docY <= z.top + b ||
+          docY >= z.bottom - b
+        ) {
+          return true;
+        }
+      }
+      return false;
     }
 
-    function markTextRect(rect) {
-      // Line-Boxes sind oft höher als die sichtbaren Glyphen — oben stark einziehen.
-      const insetTop = Math.max(3, rect.height * 0.36);
-      const insetBottom = Math.max(2, rect.height * 0.1);
-      const insetX = Math.max(1, rect.width * 0.03);
-      markBoxRect(rect, insetX, insetTop, insetBottom);
+    function pointInRect(vx, vy, rect, pad = 0) {
+      return (
+        vx >= rect.left + pad &&
+        vx <= rect.right - pad &&
+        vy >= rect.top + pad &&
+        vy <= rect.bottom - pad
+      );
     }
 
-    function markLineRect(rect) {
-      const insetX = Math.max(1, rect.width * 0.02);
-      const insetY = Math.max(1, rect.height * 0.2);
-      markBoxRect(rect, insetX, insetY, insetY);
-    }
+    function pointHitsInk(el, vx, vy) {
+      if (!(el instanceof Element)) return false;
 
-    function markImageRect(rect) {
-      markBoxRect(rect, 2, 2, 2);
-    }
+      if (el.tagName === 'IMG') {
+        return pointInRect(vx, vy, el.getBoundingClientRect(), 2);
+      }
 
-    function addTextObstacles(root) {
-      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      const svgLeaf = el.closest('path,line,polyline,polygon,rect,circle,ellipse');
+      if (svgLeaf) {
+        for (const rect of svgLeaf.getClientRects()) {
+          if (pointInRect(vx, vy, rect, 0.5)) return true;
+        }
+        return false;
+      }
+
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
         acceptNode(node) {
           if (!node.textContent?.trim()) return NodeFilter.FILTER_REJECT;
           const parent = node.parentElement;
           if (!parent) return NodeFilter.FILTER_REJECT;
           const style = getComputedStyle(parent);
-          if (style.visibility === 'hidden' || style.display === 'none' || style.opacity === '0') {
+          if (style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) < 0.05) {
             return NodeFilter.FILTER_REJECT;
           }
           return NodeFilter.FILTER_ACCEPT;
         },
       });
+
       while (walker.nextNode()) {
         const range = document.createRange();
         range.selectNodeContents(walker.currentNode);
-        for (const rect of range.getClientRects()) markTextRect(rect);
+        for (const rect of range.getClientRects()) {
+          if (rect.width < 1 || rect.height < 1) continue;
+          const insetX = Math.max(0.5, rect.width * 0.015);
+          const insetY = Math.max(0.5, rect.height * 0.08);
+          if (
+            vx >= rect.left + insetX &&
+            vx <= rect.right - insetX &&
+            vy >= rect.top + insetY &&
+            vy <= rect.bottom - insetY
+          ) {
+            return true;
+          }
+        }
       }
+      return false;
     }
 
-    function addSvgObstacles(root) {
-      root.querySelectorAll('path, line, polyline, polygon, rect, circle, ellipse').forEach((svgEl) => {
-        const stroke = parseFloat(getComputedStyle(svgEl).strokeWidth) || 1.5;
-        const pad = Math.max(0.5, stroke * 0.35);
-        for (const rect of svgEl.getClientRects()) markLineRect({
-          left: rect.left + pad,
-          top: rect.top + pad,
-          width: rect.width - pad * 2,
-          height: rect.height - pad * 2,
-        });
-      });
+    function isObstacleAt(docX, docY) {
+      const vx = docX - window.scrollX;
+      const vy = docY - window.scrollY;
+      if (vx < 0 || vy < 0 || vx >= window.innerWidth || vy >= window.innerHeight) return false;
+
+      for (const el of document.elementsFromPoint(vx, vy)) {
+        if (!(el instanceof Element)) continue;
+        if (el.closest(IGNORE_LAYERS)) continue;
+        if (el.matches(LAYOUT_CHROME)) continue;
+
+        let contentEl = null;
+        for (const sel of CONTENT_SELECTORS) {
+          if (el.matches(sel)) {
+            contentEl = el;
+            break;
+          }
+          const closest = el.closest(sel);
+          if (closest) {
+            contentEl = closest;
+            break;
+          }
+        }
+        if (contentEl && pointHitsInk(contentEl, vx, vy)) return true;
+      }
+      return false;
     }
 
-    function addImageObstacles(root) {
-      const imgs = root.tagName === 'IMG' ? [root] : [...root.querySelectorAll('img')];
-      imgs.forEach((img) => {
-        const rect = img.getBoundingClientRect();
-        if (rect.width >= 8 && rect.height >= 8) markImageRect(rect);
-      });
-    }
-
-    function isVisible(el) {
-      const rect = el.getBoundingClientRect();
-      if (rect.width < 1 || rect.height < 1) return false;
-      const style = getComputedStyle(el);
-      return style.display !== 'none' && style.visibility !== 'hidden' && Number(style.opacity) > 0.05;
-    }
-
-    document.querySelectorAll(CONTENT_SELECTOR).forEach((el) => {
-      if (!isVisible(el)) return;
-      addTextObstacles(el);
-      addSvgObstacles(el);
-      addImageObstacles(el);
-    });
-
-    const rootStyles = getComputedStyle(doc);
-    const colBody = rootStyles.getPropertyValue('--accent-ui').trim() || '#d4c4a8';
-    const colHead = rootStyles.getPropertyValue('--accent-text').trim() || colBody;
-    const colEye = rootStyles.getPropertyValue('--bg').trim() || '#0f1114';
+    const isLightTheme = doc.getAttribute('data-theme') === 'light';
+    const colBody = isLightTheme ? '#3d9e6a' : '#6ecf9a';
+    const colHead = isLightTheme ? '#2a7d52' : '#9ee4c0';
+    const colStroke = isLightTheme ? '#1f5c3c' : '#3a9e6a';
+    const colEye = isLightTheme ? '#f4f1e9' : '#0f1114';
     const COL_DEAD = '#f45b69';
 
     const canvas = document.createElement('canvas');
@@ -206,27 +238,27 @@
     }
 
     const hud = document.createElement('div');
-    hud.className = 'snake-hud';
+    hud.className = `snake-hud${isLightTheme ? ' snake-hud--light' : ''}`;
     hud.innerHTML = `
-      <div class="snake-hud__stats">
-        <div class="snake-hud__stat">
-          <span class="snake-hud__label">${escapeHtml(txt('levelShort', 'LV'))}</span>
-          <span class="snake-hud__value" data-snake-level>01</span>
+      <div class="snake-hud__panel">
+        <div class="snake-hud__crest" aria-hidden="true"><span class="snake-hud__bug">🐛</span></div>
+        <div class="snake-hud__stats">
+          <div class="snake-hud__stat snake-hud__stat--level">
+            <span class="snake-hud__label">${escapeHtml(txt('levelShort', 'LV'))}</span>
+            <span class="snake-hud__value" data-snake-level>01</span>
+          </div>
+          <div class="snake-hud__stat snake-hud__stat--pts">
+            <span class="snake-hud__label">${escapeHtml(txt('scoreShort', 'PTS'))}</span>
+            <span class="snake-hud__value" data-snake-score>0000</span>
+          </div>
         </div>
-        <div class="snake-hud__stat">
-          <span class="snake-hud__label">${escapeHtml(txt('scoreShort', 'PTS'))}</span>
-          <span class="snake-hud__value" data-snake-score>0000</span>
-        </div>
-      </div>
-      <span class="snake-hud__hint" data-snake-hint></span>
-      <button type="button" class="snake-hud__close" data-snake-quit aria-label="${escapeHtml(txt('close', 'Schließen'))}">
-        <svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.25" stroke-linecap="square"/></svg>
-      </button>`;
+        <button type="button" class="snake-hud__close" data-snake-quit aria-label="${escapeHtml(txt('close', 'Schließen'))}">
+          <span aria-hidden="true">✕</span>
+        </button>
+      </div>`;
     const scoreEl = hud.querySelector('[data-snake-score]');
     const levelEl = hud.querySelector('[data-snake-level]');
-    const hintEl = hud.querySelector('[data-snake-hint]');
     const quitBtn = hud.querySelector('[data-snake-quit]');
-    hintEl.textContent = txt('hint', 'Pfeiltasten: steuern · Esc: beenden');
     quitBtn.addEventListener('click', () => cleanup());
     hud.setAttribute('role', 'status');
 
@@ -269,7 +301,7 @@
 
     let snake = [];
     let dir = { x: 0, y: -1 };
-    let pendingDir = null;
+    const dirQueue = [];
     let grow = 0;
     let score = 0;
     let level = 1;
@@ -287,19 +319,16 @@
     let movementEnabled = false;
 
     function cellHitsObstacle(c, r) {
-      const cx = c * CELL + CELL / 2;
-      const cy = r * CELL + CELL / 2;
-      for (const o of obstacleRects) {
-        if (
-          cx + HIT_RADIUS > o.left &&
-          cx - HIT_RADIUS < o.right &&
-          cy + HIT_RADIUS > o.top &&
-          cy - HIT_RADIUS < o.bottom
-        ) {
-          return true;
-        }
-      }
-      return false;
+      const x0 = c * CELL;
+      const y0 = r * CELL;
+      const samples = [
+        [x0 + CELL / 2, y0 + CELL / 2],
+        [x0 + 3, y0 + 3],
+        [x0 + CELL - 3, y0 + 3],
+        [x0 + 3, y0 + CELL - 3],
+        [x0 + CELL - 3, y0 + CELL - 3],
+      ];
+      return samples.some(([x, y]) => hitsCardBoundary(x, y) || isObstacleAt(x, y));
     }
 
     window.__snakeDebug = () => ({
@@ -313,10 +342,22 @@
       len: snake.length,
       head: snake[0],
       bugs: bugs.map((b) => ({ c: b.c, r: b.r })),
-      obstacles: obstacleRects.length,
+      cardZones: cardZones.length,
     });
 
-    const freeCell = (c, r) => c >= 0 && c < cols && r >= 0 && r < rows && !cellHitsObstacle(c, r);
+    function wrapCol(c) {
+      if (c < 0) return cols - 1;
+      if (c >= cols) return 0;
+      return c;
+    }
+
+    const freeCell = (c, r) => {
+      if (c < 0 || c >= cols || r < 0 || r >= rows) return false;
+      const cx = c * CELL + CELL / 2;
+      const cy = r * CELL + CELL / 2;
+      if (insideCardZone(cx, cy)) return false;
+      return !cellHitsObstacle(c, r);
+    };
     const onSnake = (c, r) => snake.some((seg) => seg.c === c && seg.r === r);
     const bugIndexAt = (c, r) => bugs.findIndex((b) => b.c === c && b.r === r);
 
@@ -356,8 +397,22 @@
         const r = 2 + Math.floor(Math.random() * Math.max(1, rows - 4));
         if (freeCell(c, r) && !onSnake(c, r) && bugIndexAt(c, r) < 0) {
           bugs.push({ c, r });
-          return;
+          return true;
         }
+      }
+      return false;
+    }
+
+    function fillBugs() {
+      bugs = bugs.filter((b) => {
+        const cx = b.c * CELL + CELL / 2;
+        const cy = b.r * CELL + CELL / 2;
+        return !insideCardZone(cx, cy);
+      });
+      let guard = 0;
+      while (bugs.length < BUG_COUNT && guard < BUG_COUNT * 40) {
+        spawnBug();
+        guard += 1;
       }
     }
 
@@ -366,7 +421,25 @@
       ArrowDown: { x: 0, y: 1 },
       ArrowLeft: { x: -1, y: 0 },
       ArrowRight: { x: 1, y: 0 },
+      w: { x: 0, y: -1 },
+      W: { x: 0, y: -1 },
+      s: { x: 0, y: 1 },
+      S: { x: 0, y: 1 },
+      a: { x: -1, y: 0 },
+      A: { x: -1, y: 0 },
+      d: { x: 1, y: 0 },
+      D: { x: 1, y: 0 },
     };
+
+    function queueDir(d) {
+      const ref = dirQueue.length ? dirQueue[dirQueue.length - 1] : dir;
+      if (d.x === -ref.x && d.y === -ref.y) return;
+      if (dirQueue.length < 2) {
+        dirQueue.push(d);
+        return;
+      }
+      dirQueue[1] = d;
+    }
 
     function onKey(e) {
       if (overlay) return;
@@ -378,9 +451,7 @@
       const d = DIRS[e.key];
       if (!d) return;
       e.preventDefault();
-      const current = pendingDir || dir;
-      if (d.x === -current.x && d.y === -current.y) return;
-      pendingDir = d;
+      queueDir(d);
     }
 
     function applyLevel(lvl, flash = false) {
@@ -388,10 +459,6 @@
       speed = speedForLevel(level);
       bgm.playbackRate = playbackRateForLevel(level);
       levelEl.textContent = formatLevel(level);
-      if (movementEnabled && running && !dead) {
-        window.clearTimeout(tickTimer);
-        scheduleTick();
-      }
       if (flash) {
         hud.classList.add('is-level-up');
         window.setTimeout(() => hud.classList.remove('is-level-up'), 520);
@@ -408,18 +475,15 @@
 
     function tick() {
       if (!running || dead || !movementEnabled) return;
-      if (pendingDir) {
-        dir = pendingDir;
-        pendingDir = null;
-      }
+      if (dirQueue.length) dir = dirQueue.shift();
       const head = snake[0];
-      const nc = head.c + dir.x;
+      let nc = wrapCol(head.c + dir.x);
       const nr = head.r + dir.y;
       const tailFrees = grow === 0;
       const hitsSelf = snake.some(
         (seg, i) => !(tailFrees && i === snake.length - 1) && seg.c === nc && seg.r === nr,
       );
-      if (nc < 0 || nc >= cols || nr < 0 || nr >= rows || cellHitsObstacle(nc, nr) || hitsSelf) {
+      if (nr < 0 || nr >= rows || cellHitsObstacle(nc, nr) || hitsSelf) {
         crash();
         return;
       }
@@ -516,6 +580,9 @@
         ctx.fillStyle = isHead ? (dead ? COL_DEAD : colHead) : colBody;
         roundRectPath(seg.c * CELL + pad, seg.r * CELL + pad, CELL - 2 * pad, CELL - 2 * pad, 6);
         ctx.fill();
+        ctx.strokeStyle = colStroke;
+        ctx.lineWidth = 1.25;
+        ctx.stroke();
         ctx.restore();
       });
 
@@ -569,8 +636,12 @@
       overlay.className = 'snake-overlay';
       overlay.innerHTML = `
         <div class="snake-dialog" role="dialog" aria-modal="true" aria-labelledby="snake-go-title">
-          <p class="snake-dialog__pixel-title" id="snake-go-title">${escapeHtml(txt('gameOver', 'GAME OVER'))}</p>
-          <div class="snake-scoreboard" aria-label="${escapeHtml(txt('scoreboardAria', 'Punktestand'))}">
+          <div class="snake-dialog__frame">
+            <div class="snake-dialog__header" aria-hidden="true">
+              <span>🐛</span><span>🐛</span><span>🐛</span>
+            </div>
+            <p class="snake-dialog__pixel-title" id="snake-go-title">${escapeHtml(txt('gameOver', 'GAME OVER'))}</p>
+            <div class="snake-scoreboard" aria-label="${escapeHtml(txt('scoreboardAria', 'Punktestand'))}">
             <div class="snake-scoreboard__card${isNewBest ? ' is-highlight' : ''}">
               <span class="snake-scoreboard__label">${escapeHtml(txt('scoreShort', 'PTS'))}</span>
               <span class="snake-scoreboard__value">${formatScore(score)}</span>
@@ -588,6 +659,7 @@
           <div class="snake-dialog__actions">
             <button type="button" class="snake-btn snake-btn--primary" data-snake-again>${escapeHtml(txt('playAgain', 'NOCHMAL'))}</button>
             <button type="button" class="snake-btn snake-btn--ghost" data-snake-close>${escapeHtml(txt('close', 'ENDE'))}</button>
+          </div>
           </div>
         </div>`;
       document.body.appendChild(overlay);
@@ -636,6 +708,7 @@
       return;
     }
     for (let i = 0; i < BUG_COUNT; i++) spawnBug();
+    fillBugs();
     document.body.append(canvas, hud);
     document.addEventListener('keydown', onKey, true);
     window.addEventListener('resize', onResize);

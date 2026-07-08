@@ -222,8 +222,8 @@ const langSwitchHtml = (tag = 'div') => `<${tag} class="lang-switch" role="group
 const heroAnnotationHtml = `<a class="hero__me" href="#ueber-mich">
         <span class="hero__me-main">
           <svg class="hero__arrow" viewBox="0 0 182 34" fill="none" aria-hidden="true" focusable="false">
-            <path class="hero__arrow-line" pathLength="1" d="M4 20 C 28 22, 50 13, 74 15 S 122 21, 148 16 C 158 14, 166 13, 174 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path class="hero__arrow-head" d="M159 4 C 163 7, 168 9, 174 14 C 169 18, 166 22, 164 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero__arrow-line" pathLength="1" d="M4 20 C 28 22, 50 13, 74 15 S 122 21, 148 16 C 158 14, 166 13, 174 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero__arrow-head" d="M159 4 C 163 7, 168 9, 174 14 C 169 18, 166 22, 164 26" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="hero__me-frame">
             <svg class="hero__me-ring" viewBox="0 0 116 116" fill="none" aria-hidden="true">
@@ -269,16 +269,26 @@ const skillsHtml = site.skillGroups
   )
   .join('');
 
-const timelineLineSvg = `<svg class="about__timeline-line" aria-hidden="true" viewBox="0 0 16 100" preserveAspectRatio="none">
-            <path class="about__timeline-line__main" d="M7 0 C 9.8 3.2, 4.2 6.8, 7.2 10.5 S 4.5 17.2, 7 21 S 9.6 27.8, 4.8 31.2 S 7.2 38.2, 9.4 42 S 4.6 48.8, 7 52.5 S 9.8 59.2, 4.4 62.8 S 7.4 69.5, 9.2 73 S 4.8 80, 7 83.5 S 9.6 90, 5.2 93.8 S 6.8 97, 7 100" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path class="about__timeline-line__ghost" d="M6.3 0.5 C 9.2 3.8, 4.8 7.2, 6.8 11 S 5 17.8, 6.5 21.5 S 9.2 28.2, 5.2 31.8 S 6.8 38.8, 9 42.5 S 5.4 49.2, 6.5 53 S 9.4 59.8, 5 63.2 S 6.8 70, 8.8 73.5 S 5.4 80.5, 6.5 84 S 9.2 90.5, 5.6 94.2 S 6.2 97.5, 6.5 99.5" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+const timelineLineSvg = `<svg class="about__timeline-line" aria-hidden="true" viewBox="0 0 6 100" preserveAspectRatio="none">
+            <path d="M3 0 C 3.7 11, 2.3 22, 3.1 33 S 2.5 48, 3.3 58 S 2.7 73, 3.2 84 S 2.9 93, 3 100" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
           </svg>`;
 
+const timelineDotHollow = `<svg class="about__timeline-dot" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <circle class="about__timeline-dot-mask" cx="6" cy="6" r="4.2"/>
+              <path d="M6 1.4 C 8.8 1, 10.8 3.2, 10.6 6.1 C 10.4 9, 8 10.9, 5.2 10.6 C 2.4 10.3, 1 7.8, 1.3 5 C 1.5 2.8, 3.5 1.4, 6 1.4" fill="none" stroke="currentColor" stroke-width="1.45" stroke-linecap="round"/>
+            </svg>`;
+
+const timelineDotFilled = `<svg class="about__timeline-dot about__timeline-dot--filled" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M6 1.4 C 8.7 1, 10.7 3.2, 10.5 6.1 C 10.3 9.1, 7.9 11.1, 5.1 10.7 C 2.4 10.3, 0.9 7.9, 1.2 5.1 C 1.4 2.9, 3.4 1.5, 6 1.4" fill="currentColor"/>
+            </svg>`;
+
 const backgroundHtml = (site.background || [])
-  .map(
-    (item, index) =>
-      `<li class="about__timeline-item${item.current ? ' about__timeline-item--current' : ''}" data-bg-index="${index}"><span class="about__timeline-period">${escapeHtml(item.period?.de || '')}</span><span class="about__timeline-text">${escapeHtml(item.text?.de || '')}</span></li>`,
-  )
+  .map((item, index) => {
+    const dot = item.current ? timelineDotFilled : timelineDotHollow;
+    return `<li class="about__timeline-item${item.current ? ' about__timeline-item--current' : ''}" data-bg-index="${index}">
+            <span class="about__timeline-rail" aria-hidden="true">${dot}</span>
+            <span class="about__timeline-period">${escapeHtml(item.period?.de || '')}</span><span class="about__timeline-text">${escapeHtml(item.text?.de || '')}</span></li>`;
+  })
   .join('\n          ');
 
 const interestsHtml = (site.personalInterests || [])
@@ -444,10 +454,12 @@ ${headExtras}
       </div>
       <div class="about__col">
         <h3 class="about__label" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h3>
-        <ul class="about__timeline" id="profile-background">
-          ${backgroundHtml}
+        <div class="about__timeline-wrap">
           ${timelineLineSvg}
-        </ul>
+          <ul class="about__timeline" id="profile-background">
+            ${backgroundHtml}
+          </ul>
+        </div>
       </div>
     </div>
   </section>
