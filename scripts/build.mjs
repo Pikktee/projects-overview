@@ -194,7 +194,7 @@ const html = `<!DOCTYPE html>
   <link rel="alternate" hreflang="en" href="https://www.henrikheil.net/?lang=en" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
 </head>
@@ -265,14 +265,15 @@ ${headExtras}
     </div>
   </main>
 
-  <section class="about" aria-label="${escapeHtml(tDe.nav.profile)}">
+  <section class="about" aria-labelledby="about-heading">
+    <h2 class="section__heading" id="about-heading" data-i18n="about.title">${escapeHtml(tDe.about.title)}</h2>
     <div class="about__grid">
       <div class="about__col">
-        <h2 class="about__heading" data-i18n="skills.heading">${escapeHtml(tDe.skills.heading)}</h2>
+        <h3 class="about__label" data-i18n="skills.heading">${escapeHtml(tDe.skills.heading)}</h3>
         <dl class="skill-list" id="profile-skills"></dl>
       </div>
       <div class="about__col">
-        <h2 class="about__heading" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h2>
+        <h3 class="about__label" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h3>
         <ul class="about__timeline" id="profile-background"></ul>
       </div>
     </div>
@@ -329,7 +330,7 @@ const impressum = `<!DOCTYPE html>
   <title>Impressum · Henrik Heil</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
 </head>

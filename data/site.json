@@ -7,17 +7,17 @@
   },
   "skillGroups": [
     {
-      "key": "development",
-      "items": {
-        "de": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST-APIs", "Deployment", "Spec-Driven Development"],
-        "en": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST APIs", "Deployment", "Spec-driven development"]
-      }
-    },
-    {
       "key": "product",
       "items": {
         "de": ["UX-Konzeption", "Usability", "Prototyping"],
         "en": ["UX design", "Usability", "Prototyping"]
+      }
+    },
+    {
+      "key": "development",
+      "items": {
+        "de": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST-APIs", "Deployment", "Spec-Driven Development"],
+        "en": ["PHP", "MySQL", "Laravel", "TypeScript", "React", "REST APIs", "Deployment", "Spec-driven development"]
       }
     },
     {
@@ -80,11 +80,14 @@
         "contactAria": "Kontakt"
       },
       "profile": {
-        "role": "Medieninformatiker · Software-Architektur · UX",
+        "role": "Medieninformatiker · UX-Engineer",
         "tagline": "Medieninformatiker — Code, UX und Video aus einer Hand.",
-        "bio": "Konzeption, Code und Deployment — aus einer Hand.",
+        "bio": "Wo UX auf Code trifft — für alle zugänglich.",
         "more": "Schwerpunkte & Hintergrund",
         "credentials": ["Diplom Medieninformatik", "Frankfurt am Main"]
+      },
+      "about": {
+        "title": "Über mich"
       },
       "skills": {
         "heading": "Schwerpunkte",
@@ -205,9 +208,12 @@
       "profile": {
         "role": "Media informatics · Software architecture · UX",
         "tagline": "Media informatics engineer — code, UX, and video from one source.",
-        "bio": "Concept, code, and deployment — from one source.",
+        "bio": "Where UX meets code — accessible by design.",
         "more": "Focus areas & background",
         "credentials": ["M.Sc. Media Informatics", "Frankfurt am Main"]
+      },
+      "about": {
+        "title": "About me"
       },
       "skills": {
         "heading": "Focus areas",
