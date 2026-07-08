@@ -2361,75 +2361,89 @@ html[data-theme="light"] .btn--primary {
   color: var(--accent-text);
 }
 
-.snake-dialog__score {
-  margin: 0 0 1.1rem;
-  font-size: 1.02rem;
-  color: var(--text);
+.snake-scoreboard {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  gap: 0;
+  margin: 0.4rem 0 1.4rem;
+  padding: 0.15rem;
+  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
 }
 
-.snake-dialog__score strong {
-  font-variant-numeric: tabular-nums;
+.snake-scoreboard__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  padding: 1rem 0.75rem 0.9rem;
+  text-align: center;
 }
 
-.snake-dialog__subtitle {
-  margin: 0 0 0.6rem;
-  font-size: 0.75rem;
+.snake-scoreboard__card--best {
+  background: color-mix(in srgb, var(--accent-text) 10%, transparent);
+  border-radius: calc(var(--radius-md) - 2px);
+}
+
+.snake-scoreboard__card--record {
+  position: relative;
+}
+
+.snake-scoreboard__label {
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted);
 }
 
-.snake-scores {
-  margin: 0 0 1.2rem;
-  padding: 0;
-  list-style: none;
-}
-
-.snake-scores li {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 0.4rem 0;
-  font-size: 0.92rem;
-  color: var(--text-muted);
-  border-bottom: 1px solid var(--border);
-  font-variant-numeric: tabular-nums;
-}
-
-.snake-scores li.is-you {
-  color: var(--accent-text);
-  font-weight: 600;
-}
-
-.snake-scores__empty {
-  margin: 0 0 1.2rem;
-  font-size: 0.92rem;
+.snake-scoreboard__value {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
   font-style: italic;
-  color: var(--text-muted);
-}
-
-.snake-form {
-  display: flex;
-  gap: 0.55rem;
-  margin-bottom: 1.2rem;
-}
-
-.snake-form input {
-  flex: 1;
-  min-width: 0;
-  min-height: 2.75rem;
-  padding: 0.45rem 0.75rem;
-  font: inherit;
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
   color: var(--text);
-  background: var(--bg-elevated);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-sm);
 }
 
-.snake-form input:focus-visible {
-  outline: 2px solid var(--focus-ring);
-  outline-offset: 2px;
+.snake-scoreboard__card--record .snake-scoreboard__value {
+  color: var(--accent-text);
+}
+
+.snake-scoreboard__divider {
+  width: 1px;
+  margin: 0.75rem 0;
+  background: var(--border);
+}
+
+.snake-scoreboard__badge {
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--accent-text);
+  border-radius: 999px;
+  animation: snake-badge-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes snake-badge-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .snake-dialog__actions {

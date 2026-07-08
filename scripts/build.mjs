@@ -75,6 +75,15 @@ for (const file of ['styles.css', 'app.js', 'snake.js', 'favicon.svg', 'apple-to
   copyFileSync(join(root, 'src', file), join(publicDir, file));
 }
 
+const snakeAudioDir = join(publicDir, 'snake-audio');
+mkdirSync(snakeAudioDir, { recursive: true });
+for (const file of ['bgm.mp3', 'eat.mp3', 'crash.mp3']) {
+  const src = join(publicDir, 'snake-audio', file);
+  if (!existsSync(src)) {
+    console.warn(`Warnung: snake-audio/${file} fehlt — bitte „node scripts/generate-snake-audio.mjs“ ausführen.`);
+  }
+}
+
 const projectsJsonStr = JSON.stringify(portfolio);
 writeFileSync(join(publicDir, 'projects.json'), projectsJsonStr);
 writeFileSync(join(publicDir, 'site.json'), JSON.stringify(site));

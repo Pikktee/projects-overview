@@ -447,17 +447,14 @@
         trigger: eggBtn,
         strings: {
           hint: t('snake.hint'),
-          start: t('snake.start'),
           score: t('snake.score'),
           gameOver: t('snake.gameOver'),
           yourScore: t('snake.yourScore'),
-          highscores: t('snake.highscores'),
-          namePlaceholder: t('snake.namePlaceholder'),
-          nameLabel: t('snake.nameLabel'),
-          save: t('snake.save'),
+          bestScore: t('snake.bestScore'),
+          newBest: t('snake.newBest'),
+          scoreboardAria: t('snake.scoreboardAria'),
           playAgain: t('snake.playAgain'),
           close: t('snake.close'),
-          empty: t('snake.empty'),
         },
       });
     if (window.__startSnake) {

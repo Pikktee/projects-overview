@@ -132,7 +132,7 @@
         "title": "Über mich",
         "intro": "Ich lebe in Frankfurt am Main — nach vier Jahren als digitaler Nomade durch Asien, Süd- und Zentralamerika, in denen ich remote für meine Kunden gearbeitet habe. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen — und warum zugängliche Gestaltung kein Nice-to-have ist, sondern die Grundlage guter Produkte.",
         "photoAlt": "Porträt von Henrik Heil",
-        "interestsHeading": "Was mich bewegt"
+        "interestsHeading": "Interessen"
       },
       "skills": {
         "heading": "Schwerpunkte",
@@ -188,17 +188,14 @@
       "snake": {
         "eggHint": "— psst: startet ein kleines Snake-Spiel auf dieser Seite",
         "hint": "Pfeiltasten: steuern · Esc: beenden",
-        "start": "Drück eine Pfeiltaste!",
         "score": "Punkte",
         "gameOver": "Game Over!",
         "yourScore": "Deine Punkte",
-        "highscores": "Bestenliste",
-        "namePlaceholder": "Dein Name",
-        "nameLabel": "Name für die Bestenliste",
-        "save": "Eintragen",
+        "bestScore": "Rekord",
+        "newBest": "Neuer Rekord!",
+        "scoreboardAria": "Punktestand",
         "playAgain": "Nochmal spielen",
-        "close": "Schließen",
-        "empty": "Noch keine Einträge — du bist die erste Schlange!"
+        "close": "Schließen"
       },
       "drawer": {
         "close": "Schließen",
@@ -286,7 +283,7 @@
         "title": "About me",
         "intro": "I live in Frankfurt, Germany — after four years as a digital nomad across Asia, South and Central America, working remotely for my clients. That time sharpened my sense of how differently people use technology — and why accessible design is not a nice-to-have, but the foundation of good products.",
         "photoAlt": "Portrait of Henrik Heil",
-        "interestsHeading": "What moves me"
+        "interestsHeading": "Interests"
       },
       "skills": {
         "heading": "Focus areas",
@@ -342,17 +339,14 @@
       "snake": {
         "eggHint": "— psst: starts a little Snake game on this page",
         "hint": "Arrow keys: steer · Esc: quit",
-        "start": "Press an arrow key!",
         "score": "Score",
         "gameOver": "Game over!",
         "yourScore": "Your score",
-        "highscores": "High scores",
-        "namePlaceholder": "Your name",
-        "nameLabel": "Name for the high score list",
-        "save": "Save",
+        "bestScore": "Best",
+        "newBest": "New record!",
+        "scoreboardAria": "Score summary",
         "playAgain": "Play again",
-        "close": "Close",
-        "empty": "No entries yet — you are the first snake!"
+        "close": "Close"
       },
       "drawer": {
         "close": "Close",
