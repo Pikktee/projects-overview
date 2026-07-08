@@ -214,6 +214,16 @@
 
   // Das Markup der Über-mich-Sektion kommt vollständig aus dem Build (inkl.
   // Icons); hier werden beim Sprachwechsel nur die Texte ausgetauscht.
+  function skillItemsHtml(items) {
+    const box = document.createElement('span');
+    return (items || [])
+      .map((item) => {
+        box.textContent = item ?? '';
+        return box.innerHTML;
+      })
+      .join('<span class="skill-list__sep" aria-hidden="true"> · </span>');
+  }
+
   function renderProfileSections() {
     document.querySelectorAll('[data-skill-term]').forEach((el) => {
       el.textContent = t(`skills.groups.${el.dataset.skillTerm}`);
@@ -222,7 +232,7 @@
     document.querySelectorAll('[data-skill-items]').forEach((el) => {
       const group = site.skillGroups?.find((g) => g.key === el.dataset.skillItems);
       if (!group) return;
-      el.textContent = (group.items?.[locale] || group.items?.de || []).join(' · ');
+      el.innerHTML = skillItemsHtml(group.items?.[locale] || group.items?.de || []);
     });
 
     document.querySelectorAll('[data-bg-index]').forEach((el) => {

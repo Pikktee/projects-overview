@@ -131,6 +131,14 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
+function renderSkillItems(items) {
+  const list = items || [];
+  if (list.length === 0) return '';
+  return list
+    .map(escapeHtml)
+    .join('<span class="skill-list__sep" aria-hidden="true"> · </span>');
+}
+
 const heroLinkIcons = {
   email: `<svg class="hero__link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   github: `<svg class="hero__link-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>`,
@@ -273,9 +281,7 @@ const INTEREST_ICONS = {
   filming:
     '<rect x="1.6" y="5" width="8.8" height="6.4" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M10.4 7.2 14.4 5.2v5.6l-4-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>',
   travel:
-    '<path d="M14.4 1.8 1.6 7.3l4.7 1.6 1.5 4.9 6.6-12Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6.3 8.9 14.4 1.8" stroke="currentColor" stroke-width="1.2"/>',
-  sports:
-    '<path d="M1.5 8h1.7M12.8 8h1.7M6 8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="3.4" y="4.9" width="2.4" height="6.2" rx="0.7" stroke="currentColor" stroke-width="1.2"/><rect x="10.2" y="4.9" width="2.4" height="6.2" rx="0.7" stroke="currentColor" stroke-width="1.2"/>',
+    '<circle cx="8" cy="8" r="5.6" stroke="currentColor" stroke-width="1.2"/><ellipse cx="8" cy="8" rx="2.3" ry="5.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.4 8h11.2M3.7 5.5h8.6M3.7 10.5h8.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>',
   games:
     '<rect x="2.4" y="2.4" width="11.2" height="11.2" rx="2" stroke="currentColor" stroke-width="1.2"/><circle cx="5.55" cy="5.55" r="1.05" fill="currentColor"/><circle cx="8" cy="8" r="1.05" fill="currentColor"/><circle cx="10.45" cy="10.45" r="1.05" fill="currentColor"/>',
 };
@@ -294,7 +300,7 @@ const skillsHtml = site.skillGroups
     (group) => `
             <div class="skill-list__row">
               <dt class="skill-list__term" data-skill-term="${escapeHtml(group.key)}">${escapeHtml(tDe.skills.groups[group.key])}</dt>
-              <dd class="skill-list__items" data-skill-items="${escapeHtml(group.key)}">${(group.items?.de || []).map(escapeHtml).join(' · ')}</dd>
+              <dd class="skill-list__items" data-skill-items="${escapeHtml(group.key)}">${renderSkillItems(group.items?.de)}</dd>
             </div>`,
   )
   .join('');

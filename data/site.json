@@ -9,7 +9,6 @@
     { "key": "piano", "de": "Klavier spielen", "en": "Playing piano", "youtubeId": "NhBVHSyoRHM" },
     { "key": "filming", "de": "Filmen", "en": "Filmmaking" },
     { "key": "travel", "de": "Reisen", "en": "Travel" },
-    { "key": "sports", "de": "Sport", "en": "Sports" },
     { "key": "games", "de": "Video- & Brettspiele", "en": "Video & board games", "easterEgg": true }
   ],
   "skillGroups": [
@@ -133,7 +132,7 @@
         "title": "Über mich",
         "intro": "Ich lebe in Frankfurt am Main — nach vier Jahren als digitaler Nomade durch Asien, Süd- und Zentralamerika, in denen ich remote für meine Kunden gearbeitet habe. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen — und warum zugängliche Gestaltung kein Nice-to-have ist, sondern die Grundlage guter Produkte.",
         "photoAlt": "Porträt von Henrik Heil",
-        "interestsHeading": "Abseits des Macbooks"
+        "interestsHeading": "Abseits der Arbeit"
       },
       "skills": {
         "heading": "Schwerpunkte",
@@ -284,7 +283,7 @@
         "title": "About me",
         "intro": "I live in Frankfurt, Germany — after four years as a digital nomad across Asia, South and Central America, working remotely for my clients. That time sharpened my sense of how differently people use technology — and why accessible design is not a nice-to-have, but the foundation of good products.",
         "photoAlt": "Portrait of Henrik Heil",
-        "interestsHeading": "Away from the MacBook"
+        "interestsHeading": "Away from work"
       },
       "skills": {
         "heading": "Focus areas",
