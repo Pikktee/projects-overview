@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
-import { accessibleButtonBg, accessibleCtaColor } from './a11y-colors.mjs';
+import { accessibleButtonBg, accessibleCtaColor, accessibleCtaColorLight } from './a11y-colors.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -40,6 +40,7 @@ function mergeProject(p) {
   return {
     ...p,
     accentCta: accessibleCtaColor(p.accent),
+    accentCtaLight: accessibleCtaColorLight(p.accent),
     accentBtn: accessibleButtonBg(p.accent),
     facets: p.facets || [],
     github: m.github || p.github || null,
@@ -70,7 +71,7 @@ const sections = data.sections.map((section) => ({
 const portfolio = { sections };
 const allProjects = sections.flatMap((s) => s.projects);
 
-for (const file of ['styles.css', 'app.js', 'favicon.svg', 'apple-touch-icon.png']) {
+for (const file of ['styles.css', 'app.js', 'snake.js', 'favicon.svg', 'apple-touch-icon.png', 'me.jpg', 'me-thumb.jpg']) {
   copyFileSync(join(root, 'src', file), join(publicDir, file));
 }
 
@@ -82,6 +83,7 @@ writeFileSync(join(publicDir, 'site.json'), JSON.stringify(site));
 // sich der Inhalt, ändert sich die URL — der Browser lädt garantiert frisch.
 const assetVersion = createHash('sha1')
   .update(readFileSync(join(root, 'src/app.js')))
+  .update(readFileSync(join(root, 'src/snake.js')))
   .update(readFileSync(join(root, 'src/styles.css')))
   .update(readFileSync(join(root, 'data/site.json')))
   .update(projectsJsonStr)
@@ -90,7 +92,15 @@ const assetVersion = createHash('sha1')
 
 const headExtras = `  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <meta name="theme-color" content="#0f1114" />`;
+  <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f4f1e9" media="(prefers-color-scheme: light)" />`;
+
+// Läuft vor dem Stylesheet, damit das gewählte Theme ohne Aufblitzen (FOUC)
+// steht: gespeicherte Wahl → sonst Systempräferenz → sonst dunkel.
+const themeInitScript = `<script>(function(){var t=null;try{t=localStorage.getItem("portfolio-theme")}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)})();</script>`;
+
+const fontsHref =
+  'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500&display=swap';
 
 function escapeHtml(str) {
   return String(str)
@@ -116,13 +126,13 @@ function renderCard(p) {
   const facetAttr = (p.facets || []).join(',');
 
   return `
-    <article class="card" style="--accent:${p.accent};--accent-cta:${p.accentCta};--accent-btn:${p.accentBtn}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
+    <article class="card" style="--accent:${p.accent};--accent-cta:${p.accentCta};--accent-cta-light:${p.accentCtaLight};--accent-btn:${p.accentBtn}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
       <button type="button" class="card__btn" data-open="${p.slug}" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="${escapeHtml(`${p.name}: ${p.description}`)}" data-default-aria="${escapeHtml(`${p.name}: ${p.description}`)}"${p.descriptionEn ? ` data-en-aria="${escapeHtml(`${p.name}: ${p.descriptionEn}`)}"` : ''}>
         <div class="card__media">${img}</div>
         <div class="card__body">
           <h2 class="card__title">${escapeHtml(p.name)}</h2>
           <p class="card__desc" data-slug="${escapeHtml(p.slug)}" data-default-desc="${escapeHtml(p.description)}">${escapeHtml(p.description)}</p>
-          <span class="card__cta" style="color:${p.accentCta}"><span class="card__cta-label" data-i18n-template="card.details" data-name="${escapeHtml(p.name)}">${escapeHtml(tDe.card.details.replace('{name}', p.name))}</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="${escapeHtml(p.name)}">${escapeHtml(tDe.card.details.replace('{name}', p.name))}</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>`;
@@ -183,6 +193,94 @@ const facetOverview = FACETS.map((f) => {
   .filter(Boolean)
   .join('\n');
 
+// Icons für den Theme-Toggle: das Icon zeigt jeweils das Ziel des Klicks.
+const themeToggleHtml = `<button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="true" aria-label="${escapeHtml(tDe.a11y.themeToggle)}" data-i18n-aria="a11y.themeToggle">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7 5.3 5.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.6 13.6A8.4 8.4 0 0 1 10.4 3.4a8.4 8.4 0 1 0 10.2 10.2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>`;
+
+const langSwitchHtml = (tag = 'div') => `<${tag} class="lang-switch" role="group" aria-label="${escapeHtml(tDe.a11y.langSwitch)}" data-i18n-aria="a11y.langSwitch">
+        ${site.locales
+          .map(
+            (code) =>
+              `<button type="button" class="lang-switch__btn${code === site.defaultLocale ? ' is-active' : ''}" data-lang="${code}" aria-pressed="${code === site.defaultLocale ? 'true' : 'false'}">${code.toUpperCase()}</button>`,
+          )
+          .join('\n        ')}
+      </${tag}>`;
+
+// Skizzierter Pfeil (Signatur-Element): rein dekorativ (aria-hidden), der
+// umschließende Link trägt die Semantik („das bin ich" + sr-only-Hinweis).
+// Wellige Kurve, die am Namensende startet und deren Spitze von links auf
+// die vertikale Mitte des Fotos rechts daneben zeigt — Pfeil und Foto liegen
+// in einer Flex-Zeile, die Spitzenhöhe (22 % der Pfeilbreite) wird in
+// styles.css per margin-top auf die Fotomitte gerechnet.
+// pathLength="1" erlaubt die Zeichen-Animation im CSS.
+const heroAnnotationHtml = `<a class="hero__me" href="#ueber-mich">
+        <svg class="hero__arrow" viewBox="0 0 200 56" fill="none" aria-hidden="true" focusable="false">
+          <path class="hero__arrow-line" pathLength="1" d="M4 10 C 30 28, 58 -2, 90 8 C 122 18, 148 20, 186 44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path class="hero__arrow-head" pathLength="1" d="M186 44 L172 43 M186 44 L179 32" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span class="hero__me-frame">
+          <img class="hero__me-photo" src="/me-thumb.jpg?v=${assetVersion}" alt="" width="106" height="106" />
+        </span>
+        <span class="hero__me-note" data-i18n="hero.meNote">${escapeHtml(tDe.hero.meNote)}</span>
+        <span class="sr-only" data-i18n="hero.meHint">${escapeHtml(tDe.hero.meHint)}</span>
+      </a>`;
+
+// Interessen-Icons: schlichte Stroke-SVGs im Stil der Facet-Icons.
+const INTEREST_ICONS = {
+  piano:
+    '<rect x="1.6" y="4.6" width="12.8" height="7" rx="0.8" stroke="currentColor" stroke-width="1.2"/><path d="M5.9 7.9v3.7M10.1 7.9v3.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M5.9 4.6v3.3M10.1 4.6v3.3M8 4.6v3.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
+  filming:
+    '<rect x="1.6" y="5" width="8.8" height="6.4" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M10.4 7.2 14.4 5.2v5.6l-4-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>',
+  travel:
+    '<path d="M14.4 1.8 1.6 7.3l4.7 1.6 1.5 4.9 6.6-12Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6.3 8.9 14.4 1.8" stroke="currentColor" stroke-width="1.2"/>',
+  sports:
+    '<path d="M1.5 8h1.7M12.8 8h1.7M6 8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="3.4" y="4.9" width="2.4" height="6.2" rx="0.7" stroke="currentColor" stroke-width="1.2"/><rect x="10.2" y="4.9" width="2.4" height="6.2" rx="0.7" stroke="currentColor" stroke-width="1.2"/>',
+  games:
+    '<rect x="2.4" y="2.4" width="11.2" height="11.2" rx="2" stroke="currentColor" stroke-width="1.2"/><circle cx="5.55" cy="5.55" r="1.05" fill="currentColor"/><circle cx="8" cy="8" r="1.05" fill="currentColor"/><circle cx="10.45" cy="10.45" r="1.05" fill="currentColor"/>',
+};
+
+function interestIcon(key) {
+  const inner = INTEREST_ICONS[key];
+  if (!inner) return '';
+  return `<svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">${inner}</svg>`;
+}
+
+// Über-mich-Inhalte serverseitig (DE) rendern: lesbar ohne JS und für Crawler.
+// app.js ersetzt beim Sprachwechsel nur die Texte über die data-Attribute —
+// Icons und Struktur bleiben im DOM (eine einzige Markup-Quelle).
+const skillsHtml = site.skillGroups
+  .map(
+    (group) => `
+            <div class="skill-list__row">
+              <dt class="skill-list__term" data-skill-term="${escapeHtml(group.key)}">${escapeHtml(tDe.skills.groups[group.key])}</dt>
+              <dd class="skill-list__items" data-skill-items="${escapeHtml(group.key)}">${(group.items?.de || []).map(escapeHtml).join(' · ')}</dd>
+            </div>`,
+  )
+  .join('');
+
+const backgroundHtml = (site.background || [])
+  .map(
+    (item, index) =>
+      `<li class="about__timeline-item${item.current ? ' about__timeline-item--current' : ''}" data-bg-index="${index}"><span class="about__timeline-period">${escapeHtml(item.period?.de || '')}</span><span class="about__timeline-text">${escapeHtml(item.text?.de || '')}</span></li>`,
+  )
+  .join('\n          ');
+
+const interestsHtml = (site.personalInterests || [])
+  .map((item) => {
+    const label = `${interestIcon(item.key)}<span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span>`;
+    if (item.url) {
+      const videoLabel = escapeHtml(item.videoLabel?.de || 'Video');
+      return `<li>${label} <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">(<span data-interest-video-label="${escapeHtml(item.key)}">${videoLabel}</span>)<span class="sr-only" data-i18n="a11y.externalHint"> ${escapeHtml(tDe.a11y.externalHint)}</span></a></li>`;
+    }
+    if (item.easterEgg) {
+      return `<li>${interestIcon(item.key)}<button type="button" class="about__interest-egg" id="egg-snake"><span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span><span class="sr-only" data-i18n="snake.eggHint"> ${escapeHtml(tDe.snake.eggHint)}</span></button></li>`;
+    }
+    return `<li>${label}</li>`;
+  })
+  .join('\n          ');
+
 const html = `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -192,9 +290,10 @@ const html = `<!DOCTYPE html>
   <title>${escapeHtml(tDe.meta.title)}</title>
   <link rel="alternate" hreflang="de" href="https://www.henrikheil.net/" />
   <link rel="alternate" hreflang="en" href="https://www.henrikheil.net/?lang=en" />
+  ${themeInitScript}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="${fontsHref}" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
 </head>
@@ -206,16 +305,15 @@ ${headExtras}
   <header class="hero" id="profil">
     <div class="hero__bar">
       <p class="hero__eyebrow">Portfolio</p>
-      <div class="lang-switch" role="group" aria-label="${escapeHtml(tDe.a11y.langSwitch)}" data-i18n-aria="a11y.langSwitch">
-        ${site.locales
-          .map(
-            (code) =>
-              `<button type="button" class="lang-switch__btn${code === site.defaultLocale ? ' is-active' : ''}" data-lang="${code}" aria-pressed="${code === site.defaultLocale ? 'true' : 'false'}">${code.toUpperCase()}</button>`,
-          )
-          .join('\n        ')}
+      <div class="hero__controls">
+      ${themeToggleHtml}
+      ${langSwitchHtml('div')}
       </div>
     </div>
-    <h1 class="hero__name">${escapeHtml(site.profile.name)}</h1>
+    <div class="hero__title-row">
+      <h1 class="hero__name">${escapeHtml(site.profile.name)}</h1>
+      ${heroAnnotationHtml}
+    </div>
     <p class="hero__role" data-i18n="profile.role">${escapeHtml(tDe.profile.role)}</p>
     <p class="hero__bio" data-i18n="profile.bio">${escapeHtml(tDe.profile.bio)}</p>
     <nav class="hero__contact" id="kontakt" data-i18n-aria="a11y.contactAria" aria-label="${escapeHtml(tDe.a11y.contactAria)}">
@@ -265,16 +363,32 @@ ${headExtras}
     </div>
   </main>
 
-  <section class="about" aria-labelledby="about-heading">
+  <section class="about" id="ueber-mich" aria-labelledby="about-heading" tabindex="-1">
     <h2 class="section__heading" id="about-heading" data-i18n="about.title">${escapeHtml(tDe.about.title)}</h2>
+    <div class="about__personal">
+      <figure class="about__photo">
+        <img src="/me.jpg?v=${assetVersion}" alt="${escapeHtml(tDe.about.photoAlt)}" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
+        <figcaption>Frankfurt am Main</figcaption>
+      </figure>
+      <div class="about__personal-body">
+        <p class="about__intro" data-i18n="about.intro">${escapeHtml(tDe.about.intro)}</p>
+        <h3 class="about__label" data-i18n="about.interestsHeading">${escapeHtml(tDe.about.interestsHeading)}</h3>
+        <ul class="about__interests" id="profile-interests">
+          ${interestsHtml}
+        </ul>
+      </div>
+    </div>
     <div class="about__grid">
       <div class="about__col">
         <h3 class="about__label" data-i18n="skills.heading">${escapeHtml(tDe.skills.heading)}</h3>
-        <dl class="skill-list" id="profile-skills"></dl>
+        <dl class="skill-list" id="profile-skills">${skillsHtml}
+        </dl>
       </div>
       <div class="about__col">
         <h3 class="about__label" data-i18n="background.heading">${escapeHtml(tDe.background.heading)}</h3>
-        <ul class="about__timeline" id="profile-background"></ul>
+        <ul class="about__timeline" id="profile-background">
+          ${backgroundHtml}
+        </ul>
       </div>
     </div>
   </section>
@@ -328,9 +442,10 @@ const impressum = `<!DOCTYPE html>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Impressum · Henrik Heil</title>
+  ${themeInitScript}
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link href="${fontsHref}" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
 </head>
@@ -339,14 +454,10 @@ ${headExtras}
   <main class="legal">
     <div class="legal__top">
       <a class="legal__back" href="/" data-i18n="legal.back">${escapeHtml(tDe.legal.back)}</a>
-      <nav class="lang-switch" aria-label="${escapeHtml(tDe.a11y.langSwitch)}" data-i18n-aria="a11y.langSwitch">
-        ${site.locales
-          .map(
-            (code) =>
-              `<button type="button" class="lang-switch__btn${code === site.defaultLocale ? ' is-active' : ''}" data-lang="${code}" aria-pressed="${code === site.defaultLocale ? 'true' : 'false'}">${code.toUpperCase()}</button>`,
-          )
-          .join('\n        ')}
-      </nav>
+      <div class="hero__controls">
+      ${themeToggleHtml}
+      ${langSwitchHtml('nav')}
+      </div>
     </div>
     <h1 data-i18n="legal.heading">${escapeHtml(tDe.legal.heading)}</h1>
     <section>

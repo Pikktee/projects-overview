@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="description" content="Henrik Heil — Medieninformatiker, Full-Stack- und UX-Entwickler. Web-Apps, KI-Tools und Live-Demos: Patina, Velosia, hugur und mehr." />
-  <title>Henrik Heil · Medieninformatiker &amp; Full-Stack-Entwickler</title>
+  <meta name="description" content="Henrik Heil — UX-Engineer &amp; Designer aus Frankfurt. Web-Apps, KI-Tools und Live-Demos: Patina, Velosia, hugur und mehr — barrierefrei umgesetzt." />
+  <title>Henrik Heil · UX-Engineer &amp; Designer</title>
   <link rel="alternate" hreflang="de" href="https://www.henrikheil.net/" />
   <link rel="alternate" hreflang="en" href="https://www.henrikheil.net/?lang=en" />
+  <script>(function(){var t=null;try{t=localStorage.getItem("portfolio-theme")}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=51e03697" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=75c6cd7a" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <meta name="theme-color" content="#0f1114" />
+  <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f4f1e9" media="(prefers-color-scheme: light)" />
 </head>
 <body>
   <a class="skip-link" href="#projects" data-i18n="a11y.skipLink">Zum Hauptinhalt springen</a>
@@ -23,14 +25,33 @@
   <header class="hero" id="profil">
     <div class="hero__bar">
       <p class="hero__eyebrow">Portfolio</p>
+      <div class="hero__controls">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="true" aria-label="Dunkles Design" data-i18n-aria="a11y.themeToggle">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7 5.3 5.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.6 13.6A8.4 8.4 0 0 1 10.4 3.4a8.4 8.4 0 1 0 10.2 10.2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
       <div class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="a11y.langSwitch">
         <button type="button" class="lang-switch__btn is-active" data-lang="de" aria-pressed="true">DE</button>
         <button type="button" class="lang-switch__btn" data-lang="en" aria-pressed="false">EN</button>
       </div>
+      </div>
     </div>
-    <h1 class="hero__name">Henrik Heil</h1>
-    <p class="hero__role" data-i18n="profile.role">Medieninformatiker · UX-Engineer</p>
-    <p class="hero__bio" data-i18n="profile.bio">Wo UX auf Code trifft — für alle zugänglich.</p>
+    <div class="hero__title-row">
+      <h1 class="hero__name">Henrik Heil</h1>
+      <a class="hero__me" href="#ueber-mich">
+        <svg class="hero__arrow" viewBox="0 0 200 56" fill="none" aria-hidden="true" focusable="false">
+          <path class="hero__arrow-line" pathLength="1" d="M4 10 C 30 28, 58 -2, 90 8 C 122 18, 148 20, 186 44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <path class="hero__arrow-head" pathLength="1" d="M186 44 L172 43 M186 44 L179 32" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <span class="hero__me-frame">
+          <img class="hero__me-photo" src="/me-thumb.jpg?v=75c6cd7a" alt="" width="106" height="106" />
+        </span>
+        <span class="hero__me-note" data-i18n="hero.meNote">das bin ich</span>
+        <span class="sr-only" data-i18n="hero.meHint">— mehr über mich</span>
+      </a>
+    </div>
+    <p class="hero__role" data-i18n="profile.role">UX-Engineer &amp; Designer</p>
+    <p class="hero__bio" data-i18n="profile.bio">Ich gestalte und entwickle digitale Produkte — von der ersten Skizze bis zum barrierefreien Produktivsystem.</p>
     <nav class="hero__contact" id="kontakt" data-i18n-aria="a11y.contactAria" aria-label="Kontakt">
       <ul class="hero__contact-list">
         <li>
@@ -101,57 +122,57 @@
   <section class="section">
     <h2 class="section__heading" id="section-apps" data-i18n-section="apps">Apps &amp; Tools</h2>
     <div class="grid">
-    <article class="card" style="--accent:#8C939D;--accent-cta:#8c939d;--accent-btn:#8c939d" data-slug="patina" data-facets="ai">
+    <article class="card" style="--accent:#8C939D;--accent-cta:#8c939d;--accent-cta-light:#6d727b;--accent-btn:#8c939d" data-slug="patina" data-facets="ai">
       <button type="button" class="card__btn" data-open="patina" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Patina: Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende." data-default-aria="Patina: Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende." data-en-aria="Patina: Checks historical novels for anachronisms, backed by DWDS evidence and your final editorial judgment.">
         <div class="card__media"><img src="/screenshots/patina.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Patina</h2>
           <p class="card__desc" data-slug="patina" data-default-desc="Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende.">Prüft historische Romane auf Anachronismen — mit DWDS-Belegen und eigener Entscheidung am Ende.</p>
-          <span class="card__cta" style="color:#8c939d"><span class="card__cta-label" data-i18n-template="card.details" data-name="Patina">Mehr über Patina</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Patina">Mehr über Patina</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#09b0b7;--accent-cta:#09b0b7;--accent-btn:#09b0b7" data-slug="velosia" data-facets="ai,extension,android">
+    <article class="card" style="--accent:#09b0b7;--accent-cta:#09b0b7;--accent-cta-light:#127f86;--accent-btn:#09b0b7" data-slug="velosia" data-facets="ai,extension,android">
       <button type="button" class="card__btn" data-open="velosia" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Velosia: Foto genügt: KI erstellt Anzeigen und füllt Kleinanzeigen und Vinted per App oder Erweiterung aus." data-default-aria="Velosia: Foto genügt: KI erstellt Anzeigen und füllt Kleinanzeigen und Vinted per App oder Erweiterung aus." data-en-aria="Velosia: A photo is enough: AI creates listings and pre-fills Kleinanzeigen and Vinted via app or extension.">
         <div class="card__media"><img src="/screenshots/velosia.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Velosia</h2>
           <p class="card__desc" data-slug="velosia" data-default-desc="Foto genügt: KI erstellt Anzeigen und füllt Kleinanzeigen und Vinted per App oder Erweiterung aus.">Foto genügt: KI erstellt Anzeigen und füllt Kleinanzeigen und Vinted per App oder Erweiterung aus.</p>
-          <span class="card__cta" style="color:#09b0b7"><span class="card__cta-label" data-i18n-template="card.details" data-name="Velosia">Mehr über Velosia</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Velosia">Mehr über Velosia</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#F59E0B;--accent-cta:#f59e0b;--accent-btn:#f59e0b" data-slug="schnappster" data-facets="ai,extension">
+    <article class="card" style="--accent:#F59E0B;--accent-cta:#f59e0b;--accent-cta-light:#97681a;--accent-btn:#f59e0b" data-slug="schnappster" data-facets="ai,extension">
       <button type="button" class="card__btn" data-open="schnappster" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Schnappster: Überwacht Kleinanzeigen-Suchen, bewertet neue Inserate per KI und meldet echte Schnäppchen." data-default-aria="Schnappster: Überwacht Kleinanzeigen-Suchen, bewertet neue Inserate per KI und meldet echte Schnäppchen." data-en-aria="Schnappster: Monitors Kleinanzeigen searches, evaluates new listings with AI, and alerts you to genuine bargains.">
         <div class="card__media"><img src="/screenshots/schnappster.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Schnappster</h2>
           <p class="card__desc" data-slug="schnappster" data-default-desc="Überwacht Kleinanzeigen-Suchen, bewertet neue Inserate per KI und meldet echte Schnäppchen.">Überwacht Kleinanzeigen-Suchen, bewertet neue Inserate per KI und meldet echte Schnäppchen.</p>
-          <span class="card__cta" style="color:#f59e0b"><span class="card__cta-label" data-i18n-template="card.details" data-name="Schnappster">Mehr über Schnappster</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Schnappster">Mehr über Schnappster</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#6d5efc;--accent-cta:#8073f8;--accent-btn:#7a6cf9" data-slug="suntino" data-facets="ai,extension">
+    <article class="card" style="--accent:#6d5efc;--accent-cta:#8073f8;--accent-cta-light:#695bf2;--accent-btn:#7a6cf9" data-slug="suntino" data-facets="ai,extension">
       <button type="button" class="card__btn" data-open="suntino" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Suntino: Chrome-Erweiterung: Seiten, YouTube und PDFs im Side Panel sofort zusammenfassen." data-default-aria="Suntino: Chrome-Erweiterung: Seiten, YouTube und PDFs im Side Panel sofort zusammenfassen." data-en-aria="Suntino: Chrome extension: instantly summarizes pages, YouTube, and PDFs in the Side Panel.">
         <div class="card__media"><img src="/screenshots/suntino.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Suntino</h2>
           <p class="card__desc" data-slug="suntino" data-default-desc="Chrome-Erweiterung: Seiten, YouTube und PDFs im Side Panel sofort zusammenfassen.">Chrome-Erweiterung: Seiten, YouTube und PDFs im Side Panel sofort zusammenfassen.</p>
-          <span class="card__cta" style="color:#8073f8"><span class="card__cta-label" data-i18n-template="card.details" data-name="Suntino">Mehr über Suntino</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Suntino">Mehr über Suntino</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#c8b06a;--accent-cta:#c8b06a;--accent-btn:#c8b06a" data-slug="hugur" data-facets="ai,extension,android,macos">
+    <article class="card" style="--accent:#c8b06a;--accent-cta:#c8b06a;--accent-cta-light:#7e714e;--accent-btn:#c8b06a" data-slug="hugur" data-facets="ai,extension,android,macos">
       <button type="button" class="card__btn" data-open="hugur" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="hugur: Notizen, Links und Ideen in einem durchsuchbaren Stream — im Browser, per Erweiterung und auf Android." data-default-aria="hugur: Notizen, Links und Ideen in einem durchsuchbaren Stream — im Browser, per Erweiterung und auf Android." data-en-aria="hugur: Notes, links, and ideas in one searchable stream — in browser, extension, and Android.">
         <div class="card__media"><img src="/screenshots/hugur.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">hugur</h2>
           <p class="card__desc" data-slug="hugur" data-default-desc="Notizen, Links und Ideen in einem durchsuchbaren Stream — im Browser, per Erweiterung und auf Android.">Notizen, Links und Ideen in einem durchsuchbaren Stream — im Browser, per Erweiterung und auf Android.</p>
-          <span class="card__cta" style="color:#c8b06a"><span class="card__cta-label" data-i18n-template="card.details" data-name="hugur">Mehr über hugur</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="hugur">Mehr über hugur</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -161,68 +182,68 @@
   <section class="section section--labeled">
     <h2 class="section__heading" id="section-experiments" data-i18n-section="experiments">Experimente</h2>
     <div class="grid">
-    <article class="card" style="--accent:#f5a524;--accent-cta:#f5a524;--accent-btn:#f5a524" data-slug="luhambo" data-facets="3d">
+    <article class="card" style="--accent:#f5a524;--accent-cta:#f5a524;--accent-cta-light:#976b28;--accent-btn:#f5a524" data-slug="luhambo" data-facets="3d">
       <button type="button" class="card__btn" data-open="luhambo" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Luhambo: GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten." data-default-aria="Luhambo: GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten." data-en-aria="Luhambo: GPS routes as cinematic 3D camera tours with photo stops — built on open map data.">
         <div class="card__media"><img src="/screenshots/luhambo.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Luhambo</h2>
           <p class="card__desc" data-slug="luhambo" data-default-desc="GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten.">GPS-Routen als 3D-Kamerafahrt mit Foto-Stopps — auf freien Kartendaten.</p>
-          <span class="card__cta" style="color:#f5a524"><span class="card__cta-label" data-i18n-template="card.details" data-name="Luhambo">Mehr über Luhambo</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Luhambo">Mehr über Luhambo</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#c2603f;--accent-cta:#c66e4f;--accent-btn:#c2603f" data-slug="quality-touch" data-facets="">
+    <article class="card" style="--accent:#c2603f;--accent-cta:#c66e4f;--accent-cta-light:#b25a3d;--accent-btn:#c2603f" data-slug="quality-touch" data-facets="">
       <button type="button" class="card__btn" data-open="quality-touch" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Quality Touch: Ein warmes Drei-Minuten-Spiel für Paare: bewusst berühren, nachfragen und näherkommen." data-default-aria="Quality Touch: Ein warmes Drei-Minuten-Spiel für Paare: bewusst berühren, nachfragen und näherkommen." data-en-aria="Quality Touch: A warm three-minute game for couples: touch mindfully, ask, and grow closer.">
         <div class="card__media"><img src="/screenshots/quality-touch.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Quality Touch</h2>
           <p class="card__desc" data-slug="quality-touch" data-default-desc="Ein warmes Drei-Minuten-Spiel für Paare: bewusst berühren, nachfragen und näherkommen.">Ein warmes Drei-Minuten-Spiel für Paare: bewusst berühren, nachfragen und näherkommen.</p>
-          <span class="card__cta" style="color:#c66e4f"><span class="card__cta-label" data-i18n-template="card.details" data-name="Quality Touch">Mehr über Quality Touch</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Quality Touch">Mehr über Quality Touch</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#f45b69;--accent-cta:#f45b69;--accent-btn:#f45b69" data-slug="tile-weave" data-facets="ai,3d">
+    <article class="card" style="--accent:#f45b69;--accent-cta:#f45b69;--accent-cta-light:#c04e5a;--accent-btn:#f45b69" data-slug="tile-weave" data-facets="ai,3d">
       <button type="button" class="card__btn" data-open="tile-weave" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Tile Weave: KI-Stoffmuster erzeugen, nahtlos prüfen und in 3D direkt am Kleid betrachten." data-default-aria="Tile Weave: KI-Stoffmuster erzeugen, nahtlos prüfen und in 3D direkt am Kleid betrachten." data-en-aria="Tile Weave: Generate AI textile patterns, validate seamless tiling, and preview directly on garments in 3D.">
         <div class="card__media"><img src="/screenshots/tile-weave.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Tile Weave</h2>
           <p class="card__desc" data-slug="tile-weave" data-default-desc="KI-Stoffmuster erzeugen, nahtlos prüfen und in 3D direkt am Kleid betrachten.">KI-Stoffmuster erzeugen, nahtlos prüfen und in 3D direkt am Kleid betrachten.</p>
-          <span class="card__cta" style="color:#f45b69"><span class="card__cta-label" data-i18n-template="card.details" data-name="Tile Weave">Mehr über Tile Weave</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Tile Weave">Mehr über Tile Weave</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#43a26d;--accent-cta:#43a26d;--accent-btn:#43a26d" data-slug="komorebi" data-facets="ai">
+    <article class="card" style="--accent:#43a26d;--accent-cta:#43a26d;--accent-cta-light:#3b835d;--accent-btn:#43a26d" data-slug="komorebi" data-facets="ai">
       <button type="button" class="card__btn" data-open="komorebi" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Komorebi: Naturschutz-Stellen weltweit auf der Karte finden, filtern und direkt bewerben." data-default-aria="Komorebi: Naturschutz-Stellen weltweit auf der Karte finden, filtern und direkt bewerben." data-en-aria="Komorebi: Find conservation opportunities worldwide on an interactive map, filter them, and apply directly.">
         <div class="card__media"><img src="/screenshots/komorebi.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Komorebi</h2>
           <p class="card__desc" data-slug="komorebi" data-default-desc="Naturschutz-Stellen weltweit auf der Karte finden, filtern und direkt bewerben.">Naturschutz-Stellen weltweit auf der Karte finden, filtern und direkt bewerben.</p>
-          <span class="card__cta" style="color:#43a26d"><span class="card__cta-label" data-i18n-template="card.details" data-name="Komorebi">Mehr über Komorebi</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Komorebi">Mehr über Komorebi</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#00FF9C;--accent-cta:#00ff9c;--accent-btn:#00ff9c" data-slug="echt-oder-ki" data-facets="ai">
+    <article class="card" style="--accent:#00FF9C;--accent-cta:#00ff9c;--accent-cta-light:#157c59;--accent-btn:#00ff9c" data-slug="echt-oder-ki" data-facets="ai">
       <button type="button" class="card__btn" data-open="echt-oder-ki" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="Echt oder KI?: Tägliches Duell: KI-Fälschung in Text und Bild erkennen — drei Stufen, Ranglisten." data-default-aria="Echt oder KI?: Tägliches Duell: KI-Fälschung in Text und Bild erkennen — drei Stufen, Ranglisten." data-en-aria="Echt oder KI?: Daily duel: detect AI forgeries in text and image across three difficulty tiers.">
         <div class="card__media"><img src="/screenshots/echt-oder-ki.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">Echt oder KI?</h2>
           <p class="card__desc" data-slug="echt-oder-ki" data-default-desc="Tägliches Duell: KI-Fälschung in Text und Bild erkennen — drei Stufen, Ranglisten.">Tägliches Duell: KI-Fälschung in Text und Bild erkennen — drei Stufen, Ranglisten.</p>
-          <span class="card__cta" style="color:#00ff9c"><span class="card__cta-label" data-i18n-template="card.details" data-name="Echt oder KI?">Mehr über Echt oder KI?</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="Echt oder KI?">Mehr über Echt oder KI?</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
 
-    <article class="card" style="--accent:#6366f1;--accent-cta:#787aef;--accent-btn:#6a6df0" data-slug="cimdata-kurse" data-facets="">
+    <article class="card" style="--accent:#6366f1;--accent-cta:#787aef;--accent-cta-light:#6063e7;--accent-btn:#6a6df0" data-slug="cimdata-kurse" data-facets="">
       <button type="button" class="card__btn" data-open="cimdata-kurse" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="CIMDATA Studienplaner: CIMDATA-Kurse nach Startdatum filtern, Studienplan bauen und per Link teilen." data-default-aria="CIMDATA Studienplaner: CIMDATA-Kurse nach Startdatum filtern, Studienplan bauen und per Link teilen." data-en-aria="CIMDATA Studienplaner: Filter CIMDATA courses by start date, build a study plan, and share it by URL.">
         <div class="card__media"><img src="/screenshots/cimdata-kurse.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" /></div>
         <div class="card__body">
           <h2 class="card__title">CIMDATA Studienplaner</h2>
           <p class="card__desc" data-slug="cimdata-kurse" data-default-desc="CIMDATA-Kurse nach Startdatum filtern, Studienplan bauen und per Link teilen.">CIMDATA-Kurse nach Startdatum filtern, Studienplan bauen und per Link teilen.</p>
-          <span class="card__cta" style="color:#787aef"><span class="card__cta-label" data-i18n-template="card.details" data-name="CIMDATA Studienplaner">Mehr über CIMDATA Studienplaner</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
+          <span class="card__cta"><span class="card__cta-label" data-i18n-template="card.details" data-name="CIMDATA Studienplaner">Mehr über CIMDATA Studienplaner</span><span class="card__cta-arrow" aria-hidden="true">→</span></span>
         </div>
       </button>
     </article>
@@ -232,16 +253,61 @@
     </div>
   </main>
 
-  <section class="about" aria-labelledby="about-heading">
+  <section class="about" id="ueber-mich" aria-labelledby="about-heading" tabindex="-1">
     <h2 class="section__heading" id="about-heading" data-i18n="about.title">Über mich</h2>
+    <div class="about__personal">
+      <figure class="about__photo">
+        <img src="/me.jpg?v=75c6cd7a" alt="Porträt von Henrik Heil" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
+        <figcaption>Frankfurt am Main</figcaption>
+      </figure>
+      <div class="about__personal-body">
+        <p class="about__intro" data-i18n="about.intro">Ich lebe in Frankfurt am Main — nach vier Jahren als digitaler Nomade durch Asien, Süd- und Zentralamerika, in denen ich remote für meine Kunden gearbeitet habe. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen — und warum zugängliche Gestaltung kein Nice-to-have ist, sondern die Grundlage guter Produkte.</p>
+        <h3 class="about__label" data-i18n="about.interestsHeading">Abseits des Bildschirms</h3>
+        <ul class="about__interests" id="profile-interests">
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.6" y="4.6" width="12.8" height="7" rx="0.8" stroke="currentColor" stroke-width="1.2"/><path d="M5.9 7.9v3.7M10.1 7.9v3.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M5.9 4.6v3.3M10.1 4.6v3.3M8 4.6v3.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="about__interest-label" data-interest-key="piano">Klavier spielen</span> <a href="https://youtu.be/NhBVHSyoRHM" target="_blank" rel="noopener noreferrer">(<span data-interest-video-label="piano">Video</span>)<span class="sr-only" data-i18n="a11y.externalHint"> (öffnet in neuem Tab)</span></a></li>
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.6" y="5" width="8.8" height="6.4" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M10.4 7.2 14.4 5.2v5.6l-4-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="about__interest-label" data-interest-key="filming">Filmen</span></li>
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.4 1.8 1.6 7.3l4.7 1.6 1.5 4.9 6.6-12Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M6.3 8.9 14.4 1.8" stroke="currentColor" stroke-width="1.2"/></svg><span class="about__interest-label" data-interest-key="travel">Reisen</span></li>
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M1.5 8h1.7M12.8 8h1.7M6 8h4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><rect x="3.4" y="4.9" width="2.4" height="6.2" rx="0.7" stroke="currentColor" stroke-width="1.2"/><rect x="10.2" y="4.9" width="2.4" height="6.2" rx="0.7" stroke="currentColor" stroke-width="1.2"/></svg><span class="about__interest-label" data-interest-key="sports">Sport</span></li>
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.4" y="2.4" width="11.2" height="11.2" rx="2" stroke="currentColor" stroke-width="1.2"/><circle cx="5.55" cy="5.55" r="1.05" fill="currentColor"/><circle cx="8" cy="8" r="1.05" fill="currentColor"/><circle cx="10.45" cy="10.45" r="1.05" fill="currentColor"/></svg><button type="button" class="about__interest-egg" id="egg-snake"><span class="about__interest-label" data-interest-key="games">Video- &amp; Brettspiele</span><span class="sr-only" data-i18n="snake.eggHint"> — psst: startet ein kleines Snake-Spiel auf dieser Seite</span></button></li>
+        </ul>
+      </div>
+    </div>
     <div class="about__grid">
       <div class="about__col">
         <h3 class="about__label" data-i18n="skills.heading">Schwerpunkte</h3>
-        <dl class="skill-list" id="profile-skills"></dl>
+        <dl class="skill-list" id="profile-skills">
+            <div class="skill-list__row">
+              <dt class="skill-list__term" data-skill-term="product">UX &amp; Usability</dt>
+              <dd class="skill-list__items" data-skill-items="product">UX-Konzeption · User Research · Usability-Tests · Informationsarchitektur · Wireframing · Prototyping · Design-Systeme · Figma · Design-Reviews</dd>
+            </div>
+            <div class="skill-list__row">
+              <dt class="skill-list__term" data-skill-term="accessibility">Barrierefreiheit</dt>
+              <dd class="skill-list__items" data-skill-items="accessibility">WCAG 2.2 · Semantisches HTML · ARIA · Tastaturbedienung · Screenreader-Tests · Barrierefreie Formulare</dd>
+            </div>
+            <div class="skill-list__row">
+              <dt class="skill-list__term" data-skill-term="ai">KI &amp; Automatisierung</dt>
+              <dd class="skill-list__items" data-skill-items="ai">Coding-Agenten · LangGraph · Langfuse · LLM-Integration · n8n · ElevenLabs · Generative Bild- und Video-KIs</dd>
+            </div>
+            <div class="skill-list__row">
+              <dt class="skill-list__term" data-skill-term="development">Software-Entwicklung</dt>
+              <dd class="skill-list__items" data-skill-items="development">PHP · MySQL · Laravel · TypeScript · React · REST-APIs · Deployment · Spec-Driven Development</dd>
+            </div>
+            <div class="skill-list__row">
+              <dt class="skill-list__term" data-skill-term="media">Medienproduktion</dt>
+              <dd class="skill-list__items" data-skill-items="media">Video-Schnitt · Videoproduktion · Final Cut Pro · Premiere</dd>
+            </div>
+        </dl>
       </div>
       <div class="about__col">
         <h3 class="about__label" data-i18n="background.heading">Beruflicher Hintergrund</h3>
-        <ul class="about__timeline" id="profile-background"></ul>
+        <ul class="about__timeline" id="profile-background">
+          <li class="about__timeline-item about__timeline-item--current" data-bg-index="0"><span class="about__timeline-period">2026</span><span class="about__timeline-text">Weiterbildung „AI Process &amp; Media Engineering“ — cimdata Bildungsakademie</span></li>
+          <li class="about__timeline-item about__timeline-item--current" data-bg-index="1"><span class="about__timeline-period">seit 2006</span><span class="about__timeline-text">Selbstständig als UX-Engineer und Software-Entwickler — von der Konzeption bis zum produktiven System</span></li>
+          <li class="about__timeline-item" data-bg-index="2"><span class="about__timeline-period">2014–2017</span><span class="about__timeline-text">Associate Partner Web Development bei ZMI-Transfer (TransMIT GmbH), Uni Gießen</span></li>
+          <li class="about__timeline-item" data-bg-index="3"><span class="about__timeline-period">2008–2009</span><span class="about__timeline-text">Lead Developer bei Rhein-Main.Net GmbH, Frankfurt</span></li>
+          <li class="about__timeline-item" data-bg-index="4"><span class="about__timeline-period">2002–2007</span><span class="about__timeline-text">Dipl.-Ing. (FH) Medieninformatik, Technische Hochschule Mittelhessen</span></li>
+          <li class="about__timeline-item" data-bg-index="5"><span class="about__timeline-period">2004–2006</span><span class="about__timeline-text">Deutsche Bahn AG — Prüfungsdatenbank für Fragen und Prüfungen, von der Konzeption bis zur Produktion</span></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -284,7 +350,7 @@
     </div>
   </aside>
 
-  <script>window.__ASSET_V = "51e03697";</script>
-  <script src="/app.js?v=51e03697" defer></script>
+  <script>window.__ASSET_V = "75c6cd7a";</script>
+  <script src="/app.js?v=75c6cd7a" defer></script>
 </body>
 </html>

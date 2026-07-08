@@ -4,23 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Impressum · Henrik Heil</title>
+  <script>(function(){var t=null;try{t=localStorage.getItem("portfolio-theme")}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=51e03697" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=75c6cd7a" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <meta name="theme-color" content="#0f1114" />
+  <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#f4f1e9" media="(prefers-color-scheme: light)" />
 </head>
 <body class="page-legal">
   <div class="grain" aria-hidden="true"></div>
   <main class="legal">
     <div class="legal__top">
       <a class="legal__back" href="/" data-i18n="legal.back">← Zurück zum Portfolio</a>
-      <nav class="lang-switch" aria-label="Sprache wählen" data-i18n-aria="a11y.langSwitch">
+      <div class="hero__controls">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="true" aria-label="Dunkles Design" data-i18n-aria="a11y.themeToggle">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7L17 17M7 7 5.3 5.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.6 13.6A8.4 8.4 0 0 1 10.4 3.4a8.4 8.4 0 1 0 10.2 10.2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      </button>
+      <nav class="lang-switch" role="group" aria-label="Sprache wählen" data-i18n-aria="a11y.langSwitch">
         <button type="button" class="lang-switch__btn is-active" data-lang="de" aria-pressed="true">DE</button>
         <button type="button" class="lang-switch__btn" data-lang="en" aria-pressed="false">EN</button>
       </nav>
+      </div>
     </div>
     <h1 data-i18n="legal.heading">Impressum</h1>
     <section>
@@ -44,7 +52,7 @@
       <p data-i18n="legal.liabilityLinksBody">Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p>
     </section>
   </main>
-  <script>window.__ASSET_V = "51e03697";</script>
-  <script src="/app.js?v=51e03697" defer></script>
+  <script>window.__ASSET_V = "75c6cd7a";</script>
+  <script src="/app.js?v=75c6cd7a" defer></script>
 </body>
 </html>

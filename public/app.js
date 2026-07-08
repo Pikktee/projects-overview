@@ -4,6 +4,48 @@
   document.documentElement.classList.add('js');
 
   const LANG_KEY = 'portfolio-lang';
+  const THEME_KEY = 'portfolio-theme';
+
+  // ── Theme: data-theme wurde bereits vom Inline-Script im <head> gesetzt.
+  // Hier nur noch Toggle, Persistenz und Folgen der Systempräferenz,
+  // solange keine explizite Wahl gespeichert ist.
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeMetas = document.querySelectorAll('meta[name="theme-color"]');
+  const THEME_COLORS = { dark: '#0f1114', light: '#f4f1e9' };
+
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+
+  function applyTheme(theme, persist) {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeToggle?.setAttribute('aria-pressed', String(theme === 'dark'));
+    themeMetas.forEach((meta) => meta.setAttribute('content', THEME_COLORS[theme]));
+    if (persist) {
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch {
+        /* private mode */
+      }
+    }
+  }
+
+  applyTheme(currentTheme(), false);
+
+  themeToggle?.addEventListener('click', () => {
+    applyTheme(currentTheme() === 'dark' ? 'light' : 'dark', true);
+  });
+
+  const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  darkScheme.addEventListener?.('change', (e) => {
+    let stored = null;
+    try {
+      stored = localStorage.getItem(THEME_KEY);
+    } catch {
+      /* private mode */
+    }
+    if (stored !== 'light' && stored !== 'dark') applyTheme(e.matches ? 'dark' : 'light', false);
+  });
 
   let locale = 'de';
   let site = {};
@@ -99,6 +141,10 @@
       el.setAttribute('aria-label', t(el.dataset.i18nAria));
     });
 
+    document.querySelectorAll('[data-i18n-alt]').forEach((el) => {
+      el.setAttribute('alt', t(el.dataset.i18nAlt));
+    });
+
     document.querySelectorAll('[data-i18n-facet]').forEach((el) => {
       const label = el.querySelector('.facet-chip__label');
       if (label) label.textContent = t(`facets.${el.dataset.i18nFacet}`);
@@ -149,40 +195,42 @@
     });
   }
 
+  // Das Markup der Über-mich-Sektion kommt vollständig aus dem Build (inkl.
+  // Icons); hier werden beim Sprachwechsel nur die Texte ausgetauscht.
   function renderProfileSections() {
-    const credentialsEl = document.getElementById('profile-credentials');
-    if (credentialsEl) {
-      const items = strings.profile?.credentials || [];
-      credentialsEl.innerHTML = items
-        .map((item) => `<li class="sidebar__credential">${esc(item)}</li>`)
-        .join('');
-    }
+    document.querySelectorAll('[data-skill-term]').forEach((el) => {
+      el.textContent = t(`skills.groups.${el.dataset.skillTerm}`);
+    });
 
-    const skillsEl = document.getElementById('profile-skills');
-    if (skillsEl && site.skillGroups?.length) {
-      skillsEl.innerHTML = site.skillGroups
-        .map((group) => {
-          const label = t(`skills.groups.${group.key}`);
-          const items = group.items?.[locale] || group.items?.de || [];
-          return `
-            <div class="skill-list__row">
-              <dt class="skill-list__term">${esc(label)}</dt>
-              <dd class="skill-list__items">${items.map(esc).join(' · ')}</dd>
-            </div>`;
-        })
-        .join('');
-    }
+    document.querySelectorAll('[data-skill-items]').forEach((el) => {
+      const group = site.skillGroups?.find((g) => g.key === el.dataset.skillItems);
+      if (!group) return;
+      el.textContent = (group.items?.[locale] || group.items?.de || []).join(' · ');
+    });
 
-    const backgroundEl = document.getElementById('profile-background');
-    if (backgroundEl) {
-      const items = site.background?.[locale] || site.background?.de || [];
-      backgroundEl.innerHTML = items
-        .map((item) => {
-          const text = item.replace(/\{count\}/g, String(totalProjects));
-          return `<li class="about__timeline-item">${esc(text)}</li>`;
-        })
-        .join('');
-    }
+    document.querySelectorAll('[data-bg-index]').forEach((el) => {
+      const item = site.background?.[Number(el.dataset.bgIndex)];
+      if (!item) return;
+      const periodEl = el.querySelector('.about__timeline-period');
+      const textEl = el.querySelector('.about__timeline-text');
+      if (periodEl) periodEl.textContent = item.period?.[locale] || item.period?.de || '';
+      if (textEl) {
+        textEl.textContent = (item.text?.[locale] || item.text?.de || '').replace(
+          /\{count\}/g,
+          String(totalProjects),
+        );
+      }
+    });
+
+    document.querySelectorAll('[data-interest-key]').forEach((el) => {
+      const item = site.personalInterests?.find((i) => i.key === el.dataset.interestKey);
+      if (item) el.textContent = item[locale] || item.de;
+    });
+
+    document.querySelectorAll('[data-interest-video-label]').forEach((el) => {
+      const item = site.personalInterests?.find((i) => i.key === el.dataset.interestVideoLabel);
+      if (item) el.textContent = item.videoLabel?.[locale] || item.videoLabel?.de || 'Video';
+    });
   }
 
   async function loadSite() {
@@ -205,6 +253,7 @@
   const projectsReady = loadProjects();
 
   function ensureDrawerClosed() {
+    if (!drawer) return;
     drawer.classList.remove('drawer--open');
     backdrop.classList.remove('drawer-backdrop--visible');
     drawer.hidden = true;
@@ -277,6 +326,38 @@
   });
 
   filterReset?.addEventListener('click', () => setFilter('all'));
+
+  // Easter Egg: „Video- & Brettspiele" lädt snake.js nach und startet das
+  // Spiel. Die Strings kommen aus der aktiven Sprache.
+  const eggBtn = document.getElementById('egg-snake');
+  eggBtn?.addEventListener('click', () => {
+    const start = () =>
+      window.__startSnake?.({
+        trigger: eggBtn,
+        strings: {
+          hint: t('snake.hint'),
+          start: t('snake.start'),
+          score: t('snake.score'),
+          gameOver: t('snake.gameOver'),
+          yourScore: t('snake.yourScore'),
+          highscores: t('snake.highscores'),
+          namePlaceholder: t('snake.namePlaceholder'),
+          nameLabel: t('snake.nameLabel'),
+          save: t('snake.save'),
+          playAgain: t('snake.playAgain'),
+          close: t('snake.close'),
+          empty: t('snake.empty'),
+        },
+      });
+    if (window.__startSnake) {
+      start();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = `/snake.js${window.__ASSET_V ? `?v=${window.__ASSET_V}` : ''}`;
+    script.onload = start;
+    document.head.appendChild(script);
+  });
 
   async function loadProjects() {
     const v = window.__ASSET_V ? `?v=${window.__ASSET_V}` : '';
@@ -568,7 +649,7 @@
 
     const introActions = document.getElementById('drawer-intro-actions');
     introActions.innerHTML = `
-      <a class="drawer__visit" href="${esc(project.url)}" target="_blank" rel="noopener noreferrer" style="background-color:${esc(project.accentBtn || project.accent)}">
+      <a class="drawer__visit" href="${esc(project.url)}" target="_blank" rel="noopener noreferrer">
         <span>${esc(t('drawer.visit'))}</span>
         <span class="sr-only">${esc(t('a11y.externalHint'))}</span>
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -589,6 +670,7 @@
     actions.innerHTML = actionLinks.join('');
 
     drawer.style.setProperty('--accent', project.accent);
+    drawer.style.setProperty('--accent-light', project.accentCtaLight || project.accent);
     drawer.style.setProperty('--accent-btn', project.accentBtn || project.accent);
     backdrop.style.setProperty('--accent', project.accent);
   }
@@ -675,7 +757,7 @@
   function openDrawer(slug) {
     return projectsReady.then(() => {
       const project = projects[slug];
-      if (!project) return;
+      if (!project || !drawer) return;
 
       cancelPendingClose();
 
@@ -739,8 +821,8 @@
     openDrawer(slug);
   }
 
-  closeBtn.addEventListener('click', closeDrawer);
-  backdrop.addEventListener('click', closeDrawer);
+  closeBtn?.addEventListener('click', closeDrawer);
+  backdrop?.addEventListener('click', closeDrawer);
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && activeSlug) closeDrawer();

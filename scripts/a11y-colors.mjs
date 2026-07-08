@@ -3,6 +3,8 @@
 const CARD_BG = '#171a1f';
 const BTN_TEXT = '#0f1114';
 const LIGHTEN_WITH = '#ece8e1';
+const LIGHT_CARD_BG = '#fffdf8';
+const DARKEN_WITH = '#23252c';
 
 function parseHex(hex) {
   const h = hex.replace('#', '');
@@ -48,6 +50,19 @@ export function accessibleCtaColor(accent, background = CARD_BG, minRatio = 4.5)
     if (contrast(mixed, bg) >= minRatio) return toHex(mixed);
   }
   return LIGHTEN_WITH.toLowerCase();
+}
+
+/** Lesbare Akzentfarbe auf hellem Kartenhintergrund (Light-Theme): abdunkeln statt aufhellen. */
+export function accessibleCtaColorLight(accent, background = LIGHT_CARD_BG, minRatio = 4.5) {
+  const fg = parseHex(accent);
+  const bg = parseHex(background);
+  if (contrast(fg, bg) >= minRatio) return accent.toLowerCase();
+
+  for (let accentPct = 95; accentPct >= 25; accentPct -= 5) {
+    const mixed = mixColors(fg, parseHex(DARKEN_WITH), accentPct);
+    if (contrast(mixed, bg) >= minRatio) return toHex(mixed);
+  }
+  return DARKEN_WITH.toLowerCase();
 }
 
 /** Heller Button-Hintergrund für dunklen Text (#0f1114). */
