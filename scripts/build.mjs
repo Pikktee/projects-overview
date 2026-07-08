@@ -208,20 +208,20 @@ const langSwitchHtml = (tag = 'div') => `<${tag} class="lang-switch" role="group
           .join('\n        ')}
       </${tag}>`;
 
-// Skizzierter Pfeil (Signatur-Element): rein dekorativ (aria-hidden), der
-// umschließende Link trägt die Semantik („das bin ich" + sr-only-Hinweis).
-// Wellige Kurve, die am Namensende startet und deren Spitze von links auf
-// die vertikale Mitte des Fotos rechts daneben zeigt — Pfeil und Foto liegen
-// in einer Flex-Zeile, die Spitzenhöhe (22 % der Pfeilbreite) wird in
-// styles.css per margin-top auf die Fotomitte gerechnet.
-// pathLength="1" erlaubt die Zeichen-Animation im CSS.
+// Skizzierter Pfeil (Signatur-Element): ein durchgehender Pfad (Schaft + Spitze),
+// damit keine Lücke an der Spitze entsteht. Strichstärke 1.5 wie Rolle, Überschriften
+// und Label-Wellen. pathLength="1" erlaubt die Zeichen-Animation im CSS.
 const heroAnnotationHtml = `<a class="hero__me" href="#ueber-mich">
-        <svg class="hero__arrow" viewBox="0 0 200 56" fill="none" aria-hidden="true" focusable="false">
-          <path class="hero__arrow-line" pathLength="1" d="M4 10 C 30 28, 58 -2, 90 8 C 122 18, 148 20, 186 44" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-          <path class="hero__arrow-head" pathLength="1" d="M186 44 L172 43 M186 44 L179 32" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-        </svg>
-        <span class="hero__me-frame">
-          <img class="hero__me-photo" src="/me-thumb.jpg?v=${assetVersion}" alt="" width="106" height="106" />
+        <span class="hero__me-main">
+          <svg class="hero__arrow" viewBox="0 0 182 34" fill="none" aria-hidden="true" focusable="false">
+            <path class="hero__arrow-path" pathLength="1" d="M4 20 C 28 22, 50 13, 74 15 S 122 21, 148 16 C 158 14, 166 13, 174 14 C 168 9, 163 7, 159 4 C 163 7, 168 9, 174 14 C 169 18, 166 22, 164 26" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="hero__me-frame">
+            <svg class="hero__me-ring" viewBox="0 0 116 116" fill="none" aria-hidden="true">
+              <path class="hero__me-ring-path" pathLength="1" d="M58 9 C 90 7, 108 30, 109 58 C 110 86, 86 109, 58 110 C 30 109, 7 86, 9 58 C 11 30, 30 11, 58 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+            <img class="hero__me-photo" src="/me-thumb.jpg?v=${assetVersion}" alt="" width="106" height="106" />
+          </span>
         </span>
         <span class="hero__me-note" data-i18n="hero.meNote">${escapeHtml(tDe.hero.meNote)}</span>
         <span class="sr-only" data-i18n="hero.meHint">${escapeHtml(tDe.hero.meHint)}</span>
@@ -269,6 +269,9 @@ const backgroundHtml = (site.background || [])
 
 const interestsHtml = (site.personalInterests || [])
   .map((item) => {
+    if (item.youtubeId) {
+      return `<li>${interestIcon(item.key)}<button type="button" class="about__interest-video" data-interest-key="${escapeHtml(item.key)}"><span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span><span class="sr-only" data-i18n="videoModal.opens"> ${escapeHtml(tDe.videoModal.opens)}</span></button></li>`;
+    }
     const label = `${interestIcon(item.key)}<span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span>`;
     if (item.url) {
       const videoLabel = escapeHtml(item.videoLabel?.de || 'Video');
@@ -366,9 +369,50 @@ ${headExtras}
   <section class="about" id="ueber-mich" aria-labelledby="about-heading" tabindex="-1">
     <h2 class="section__heading" id="about-heading" data-i18n="about.title">${escapeHtml(tDe.about.title)}</h2>
     <div class="about__personal">
-      <figure class="about__photo">
-        <img src="/me.jpg?v=${assetVersion}" alt="${escapeHtml(tDe.about.photoAlt)}" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
-        <figcaption>Frankfurt am Main</figcaption>
+      <figure class="about__photo" id="about-photo-pinned">
+        <div class="about__photo-pin-mount" aria-hidden="true">
+          <svg class="about__photo-pin" viewBox="0 0 48 64" width="36" height="48" fill="none" focusable="false">
+            <defs>
+              <radialGradient id="about-pin-head" cx="36%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#fff6e0"/>
+                <stop offset="28%" stop-color="#f0d48a"/>
+                <stop offset="62%" stop-color="#c9963a"/>
+                <stop offset="100%" stop-color="#654a1e"/>
+              </radialGradient>
+              <linearGradient id="about-pin-shaft" x1="24" y1="32" x2="24" y2="58" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#b8a890"/>
+                <stop offset="45%" stop-color="#8a7a68"/>
+                <stop offset="100%" stop-color="#4a4038"/>
+              </linearGradient>
+              <linearGradient id="about-pin-rim" x1="12" y1="14" x2="36" y2="28" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fff" stop-opacity="0.55"/>
+                <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+              </linearGradient>
+              <filter id="about-pin-glow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="1.5" stdDeviation="1.2" flood-color="#000" flood-opacity="0.35"/>
+              </filter>
+            </defs>
+            <g filter="url(#about-pin-glow)">
+              <ellipse class="about__photo-pin-shadow" cx="24" cy="60.5" rx="12" ry="2.8" fill="#000" opacity="0.2"/>
+              <path d="M24 33v22.5" stroke="url(#about-pin-shaft)" stroke-width="1.7" stroke-linecap="round"/>
+              <path d="M24 55.5 20.6 61.2 24 58.8 27.4 61.2Z" fill="#3a322a"/>
+              <ellipse cx="24" cy="32.5" rx="6.2" ry="2.1" fill="#4a3a22"/>
+              <ellipse cx="24" cy="31.8" rx="13" ry="3.8" fill="#7d6538"/>
+              <ellipse cx="24" cy="23" rx="15.5" ry="10.2" fill="url(#about-pin-head)"/>
+              <path d="M10.5 24c1.2-5.8 5.8-10 13.5-10s12.3 4.2 13.5 10" stroke="url(#about-pin-rim)" stroke-width="1.4" fill="none"/>
+              <ellipse cx="24" cy="31.5" rx="10.5" ry="2.3" fill="#000" opacity="0.14"/>
+              <ellipse cx="17.2" cy="17.5" rx="5.2" ry="3.4" fill="#fff" opacity="0.48"/>
+              <ellipse cx="18.4" cy="16.2" rx="2.1" ry="1.35" fill="#fff" opacity="0.82"/>
+              <path d="M13 27.5c2.6-1.4 6-1.9 11-1.9s8.4.5 11 1.9" stroke="#000" opacity="0.07" stroke-width="0.9" fill="none"/>
+            </g>
+          </svg>
+        </div>
+        <div class="about__photo-swing">
+          <div class="about__photo-card">
+            <img src="/me.jpg?v=${assetVersion}" alt="${escapeHtml(tDe.about.photoAlt)}" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
+            <figcaption>${escapeHtml(site.profile.name)}</figcaption>
+          </div>
+        </div>
       </figure>
       <div class="about__personal-body">
         <p class="about__intro" data-i18n="about.intro">${escapeHtml(tDe.about.intro)}</p>
@@ -430,6 +474,23 @@ ${headExtras}
       </div>
     </div>
   </aside>
+
+  <div class="video-modal" id="video-modal" hidden>
+    <div class="video-modal__backdrop" id="video-modal-backdrop"></div>
+    <div class="video-modal__stage">
+      <div class="video-modal__wrap">
+        <div class="video-modal__top-zone" id="video-modal-top-zone" aria-hidden="true">
+          <p class="video-modal__hint" id="video-modal-hint" aria-hidden="true" data-i18n="videoModal.escHint">↓ ESC schließt die Ansicht</p>
+        </div>
+        <div class="video-modal__dialog" id="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="video-modal-title" tabindex="-1">
+          <h2 class="sr-only" id="video-modal-title"></h2>
+          <div class="video-modal__frame">
+            <iframe id="video-modal-iframe" title="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script>window.__ASSET_V = "${assetVersion}";</script>
   <script src="/app.js?v=${assetVersion}" defer></script>

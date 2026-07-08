@@ -6,7 +6,7 @@
     "linkedin": "https://www.linkedin.com/in/henrik-heil-553a1226/"
   },
   "personalInterests": [
-    { "key": "piano", "de": "Klavier spielen", "en": "Playing piano", "url": "https://youtu.be/NhBVHSyoRHM", "videoLabel": { "de": "Video", "en": "video" } },
+    { "key": "piano", "de": "Klavier spielen", "en": "Playing piano", "youtubeId": "NhBVHSyoRHM" },
     { "key": "filming", "de": "Filmen", "en": "Filmmaking" },
     { "key": "travel", "de": "Reisen", "en": "Travel" },
     { "key": "sports", "de": "Sport", "en": "Sports" },
@@ -100,8 +100,8 @@
   "translations": {
     "de": {
       "meta": {
-        "title": "Henrik Heil · UX-Engineer & Designer",
-        "description": "Henrik Heil — UX-Engineer & Designer aus Frankfurt. Web-Apps, KI-Tools und Live-Demos: Patina, Velosia, hugur und mehr — barrierefrei umgesetzt."
+        "title": "Henrik Heil · UX-Engineer & Software-Entwickler",
+        "description": "Henrik Heil — UX-Engineer & Software-Entwickler aus Frankfurt. Web-Apps, KI-Tools und Live-Demos: Patina, Velosia, hugur und mehr — barrierefrei umgesetzt."
       },
       "nav": {
         "profile": "Profil",
@@ -118,8 +118,8 @@
         "themeToggle": "Dunkles Design"
       },
       "profile": {
-        "role": "UX-Engineer & Designer",
-        "tagline": "UX-Engineer & Designer — Konzeption, Code und Video aus einer Hand.",
+        "role": "UX-Engineer & Software-Entwickler",
+        "tagline": "UX-Engineer & Software-Entwickler — Konzeption, Code und Video aus einer Hand.",
         "bio": "Ich gestalte und entwickle digitale Produkte — von der ersten Skizze bis zum barrierefreien Produktivsystem.",
         "more": "Schwerpunkte & Hintergrund",
         "credentials": ["Dipl.-Ing. (FH) Medieninformatik", "Frankfurt am Main"]
@@ -132,7 +132,7 @@
         "title": "Über mich",
         "intro": "Ich lebe in Frankfurt am Main — nach vier Jahren als digitaler Nomade durch Asien, Süd- und Zentralamerika, in denen ich remote für meine Kunden gearbeitet habe. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen — und warum zugängliche Gestaltung kein Nice-to-have ist, sondern die Grundlage guter Produkte.",
         "photoAlt": "Porträt von Henrik Heil",
-        "interestsHeading": "Abseits des Bildschirms"
+        "interestsHeading": "Was mich bewegt"
       },
       "skills": {
         "heading": "Schwerpunkte",
@@ -179,6 +179,11 @@
       },
       "footer": {
         "impressum": "Impressum"
+      },
+      "videoModal": {
+        "close": "Video schließen",
+        "opens": "— Video abspielen",
+        "escHint": "↓ ESC schließt die Ansicht"
       },
       "snake": {
         "eggHint": "— psst: startet ein kleines Snake-Spiel auf dieser Seite",
@@ -249,8 +254,8 @@
     },
     "en": {
       "meta": {
-        "title": "Henrik Heil · UX Engineer & Designer",
-        "description": "Henrik Heil — UX engineer & designer based in Frankfurt. Web apps, AI tools, and live demos: Patina, Velosia, hugur, and more — built accessibly."
+        "title": "Henrik Heil · UX Engineer & Software Developer",
+        "description": "Henrik Heil — UX engineer & software developer based in Frankfurt. Web apps, AI tools, and live demos: Patina, Velosia, hugur, and more — built accessibly."
       },
       "nav": {
         "profile": "Profile",
@@ -267,8 +272,8 @@
         "themeToggle": "Dark theme"
       },
       "profile": {
-        "role": "UX Engineer & Designer",
-        "tagline": "UX engineer & designer — concept, code, and video from one source.",
+        "role": "UX Engineer & Software Developer",
+        "tagline": "UX engineer & software developer — concept, code, and video from one source.",
         "bio": "I design and build digital products — from the first sketch to an accessible production system.",
         "more": "Focus areas & background",
         "credentials": ["Dipl.-Ing. (FH) Media Informatics", "Frankfurt am Main"]
@@ -281,7 +286,7 @@
         "title": "About me",
         "intro": "I live in Frankfurt, Germany — after four years as a digital nomad across Asia, South and Central America, working remotely for my clients. That time sharpened my sense of how differently people use technology — and why accessible design is not a nice-to-have, but the foundation of good products.",
         "photoAlt": "Portrait of Henrik Heil",
-        "interestsHeading": "Away from the screen"
+        "interestsHeading": "What moves me"
       },
       "skills": {
         "heading": "Focus areas",
@@ -328,6 +333,11 @@
       },
       "footer": {
         "impressum": "Legal notice"
+      },
+      "videoModal": {
+        "close": "Close video",
+        "opens": "— play video",
+        "escHint": "↓ ESC closes the view"
       },
       "snake": {
         "eggHint": "— psst: starts a little Snake game on this page",

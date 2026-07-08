@@ -226,11 +226,6 @@
       const item = site.personalInterests?.find((i) => i.key === el.dataset.interestKey);
       if (item) el.textContent = item[locale] || item.de;
     });
-
-    document.querySelectorAll('[data-interest-video-label]').forEach((el) => {
-      const item = site.personalInterests?.find((i) => i.key === el.dataset.interestVideoLabel);
-      if (item) el.textContent = item.videoLabel?.[locale] || item.videoLabel?.de || 'Video';
-    });
   }
 
   async function loadSite() {
@@ -312,6 +307,122 @@
 
       btn.addEventListener('pointerleave', resetTilt);
     });
+  }
+
+  // Pinnwand-Foto: Pendelphysik — Mausgeschwindigkeit stößt an, Feder bringt zurück.
+  const aboutPhotoPinned = document.getElementById('about-photo-pinned');
+  const aboutPhotoSwing = aboutPhotoPinned?.querySelector('.about__photo-swing');
+  const ABOUT_PHOTO_REST = -1.6;
+  const SWING_SPRING = 0.044;
+  const SWING_DAMPING = 0.86;
+  const SWING_IMPULSE = 0.17;
+  const SWING_MAX_VEL = 4.6;
+  const SWING_MAX_ANGLE = 26;
+  const SWING_SETTLE = 0.035;
+
+  if (aboutPhotoPinned && aboutPhotoSwing && !reduceMotion) {
+    let angle = ABOUT_PHOTO_REST;
+    let angularVel = 0;
+    let lastX = null;
+    let lastTime = null;
+    let hovering = false;
+    let rafId = null;
+
+    const setAngle = (deg) => {
+      aboutPhotoPinned.style.setProperty('--swing-angle', `${deg.toFixed(2)}deg`);
+    };
+
+    const step = () => {
+      const displacement = angle - ABOUT_PHOTO_REST;
+      angularVel = (angularVel - SWING_SPRING * displacement) * SWING_DAMPING;
+      angle += angularVel;
+
+      if (angle < ABOUT_PHOTO_REST - SWING_MAX_ANGLE) {
+        angle = ABOUT_PHOTO_REST - SWING_MAX_ANGLE;
+        angularVel *= -0.32;
+      } else if (angle > ABOUT_PHOTO_REST + SWING_MAX_ANGLE) {
+        angle = ABOUT_PHOTO_REST + SWING_MAX_ANGLE;
+        angularVel *= -0.32;
+      }
+
+      setAngle(angle);
+
+      const settled =
+        !hovering &&
+        Math.abs(angularVel) < SWING_SETTLE &&
+        Math.abs(angle - ABOUT_PHOTO_REST) < SWING_SETTLE;
+
+      if (settled) {
+        angle = ABOUT_PHOTO_REST;
+        angularVel = 0;
+        setAngle(angle);
+        rafId = null;
+        return;
+      }
+
+      rafId = requestAnimationFrame(step);
+    };
+
+    const ensureAnimating = () => {
+      if (rafId === null) rafId = requestAnimationFrame(step);
+    };
+
+    const resetTracking = () => {
+      lastX = null;
+      lastTime = null;
+    };
+
+    const startTracking = (e) => {
+      hovering = true;
+      lastX = e.clientX;
+      lastTime = performance.now();
+    };
+
+    const endTouchInteraction = (e) => {
+      if (e.pointerType !== 'touch') return;
+      if (aboutPhotoPinned.hasPointerCapture(e.pointerId)) {
+        aboutPhotoPinned.releasePointerCapture(e.pointerId);
+      }
+      hovering = false;
+      resetTracking();
+      ensureAnimating();
+    };
+
+    aboutPhotoPinned.addEventListener('pointerenter', startTracking);
+
+    aboutPhotoPinned.addEventListener('pointerdown', (e) => {
+      startTracking(e);
+      if (e.pointerType === 'touch') {
+        aboutPhotoPinned.setPointerCapture(e.pointerId);
+      }
+    });
+
+    aboutPhotoPinned.addEventListener('pointermove', (e) => {
+      const now = performance.now();
+      if (lastX !== null && lastTime !== null) {
+        const dt = Math.max(10, now - lastTime);
+        const vx = (e.clientX - lastX) / dt;
+        angularVel -= vx * SWING_IMPULSE;
+        angularVel = Math.max(-SWING_MAX_VEL, Math.min(SWING_MAX_VEL, angularVel));
+        ensureAnimating();
+      }
+      lastX = e.clientX;
+      lastTime = now;
+      hovering = true;
+    });
+
+    aboutPhotoPinned.addEventListener('pointerleave', () => {
+      hovering = false;
+      resetTracking();
+      ensureAnimating();
+    });
+
+    aboutPhotoPinned.addEventListener('pointerup', endTouchInteraction);
+    aboutPhotoPinned.addEventListener('pointercancel', endTouchInteraction);
+
+    setAngle(ABOUT_PHOTO_REST);
+  } else if (aboutPhotoPinned) {
+    aboutPhotoPinned.style.setProperty('--swing-angle', `${ABOUT_PHOTO_REST}deg`);
   }
 
   openButtons.forEach((btn) => {
@@ -825,8 +936,12 @@
   backdrop?.addEventListener('click', closeDrawer);
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && activeSlug) closeDrawer();
+    if (e.key === 'Escape') {
+      if (activeSlug) closeDrawer();
+      else if (videoModalOpen) closeVideoModal();
+    }
     trapDrawerFocus(e);
+    trapVideoModalFocus(e);
   });
 
   function trapDrawerFocus(e) {
@@ -849,6 +964,91 @@
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => switchTab(tab.dataset.tab));
   });
+
+  // ── YouTube-Video-Modal (z. B. Klavier spielen) ──
+  const videoModal = document.getElementById('video-modal');
+  const videoBackdrop = document.getElementById('video-modal-backdrop');
+  const videoDialog = document.getElementById('video-modal-dialog');
+  const videoTopZone = document.getElementById('video-modal-top-zone');
+  const videoIframe = document.getElementById('video-modal-iframe');
+  const videoTitle = document.getElementById('video-modal-title');
+  let videoModalOpen = false;
+  let videoLastFocus = null;
+
+  function youtubeEmbedUrl(id) {
+    return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+  }
+
+  function resetVideoModalHover() {
+    videoModal?.classList.remove('video-modal--top-hover');
+  }
+
+  function openVideoModal(youtubeId, title) {
+    if (!videoModal || !videoIframe || !youtubeId) return;
+
+    videoLastFocus = document.activeElement;
+    videoModalOpen = true;
+    resetVideoModalHover();
+    if (videoTitle) videoTitle.textContent = title;
+    videoIframe.title = title;
+    videoIframe.src = youtubeEmbedUrl(youtubeId);
+    videoModal.hidden = false;
+    requestAnimationFrame(() => {
+      videoModal.classList.add('video-modal--open');
+      lockBodyScroll();
+      videoDialog?.focus({ preventScroll: true });
+    });
+  }
+
+  function closeVideoModal() {
+    if (!videoModalOpen || !videoModal) return;
+
+    videoModalOpen = false;
+    videoModal.classList.remove('video-modal--open');
+    resetVideoModalHover();
+    if (videoIframe) videoIframe.src = '';
+    unlockBodyScroll();
+    videoModal.hidden = true;
+    videoLastFocus?.focus({ preventScroll: true });
+  }
+
+  function bindVideoTriggers() {
+    document.querySelectorAll('.about__interest-video').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = site.personalInterests?.find((i) => i.key === btn.dataset.interestKey);
+        if (!item?.youtubeId) return;
+        openVideoModal(item.youtubeId, item[locale] || item.de);
+      });
+    });
+  }
+
+  siteReady.then(bindVideoTriggers);
+
+  videoBackdrop?.addEventListener('click', closeVideoModal);
+  videoTopZone?.addEventListener('click', closeVideoModal);
+  videoTopZone?.addEventListener('mouseenter', () => {
+    videoModal?.classList.add('video-modal--top-hover');
+  });
+  videoTopZone?.addEventListener('mouseleave', () => {
+    videoModal?.classList.remove('video-modal--top-hover');
+  });
+
+  function trapVideoModalFocus(e) {
+    if (!videoModalOpen || e.key !== 'Tab' || videoModal?.hidden) return;
+    const focusable = videoModal.querySelectorAll(
+      'button:not([disabled]), [href], iframe, [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 
   window.addEventListener('hashchange', handleHash);
 })();
