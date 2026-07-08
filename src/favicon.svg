@@ -1,8 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Projekte">
-  <rect width="32" height="32" rx="8" fill="#12151a"/>
-  <rect x="4" y="4" width="11" height="8" rx="2.5" fill="#d4c4a8"/>
-  <rect x="17" y="4" width="11" height="8" rx="2.5" fill="#d4c4a8" fill-opacity="0.42"/>
-  <rect x="4" y="14" width="11" height="14" rx="2.5" fill="#d4c4a8" fill-opacity="0.28"/>
-  <rect x="17" y="14" width="11" height="8" rx="2.5" fill="#d4c4a8" fill-opacity="0.62"/>
-  <rect x="17" y="24" width="11" height="4" rx="1.5" fill="#8b6f47" fill-opacity="0.85"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" role="img" aria-label="Henrik Heil — Portfolio">
+  <style>
+    .bg { fill: #0f1114; }
+    .glow-a { fill: #8b6f47; fill-opacity: 0.14; }
+    .glow-b { fill: #3d8bfd; fill-opacity: 0.1; }
+    .tile-a { fill: url(#sand-dark); }
+    .tile-b { fill: #d4c4a8; fill-opacity: 0.5; }
+    .tile-c { fill: #d4c4a8; fill-opacity: 0.76; }
+    .tile-d { fill: #e8c88a; fill-opacity: 0.92; }
+    @media (prefers-color-scheme: light) {
+      .bg { fill: #f4f1e9; }
+      .glow-a { fill: #c4a46e; fill-opacity: 0.18; }
+      .glow-b { fill: #3d8bfd; fill-opacity: 0.06; }
+      .tile-a { fill: url(#ink-light); }
+      .tile-b { fill: #23252c; fill-opacity: 0.34; }
+      .tile-c { fill: #23252c; fill-opacity: 0.58; }
+      .tile-d { fill: #a8854a; fill-opacity: 0.96; }
+    }
+  </style>
+  <rect class="bg" width="32" height="32"/>
+  <circle class="glow-a" cx="7" cy="26" r="11"/>
+  <circle class="glow-b" cx="26" cy="7" r="9"/>
+  <rect class="tile-a" x="5" y="5" width="10" height="22"/>
+  <rect class="tile-b" x="17" y="5" width="10" height="9"/>
+  <rect class="tile-c" x="17" y="16" width="10" height="7"/>
+  <rect class="tile-d" x="17" y="25" width="10" height="2"/>
+  <defs>
+    <linearGradient id="sand-dark" x1="5" y1="5" x2="15" y2="27" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f6f1e7"/>
+      <stop offset="0.48" stop-color="#d4c4a8"/>
+      <stop offset="1" stop-color="#a8854a"/>
+    </linearGradient>
+    <linearGradient id="ink-light" x1="5" y1="5" x2="15" y2="27" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3a3d48"/>
+      <stop offset="0.48" stop-color="#23252c"/>
+      <stop offset="1" stop-color="#6d5527"/>
+    </linearGradient>
+  </defs>
 </svg>
