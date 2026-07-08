@@ -108,15 +108,15 @@
     ]
   },
   "quality-touch": {
-    "tagline": "Ein achtsamer Raum für Paare: geführte Berührung, tiefe Gespräche und Verbindung über jede Distanz hinweg.",
-    "summary": "Geführter Verbindungsraum für Paare — Berührung, Tiefengespräche, auch auf Distanz.",
-    "overview": "Quality Touch ist ein digitaler Verbindungsraum für Paare, die Nähe bewusst pflegen möchten — ohne Hetze, ohne Druck und mit klaren Grenzen. Die App übersetzt erprobte Ansätze aus Forschung und Körperarbeit in sanfte, geführte Rituale: vom Rad der Zustimmung über langsame Berührung bis zu Arthur-Aron-inspirierten Tiefenfragen und Gottman-Mikroritualen.\n\nEin adaptives Onboarding erstellt ein persönliches Verbindungsprofil und empfiehlt passende Module. Premium-Funktionen wie EFT-inspirierte Gespräche und Nähe auf Distanz erweitern den Raum für Paare, die räumlich getrennt leben: Zwei Geräte lassen sich per Code koppeln und tauschen Echtzeit-Signale aus.\n\nUnter der warmen Oberfläche aus Sandcreme, Terrakotta und Salbei liegt ein modernes Next.js-Frontend mit atmendem three.js-Hintergrund. Profil und Fortschritt bleiben lokal im Browser — Vertrauen und Privatsphäre sind Teil des Produkts, nicht ein Nachgedanke.",
-    "uxNarrative": "Quality Touch entschleunigt von der ersten Sekunde: weiche Farben, ein sanft atmender 3D-Hintergrund und klare Modulkarten laden ein, ohne zu überfordern. Jedes Ritual führt Schritt für Schritt — mit Timern, Atemhinweisen und expliziten Konsens-Leitplanken, damit Nähe sicher und freiwillig bleibt. Der Nachtmodus und die ruhige Typografie unterstützen einen Raum, der eher Abendlicht als Büro-App ausstrahlt.\n\nBesonders Nähe auf Distanz zeigt, wie Interaktionsdesign Gefühle überbrücken kann: Ein kurzer Kopplungscode, diskrete Echtzeit-Signale und das Wissen, dass die andere Person gerade im selben Ritual ist — das erzeugt Präsenz ohne Videocall-Zwang. Emotional geht es um Verbindung, nicht um Leistung: Die App feiert kleine Rituale, nicht Perfektion.",
+    "tagline": "Das Drei-Minuten-Spiel für Paare: kurze, achtsame Momente der Nähe — einfach zu zweit ausprobieren.",
+    "summary": "Ein warmes Drei-Minuten-Spiel für Paare: bewusst berühren, nachfragen und näherkommen.",
+    "overview": "Quality Touch dreht sich um eine einfache, warme Idee: das Drei-Minuten-Spiel. Ihr nehmt euch als Paar ein paar Minuten Zeit, stellt euch abwechselnd zwei Fragen — „Wie möchtest du berührt werden?“ und „Wie möchtest du mich berühren?“ — und schenkt euch für jeweils drei Minuten genau das. Kein Ziel, kein Leistungsdruck, nur ihr beide.\n\nDie App nimmt euch dabei sanft an die Hand: Ein ruhiger Timer läuft leise mit, kurze Hinweise begleiten euch und klare Grenzen sorgen dafür, dass sich beide wohl und sicher fühlen. Alles ist bewusst einfach gehalten, damit ihr sofort loslegen könnt — egal, ob frisch verliebt oder seit Jahren zusammen.\n\nRund um das Drei-Minuten-Spiel warten weitere kleine Rituale und Gesprächsfragen, wenn euch danach ist. Quality Touch will inspirieren, nicht therapieren — und alles bleibt privat auf eurem eigenen Gerät.",
+    "uxNarrative": "Quality Touch entschleunigt vom ersten Moment an: weiche Farben, ein sanft atmender Hintergrund und eine ruhige Führung laden ein, ohne zu überfordern. Das Drei-Minuten-Spiel steht im Mittelpunkt — ein Timer zählt leise mit, kurze Hinweise begleiten euch, und ihr entscheidet immer selbst, was sich gut anfühlt.\n\nEmotional geht es um Verbindung, nicht um Perfektion. Die App feiert die kleinen Momente: kurz innehalten, nachfragen, einander spüren. Wer mag, koppelt zwei Geräte und teilt den Moment sogar über Distanz.",
     "highlights": [
-      "Sieben geführte Module — von Zustimmung und Berührung bis zu Tiefengesprächen",
-      "Atmender WebGL-Hintergrund und warmes Design-System mit Nachtmodus",
-      "Fernbeziehung: Geräte per Code koppeln und Rituale in Echtzeit teilen",
-      "Lokal-first: Verbindungsprofil und Fortschritt bleiben im eigenen Browser"
+      "Das Drei-Minuten-Spiel: abwechselnd fragen, geben und empfangen",
+      "Sanfter Timer und ruhige Hinweise führen euch Schritt für Schritt",
+      "Einfach für jedes Paar — kein Vorwissen, kein Druck",
+      "Privat und lokal: alles bleibt auf eurem eigenen Gerät"
     ]
   },
   "a11y-quiz": {

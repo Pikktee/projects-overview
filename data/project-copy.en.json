@@ -108,15 +108,15 @@
     ]
   },
   "quality-touch": {
-    "tagline": "A mindful space for couples: guided touch, deep conversation, and connection across any distance.",
-    "summary": "A guided connection space for couples — touch, deep talks, and long-distance closeness.",
-    "overview": "Quality Touch is a digital space for couples who want to nurture closeness intentionally — without hurry, without pressure, and with clear boundaries. The app translates proven ideas from relationship research and somatic practice into gentle guided rituals: from a consent wheel and slow touch to Arthur-Aron-inspired deep questions and Gottman-style micro-rituals.\n\nAdaptive onboarding creates a personal connection profile and recommends fitting modules. Premium features such as EFT-inspired conversations and long-distance closeness extend the experience for couples living apart: two devices can be paired by code and exchange real-time signals.\n\nBeneath the warm visual system of sand cream, terracotta, and sage sits a modern Next.js frontend with a breathing three.js background. Profile and progress remain local in the browser — trust and privacy are core product features, not afterthoughts.",
-    "uxNarrative": "Quality Touch deliberately slows things down from the first second: soft colors, a gently breathing 3D background, and clear module cards invite participation without overwhelm. Each ritual guides step by step — with timers, breathing cues, and explicit consent guardrails so intimacy remains safe and voluntary. Dark mode and calm typography support a space that feels more like evening light than office software.\n\nThe long-distance module shows how interaction design can bridge emotion: a short pairing code, discreet real-time signals, and the awareness that your partner is currently in the same ritual create presence without forcing a video call. The emotional focus is connection over performance: the app celebrates small rituals, not perfection.",
+    "tagline": "The Three-Minute Game for couples: short, mindful moments of closeness — easy to try together.",
+    "summary": "A warm three-minute game for couples: touch mindfully, ask, and grow closer.",
+    "overview": "Quality Touch is built around one simple, warm idea: the Three-Minute Game. As a couple, you take a few minutes, take turns asking two questions — “How would you like to be touched?” and “How would you like to touch me?” — and give each other exactly that for three minutes each. No goal, no pressure, just the two of you.\n\nThe app gently guides you along the way: a calm timer counts quietly, short prompts accompany you, and clear boundaries help you both feel comfortable and safe. Everything is kept deliberately simple so you can start right away — whether you're newly in love or together for years.\n\nAround the Three-Minute Game there are more small rituals and conversation questions whenever you feel like it. Quality Touch is meant to inspire, not to treat — and everything stays private on your own device.",
+    "uxNarrative": "Quality Touch slows things down from the very first moment: soft colors, a gently breathing background, and calm guidance invite you in without overwhelm. The Three-Minute Game sits at the center — a quiet timer counts along, short prompts accompany you, and you always decide what feels right.\n\nThe emotional focus is connection, not perfection. The app celebrates the small moments: pausing, asking, and feeling each other. If you like, you can pair two devices and share the moment even across distance.",
     "highlights": [
-      "Seven guided modules — from consent and touch to deep conversations",
-      "Breathing WebGL background with a warm design system and dark mode",
-      "Long-distance mode: pair devices by code and share rituals in real time",
-      "Local-first by default: profile and progress stay in your own browser"
+      "The Three-Minute Game: take turns asking, giving, and receiving",
+      "A gentle timer and calm prompts guide you step by step",
+      "Simple for any couple — no prior knowledge, no pressure",
+      "Private and local: everything stays on your own device"
     ]
   },
   "a11y-quiz": {
