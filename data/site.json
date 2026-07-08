@@ -67,6 +67,13 @@
       }
     },
     {
+      "period": { "de": "2009–2025", "en": "2009–2025" },
+      "text": {
+        "de": "Deutsche Bahn AG — Prüfungsdatenbank für Fragen und Prüfungen, von der Konzeption bis zur Produktion",
+        "en": "Deutsche Bahn AG — exam database for questions and exam workflows, from concept to production"
+      }
+    },
+    {
       "period": { "de": "2014–2017", "en": "2014–2017" },
       "text": {
         "de": "Associate Partner Web Development bei ZMI-Transfer (TransMIT GmbH), Uni Gießen",
@@ -85,13 +92,6 @@
       "text": {
         "de": "Dipl.-Ing. (FH) Medieninformatik, Technische Hochschule Mittelhessen",
         "en": "Dipl.-Ing. (FH) in Media Informatics, Technische Hochschule Mittelhessen"
-      }
-    },
-    {
-      "period": { "de": "2004–2006", "en": "2004–2006" },
-      "text": {
-        "de": "Deutsche Bahn AG — Prüfungsdatenbank für Fragen und Prüfungen, von der Konzeption bis zur Produktion",
-        "en": "Deutsche Bahn AG — exam database for questions and exam workflows, from concept to production"
       }
     }
   ],
