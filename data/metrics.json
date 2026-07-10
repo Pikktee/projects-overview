@@ -96,7 +96,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:05.582Z"
+    "analyzedAt": "2026-07-10T13:03:00.350Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -178,9 +178,9 @@
     },
     "coverage": null,
     "git": {
-      "commits": 266,
+      "commits": 267,
       "firstCommit": "2026-06-08 00:35:50 +0200",
-      "lastCommit": "2026-06-28 23:58:31 +0200"
+      "lastCommit": "2026-07-09 11:19:02 +0200"
     },
     "ux": {
       "uiFrameworks": [],
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T23:34:05.777Z"
+    "analyzedAt": "2026-07-10T13:03:00.515Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -298,25 +298,25 @@
     },
     "dependencyCount": 66,
     "loc": {
-      "total": 68181,
-      "code": 52350,
-      "blank": 15136,
-      "comment": 695,
+      "total": 68672,
+      "code": 52793,
+      "blank": 15168,
+      "comment": 711,
       "byLanguage": {
         "Python": 14315,
-        "CSS": 644,
+        "CSS": 655,
         "SQL": 133,
         "HTML": 21827,
         "JavaScript": 408,
-        "TypeScript": 14953,
+        "TypeScript": 15385,
         "MJS": 70
       }
     },
-    "locFormatted": "52.4k",
+    "locFormatted": "52.8k",
     "files": {
-      "source": 281,
-      "components": 87,
-      "tsx": 111,
+      "source": 282,
+      "components": 88,
+      "tsx": 112,
       "tests": 33
     },
     "coverage": null,
@@ -336,13 +336,13 @@
       "a11yTools": [],
       "e2eTools": [],
       "unitTools": [],
-      "componentCount": 87,
-      "tsxFiles": 111,
+      "componentCount": 88,
+      "tsxFiles": 112,
       "testFiles": 33,
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T23:34:06.018Z"
+    "analyzedAt": "2026-07-10T13:03:00.765Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T23:34:06.176Z"
+    "analyzedAt": "2026-07-10T13:03:00.928Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -507,19 +507,19 @@
     },
     "dependencyCount": 20,
     "loc": {
-      "total": 7542,
-      "code": 6534,
-      "blank": 811,
-      "comment": 197,
+      "total": 7637,
+      "code": 6612,
+      "blank": 819,
+      "comment": 206,
       "byLanguage": {
         "JavaScript": 88,
         "HTML": 18,
         "MJS": 503,
-        "TypeScript": 3459,
+        "TypeScript": 3537,
         "CSS": 2466
       }
     },
-    "locFormatted": "6.5k",
+    "locFormatted": "6.6k",
     "files": {
       "source": 9,
       "components": 0,
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:06.251Z"
+    "analyzedAt": "2026-07-10T13:03:01.005Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-08T23:34:06.315Z"
+    "analyzedAt": "2026-07-10T13:03:01.069Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:06.396Z"
+    "analyzedAt": "2026-07-10T13:03:01.155Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:06.469Z"
+    "analyzedAt": "2026-07-10T13:03:01.226Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:06.534Z"
+    "analyzedAt": "2026-07-10T13:03:01.291Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -989,7 +989,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:06.640Z"
+    "analyzedAt": "2026-07-10T13:03:01.398Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1085,7 +1085,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:06.698Z"
+    "analyzedAt": "2026-07-10T13:03:01.453Z"
   },
   "luhambo": {
     "slug": "luhambo",
@@ -1096,8 +1096,11 @@
     "highlights": [],
     "stack": [
       "Vite",
+      "TypeScript",
+      "SQLite",
       "Three.js",
       "Docker",
+      "Vitest",
       "MapLibre",
       "deck.gl"
     ],
@@ -1111,37 +1114,50 @@
         "maplibre-gl",
         "three"
       ],
-      "data": [],
+      "data": [
+        "@types/better-sqlite3",
+        "better-sqlite3"
+      ],
       "ai": [],
       "infra": [
+        "@vitest/coverage-v8",
         "puppeteer-core",
-        "vite"
+        "tsx",
+        "typescript",
+        "vite",
+        "vitest"
       ],
       "testing": [],
       "other": [
+        "@fastify/cookie",
         "@loaders.gl/mvt",
-        "3d-tiles-renderer"
+        "@node-rs/argon2",
+        "@types/node",
+        "3d-tiles-renderer",
+        "fastify",
+        "nanoid"
       ]
     },
-    "dependencyCount": 11,
+    "dependencyCount": 22,
     "loc": {
-      "total": 10223,
-      "code": 7978,
-      "blank": 765,
-      "comment": 1480,
+      "total": 12829,
+      "code": 10086,
+      "blank": 1060,
+      "comment": 1683,
       "byLanguage": {
         "HTML": 280,
-        "MJS": 285,
-        "JavaScript": 5731,
+        "MJS": 572,
+        "TypeScript": 1798,
+        "JavaScript": 5754,
         "CSS": 1682
       }
     },
-    "locFormatted": "8k",
+    "locFormatted": "10.1k",
     "files": {
-      "source": 32,
+      "source": 57,
       "components": 0,
       "tsx": 0,
-      "tests": 0
+      "tests": 5
     },
     "coverage": null,
     "git": {
@@ -1155,13 +1171,15 @@
       ],
       "a11yTools": [],
       "e2eTools": [],
-      "unitTools": [],
+      "unitTools": [
+        "Vitest"
+      ],
       "componentCount": 0,
       "tsxFiles": 0,
-      "testFiles": 0,
+      "testFiles": 5,
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-08T23:34:06.916Z"
+    "analyzedAt": "2026-07-10T13:03:01.529Z"
   }
 }

@@ -758,6 +758,196 @@
     });
   }
 
+  function renderResponsivePicture(shot, { sizes, alt, loading = 'lazy' } = {}) {
+    const avif = shot.srcset?.avif;
+    const webp = shot.srcset?.webp;
+    return `<picture>
+      ${avif ? `<source type="image/avif" srcset="${esc(avif)}" sizes="${sizes}" />` : ''}
+      ${webp ? `<source type="image/webp" srcset="${esc(webp)}" sizes="${sizes}" />` : ''}
+      <img src="${esc(shot.src)}" alt="${esc(alt)}" width="${shot.width || 1280}" height="${shot.height || 800}" loading="${loading}" decoding="async" />
+    </picture>`;
+  }
+
+  function shotLabel(shot) {
+    return shot.label?.[locale] || shot.label?.de || shot.id;
+  }
+
+  function shotAlt(shot, index, total, projectName) {
+    return t('drawer.screenshotSlide', {
+      current: index + 1,
+      total,
+      label: shotLabel(shot),
+      name: projectName,
+    });
+  }
+
+  function parseYoutubeId(url) {
+    if (!url) return null;
+    try {
+      const u = new URL(url);
+      if (u.hostname === 'youtu.be') return u.pathname.replace(/^\//, '').split('/')[0] || null;
+      if (u.hostname.includes('youtube.com')) return u.searchParams.get('v');
+    } catch {
+      return null;
+    }
+    return null;
+  }
+
+  function youtubeThumbnails(ytId) {
+    const base = `https://i.ytimg.com/vi/${ytId}`;
+    return {
+      src: `${base}/maxresdefault.jpg`,
+      fallback: `${base}/mqdefault.jpg`,
+    };
+  }
+
+  function buildDrawerSlides(project) {
+    const shots = project.screenshots?.length ? [...project.screenshots] : [];
+    const ytId = parseYoutubeId(project.productVideo);
+    if (ytId) {
+      const thumbs = youtubeThumbnails(ytId);
+      shots.push({
+        id: 'product-video',
+        type: 'video',
+        youtubeId: ytId,
+        thumbnail: thumbs.src,
+        thumbnailFallback: thumbs.fallback,
+        src: thumbs.src,
+        width: 1280,
+        height: 720,
+        label: { de: 'Video', en: 'Video' },
+      });
+    }
+    return shots;
+  }
+
+  const playIcon = `<svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72L19 12 8 5.14z"/></svg>`;
+
+  let drawerGallery = { index: 0, shots: [], project: null, go: null, media: null };
+
+  function bindDrawerMediaInteractions(media) {
+    media.querySelectorAll('[data-gallery-open]').forEach((btn) => {
+      btn.addEventListener('click', () => openDrawerSlide(Number(btn.dataset.galleryOpen)));
+    });
+  }
+
+  function bindDrawerGallery(media) {
+    const track = media.querySelector('[data-gallery-track]');
+    const prev = media.querySelector('[data-gallery-prev]');
+    const next = media.querySelector('[data-gallery-next]');
+    if (!track) return;
+
+    const go = (index) => {
+      const max = drawerGallery.shots.length;
+      if (!max) return;
+      drawerGallery.index = ((index % max) + max) % max;
+      track.style.setProperty('--gallery-index', String(drawerGallery.index));
+    };
+
+    drawerGallery.go = go;
+    prev?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      go(drawerGallery.index - 1);
+    });
+    next?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      go(drawerGallery.index + 1);
+    });
+
+    let startX = null;
+    const viewport = media.querySelector('.drawer__gallery-viewport');
+    viewport?.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('[data-gallery-prev], [data-gallery-next]')) return;
+      startX = e.clientX;
+    });
+    viewport?.addEventListener('pointerup', (e) => {
+      if (startX == null) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 48) go(drawerGallery.index + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
+
+    bindDrawerMediaInteractions(media);
+  }
+
+  function renderGallerySlide(shot, i, project, total) {
+    const label = shotLabel(shot);
+    const alt = shotAlt(shot, i, total, project.name);
+    if (shot.type === 'video') {
+      const fallback = esc(shot.thumbnailFallback || shot.thumbnail);
+      return `<figure class="drawer__gallery-slide" role="group" aria-roledescription="slide" aria-label="${esc(alt)}" data-slide="${i}">
+      <button type="button" class="drawer__gallery-hit drawer__gallery-hit--video" data-gallery-open="${i}" aria-label="${esc(t('drawer.playVideo'))}">
+        <img src="${esc(shot.thumbnail)}" alt="" width="1280" height="720" loading="eager" decoding="async" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback=''}" data-fallback="${fallback}" />
+        <span class="drawer__gallery-play" aria-hidden="true">${playIcon}</span>
+      </button>
+    </figure>`;
+    }
+    return `<figure class="drawer__gallery-slide" role="group" aria-roledescription="slide" aria-label="${esc(alt)}" data-slide="${i}">
+      <button type="button" class="drawer__gallery-hit" data-gallery-open="${i}" aria-label="${esc(t('drawer.enlargeScreenshotNamed', { label }))}">
+        ${renderResponsivePicture(shot, { sizes: '100vw', alt, loading: 'eager' })}
+      </button>
+    </figure>`;
+  }
+
+  function renderDrawerMedia(project) {
+    const media = document.getElementById('drawer-media');
+    media.style.setProperty('--accent', project.accent);
+    const shots = buildDrawerSlides(project);
+
+    if (!shots.length) {
+      const shot = `/screenshots/${project.slug}.png`;
+      media.innerHTML = `<button type="button" class="drawer__media-hit" data-gallery-open="0" aria-label="${esc(t('drawer.enlargeScreenshot', { name: project.name }))}">
+        <img src="${shot}" alt="${esc(t('drawer.screenshotAlt', { name: project.name }))}" onerror="this.closest('.drawer__media').classList.add('drawer__media--fallback');this.remove()" />
+      </button>`;
+      media.classList.remove('drawer__media--fallback', 'drawer__media--gallery');
+      media.classList.add('drawer__media--zoomable');
+      drawerGallery = {
+        index: 0,
+        shots: [{
+          id: 'landing',
+          src: shot,
+          width: 1280,
+          height: 800,
+          label: { de: 'Startseite', en: 'Landing page' },
+        }],
+        project,
+        go: null,
+        media,
+      };
+      bindDrawerMediaInteractions(media);
+      return;
+    }
+
+    media.classList.remove('drawer__media--fallback', 'drawer__media--zoomable');
+    media.classList.add('drawer__media--gallery');
+
+    const slides = shots.map((shot, i) => renderGallerySlide(shot, i, project, shots.length)).join('');
+    const multi = shots.length > 1;
+
+    media.innerHTML = `
+    <div class="drawer__gallery" data-drawer-gallery>
+      <div class="drawer__gallery-viewport">
+        <div class="drawer__gallery-track" data-gallery-track style="--gallery-index: 0">
+          ${slides}
+        </div>
+        ${
+          multi
+            ? `<button type="button" class="drawer__gallery-nav drawer__gallery-nav--prev" data-gallery-prev aria-label="${esc(t('drawer.prevScreenshot'))}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="drawer__gallery-nav drawer__gallery-nav--next" data-gallery-next aria-label="${esc(t('drawer.nextScreenshot'))}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>`
+            : ''
+        }
+      </div>
+    </div>`;
+
+    drawerGallery = { index: 0, shots, project, go: null, media };
+    if (multi) bindDrawerGallery(media);
+    else bindDrawerMediaInteractions(media);
+  }
+
   function renderDrawer(project) {
     document.getElementById('drawer-title').textContent = project.name;
     document.getElementById('drawer-stats').innerHTML = renderStatLine(project);
@@ -766,21 +956,9 @@
     panels.tech.innerHTML = renderTech(project);
     switchTab('overview');
 
-    const media = document.getElementById('drawer-media');
-    const shot = `/screenshots/${project.slug}.png`;
-    media.style.setProperty('--accent', project.accent);
-    media.innerHTML = `<img src="${shot}" alt="${esc(t('drawer.screenshotAlt', { name: project.name }))}" onerror="this.parentElement.classList.add('drawer__media--fallback');this.remove()" />`;
-    media.classList.remove('drawer__media--fallback');
+    renderDrawerMedia(project);
 
-    const heroOverlay = document.getElementById('drawer-hero-overlay');
-    heroOverlay.innerHTML = project.productVideo
-      ? `<a class="drawer__video" href="${esc(project.productVideo)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(`${t('drawer.productVideo')} — ${t('a11y.externalHint')}`)}">
-        <span class="drawer__video-play" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v13.72L19 12 8 5.14z"/></svg>
-        </span>
-        <span class="drawer__video-label">${esc(t('drawer.productVideo'))}</span>
-      </a>`
-      : '';
+    document.getElementById('drawer-hero-overlay').innerHTML = '';
 
     const introActions = document.getElementById('drawer-intro-actions');
     introActions.innerHTML = `
@@ -811,6 +989,7 @@
   }
 
   let savedScrollY = 0;
+  let scrollLockDepth = 0;
 
   function getScrollbarWidth() {
     return Math.max(0, window.innerWidth - document.documentElement.clientWidth);
@@ -819,18 +998,21 @@
   // Scroll sperren ohne Layout-Shift: Scrollbar-Breite per Padding ausgleichen,
   // Scroll-Position per position:fixed + top beibehalten.
   function lockBodyScroll() {
-    if (document.body.classList.contains('drawer-open')) return;
-
-    savedScrollY = window.scrollY;
-    const scrollbarWidth = getScrollbarWidth();
-    document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-    document.documentElement.classList.add('drawer-open');
-    document.body.classList.add('drawer-open');
-    document.body.style.top = `-${savedScrollY}px`;
+    if (scrollLockDepth === 0) {
+      savedScrollY = window.scrollY;
+      const scrollbarWidth = getScrollbarWidth();
+      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+      document.documentElement.classList.add('drawer-open');
+      document.body.classList.add('drawer-open');
+      document.body.style.top = `-${savedScrollY}px`;
+    }
+    scrollLockDepth += 1;
   }
 
   function unlockBodyScroll() {
-    if (!document.body.classList.contains('drawer-open')) return;
+    if (scrollLockDepth === 0) return;
+    scrollLockDepth -= 1;
+    if (scrollLockDepth > 0) return;
 
     const scrollY = savedScrollY;
     const html = document.documentElement;
@@ -927,6 +1109,9 @@
   function closeDrawer() {
     if (!activeSlug) return;
 
+    closeShotLightbox();
+    if (videoModalOpen) closeVideoModal();
+
     cancelPendingClose();
 
     drawer.classList.remove('drawer--open');
@@ -961,9 +1146,29 @@
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      if (activeSlug) closeDrawer();
-      else if (videoModalOpen) closeVideoModal();
+      if (videoModalOpen) closeVideoModal();
+      else if (shotLightboxOpen) closeShotLightbox();
+      else if (activeSlug) closeDrawer();
+      return;
     }
+    if (shotLightboxOpen && drawerGallery.shots.length > 1) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goShotLightbox(drawerGallery.index - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        goShotLightbox(drawerGallery.index + 1);
+      }
+    } else if (activeSlug && drawerGallery.shots.length > 1 && drawerGallery.go) {
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        drawerGallery.go(drawerGallery.index - 1);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        drawerGallery.go(drawerGallery.index + 1);
+      }
+    }
+    trapShotLightboxFocus(e);
     trapDrawerFocus(e);
     trapVideoModalFocus(e);
   });
@@ -988,6 +1193,135 @@
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => switchTab(tab.dataset.tab));
   });
+
+  // ── Screenshot-Lightbox (Drawer) ──
+  const shotLightbox = document.getElementById('shot-lightbox');
+  const shotLightboxBackdrop = document.getElementById('shot-lightbox-backdrop');
+  const shotLightboxDialog = document.getElementById('shot-lightbox-dialog');
+  const shotLightboxMedia = document.getElementById('shot-lightbox-media');
+  const shotLightboxCaption = document.getElementById('shot-lightbox-caption');
+  const shotLightboxCounter = document.getElementById('shot-lightbox-counter');
+  const shotLightboxClose = document.getElementById('shot-lightbox-close');
+  const shotLightboxPrev = document.getElementById('shot-lightbox-prev');
+  const shotLightboxNext = document.getElementById('shot-lightbox-next');
+  let shotLightboxOpen = false;
+  let shotLightboxLastFocus = null;
+
+  function imageSlideIndexes() {
+    return drawerGallery.shots
+      .map((shot, i) => (shot.type === 'video' ? -1 : i))
+      .filter((i) => i >= 0);
+  }
+
+  function nextImageSlideIndex(from, direction) {
+    const max = drawerGallery.shots.length;
+    if (!max) return from;
+    for (let step = 1; step <= max; step += 1) {
+      const i = ((from + direction * step) % max + max) % max;
+      if (drawerGallery.shots[i]?.type !== 'video') return i;
+    }
+    return from;
+  }
+
+  function openDrawerSlide(index) {
+    const shot = drawerGallery.shots[index];
+    if (!shot) return;
+    if (shot.type === 'video') {
+      openVideoModal(shot.youtubeId, drawerGallery.project?.name || '');
+      return;
+    }
+    openShotLightbox(index);
+  }
+
+  function renderShotLightboxSlide(index) {
+    const max = drawerGallery.shots.length;
+    if (!max || !shotLightboxMedia || !shotLightboxCaption) return;
+
+    const i = ((index % max) + max) % max;
+    drawerGallery.index = i;
+    if (drawerGallery.go) drawerGallery.go(i);
+
+    const shot = drawerGallery.shots[i];
+    if (!shot || shot.type === 'video') return;
+
+    const projectName = drawerGallery.project?.name || '';
+    const label = shotLabel(shot);
+    const alt = shotAlt(shot, i, max, projectName);
+
+    shotLightboxMedia.innerHTML = renderResponsivePicture(shot, {
+      sizes: '96vw',
+      alt,
+      loading: 'eager',
+    });
+    shotLightboxCaption.textContent = label;
+
+    const imageIndexes = imageSlideIndexes();
+    const imagePos = imageIndexes.indexOf(i);
+    const imageTotal = imageIndexes.length;
+
+    if (shotLightboxPrev) shotLightboxPrev.hidden = imageTotal <= 1;
+    if (shotLightboxNext) shotLightboxNext.hidden = imageTotal <= 1;
+    if (shotLightboxCounter) {
+      shotLightboxCounter.hidden = imageTotal <= 1;
+      if (imageTotal > 1 && imagePos >= 0) {
+        shotLightboxCounter.textContent = t('drawer.lightboxCounter', {
+          current: imagePos + 1,
+          total: imageTotal,
+        });
+      }
+    }
+  }
+
+  function goShotLightbox(index) {
+    renderShotLightboxSlide(index);
+  }
+
+  function openShotLightbox(index = drawerGallery.index) {
+    if (!shotLightbox || !drawerGallery.shots.length) return;
+    const shot = drawerGallery.shots[index];
+    if (!shot || shot.type === 'video') return;
+
+    shotLightboxLastFocus = document.activeElement;
+    shotLightboxOpen = true;
+    renderShotLightboxSlide(index);
+    shotLightbox.hidden = false;
+    requestAnimationFrame(() => {
+      shotLightbox.classList.add('shot-lightbox--open');
+      shotLightboxDialog?.focus({ preventScroll: true });
+    });
+  }
+
+  function closeShotLightbox() {
+    if (!shotLightboxOpen || !shotLightbox) return;
+
+    shotLightboxOpen = false;
+    shotLightbox.classList.remove('shot-lightbox--open');
+    if (shotLightboxMedia) shotLightboxMedia.innerHTML = '';
+    shotLightbox.hidden = true;
+    shotLightboxLastFocus?.focus({ preventScroll: true });
+  }
+
+  shotLightboxBackdrop?.addEventListener('click', closeShotLightbox);
+  shotLightboxClose?.addEventListener('click', closeShotLightbox);
+  shotLightboxPrev?.addEventListener('click', () => goShotLightbox(nextImageSlideIndex(drawerGallery.index, -1)));
+  shotLightboxNext?.addEventListener('click', () => goShotLightbox(nextImageSlideIndex(drawerGallery.index, 1)));
+
+  function trapShotLightboxFocus(e) {
+    if (!shotLightboxOpen || e.key !== 'Tab' || shotLightbox?.hidden) return;
+    const focusable = shotLightbox.querySelectorAll(
+      'button:not([disabled]):not([hidden]), [href], [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 
   // ── YouTube-Video-Modal (z. B. Klavier spielen) ──
   const videoModal = document.getElementById('video-modal');

@@ -1,0 +1,452 @@
+{
+  "a11y-quiz": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 791,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/a11y-quiz/landing-480.webp",
+            "768": "/screenshots/a11y-quiz/landing-768.webp",
+            "1280": "/screenshots/a11y-quiz/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/a11y-quiz/landing-480.avif",
+            "768": "/screenshots/a11y-quiz/landing-768.avif",
+            "1280": "/screenshots/a11y-quiz/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/a11y-quiz/landing-480.webp 480w, /screenshots/a11y-quiz/landing-768.webp 768w, /screenshots/a11y-quiz/landing-1280.webp 1280w",
+          "avif": "/screenshots/a11y-quiz/landing-480.avif 480w, /screenshots/a11y-quiz/landing-768.avif 768w, /screenshots/a11y-quiz/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/a11y-quiz/landing-1280.webp"
+      }
+    ]
+  },
+  "cimdata-kurse": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/cimdata-kurse/landing-480.webp",
+            "768": "/screenshots/cimdata-kurse/landing-768.webp",
+            "1280": "/screenshots/cimdata-kurse/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/cimdata-kurse/landing-480.avif",
+            "768": "/screenshots/cimdata-kurse/landing-768.avif",
+            "1280": "/screenshots/cimdata-kurse/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Studienplaner",
+          "en": "Study planner"
+        },
+        "srcset": {
+          "webp": "/screenshots/cimdata-kurse/landing-480.webp 480w, /screenshots/cimdata-kurse/landing-768.webp 768w, /screenshots/cimdata-kurse/landing-1280.webp 1280w",
+          "avif": "/screenshots/cimdata-kurse/landing-480.avif 480w, /screenshots/cimdata-kurse/landing-768.avif 768w, /screenshots/cimdata-kurse/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/cimdata-kurse/landing-1280.webp"
+      }
+    ]
+  },
+  "echt-oder-ki": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/echt-oder-ki/landing-480.webp",
+            "768": "/screenshots/echt-oder-ki/landing-768.webp",
+            "1280": "/screenshots/echt-oder-ki/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/echt-oder-ki/landing-480.avif",
+            "768": "/screenshots/echt-oder-ki/landing-768.avif",
+            "1280": "/screenshots/echt-oder-ki/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/echt-oder-ki/landing-480.webp 480w, /screenshots/echt-oder-ki/landing-768.webp 768w, /screenshots/echt-oder-ki/landing-1280.webp 1280w",
+          "avif": "/screenshots/echt-oder-ki/landing-480.avif 480w, /screenshots/echt-oder-ki/landing-768.avif 768w, /screenshots/echt-oder-ki/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/echt-oder-ki/landing-1280.webp"
+      },
+      {
+        "id": "play",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/echt-oder-ki/play-480.webp",
+            "768": "/screenshots/echt-oder-ki/play-768.webp",
+            "1280": "/screenshots/echt-oder-ki/play-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/echt-oder-ki/play-480.avif",
+            "768": "/screenshots/echt-oder-ki/play-768.avif",
+            "1280": "/screenshots/echt-oder-ki/play-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Spiel",
+          "en": "Game"
+        },
+        "srcset": {
+          "webp": "/screenshots/echt-oder-ki/play-480.webp 480w, /screenshots/echt-oder-ki/play-768.webp 768w, /screenshots/echt-oder-ki/play-1280.webp 1280w",
+          "avif": "/screenshots/echt-oder-ki/play-480.avif 480w, /screenshots/echt-oder-ki/play-768.avif 768w, /screenshots/echt-oder-ki/play-1280.avif 1280w"
+        },
+        "src": "/screenshots/echt-oder-ki/play-1280.webp"
+      }
+    ]
+  },
+  "hugur": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/hugur/landing-480.webp",
+            "768": "/screenshots/hugur/landing-768.webp",
+            "1280": "/screenshots/hugur/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/hugur/landing-480.avif",
+            "768": "/screenshots/hugur/landing-768.avif",
+            "1280": "/screenshots/hugur/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/hugur/landing-480.webp 480w, /screenshots/hugur/landing-768.webp 768w, /screenshots/hugur/landing-1280.webp 1280w",
+          "avif": "/screenshots/hugur/landing-480.avif 480w, /screenshots/hugur/landing-768.avif 768w, /screenshots/hugur/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/hugur/landing-1280.webp"
+      }
+    ]
+  },
+  "komorebi": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "finden",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/komorebi/finden-480.webp",
+            "768": "/screenshots/komorebi/finden-768.webp",
+            "1280": "/screenshots/komorebi/finden-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/komorebi/finden-480.avif",
+            "768": "/screenshots/komorebi/finden-768.avif",
+            "1280": "/screenshots/komorebi/finden-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Suche",
+          "en": "Search"
+        },
+        "srcset": {
+          "webp": "/screenshots/komorebi/finden-480.webp 480w, /screenshots/komorebi/finden-768.webp 768w, /screenshots/komorebi/finden-1280.webp 1280w",
+          "avif": "/screenshots/komorebi/finden-480.avif 480w, /screenshots/komorebi/finden-768.avif 768w, /screenshots/komorebi/finden-1280.avif 1280w"
+        },
+        "src": "/screenshots/komorebi/finden-1280.webp"
+      },
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/komorebi/landing-480.webp",
+            "768": "/screenshots/komorebi/landing-768.webp",
+            "1280": "/screenshots/komorebi/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/komorebi/landing-480.avif",
+            "768": "/screenshots/komorebi/landing-768.avif",
+            "1280": "/screenshots/komorebi/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/komorebi/landing-480.webp 480w, /screenshots/komorebi/landing-768.webp 768w, /screenshots/komorebi/landing-1280.webp 1280w",
+          "avif": "/screenshots/komorebi/landing-480.avif 480w, /screenshots/komorebi/landing-768.avif 768w, /screenshots/komorebi/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/komorebi/landing-1280.webp"
+      }
+    ]
+  },
+  "luhambo": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/luhambo/landing-480.webp",
+            "768": "/screenshots/luhambo/landing-768.webp",
+            "1280": "/screenshots/luhambo/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/luhambo/landing-480.avif",
+            "768": "/screenshots/luhambo/landing-768.avif",
+            "1280": "/screenshots/luhambo/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Spiel",
+          "en": "Game"
+        },
+        "srcset": {
+          "webp": "/screenshots/luhambo/landing-480.webp 480w, /screenshots/luhambo/landing-768.webp 768w, /screenshots/luhambo/landing-1280.webp 1280w",
+          "avif": "/screenshots/luhambo/landing-480.avif 480w, /screenshots/luhambo/landing-768.avif 768w, /screenshots/luhambo/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/luhambo/landing-1280.webp"
+      }
+    ]
+  },
+  "patina": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/patina/landing-480.webp",
+            "768": "/screenshots/patina/landing-768.webp",
+            "1280": "/screenshots/patina/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/patina/landing-480.avif",
+            "768": "/screenshots/patina/landing-768.avif",
+            "1280": "/screenshots/patina/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/patina/landing-480.webp 480w, /screenshots/patina/landing-768.webp 768w, /screenshots/patina/landing-1280.webp 1280w",
+          "avif": "/screenshots/patina/landing-480.avif 480w, /screenshots/patina/landing-768.avif 768w, /screenshots/patina/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/patina/landing-1280.webp"
+      }
+    ]
+  },
+  "quality-touch": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/quality-touch/landing-480.webp",
+            "768": "/screenshots/quality-touch/landing-768.webp",
+            "1280": "/screenshots/quality-touch/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/quality-touch/landing-480.avif",
+            "768": "/screenshots/quality-touch/landing-768.avif",
+            "1280": "/screenshots/quality-touch/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/quality-touch/landing-480.webp 480w, /screenshots/quality-touch/landing-768.webp 768w, /screenshots/quality-touch/landing-1280.webp 1280w",
+          "avif": "/screenshots/quality-touch/landing-480.avif 480w, /screenshots/quality-touch/landing-768.avif 768w, /screenshots/quality-touch/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/quality-touch/landing-1280.webp"
+      },
+      {
+        "id": "module",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/quality-touch/module-480.webp",
+            "768": "/screenshots/quality-touch/module-768.webp",
+            "1280": "/screenshots/quality-touch/module-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/quality-touch/module-480.avif",
+            "768": "/screenshots/quality-touch/module-768.avif",
+            "1280": "/screenshots/quality-touch/module-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Modul",
+          "en": "Module"
+        },
+        "srcset": {
+          "webp": "/screenshots/quality-touch/module-480.webp 480w, /screenshots/quality-touch/module-768.webp 768w, /screenshots/quality-touch/module-1280.webp 1280w",
+          "avif": "/screenshots/quality-touch/module-480.avif 480w, /screenshots/quality-touch/module-768.avif 768w, /screenshots/quality-touch/module-1280.avif 1280w"
+        },
+        "src": "/screenshots/quality-touch/module-1280.webp"
+      }
+    ]
+  },
+  "schnappster": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/schnappster/landing-480.webp",
+            "768": "/screenshots/schnappster/landing-768.webp",
+            "1280": "/screenshots/schnappster/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/schnappster/landing-480.avif",
+            "768": "/screenshots/schnappster/landing-768.avif",
+            "1280": "/screenshots/schnappster/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/schnappster/landing-480.webp 480w, /screenshots/schnappster/landing-768.webp 768w, /screenshots/schnappster/landing-1280.webp 1280w",
+          "avif": "/screenshots/schnappster/landing-480.avif 480w, /screenshots/schnappster/landing-768.avif 768w, /screenshots/schnappster/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/schnappster/landing-1280.webp"
+      }
+    ]
+  },
+  "suntino": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/suntino/landing-480.webp",
+            "768": "/screenshots/suntino/landing-768.webp",
+            "1280": "/screenshots/suntino/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/suntino/landing-480.avif",
+            "768": "/screenshots/suntino/landing-768.avif",
+            "1280": "/screenshots/suntino/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/suntino/landing-480.webp 480w, /screenshots/suntino/landing-768.webp 768w, /screenshots/suntino/landing-1280.webp 1280w",
+          "avif": "/screenshots/suntino/landing-480.avif 480w, /screenshots/suntino/landing-768.avif 768w, /screenshots/suntino/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/suntino/landing-1280.webp"
+      }
+    ]
+  },
+  "tile-weave": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/tile-weave/landing-480.webp",
+            "768": "/screenshots/tile-weave/landing-768.webp",
+            "1280": "/screenshots/tile-weave/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/tile-weave/landing-480.avif",
+            "768": "/screenshots/tile-weave/landing-768.avif",
+            "1280": "/screenshots/tile-weave/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Editor",
+          "en": "Editor"
+        },
+        "srcset": {
+          "webp": "/screenshots/tile-weave/landing-480.webp 480w, /screenshots/tile-weave/landing-768.webp 768w, /screenshots/tile-weave/landing-1280.webp 1280w",
+          "avif": "/screenshots/tile-weave/landing-480.avif 480w, /screenshots/tile-weave/landing-768.avif 768w, /screenshots/tile-weave/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/tile-weave/landing-1280.webp"
+      }
+    ]
+  },
+  "velosia": {
+    "cover": "landing",
+    "shots": [
+      {
+        "id": "landing",
+        "width": 1280,
+        "height": 800,
+        "formats": {
+          "webp": {
+            "480": "/screenshots/velosia/landing-480.webp",
+            "768": "/screenshots/velosia/landing-768.webp",
+            "1280": "/screenshots/velosia/landing-1280.webp"
+          },
+          "avif": {
+            "480": "/screenshots/velosia/landing-480.avif",
+            "768": "/screenshots/velosia/landing-768.avif",
+            "1280": "/screenshots/velosia/landing-1280.avif"
+          }
+        },
+        "label": {
+          "de": "Startseite",
+          "en": "Landing page"
+        },
+        "srcset": {
+          "webp": "/screenshots/velosia/landing-480.webp 480w, /screenshots/velosia/landing-768.webp 768w, /screenshots/velosia/landing-1280.webp 1280w",
+          "avif": "/screenshots/velosia/landing-480.avif 480w, /screenshots/velosia/landing-768.avif 768w, /screenshots/velosia/landing-1280.avif 1280w"
+        },
+        "src": "/screenshots/velosia/landing-1280.webp"
+      }
+    ]
+  }
+}

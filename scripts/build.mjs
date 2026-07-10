@@ -1,8 +1,9 @@
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, cpSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
 import { accessibleButtonBg, accessibleCtaColor, accessibleCtaColorLight } from './a11y-colors.mjs';
+import { optimizeImages } from './optimize-images.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -10,6 +11,18 @@ const publicDir = join(root, 'public');
 const metricsPath = join(root, 'data/metrics.json');
 
 mkdirSync(publicDir, { recursive: true });
+
+console.log('Optimiere Bilder…');
+await optimizeImages();
+
+const screenshotManifestPath = join(publicDir, 'screenshots', 'manifest.json');
+const screenshotManifest = existsSync(screenshotManifestPath)
+  ? JSON.parse(readFileSync(screenshotManifestPath, 'utf8'))
+  : {};
+
+const fontsSrc = join(root, 'src', 'fonts');
+const fontsDest = join(publicDir, 'fonts');
+if (existsSync(fontsSrc)) cpSync(fontsSrc, fontsDest, { recursive: true });
 
 const data = JSON.parse(readFileSync(join(root, 'data/projects.json'), 'utf8'));
 const site = JSON.parse(readFileSync(join(root, 'data/site.json'), 'utf8'));
@@ -60,6 +73,8 @@ function mergeProject(p) {
     git: m.git || null,
     ux: m.ux || null,
     analyzedAt: m.analyzedAt || null,
+    screenshots: screenshotManifest[p.slug]?.shots || [],
+    screenshotCover: screenshotManifest[p.slug]?.cover || 'landing',
   };
 }
 
@@ -108,6 +123,7 @@ const assetVersion = createHash('sha1')
   .update(readFileSync(join(root, 'src/styles.css')))
   .update(readFileSync(join(root, 'data/site.json')))
   .update(projectsJsonStr)
+  .update(existsSync(screenshotManifestPath) ? readFileSync(screenshotManifestPath) : '')
   .digest('hex')
   .slice(0, 8);
 
@@ -120,8 +136,7 @@ const headExtras = `  <link rel="icon" href="/favicon.svg" type="image/svg+xml" 
 // steht: gespeicherte Wahl → sonst Systempräferenz → sonst dunkel.
 const themeInitScript = `<script>(function(){var t=null;try{t=localStorage.getItem("portfolio-theme")}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)})();</script>`;
 
-const fontsHref =
-  'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@500&display=swap';
+const fontsHref = `/fonts/fonts.css?v=${assetVersion}`;
 
 function escapeHtml(str) {
   return String(str)
@@ -146,11 +161,36 @@ const heroLinkIcons = {
   external: `<svg class="hero__link-external" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 3.5H12.5V10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.5 12.5L12 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>`,
 };
 
+function renderResponsiveImage(shot, { sizes, alt = '', decorative = false, loading = 'lazy' } = {}) {
+  if (!shot?.src) return '';
+  const altAttr = decorative ? 'alt="" aria-hidden="true"' : `alt="${escapeHtml(alt)}"`;
+  const avif = shot.srcset?.avif;
+  const webp = shot.srcset?.webp;
+  const w = shot.width || 1280;
+  const h = shot.height || 800;
+  return `<picture>
+            ${avif ? `<source type="image/avif" srcset="${avif}" sizes="${sizes}" />` : ''}
+            ${webp ? `<source type="image/webp" srcset="${webp}" sizes="${sizes}" />` : ''}
+            <img src="${shot.src}" ${altAttr} loading="${loading}" width="${w}" height="${h}" />
+          </picture>`;
+}
+
+function coverShot(p) {
+  if (!p.screenshots?.length) return null;
+  return p.screenshots.find((s) => s.id === p.screenshotCover) || p.screenshots[0];
+}
+
 function renderCard(p) {
-  const hasShot = existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
-  const img = hasShot
-    ? `<img src="/screenshots/${p.slug}.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" />`
-    : `<div class="card__placeholder" aria-hidden="true"><span>${escapeHtml(p.name.charAt(0))}</span></div>`;
+  const shot = coverShot(p);
+  const hasShot = shot || existsSync(join(publicDir, 'screenshots', `${p.slug}.png`));
+  const img = shot
+    ? renderResponsiveImage(shot, {
+        sizes: '(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 360px',
+        decorative: true,
+      })
+    : hasShot
+      ? `<img src="/screenshots/${p.slug}.png" alt="" aria-hidden="true" loading="lazy" width="640" height="400" />`
+      : `<div class="card__placeholder" aria-hidden="true"><span>${escapeHtml(p.name.charAt(0))}</span></div>`;
 
   const facetAttr = (p.facets || []).join(',');
 
@@ -255,13 +295,16 @@ const langSwitchHtml = (tag = 'div') => `<${tag} class="lang-switch" role="group
           .join('\n        ')}
       </${tag}>`;
 
-// Skizzierter Pfeil (Signatur-Element, nur Desktop): Schaft und Spitze getrennt,
+// Skizzierter Pfeil (Signatur-Element, nur Desktop): startet über dem Namensende,
+// schwingt nach oben und fällt dann zum Foto ab. Schaft und Spitze getrennt,
 // damit keine Lücke an der Spitze entsteht. Auf Mobilgeräten per CSS ausgeblendet.
+// preserveAspectRatio="none" + non-scaling-stroke: Form folgt dem CSS-Kasten,
+// Linienstärke bleibt konstant.
 const heroAnnotationHtml = `<a class="hero__me" href="#ueber-mich">
         <span class="hero__me-main">
-          <svg class="hero__arrow" viewBox="0 0 182 34" fill="none" aria-hidden="true" focusable="false">
-            <path class="hero__arrow-line" pathLength="1" d="M4 20 C 28 22, 50 13, 74 15 S 122 21, 148 16 C 158 14, 166 13, 174 14" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-            <path class="hero__arrow-head" d="M159 4 C 163 7, 168 9, 174 14 C 169 18, 166 22, 164 26" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg class="hero__arrow" viewBox="0 0 220 100" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
+            <path class="hero__arrow-line" pathLength="1" d="M 10 34 C 22 14, 42 4, 68 14 S 128 62, 158 76 C 174 83, 190 87, 202 88" vector-effect="non-scaling-stroke" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero__arrow-head" d="M 186 70 C 192 77, 197 83, 202 88 C 195 91, 187 95, 180 99" vector-effect="non-scaling-stroke" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="hero__me-frame">
             <svg class="hero__me-ring" viewBox="0 0 116 116" fill="none" aria-hidden="true">
@@ -354,8 +397,6 @@ const html = `<!DOCTYPE html>
   <link rel="alternate" hreflang="de" href="https://www.henrikheil.net/" />
   <link rel="alternate" hreflang="en" href="https://www.henrikheil.net/?lang=en" />
   ${themeInitScript}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="${fontsHref}" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
@@ -497,14 +538,15 @@ ${headExtras}
 
   <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
   <aside class="drawer" id="project-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
+    <button type="button" class="drawer__handle" id="drawer-close" data-i18n-aria="drawer.close" aria-label="${escapeHtml(tDe.drawer.close)}">
+      <svg class="drawer__handle-icon drawer__handle-icon--side" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="drawer__handle-icon drawer__handle-icon--sheet" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
     <div class="drawer__scroll">
       <div class="drawer__hero">
         <div class="drawer__media" id="drawer-media"></div>
         <div class="drawer__hero-scrim" aria-hidden="true"></div>
         <div class="drawer__hero-overlay" id="drawer-hero-overlay"></div>
-        <button type="button" class="drawer__close" id="drawer-close" data-i18n-aria="drawer.close" aria-label="${escapeHtml(tDe.drawer.close)}">
-          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-        </button>
       </div>
       <div class="drawer__body">
         <div class="drawer__intro">
@@ -539,10 +581,30 @@ ${headExtras}
         <div class="video-modal__dialog" id="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="video-modal-title" tabindex="-1">
           <h2 class="sr-only" id="video-modal-title"></h2>
           <div class="video-modal__frame">
-            <iframe id="video-modal-iframe" title="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe id="video-modal-iframe" title="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="shot-lightbox" id="shot-lightbox" hidden>
+    <div class="shot-lightbox__backdrop" id="shot-lightbox-backdrop"></div>
+    <div class="shot-lightbox__dialog" id="shot-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="shot-lightbox-caption" tabindex="-1">
+      <button type="button" class="shot-lightbox__close" id="shot-lightbox-close" data-i18n-aria="drawer.closeLightbox" aria-label="${escapeHtml(tDe.drawer.closeLightbox)}">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+      </button>
+      <button type="button" class="shot-lightbox__nav shot-lightbox__nav--prev" id="shot-lightbox-prev" data-i18n-aria="drawer.prevScreenshot" aria-label="${escapeHtml(tDe.drawer.prevScreenshot)}" hidden>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="shot-lightbox__content">
+        <div class="shot-lightbox__media" id="shot-lightbox-media"></div>
+        <p class="shot-lightbox__caption" id="shot-lightbox-caption"></p>
+        <p class="shot-lightbox__counter" id="shot-lightbox-counter" hidden></p>
+      </div>
+      <button type="button" class="shot-lightbox__nav shot-lightbox__nav--next" id="shot-lightbox-next" data-i18n-aria="drawer.nextScreenshot" aria-label="${escapeHtml(tDe.drawer.nextScreenshot)}" hidden>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </div>
 
@@ -558,8 +620,6 @@ const impressum = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Impressum · Henrik Heil</title>
   ${themeInitScript}
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="${fontsHref}" rel="stylesheet" />
   <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}

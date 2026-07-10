@@ -1,0 +1,63 @@
+{
+  "patina": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } }],
+    "discover": { "max": 2, "skipAuth": true, "exclude": ["/impressum", "/datenschutz", "/registrieren", "/anmelden"] }
+  },
+  "velosia": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } }],
+    "discover": { "max": 2, "skipAuth": true, "exclude": ["/impressum", "/datenschutz", "/privacy", "/download"] }
+  },
+  "schnappster": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } }],
+    "discover": { "max": 2, "skipAuth": true, "exclude": ["/impressum", "/datenschutz", "/register"] }
+  },
+  "suntino": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } }],
+    "discover": { "max": 2, "skipAuth": true, "exclude": ["/impressum", "/datenschutz", "/download"] }
+  },
+  "hugur": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } }],
+    "discover": { "max": 2, "skipAuth": true, "exclude": ["/impressum", "/datenschutz", "/login"] }
+  },
+  "luhambo": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Spiel", "en": "Game" } }],
+    "discover": { "max": 1, "skipAuth": true }
+  },
+  "quality-touch": {
+    "shots": [
+      { "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } },
+      { "id": "module", "path": "/module", "label": { "de": "Modul", "en": "Module" }, "optional": true }
+    ],
+    "discover": { "max": 1, "skipAuth": true }
+  },
+  "tile-weave": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Editor", "en": "Editor" } }],
+    "discover": { "max": 1, "skipAuth": true }
+  },
+  "komorebi": {
+    "shots": [
+      { "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } },
+      { "id": "finden", "path": "/finden", "label": { "de": "Suche", "en": "Search" }, "optional": true }
+    ],
+    "discover": { "max": 1, "skipAuth": true }
+  },
+  "echt-oder-ki": {
+    "shots": [
+      { "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } },
+      { "id": "play", "path": "/play", "label": { "de": "Spiel", "en": "Game" }, "optional": true }
+    ],
+    "discover": { "max": 1, "skipAuth": true }
+  },
+  "cimdata-kurse": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Studienplaner", "en": "Study planner" } }],
+    "discover": { "max": 2, "skipAuth": true, "exclude": ["/impressum", "/datenschutz"] }
+  },
+  "default": {
+    "shots": [{ "id": "landing", "path": "/", "label": { "de": "Startseite", "en": "Landing page" } }],
+    "discover": {
+      "max": 2,
+      "skipAuth": true,
+      "exclude": ["/impressum", "/datenschutz", "/privacy", "/legal", "/agb"]
+    }
+  }
+}

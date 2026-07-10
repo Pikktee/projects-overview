@@ -8,10 +8,14 @@
     "metrics": "node scripts/collect-metrics.mjs",
     "build": "node scripts/build.mjs",
     "prebuild": "node scripts/collect-metrics.mjs",
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "optimize-images": "node scripts/optimize-images.mjs",
+    "fonts": "node scripts/fetch-fonts.mjs",
     "snake:audio": "node scripts/generate-snake-audio.mjs",
     "dev": "npx serve public -l 3000"
   },
   "devDependencies": {
-    "playwright": "^1.61.1"
+    "playwright": "^1.61.1",
+    "sharp": "^0.35.3"
   }
 }
