@@ -920,7 +920,7 @@
     const ytId = parseYoutubeId(project.productVideo);
     if (ytId) {
       const thumbs = youtubeThumbnails(ytId);
-      shots.push({
+      shots.unshift({
         id: 'product-video',
         type: 'video',
         youtubeId: ytId,
@@ -1369,7 +1369,9 @@
 
   // ── Screenshot-Lightbox (Drawer) ──
   const shotLightbox = document.getElementById('shot-lightbox');
-  const shotLightboxBackdrop = document.getElementById('shot-lightbox-backdrop');
+  const shotLightboxSideLeft = document.getElementById('shot-lightbox-side-left');
+  const shotLightboxSideRight = document.getElementById('shot-lightbox-side-right');
+  const shotLightboxTopZone = document.getElementById('shot-lightbox-top-zone');
   const shotLightboxDialog = document.getElementById('shot-lightbox-dialog');
   const shotLightboxMedia = document.getElementById('shot-lightbox-media');
   const shotLightboxCaption = document.getElementById('shot-lightbox-caption');
@@ -1379,6 +1381,37 @@
   const shotLightboxNext = document.getElementById('shot-lightbox-next');
   let shotLightboxOpen = false;
   let shotLightboxLastFocus = null;
+
+  function shotLightboxAspect(shot) {
+    const w = shot.width || 1280;
+    const h = shot.height || (shot.type === 'video' ? 720 : 800);
+    return w / h;
+  }
+
+  function shotLightboxBounds(shot) {
+    const ratio = shotLightboxAspect(shot);
+    const maxW = Math.min(1280, window.innerWidth * 0.92);
+    const maxH = window.innerHeight * 0.88 - 32;
+    let w = maxW;
+    let h = w / ratio;
+    if (h > maxH) {
+      h = maxH;
+      w = h * ratio;
+    }
+    return { w: Math.round(w), h: Math.round(h) };
+  }
+
+  function applyShotLightboxSize(shot) {
+    if (!shotLightbox || !shot) return;
+    const { w, h } = shotLightboxBounds(shot);
+    shotLightbox.style.setProperty('--shot-lightbox-w', `${w}px`);
+    shotLightbox.style.setProperty('--shot-lightbox-h', `${h}px`);
+  }
+
+  function clearShotLightboxSize() {
+    shotLightbox?.style.removeProperty('--shot-lightbox-w');
+    shotLightbox?.style.removeProperty('--shot-lightbox-h');
+  }
 
   function renderShotLightboxVideoPreview(shot) {
     const fallback = esc(shot.thumbnailFallback || shot.thumbnail);
@@ -1434,6 +1467,19 @@
       });
     }
     shotLightboxCaption.textContent = label;
+    applyShotLightboxSize(shot);
+
+    if (shot.type !== 'video') {
+      shotLightboxMedia.querySelector('img')?.addEventListener('load', () => {
+        const img = shotLightboxMedia.querySelector('img');
+        if (!img?.naturalWidth) return;
+        applyShotLightboxSize({
+          ...shot,
+          width: img.naturalWidth,
+          height: img.naturalHeight,
+        });
+      }, { once: true });
+    }
 
     if (shotLightboxPrev) shotLightboxPrev.hidden = max <= 1;
     if (shotLightboxNext) shotLightboxNext.hidden = max <= 1;
@@ -1452,6 +1498,20 @@
     renderShotLightboxSlide(index);
   }
 
+  function resetShotLightboxHover() {
+    shotLightbox?.classList.remove('shot-lightbox--top-hover', 'shot-lightbox--side-hover');
+  }
+
+  function bindShotLightboxSideZone(el) {
+    el?.addEventListener('mouseenter', () => {
+      shotLightbox?.classList.add('shot-lightbox--side-hover');
+    });
+    el?.addEventListener('mouseleave', () => {
+      shotLightbox?.classList.remove('shot-lightbox--side-hover');
+    });
+    el?.addEventListener('click', closeShotLightbox);
+  }
+
   function openShotLightbox(index = drawerGallery.index) {
     if (!shotLightbox || !drawerGallery.shots.length) return;
     const shot = drawerGallery.shots[index];
@@ -1459,6 +1519,7 @@
 
     shotLightboxLastFocus = document.activeElement;
     shotLightboxOpen = true;
+    resetShotLightboxHover();
     renderShotLightboxSlide(index);
     shotLightbox.hidden = false;
     requestAnimationFrame(() => {
@@ -1472,12 +1533,27 @@
 
     shotLightboxOpen = false;
     shotLightbox.classList.remove('shot-lightbox--open');
+    resetShotLightboxHover();
     if (shotLightboxMedia) shotLightboxMedia.innerHTML = '';
+    clearShotLightboxSize();
     shotLightbox.hidden = true;
     shotLightboxLastFocus?.focus({ preventScroll: true });
   }
 
-  shotLightboxBackdrop?.addEventListener('click', closeShotLightbox);
+  shotLightboxTopZone?.addEventListener('click', closeShotLightbox);
+  shotLightboxTopZone?.addEventListener('mouseenter', () => {
+    shotLightbox?.classList.add('shot-lightbox--top-hover');
+  });
+  shotLightboxTopZone?.addEventListener('mouseleave', () => {
+    shotLightbox?.classList.remove('shot-lightbox--top-hover');
+  });
+  bindShotLightboxSideZone(shotLightboxSideLeft);
+  bindShotLightboxSideZone(shotLightboxSideRight);
+  window.addEventListener('resize', () => {
+    if (!shotLightboxOpen) return;
+    const shot = drawerGallery.shots[drawerGallery.index];
+    if (shot) applyShotLightboxSize(shot);
+  }, { passive: true });
   shotLightboxClose?.addEventListener('click', closeShotLightbox);
   shotLightboxPrev?.addEventListener('click', () => goShotLightbox(drawerGallery.index - 1));
   shotLightboxNext?.addEventListener('click', () => goShotLightbox(drawerGallery.index + 1));

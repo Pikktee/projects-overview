@@ -2291,8 +2291,10 @@ html[data-theme="light"] .drawer {
   cursor: pointer;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: -4px 0 14px color-mix(in srgb, #000 10%, transparent);
-  transform: translate(-100%, -50%);
+  box-shadow:
+    -4px 0 14px color-mix(in srgb, #000 10%, transparent),
+    1px 0 0 var(--bg-card);
+  transform: translate(calc(-100% + 1px), -50%);
   opacity: 0;
   transition:
     color 0.2s ease,
@@ -3522,7 +3524,7 @@ html[data-theme="light"] .btn--primary {
   }
 }
 
-/* ── Screenshot lightbox (Drawer) ── */
+/* ── Screenshot lightbox (Drawer, MyMind-Stil wie Video-Modal) ── */
 
 .shot-lightbox[hidden] {
   display: none;
@@ -3532,44 +3534,110 @@ html[data-theme="light"] .btn--primary {
   position: fixed;
   inset: 0;
   z-index: 1200;
-  display: grid;
-  place-items: center;
-  padding: clamp(0.65rem, 2.5vw, 1.25rem);
+  padding: 0;
 }
 
 .shot-lightbox__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(6, 8, 10, 0.72);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  z-index: 0;
+  background: var(--video-modal-bg);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   opacity: 0;
-  cursor: zoom-out;
-  transition: opacity 0.32s var(--ease-out);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .shot-lightbox--open .shot-lightbox__backdrop {
   opacity: 1;
 }
 
-.shot-lightbox__dialog {
+.shot-lightbox--side-hover .shot-lightbox__backdrop,
+.shot-lightbox:has(.shot-lightbox__top-zone:hover) .shot-lightbox__backdrop {
+  background: var(--video-modal-bg-hover);
+}
+
+.shot-lightbox__layout {
   position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
   width: 100%;
-  max-height: 96dvh;
-  opacity: 0;
-  transform: translateY(10px) scale(0.988);
-  transition:
-    opacity 0.32s var(--ease-out),
-    transform 0.32s var(--ease-out);
+  min-height: 100%;
+  padding: clamp(1rem, 4vw, 2rem);
+  box-sizing: border-box;
+  pointer-events: none;
 }
 
-.shot-lightbox--open .shot-lightbox__dialog {
+.shot-lightbox__side-zone {
+  flex: 1 1 0;
+  align-self: stretch;
+  min-width: 0;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.shot-lightbox__stage {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.shot-lightbox__hint {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  margin: 0;
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(0.15rem);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.shot-lightbox__top-zone {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  transform: translateX(-50%);
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.shot-lightbox__top-zone:hover .shot-lightbox__hint,
+.shot-lightbox--top-hover .shot-lightbox__hint {
   opacity: 1;
-  transform: none;
+  transform: translateY(0);
+}
+
+.shot-lightbox__wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: auto;
+  pointer-events: none;
+}
+
+.shot-lightbox--top-hover .shot-lightbox__dialog,
+.shot-lightbox:has(.shot-lightbox__top-zone:hover) .shot-lightbox__dialog {
+  transform: translateY(0.5rem) scale(0.98);
 }
 
 .shot-lightbox__viewer {
@@ -3577,36 +3645,71 @@ html[data-theme="light"] .btn--primary {
   align-items: center;
   justify-content: center;
   gap: clamp(0.55rem, 2vw, 1rem);
-  width: 100%;
-  max-width: min(98vw, 1320px);
+  width: auto;
+  pointer-events: none;
+}
+
+.shot-lightbox__dialog {
+  flex: 0 1 auto;
+  width: var(--shot-lightbox-w, auto);
+  min-width: 0;
+  padding: 0;
+  background: #0a0c0e;
+  border: 1px solid color-mix(in srgb, var(--accent-ui) 28%, transparent);
+  border-radius: 1rem;
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  overflow: hidden;
+  cursor: default;
+  pointer-events: auto;
+  transform: translateY(16px) scale(0.97);
+  opacity: 0;
+  transition:
+    transform 0.32s var(--ease-out),
+    opacity 0.3s ease,
+    width 0.32s var(--ease-out);
+}
+
+.shot-lightbox--open .shot-lightbox__dialog {
+  transform: none;
+  opacity: 1;
+}
+
+.shot-lightbox--open.shot-lightbox--top-hover .shot-lightbox__dialog,
+.shot-lightbox--open:has(.shot-lightbox__top-zone:hover) .shot-lightbox__dialog {
+  transform: translateY(0.5rem) scale(0.98);
 }
 
 .shot-lightbox__frame {
   position: relative;
-  flex: 0 1 auto;
-  min-width: 0;
-  max-width: min(92vw, 1280px);
-  max-height: calc(96dvh - 1.5rem);
   margin: 0;
   overflow: hidden;
   background: #050607;
-  box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.42),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
+  width: 100%;
+  height: var(--shot-lightbox-h, auto);
+  transition: height 0.32s var(--ease-out);
 }
 
 .shot-lightbox__media {
   display: block;
+  width: 100%;
+  height: 100%;
   line-height: 0;
+}
+
+.shot-lightbox__media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .shot-lightbox__media picture,
 .shot-lightbox__media img {
   display: block;
-  width: auto;
-  height: auto;
-  max-width: min(92vw, 1280px);
-  max-height: calc(96dvh - 1.5rem);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .shot-lightbox__bar {
@@ -3678,6 +3781,7 @@ html[data-theme="light"] .btn--primary {
   color: rgba(255, 255, 255, 0.94);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.5rem;
   cursor: pointer;
   pointer-events: auto;
   backdrop-filter: blur(10px);
@@ -3698,9 +3802,8 @@ html[data-theme="light"] .btn--primary {
 
 .shot-lightbox__video-preview {
   position: relative;
-  width: min(92vw, 1280px);
-  aspect-ratio: 16 / 9;
-  max-height: calc(96dvh - 1.5rem);
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: #000;
 }
@@ -3754,9 +3857,8 @@ html[data-theme="light"] .btn--primary {
 
 .shot-lightbox__video-frame {
   position: relative;
-  width: min(92vw, 1280px);
-  aspect-ratio: 16 / 9;
-  max-height: calc(96dvh - 1.5rem);
+  width: 100%;
+  height: 100%;
   background: #000;
 }
 
@@ -3778,7 +3880,9 @@ html[data-theme="light"] .btn--primary {
   color: rgba(255, 255, 255, 0.94);
   background: rgba(8, 10, 12, 0.52);
   border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
   cursor: pointer;
+  pointer-events: auto;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
@@ -3801,24 +3905,21 @@ html[data-theme="light"] .btn--primary {
   display: none;
 }
 
+@media (min-width: 768px) {
+  .shot-lightbox__top-zone {
+    display: block;
+  }
+}
+
 @media (max-width: 720px) {
   .shot-lightbox__viewer {
     position: relative;
     display: block;
-    width: 100%;
+    width: var(--shot-lightbox-w, calc(100vw - 2rem));
   }
 
-  .shot-lightbox__frame {
+  .shot-lightbox__dialog {
     width: 100%;
-    max-width: none;
-  }
-
-  .shot-lightbox__media picture,
-  .shot-lightbox__media img,
-  .shot-lightbox__video-preview,
-  .shot-lightbox__video-frame {
-    width: 100%;
-    max-width: none;
   }
 
   .shot-lightbox__nav {
@@ -3852,7 +3953,13 @@ html[data-theme="light"] .btn--primary {
 @media (prefers-reduced-motion: reduce) {
   .shot-lightbox__dialog {
     transform: none;
-    transition: opacity 0.01ms;
+    transition:
+      opacity 0.01ms,
+      width 0.01ms;
+  }
+
+  .shot-lightbox__frame {
+    transition: height 0.01ms;
   }
 }
 
@@ -4132,6 +4239,17 @@ html[data-theme="light"] .btn--primary {
     text-decoration: none;
     cursor: default;
     pointer-events: none;
+    color: inherit;
+  }
+
+  .about__interest-egg .about__interest-label {
+    color: inherit;
+    padding-block: 0;
+    margin-block: 0;
+  }
+
+  .about__interest-egg .about__interest-label::after {
+    display: none;
   }
 
   .about__interest-egg .sr-only {
