@@ -69,6 +69,7 @@
   let lastFocus = null;
   let activeTab = 'overview';
   let closeTimer = null;
+  let drawerCloseFinished = false;
   let activeFilter = 'all';
 
   function t(key, vars = {}) {
@@ -342,46 +343,58 @@
     });
   }
 
-  // Pinnwand-Foto: Pendelphysik — Mausgeschwindigkeit stößt an, Feder bringt zurück.
+  // Pinnwand-Foto: Pendelphysik — nur per Drag/Swipe anstupsen, Feder bringt zurück.
   const aboutPhotoPinned = document.getElementById('about-photo-pinned');
   const aboutPhotoSwing = aboutPhotoPinned?.querySelector('.about__photo-swing');
   const ABOUT_PHOTO_REST = -1.6;
-  const SWING_SPRING = 0.044;
-  const SWING_DAMPING = 0.86;
-  const SWING_IMPULSE = 0.17;
+  const SWING_SPRING = 0.038;
+  const SWING_DAMPING = 0.925;
+  const SWING_DRAG_RATIO = 0.088;
+  const SWING_RELEASE_GAIN = 14;
   const SWING_MAX_VEL = 4.6;
   const SWING_MAX_ANGLE = 26;
-  const SWING_SETTLE = 0.035;
+  const SWING_SETTLE = 0.022;
 
   if (aboutPhotoPinned && aboutPhotoSwing && !reduceMotion) {
     let angle = ABOUT_PHOTO_REST;
     let angularVel = 0;
     let lastX = null;
     let lastTime = null;
-    let hovering = false;
+    let grabbing = false;
+    let activePointerId = null;
+    let grabStartX = 0;
+    let grabStartAngle = ABOUT_PHOTO_REST;
     let rafId = null;
+
+    const clampAngle = (deg) =>
+      Math.max(ABOUT_PHOTO_REST - SWING_MAX_ANGLE, Math.min(ABOUT_PHOTO_REST + SWING_MAX_ANGLE, deg));
 
     const setAngle = (deg) => {
       aboutPhotoPinned.style.setProperty('--swing-angle', `${deg.toFixed(2)}deg`);
     };
 
     const step = () => {
+      if (grabbing) {
+        setAngle(angle);
+        rafId = requestAnimationFrame(step);
+        return;
+      }
+
       const displacement = angle - ABOUT_PHOTO_REST;
       angularVel = (angularVel - SWING_SPRING * displacement) * SWING_DAMPING;
       angle += angularVel;
 
       if (angle < ABOUT_PHOTO_REST - SWING_MAX_ANGLE) {
         angle = ABOUT_PHOTO_REST - SWING_MAX_ANGLE;
-        angularVel *= -0.32;
+        angularVel *= -0.38;
       } else if (angle > ABOUT_PHOTO_REST + SWING_MAX_ANGLE) {
         angle = ABOUT_PHOTO_REST + SWING_MAX_ANGLE;
-        angularVel *= -0.32;
+        angularVel *= -0.38;
       }
 
       setAngle(angle);
 
       const settled =
-        !hovering &&
         Math.abs(angularVel) < SWING_SETTLE &&
         Math.abs(angle - ABOUT_PHOTO_REST) < SWING_SETTLE;
 
@@ -405,53 +418,69 @@
       lastTime = null;
     };
 
-    const startTracking = (e) => {
-      hovering = true;
+    const startGrab = (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+      grabbing = true;
+      activePointerId = e.pointerId;
+      grabStartX = e.clientX;
+      grabStartAngle = angle;
+      angularVel = 0;
       lastX = e.clientX;
       lastTime = performance.now();
+      aboutPhotoPinned.classList.add('about__photo--grabbing');
+      aboutPhotoPinned.setPointerCapture(e.pointerId);
+      ensureAnimating();
     };
 
-    const endTouchInteraction = (e) => {
-      if (e.pointerType !== 'touch') return;
+    const endGrab = (e) => {
+      if (!grabbing) return;
+      if (activePointerId !== null && e.pointerId !== undefined && e.pointerId !== activePointerId) return;
+      if (e.type === 'pointerup' && e.pointerType === 'mouse' && e.button !== 0) return;
+
       if (aboutPhotoPinned.hasPointerCapture(e.pointerId)) {
         aboutPhotoPinned.releasePointerCapture(e.pointerId);
       }
-      hovering = false;
+
+      grabbing = false;
+      activePointerId = null;
+      aboutPhotoPinned.classList.remove('about__photo--grabbing');
       resetTracking();
       ensureAnimating();
     };
 
-    aboutPhotoPinned.addEventListener('pointerenter', startTracking);
-
     aboutPhotoPinned.addEventListener('pointerdown', (e) => {
-      startTracking(e);
-      if (e.pointerType === 'touch') {
-        aboutPhotoPinned.setPointerCapture(e.pointerId);
-      }
+      e.preventDefault();
+      startGrab(e);
     });
 
     aboutPhotoPinned.addEventListener('pointermove', (e) => {
+      if (!grabbing || e.pointerId !== activePointerId) return;
+
       const now = performance.now();
+      const targetAngle = clampAngle(grabStartAngle - (e.clientX - grabStartX) * SWING_DRAG_RATIO);
+
       if (lastX !== null && lastTime !== null) {
         const dt = Math.max(10, now - lastTime);
         const vx = (e.clientX - lastX) / dt;
-        angularVel -= vx * SWING_IMPULSE;
+        const instantVel = -vx * SWING_DRAG_RATIO * SWING_RELEASE_GAIN;
+        angularVel = angularVel * 0.25 + instantVel * 0.75;
         angularVel = Math.max(-SWING_MAX_VEL, Math.min(SWING_MAX_VEL, angularVel));
-        ensureAnimating();
       }
+
+      angle = targetAngle;
+      setAngle(angle);
       lastX = e.clientX;
       lastTime = now;
-      hovering = true;
     });
 
-    aboutPhotoPinned.addEventListener('pointerleave', () => {
-      hovering = false;
-      resetTracking();
-      ensureAnimating();
+    aboutPhotoPinned.addEventListener('pointerup', endGrab);
+    aboutPhotoPinned.addEventListener('pointercancel', endGrab);
+    aboutPhotoPinned.addEventListener('lostpointercapture', endGrab);
+    window.addEventListener('pointerup', endGrab);
+    window.addEventListener('blur', () => {
+      if (grabbing) endGrab({ pointerId: activePointerId, clientX: lastX ?? 0, clientY: 0 });
     });
-
-    aboutPhotoPinned.addEventListener('pointerup', endTouchInteraction);
-    aboutPhotoPinned.addEventListener('pointercancel', endTouchInteraction);
 
     setAngle(ABOUT_PHOTO_REST);
   } else if (aboutPhotoPinned) {
@@ -876,7 +905,7 @@
     if (shot.type === 'video') {
       const fallback = esc(shot.thumbnailFallback || shot.thumbnail);
       return `<figure class="drawer__gallery-slide" role="group" aria-roledescription="slide" aria-label="${esc(alt)}" data-slide="${i}">
-      <button type="button" class="drawer__gallery-hit drawer__gallery-hit--video" data-gallery-open="${i}" aria-label="${esc(t('drawer.playVideo'))}">
+      <button type="button" class="drawer__gallery-hit drawer__gallery-hit--video" data-gallery-open="${i}" aria-label="${esc(t('drawer.enlargeScreenshotNamed', { label }))}">
         <img src="${esc(shot.thumbnail)}" alt="" width="1280" height="720" loading="eager" decoding="async" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback=''}" data-fallback="${fallback}" />
         <span class="drawer__gallery-play" aria-hidden="true">${playIcon}</span>
       </button>
@@ -1000,11 +1029,14 @@
   function lockBodyScroll() {
     if (scrollLockDepth === 0) {
       savedScrollY = window.scrollY;
-      const scrollbarWidth = getScrollbarWidth();
-      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
       document.documentElement.classList.add('drawer-open');
       document.body.classList.add('drawer-open');
-      document.body.style.top = `-${savedScrollY}px`;
+      if (savedScrollY > 0) {
+        const scrollbarWidth = getScrollbarWidth();
+        document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+        document.documentElement.classList.add('drawer-open--scroll-lock');
+        document.body.style.top = `-${savedScrollY}px`;
+      }
     }
     scrollLockDepth += 1;
   }
@@ -1016,26 +1048,41 @@
 
     const scrollY = savedScrollY;
     const html = document.documentElement;
-    const previousScrollBehavior = html.style.scrollBehavior;
+    const body = document.body;
 
-    html.style.scrollBehavior = 'auto';
-    document.body.style.top = '';
-    document.body.classList.remove('drawer-open');
+    body.style.removeProperty('top');
+    body.classList.remove('drawer-open');
     html.classList.remove('drawer-open');
+    html.classList.remove('drawer-open--scroll-lock');
     html.style.removeProperty('--scrollbar-width');
-    window.scrollTo(0, scrollY);
-    html.style.scrollBehavior = previousScrollBehavior;
+
+    if (scrollY > 0) {
+      html.style.scrollBehavior = 'auto';
+      html.scrollTop = scrollY;
+      body.scrollTop = scrollY;
+      window.scrollTo(0, scrollY);
+      html.style.removeProperty('scroll-behavior');
+    }
   }
 
   function finishDrawerClose() {
-    if (activeSlug) return;
+    if (activeSlug || drawerCloseFinished) return;
+    drawerCloseFinished = true;
+
     if (closeTimer !== null) {
       clearTimeout(closeTimer);
       closeTimer = null;
     }
     drawer.removeEventListener('transitionend', onCloseTransitionEnd);
-    hideDrawerElements();
+
     unlockBodyScroll();
+
+    requestAnimationFrame(() => {
+      hideDrawerElements();
+      requestAnimationFrame(() => {
+        lastFocus?.focus({ preventScroll: true });
+      });
+    });
   }
 
   // Verbirgt den Drawer erst nach der Schließen-Animation. Bricht ab, falls
@@ -1043,7 +1090,12 @@
   // und sofort verschwinden" bei schnellem Wechsel zwischen Karten).
   function hideDrawerElements() {
     if (activeSlug) return;
+    if (backdrop) {
+      backdrop.style.setProperty('-webkit-backdrop-filter', 'none');
+      backdrop.style.setProperty('backdrop-filter', 'none');
+    }
     drawer.hidden = true;
+    backdrop.hidden = true;
     drawer.removeEventListener('transitionend', onCloseTransitionEnd);
     const drawerTitle = document.getElementById('drawer-title');
     if (drawerTitle) drawerTitle.textContent = t('drawer.defaultTitle');
@@ -1077,6 +1129,7 @@
       if (!project || !drawer) return;
 
       cancelPendingClose();
+      drawerCloseFinished = false;
 
       if (!activeSlug) {
         lastFocus = document.activeElement;
@@ -1088,6 +1141,8 @@
       drawer.inert = false;
       drawer.hidden = false;
       backdrop.hidden = false;
+      backdrop.style.removeProperty('-webkit-backdrop-filter');
+      backdrop.style.removeProperty('backdrop-filter');
       void drawer.offsetWidth;
       drawer.classList.add('drawer--open');
       backdrop.classList.add('drawer-backdrop--visible');
@@ -1113,10 +1168,10 @@
     if (videoModalOpen) closeVideoModal();
 
     cancelPendingClose();
+    drawerCloseFinished = false;
 
     drawer.classList.remove('drawer--open');
     backdrop.classList.remove('drawer-backdrop--visible');
-    backdrop.hidden = true;
     drawer.inert = true;
     resetDrawerScroll();
 
@@ -1130,8 +1185,6 @@
     if (location.hash) {
       history.replaceState(null, '', location.pathname + location.search);
     }
-
-    lastFocus?.focus({ preventScroll: true });
   }
 
   async function handleHash() {
@@ -1207,29 +1260,31 @@
   let shotLightboxOpen = false;
   let shotLightboxLastFocus = null;
 
-  function imageSlideIndexes() {
-    return drawerGallery.shots
-      .map((shot, i) => (shot.type === 'video' ? -1 : i))
-      .filter((i) => i >= 0);
+  function renderShotLightboxVideoPreview(shot) {
+    const fallback = esc(shot.thumbnailFallback || shot.thumbnail);
+    return `<div class="shot-lightbox__video-preview">
+      <img src="${esc(shot.thumbnail)}" alt="" width="1280" height="720" decoding="async" onerror="if(this.dataset.fallback){this.src=this.dataset.fallback;this.dataset.fallback=''}" data-fallback="${fallback}" />
+      <button type="button" class="shot-lightbox__play" data-shot-lightbox-play aria-label="${esc(t('drawer.playVideo'))}">
+        ${playIcon}
+      </button>
+    </div>`;
   }
 
-  function nextImageSlideIndex(from, direction) {
-    const max = drawerGallery.shots.length;
-    if (!max) return from;
-    for (let step = 1; step <= max; step += 1) {
-      const i = ((from + direction * step) % max + max) % max;
-      if (drawerGallery.shots[i]?.type !== 'video') return i;
-    }
-    return from;
+  function playShotLightboxVideo(shot) {
+    if (!shot?.youtubeId || !shotLightboxMedia) return;
+    const title = `${drawerGallery.project?.name || ''} – ${shotLabel(shot)}`;
+    shotLightboxMedia.innerHTML = `<div class="shot-lightbox__video-frame">
+      <iframe src="${youtubeEmbedUrl(shot.youtubeId)}" title="${esc(title)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>`;
+  }
+
+  function bindShotLightboxMediaInteractions(shot) {
+    shotLightboxMedia?.querySelector('[data-shot-lightbox-play]')?.addEventListener('click', () => {
+      playShotLightboxVideo(shot);
+    });
   }
 
   function openDrawerSlide(index) {
-    const shot = drawerGallery.shots[index];
-    if (!shot) return;
-    if (shot.type === 'video') {
-      openVideoModal(shot.youtubeId, drawerGallery.project?.name || '');
-      return;
-    }
     openShotLightbox(index);
   }
 
@@ -1242,31 +1297,32 @@
     if (drawerGallery.go) drawerGallery.go(i);
 
     const shot = drawerGallery.shots[i];
-    if (!shot || shot.type === 'video') return;
+    if (!shot) return;
 
     const projectName = drawerGallery.project?.name || '';
     const label = shotLabel(shot);
     const alt = shotAlt(shot, i, max, projectName);
 
-    shotLightboxMedia.innerHTML = renderResponsivePicture(shot, {
-      sizes: '96vw',
-      alt,
-      loading: 'eager',
-    });
+    if (shot.type === 'video') {
+      shotLightboxMedia.innerHTML = renderShotLightboxVideoPreview(shot);
+      bindShotLightboxMediaInteractions(shot);
+    } else {
+      shotLightboxMedia.innerHTML = renderResponsivePicture(shot, {
+        sizes: '96vw',
+        alt,
+        loading: 'eager',
+      });
+    }
     shotLightboxCaption.textContent = label;
 
-    const imageIndexes = imageSlideIndexes();
-    const imagePos = imageIndexes.indexOf(i);
-    const imageTotal = imageIndexes.length;
-
-    if (shotLightboxPrev) shotLightboxPrev.hidden = imageTotal <= 1;
-    if (shotLightboxNext) shotLightboxNext.hidden = imageTotal <= 1;
+    if (shotLightboxPrev) shotLightboxPrev.hidden = max <= 1;
+    if (shotLightboxNext) shotLightboxNext.hidden = max <= 1;
     if (shotLightboxCounter) {
-      shotLightboxCounter.hidden = imageTotal <= 1;
-      if (imageTotal > 1 && imagePos >= 0) {
+      shotLightboxCounter.hidden = max <= 1;
+      if (max > 1) {
         shotLightboxCounter.textContent = t('drawer.lightboxCounter', {
-          current: imagePos + 1,
-          total: imageTotal,
+          current: i + 1,
+          total: max,
         });
       }
     }
@@ -1279,7 +1335,7 @@
   function openShotLightbox(index = drawerGallery.index) {
     if (!shotLightbox || !drawerGallery.shots.length) return;
     const shot = drawerGallery.shots[index];
-    if (!shot || shot.type === 'video') return;
+    if (!shot) return;
 
     shotLightboxLastFocus = document.activeElement;
     shotLightboxOpen = true;
@@ -1303,8 +1359,8 @@
 
   shotLightboxBackdrop?.addEventListener('click', closeShotLightbox);
   shotLightboxClose?.addEventListener('click', closeShotLightbox);
-  shotLightboxPrev?.addEventListener('click', () => goShotLightbox(nextImageSlideIndex(drawerGallery.index, -1)));
-  shotLightboxNext?.addEventListener('click', () => goShotLightbox(nextImageSlideIndex(drawerGallery.index, 1)));
+  shotLightboxPrev?.addEventListener('click', () => goShotLightbox(drawerGallery.index - 1));
+  shotLightboxNext?.addEventListener('click', () => goShotLightbox(drawerGallery.index + 1));
 
   function trapShotLightboxFocus(e) {
     if (!shotLightboxOpen || e.key !== 'Tab' || shotLightbox?.hidden) return;

@@ -591,20 +591,26 @@ ${headExtras}
   <div class="shot-lightbox" id="shot-lightbox" hidden>
     <div class="shot-lightbox__backdrop" id="shot-lightbox-backdrop"></div>
     <div class="shot-lightbox__dialog" id="shot-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="shot-lightbox-caption" tabindex="-1">
-      <button type="button" class="shot-lightbox__close" id="shot-lightbox-close" data-i18n-aria="drawer.closeLightbox" aria-label="${escapeHtml(tDe.drawer.closeLightbox)}">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
-      </button>
-      <button type="button" class="shot-lightbox__nav shot-lightbox__nav--prev" id="shot-lightbox-prev" data-i18n-aria="drawer.prevScreenshot" aria-label="${escapeHtml(tDe.drawer.prevScreenshot)}" hidden>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="shot-lightbox__content">
-        <div class="shot-lightbox__media" id="shot-lightbox-media"></div>
-        <p class="shot-lightbox__caption" id="shot-lightbox-caption"></p>
-        <p class="shot-lightbox__counter" id="shot-lightbox-counter" hidden></p>
+      <div class="shot-lightbox__viewer">
+        <button type="button" class="shot-lightbox__nav shot-lightbox__nav--prev" id="shot-lightbox-prev" data-i18n-aria="drawer.prevScreenshot" aria-label="${escapeHtml(tDe.drawer.prevScreenshot)}" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 6l-6 6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <figure class="shot-lightbox__frame">
+          <div class="shot-lightbox__media" id="shot-lightbox-media"></div>
+          <figcaption class="shot-lightbox__bar">
+            <div class="shot-lightbox__meta">
+              <p class="shot-lightbox__caption" id="shot-lightbox-caption"></p>
+              <p class="shot-lightbox__counter" id="shot-lightbox-counter" hidden></p>
+            </div>
+            <button type="button" class="shot-lightbox__close" id="shot-lightbox-close" data-i18n-aria="drawer.closeLightbox" aria-label="${escapeHtml(tDe.drawer.closeLightbox)}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+            </button>
+          </figcaption>
+        </figure>
+        <button type="button" class="shot-lightbox__nav shot-lightbox__nav--next" id="shot-lightbox-next" data-i18n-aria="drawer.nextScreenshot" aria-label="${escapeHtml(tDe.drawer.nextScreenshot)}" hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
-      <button type="button" class="shot-lightbox__nav shot-lightbox__nav--next" id="shot-lightbox-next" data-i18n-aria="drawer.nextScreenshot" aria-label="${escapeHtml(tDe.drawer.nextScreenshot)}" hidden>
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
     </div>
   </div>
 

@@ -55,29 +55,29 @@
     },
     "dependencyCount": 23,
     "loc": {
-      "total": 30023,
-      "code": 24814,
-      "blank": 2827,
-      "comment": 2382,
+      "total": 30997,
+      "code": 25596,
+      "blank": 2926,
+      "comment": 2475,
       "byLanguage": {
-        "SQL": 132,
-        "TypeScript": 16927,
-        "MJS": 92,
-        "CSS": 7663
+        "SQL": 150,
+        "TypeScript": 17251,
+        "MJS": 475,
+        "CSS": 7720
       }
     },
-    "locFormatted": "24.8k",
+    "locFormatted": "25.6k",
     "files": {
-      "source": 220,
+      "source": 229,
       "components": 50,
       "tsx": 67,
-      "tests": 10
+      "tests": 11
     },
     "coverage": null,
     "git": {
-      "commits": 137,
+      "commits": 138,
       "firstCommit": "2026-06-11 15:38:38 +0200",
-      "lastCommit": "2026-07-03 23:23:48 +0200"
+      "lastCommit": "2026-07-11 11:08:34 +0200"
     },
     "ux": {
       "uiFrameworks": [
@@ -92,11 +92,11 @@
       ],
       "componentCount": 50,
       "tsxFiles": 67,
-      "testFiles": 10,
+      "testFiles": 11,
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:00.350Z"
+    "analyzedAt": "2026-07-11T21:54:38.086Z"
   },
   "velosia": {
     "slug": "velosia",
@@ -193,7 +193,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-10T13:03:00.515Z"
+    "analyzedAt": "2026-07-11T21:54:38.248Z"
   },
   "schnappster": {
     "slug": "schnappster",
@@ -342,7 +342,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-10T13:03:00.765Z"
+    "analyzedAt": "2026-07-11T21:54:38.485Z"
   },
   "hugur": {
     "slug": "hugur",
@@ -451,7 +451,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-10T13:03:00.928Z"
+    "analyzedAt": "2026-07-11T21:54:38.643Z"
   },
   "tile-weave": {
     "slug": "tile-weave",
@@ -507,19 +507,19 @@
     },
     "dependencyCount": 20,
     "loc": {
-      "total": 7637,
-      "code": 6612,
-      "blank": 819,
-      "comment": 206,
+      "total": 8075,
+      "code": 6998,
+      "blank": 857,
+      "comment": 220,
       "byLanguage": {
         "JavaScript": 88,
         "HTML": 18,
         "MJS": 503,
-        "TypeScript": 3537,
-        "CSS": 2466
+        "TypeScript": 3725,
+        "CSS": 2664
       }
     },
-    "locFormatted": "6.6k",
+    "locFormatted": "7k",
     "files": {
       "source": 9,
       "components": 0,
@@ -545,7 +545,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:01.005Z"
+    "analyzedAt": "2026-07-11T21:54:38.723Z"
   },
   "suntino": {
     "slug": "suntino",
@@ -613,7 +613,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": true
     },
-    "analyzedAt": "2026-07-10T13:03:01.069Z"
+    "analyzedAt": "2026-07-11T21:54:38.783Z"
   },
   "cimdata-kurse": {
     "slug": "cimdata-kurse",
@@ -700,7 +700,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:01.155Z"
+    "analyzedAt": "2026-07-11T21:54:38.860Z"
   },
   "echt-oder-ki": {
     "slug": "echt-oder-ki",
@@ -794,7 +794,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:01.226Z"
+    "analyzedAt": "2026-07-11T21:54:38.936Z"
   },
   "komorebi": {
     "slug": "komorebi",
@@ -904,7 +904,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:01.291Z"
+    "analyzedAt": "2026-07-11T21:54:39.007Z"
   },
   "quality-touch": {
     "slug": "quality-touch",
@@ -918,6 +918,7 @@
       "React",
       "TypeScript",
       "SQLite",
+      "Android",
       "Railway",
       "GSAP"
     ],
@@ -989,7 +990,7 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:01.398Z"
+    "analyzedAt": "2026-07-11T21:54:39.113Z"
   },
   "a11y-quiz": {
     "slug": "a11y-quiz",
@@ -1085,21 +1086,26 @@
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:01.453Z"
+    "analyzedAt": "2026-07-11T21:54:39.173Z"
   },
   "luhambo": {
     "slug": "luhambo",
     "localPath": "journey",
     "github": "https://github.com/Pikktee/journey",
-    "description": "Luhambo (Siswati für „Reise“) ist eine App für Relive-artige 3D-Kamerafahrten über eine GPS-Route mit automatischen Foto-Stopps — vollständig auf freien Kartendaten. Aktuell Vanilla JS + Vite, gerendert mit MapLibre GL J",
-    "longDescription": "Luhambo (Siswati für „Reise“) ist eine App für Relive-artige 3D-Kamerafahrten über eine GPS-Route mit automatischen Foto-Stopps — vollständig auf freien Kartendaten. Aktuell Vanilla JS + Vite, gerendert mit MapLibre GL JS; derzeit ohne Framework, ohne Tests, ohne Backend. Luhambo wird von einem Prototyp zu einem echten Produkt ausgebaut — größere Architektur-Investitionen (z. B. echter 3D-Renderer für Dächer/Schatten, eigene aufbereitete Gebäude-Tiles, Tests, Backend) sind daher eingeplant, werden aber inkrementell angegangen statt als Big-Bang-Rewrite.",
-    "highlights": [],
+    "description": "Luhambo (Siswati für „Reise“) ist eine App für Relive-artige 3D-Kamerafahrten über eine GPS-Route mit automatischen Foto-Stopps — vollständig auf freien Kartendaten. Web-Player in Vanilla JS + Vite (neue Module in TypeSc",
+    "longDescription": "Luhambo (Siswati für „Reise“) ist eine App für Relive-artige 3D-Kamerafahrten über eine GPS-Route mit automatischen Foto-Stopps — vollständig auf freien Kartendaten. Web-Player in Vanilla JS + Vite (neue Module in TypeScript), gerendert mit MapLibre GL JS. Luhambo wird von einem Prototyp zu einem echten Produkt ausgebaut (Aufnahme-Plattform, Meilensteine M1–M9): eigene Touren aufzeichnen (Android), hochladen, serverseitig anreichern und mit der vorhandenen Player-Engine abspielen. Das Repo ist ein Monorepo:",
+    "highlights": [
+      "Root: Web-Player (Vite). Spielt statische TOURS und aufgezeichnete Touren",
+      "[server/](server/): Backend (Node 22 + Fastify + better-sqlite3, TypeScript strict).",
+      "[android/](android/): Aufnahme-App (Kotlin, Compose, minSdk 29) — GPS-Tracking als"
+    ],
     "stack": [
       "Vite",
       "TypeScript",
       "SQLite",
       "Three.js",
       "Docker",
+      "Android",
       "Vitest",
       "MapLibre",
       "deck.gl"
@@ -1140,30 +1146,31 @@
     },
     "dependencyCount": 22,
     "loc": {
-      "total": 12829,
-      "code": 10086,
-      "blank": 1060,
-      "comment": 1683,
+      "total": 17949,
+      "code": 14385,
+      "blank": 1573,
+      "comment": 1991,
       "byLanguage": {
-        "HTML": 280,
-        "MJS": 572,
-        "TypeScript": 1798,
-        "JavaScript": 5754,
-        "CSS": 1682
+        "KT": 2588,
+        "HTML": 286,
+        "MJS": 593,
+        "TypeScript": 3279,
+        "JavaScript": 5914,
+        "CSS": 1725
       }
     },
-    "locFormatted": "10.1k",
+    "locFormatted": "14.4k",
     "files": {
-      "source": 57,
+      "source": 94,
       "components": 0,
       "tsx": 0,
-      "tests": 5
+      "tests": 10
     },
     "coverage": null,
     "git": {
-      "commits": 43,
+      "commits": 44,
       "firstCommit": "2026-07-03 10:08:26 +0200",
-      "lastCommit": "2026-07-08 17:05:36 +0200"
+      "lastCommit": "2026-07-11 11:07:59 +0200"
     },
     "ux": {
       "uiFrameworks": [
@@ -1176,10 +1183,10 @@
       ],
       "componentCount": 0,
       "tsxFiles": 0,
-      "testFiles": 5,
+      "testFiles": 10,
       "hasResponsiveCss": true,
       "hasManifestExtension": false
     },
-    "analyzedAt": "2026-07-10T13:03:01.529Z"
+    "analyzedAt": "2026-07-11T21:54:39.270Z"
   }
 }
