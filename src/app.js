@@ -1126,11 +1126,7 @@
     scrollLockDepth += 1;
   }
 
-  function unlockBodyScroll() {
-    if (scrollLockDepth === 0) return;
-    scrollLockDepth -= 1;
-    if (scrollLockDepth > 0) return;
-
+  function clearBodyScrollLockState() {
     const scrollY = savedScrollY;
     const html = document.documentElement;
     const body = document.body;
@@ -1150,6 +1146,19 @@
     }
   }
 
+  function unlockBodyScroll() {
+    if (scrollLockDepth === 0) return;
+    scrollLockDepth -= 1;
+    if (scrollLockDepth > 0) return;
+    clearBodyScrollLockState();
+  }
+
+  function resetBodyScrollLockIfIdle() {
+    if (activeSlug || facetSheetOpen || videoModalOpen || scrollLockDepth === 0) return;
+    scrollLockDepth = 0;
+    clearBodyScrollLockState();
+  }
+
   function finishDrawerClose() {
     if (activeSlug || drawerCloseFinished) return;
     drawerCloseFinished = true;
@@ -1161,6 +1170,7 @@
     drawer.removeEventListener('transitionend', onCloseTransitionEnd);
 
     unlockBodyScroll();
+    resetBodyScrollLockIfIdle();
 
     requestAnimationFrame(() => {
       hideDrawerElements();
@@ -1235,7 +1245,9 @@
       backdrop.classList.add('drawer-backdrop--visible');
 
       resetDrawerScroll();
-      lockBodyScroll();
+      if (!document.documentElement.classList.contains('drawer-open')) {
+        lockBodyScroll();
+      }
       openButtons.forEach((btn) => {
         btn.setAttribute('aria-expanded', btn.dataset.open === slug ? 'true' : 'false');
       });

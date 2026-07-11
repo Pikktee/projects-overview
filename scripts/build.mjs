@@ -439,7 +439,6 @@ ${headExtras}
 
   <header class="hero" id="profil">
     <div class="hero__bar">
-      <p class="hero__eyebrow">Portfolio</p>
       <div class="hero__controls">
       ${themeToggleHtml}
       ${langSwitchHtml('div')}

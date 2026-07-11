@@ -345,18 +345,9 @@ html.drawer-open.drawer-open--scroll-lock body.drawer-open {
 .hero__bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
   margin-bottom: clamp(1.75rem, 5vw, 3rem);
-}
-
-.hero__eyebrow {
-  margin: 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-muted);
 }
 
 .hero__controls {
@@ -458,11 +449,11 @@ html.drawer-open.drawer-open--scroll-lock body.drawer-open {
 }
 
 /* Foto-Reveal als Pointe: erst wenn der Pfeil fertig gezeichnet ist (1.4s),
-   stempelt das Foto ein, die Notiz folgt einen Tick später. Nur Desktop —
-   auf Mobile gibt es keinen Pfeil, dort steht das Foto sofort.
+   stempelt das Foto ein, die Notiz folgt einen Tick später. Nur mit Pfeil-Zeile
+   (ab 901px) — darunter steht das Foto sofort wie auf dem Phone.
    fill-mode backwards statt forwards: Der Endzustand bleibt der Basisstil,
    damit die Hover-Transitions auf Foto/Ring/Notiz nicht überschrieben werden. */
-@media (min-width: 641px) {
+@media (min-width: 901px) {
   .hero__me-frame {
     animation: hero-me-pop 0.3s var(--ease-out) 1.4s backwards;
   }
@@ -3880,7 +3871,8 @@ html[data-theme="light"] .btn--primary {
 
 /* ── Responsive ── */
 
-@media (max-width: 640px) {
+/* Hero: gestapelte Komposition bis 900px — dort wird die Pfeil-Zeile sonst zu eng. */
+@media (max-width: 900px) {
   .hero {
     padding-top: 1rem;
     text-align: center;
@@ -3895,7 +3887,6 @@ html[data-theme="light"] .btn--primary {
     gap: 0.4rem 1.35rem;
   }
 
-  /* Mobile: zentrierte Hero-Komposition — Name, Foto + Notiz, Rolle, Bio. */
   .hero__title-row {
     flex-direction: column;
     align-items: center;
@@ -3943,7 +3934,9 @@ html[data-theme="light"] .btn--primary {
     margin-left: auto;
     margin-right: auto;
   }
+}
 
+@media (max-width: 640px) {
   .sections {
     padding-bottom: 1.5rem;
   }
@@ -4152,11 +4145,8 @@ html[data-theme="light"] .btn--primary {
   }
 }
 
-/* Solange Name und Annotation nebeneinander stehen (kein Wrap), bestimmt
-   das Foto die Zeilenhöhe. Die Formel zieht genau den Überhang
-   (--me-drop padding + Foto − Namenshöhe) wieder ab und lässt 0.75rem Luft —
-   Rolle und Bio schließen so auf jeder Breite gleich an den Namen an. */
-@media (min-width: 641px) {
+/* Pfeil-Zeile nur ab 901px — Formel zieht den Foto-Überhang unter der Namenszeile heraus. */
+@media (min-width: 901px) {
   .hero__title-row {
     --me-note-stack: 2.35rem;
     margin-bottom: calc(var(--name-size) - var(--me-photo) - var(--me-note-stack) - var(--me-drop) + 0.75rem);

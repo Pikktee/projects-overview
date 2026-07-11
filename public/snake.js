@@ -22,7 +22,6 @@
 
   // Nur Inhalts-Elemente — keine großen Container wie .card (Padding wäre sonst Hindernis).
   const CONTENT_SELECTOR = [
-    '.hero__eyebrow',
     '.theme-toggle',
     '.lang-switch__btn',
     '.hero__name',
