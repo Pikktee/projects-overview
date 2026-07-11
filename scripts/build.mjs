@@ -303,8 +303,8 @@ const langSwitchHtml = (tag = 'div') => `<${tag} class="lang-switch" role="group
 const heroAnnotationHtml = `<a class="hero__me" href="#ueber-mich">
         <span class="hero__me-main">
           <svg class="hero__arrow" viewBox="0 0 220 100" preserveAspectRatio="none" fill="none" aria-hidden="true" focusable="false">
-            <path class="hero__arrow-line" pathLength="1" d="M 10 34 C 22 14, 42 4, 68 14 S 128 62, 158 76 C 174 83, 190 87, 202 88" vector-effect="non-scaling-stroke" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path class="hero__arrow-head" d="M 186 70 C 192 77, 197 83, 202 88 C 195 91, 187 95, 180 99" vector-effect="non-scaling-stroke" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero__arrow-line" pathLength="1" d="M -26 44 C -16 50, 2 46, 10 34 C 22 14, 42 4, 68 14 S 128 62, 158 76 C 174 83, 190 87, 202 88" vector-effect="non-scaling-stroke" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="hero__arrow-head" pathLength="1" d="M 186 70 C 192 77, 197 83, 202 88 C 195 91, 187 95, 180 99" vector-effect="non-scaling-stroke" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="hero__me-frame">
             <svg class="hero__me-ring" viewBox="0 0 116 116" fill="none" aria-hidden="true">

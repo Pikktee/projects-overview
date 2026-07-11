@@ -427,7 +427,8 @@ body.drawer-open {
   transition: opacity 0.25s ease;
 }
 
-/* Einzeichnen beim Laden: erst der Schaft, dann blendet die Spitze ein. */
+/* Einzeichnen beim Laden: erst der Schaft, dann wird die Spitze gezeichnet —
+   beide über stroke-dashoffset, damit es wie ein durchgehender Stift wirkt. */
 .hero__arrow-line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
@@ -435,19 +436,14 @@ body.drawer-open {
 }
 
 .hero__arrow-head {
-  opacity: 0;
-  animation: hero-arrow-head 0.3s ease 1.2s forwards;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hero-arrow-draw 0.35s ease-out 1.3s forwards;
 }
 
 @keyframes hero-arrow-draw {
   to {
     stroke-dashoffset: 0;
-  }
-}
-
-@keyframes hero-arrow-head {
-  to {
-    opacity: 1;
   }
 }
 
@@ -3626,13 +3622,9 @@ html[data-theme="light"] .btn--primary {
   }
 
   /* Auftritts-Sequenz sofort im Endzustand (animation-delay würde sonst weiter greifen). */
-  .hero__arrow-line {
-    stroke-dashoffset: 0;
-    animation: none;
-  }
-
+  .hero__arrow-line,
   .hero__arrow-head {
-    opacity: 1;
+    stroke-dashoffset: 0;
     animation: none;
   }
 
