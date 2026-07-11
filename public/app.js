@@ -56,6 +56,14 @@
   const closeBtn = document.getElementById('drawer-close');
   const cards = document.querySelectorAll('.card');
   const facetChips = document.querySelectorAll('.facet-chip');
+  const facetSheet = document.getElementById('facet-sheet');
+  const facetOpen = document.getElementById('facet-open');
+  const facetClose = document.getElementById('facet-sheet-close');
+  const facetBackdrop = document.getElementById('facet-sheet-backdrop');
+  const facetActiveChip = document.getElementById('facet-active-chip');
+  const facetActiveChipIcon = document.getElementById('facet-active-chip-icon');
+  const facetActiveChipLabel = document.getElementById('facet-active-chip-label');
+  const facetActiveChipCount = document.getElementById('facet-active-chip-count');
   const openButtons = document.querySelectorAll('[data-open]');
   const tabs = document.querySelectorAll('.drawer__tab');
   const panels = {
@@ -71,6 +79,8 @@
   let closeTimer = null;
   let drawerCloseFinished = false;
   let activeFilter = 'all';
+  let facetSheetOpen = false;
+  let lastFacetFocus = null;
 
   function t(key, vars = {}) {
     const parts = key.split('.');
@@ -495,7 +505,80 @@
     chip.addEventListener('click', () => {
       const next = chip.dataset.filter;
       setFilter(activeFilter === next && next !== 'all' ? 'all' : next);
+      if (facetSheetOpen) closeFacetSheet({ restoreFocus: false });
     });
+  });
+
+  function updateFacetActiveChip(filter) {
+    if (!facetActiveChip || !facetActiveChipLabel || !facetActiveChipCount) return;
+    if (filter === 'all') {
+      facetActiveChip.hidden = true;
+      facetActiveChipLabel.textContent = '';
+      facetActiveChipCount.textContent = '';
+      if (facetActiveChipIcon) facetActiveChipIcon.innerHTML = '';
+      return;
+    }
+    const refChip = document.querySelector(
+      `.facet-bar--sheet .facet-chip[data-filter="${filter}"]:not(.facet-chip--all)`,
+    );
+    if (!refChip) return;
+    const label = refChip.querySelector('.facet-chip__label')?.textContent?.trim() || '';
+    const count = refChip.querySelector('.facet-chip__count')?.textContent?.trim() || '';
+    const icon = refChip.querySelector('.facet-chip__icon');
+    facetActiveChipLabel.textContent = label;
+    facetActiveChipCount.textContent = count;
+    if (facetActiveChipIcon) {
+      facetActiveChipIcon.innerHTML = icon ? icon.outerHTML : '';
+    }
+    facetActiveChip.setAttribute('aria-label', t('facets.clearFilter', { label }));
+    facetActiveChip.hidden = false;
+  }
+
+  function openFacetSheet() {
+    if (!facetSheet || facetSheetOpen) return;
+    lastFacetFocus = document.activeElement;
+    facetSheetOpen = true;
+    facetSheet.hidden = false;
+    facetSheet.inert = false;
+    facetOpen?.setAttribute('aria-expanded', 'true');
+    void facetSheet.offsetWidth;
+    facetSheet.classList.add('facet-sheet--open');
+    lockBodyScroll();
+    (facetClose || facetSheet.querySelector('.facet-chip'))?.focus({ preventScroll: true });
+  }
+
+  function closeFacetSheet({ restoreFocus = true } = {}) {
+    if (!facetSheet || !facetSheetOpen) return;
+    facetSheetOpen = false;
+    facetSheet.classList.remove('facet-sheet--open');
+    facetSheet.inert = true;
+    facetOpen?.setAttribute('aria-expanded', 'false');
+    unlockBodyScroll();
+
+    const panel = facetSheet.querySelector('.facet-sheet__panel');
+    const finishClose = () => {
+      if (facetSheetOpen) return;
+      facetSheet.hidden = true;
+      if (restoreFocus) lastFacetFocus?.focus({ preventScroll: true });
+    };
+
+    const onEnd = (event) => {
+      if (event.target !== panel || event.propertyName !== 'transform') return;
+      panel.removeEventListener('transitionend', onEnd);
+      finishClose();
+    };
+
+    panel?.addEventListener('transitionend', onEnd);
+    window.setTimeout(finishClose, 500);
+  }
+
+  facetOpen?.addEventListener('click', openFacetSheet);
+  facetClose?.addEventListener('click', () => closeFacetSheet());
+  facetBackdrop?.addEventListener('click', () => closeFacetSheet());
+  facetActiveChip?.addEventListener('click', () => setFilter('all'));
+
+  window.matchMedia('(max-width: 640px)').addEventListener('change', (e) => {
+    if (!e.matches && facetSheetOpen) closeFacetSheet({ restoreFocus: false });
   });
 
   // Easter Egg: „Video- & Brettspiele" lädt snake.js nach und startet das
@@ -576,6 +659,8 @@
     if (filter !== 'all') {
       document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+
+    updateFacetActiveChip(filter);
   }
 
   function esc(str) {
@@ -1131,6 +1216,8 @@
       cancelPendingClose();
       drawerCloseFinished = false;
 
+      if (facetSheetOpen) closeFacetSheet({ restoreFocus: false });
+
       if (!activeSlug) {
         lastFocus = document.activeElement;
       }
@@ -1201,6 +1288,7 @@
     if (e.key === 'Escape') {
       if (videoModalOpen) closeVideoModal();
       else if (shotLightboxOpen) closeShotLightbox();
+      else if (facetSheetOpen) closeFacetSheet();
       else if (activeSlug) closeDrawer();
       return;
     }
@@ -1222,9 +1310,29 @@
       }
     }
     trapShotLightboxFocus(e);
+    trapFacetSheetFocus(e);
     trapDrawerFocus(e);
     trapVideoModalFocus(e);
   });
+
+  function trapFacetSheetFocus(e) {
+    if (!facetSheetOpen || e.key !== 'Tab' || facetSheet.hidden) return;
+    const panel = facetSheet.querySelector('.facet-sheet__panel');
+    if (!panel) return;
+    const focusable = panel.querySelectorAll(
+      'button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 
   function trapDrawerFocus(e) {
     if (!activeSlug || e.key !== 'Tab' || drawer.hidden) return;

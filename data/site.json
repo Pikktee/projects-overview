@@ -43,8 +43,8 @@
     {
       "key": "media",
       "items": {
-        "de": ["Video-Schnitt", "Videoproduktion", "Final Cut Pro", "Premiere"],
-        "en": ["Video editing", "Video production", "Final Cut Pro", "Premiere"]
+        "de": ["Video-Schnitt", "Videoproduktion", "Final Cut Pro", "DaVinci Resolve"],
+        "en": ["Video editing", "Video production", "Final Cut Pro", "DaVinci Resolve"]
       }
     }
   ],
@@ -165,6 +165,10 @@
       },
       "facets": {
         "heading": "Filter",
+        "open": "Filtern",
+        "openAria": "Projekte nach Merkmal filtern",
+        "close": "Schließen",
+        "clearFilter": "Filter {label} entfernen",
         "all": "Alle",
         "ai": "KI-gestützt",
         "extension": "Chrome-Erweiterung",
@@ -325,6 +329,10 @@
       },
       "facets": {
         "heading": "Filter",
+        "open": "Filter",
+        "openAria": "Filter projects by trait",
+        "close": "Close",
+        "clearFilter": "Remove filter {label}",
         "all": "All",
         "ai": "AI-powered",
         "extension": "Chrome extension",

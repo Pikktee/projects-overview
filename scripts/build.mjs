@@ -235,7 +235,7 @@ const FACETS = [
 const facetOverview = FACETS.map((f) => {
   const count = allProjects.filter((p) => (p.facets || []).includes(f.key)).length;
   if (count === 0) return '';
-  return `<button type="button" class="facet-chip" data-filter="${escapeHtml(f.key)}" data-i18n-facet="${escapeHtml(f.key)}">
+  return `<button type="button" class="facet-chip" data-filter="${escapeHtml(f.key)}" data-i18n-facet="${escapeHtml(f.key)}" aria-pressed="false">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">${f.icon}</svg>
           <span class="facet-chip__label">${escapeHtml(tDe.facets[f.key])}</span>
           <span class="facet-chip__count">${count}</span>
@@ -244,16 +244,47 @@ const facetOverview = FACETS.map((f) => {
   .filter(Boolean)
   .join('\n');
 
-const catalogToolbarHtml = `
-    <div class="catalog-toolbar">
-      <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
-        <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
+const facetBarChipsHtml = `<button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
           <span class="facet-chip__label">${escapeHtml(tDe.facets.all)}</span>
           <span class="facet-chip__count">${allProjects.length}</span>
         </button>
-        ${facetOverview}
+        ${facetOverview}`;
+
+const renderFacetBar = (variant) => `
+      <div class="facet-bar facet-bar--${variant}" role="group" data-i18n-aria="facets.filterAria" aria-label="${escapeHtml(tDe.facets.filterAria)}">
+        ${facetBarChipsHtml}
+      </div>`;
+
+const catalogToolbarHtml = `
+    <div class="catalog-toolbar">
+      <div class="catalog-toolbar__mobile">
+        <button type="button" class="facet-trigger" id="facet-open" aria-haspopup="dialog" aria-controls="facet-sheet" aria-expanded="false" data-i18n-aria="facets.openAria" aria-label="${escapeHtml(tDe.facets.openAria)}">
+          <span class="facet-trigger__label" data-i18n="facets.open">${escapeHtml(tDe.facets.open)}</span>
+          <svg class="facet-trigger__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="facet-active-chip" id="facet-active-chip" hidden>
+          <span class="facet-active-chip__icon" id="facet-active-chip-icon" aria-hidden="true"></span>
+          <span class="facet-active-chip__label" id="facet-active-chip-label"></span>
+          <span class="facet-active-chip__count" id="facet-active-chip-count" aria-hidden="true"></span>
+          <svg class="facet-active-chip__clear" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4 4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
       </div>
+      ${renderFacetBar('inline')}
     </div>`;
+
+const facetSheetHtml = `
+  <div class="facet-sheet" id="facet-sheet" role="dialog" aria-modal="true" aria-labelledby="facet-sheet-title" hidden inert>
+    <button type="button" class="facet-sheet__backdrop" id="facet-sheet-backdrop" tabindex="-1" aria-hidden="true"></button>
+    <div class="facet-sheet__panel">
+      <button type="button" class="facet-sheet__handle" id="facet-sheet-close" data-i18n-aria="facets.close" aria-label="${escapeHtml(tDe.facets.close)}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="facet-sheet__body">
+        <h3 class="facet-sheet__title" id="facet-sheet-title" data-i18n="facets.heading">${escapeHtml(tDe.facets.heading)}</h3>
+        ${renderFacetBar('sheet')}
+      </div>
+    </div>
+  </div>`;
 
 const sectionsHtml = sections
   .map((section) => {
@@ -460,6 +491,7 @@ ${headExtras}
 
   <section class="about" id="ueber-mich" aria-labelledby="about-heading" tabindex="-1">
     <h2 class="section__heading" id="about-heading" data-i18n="about.title">${escapeHtml(tDe.about.title)}</h2>
+    <div class="about__stack">
     <div class="about__personal">
       <figure class="about__photo" id="about-photo-pinned">
         <div class="about__photo-pin-mount" aria-hidden="true">
@@ -508,10 +540,6 @@ ${headExtras}
       </figure>
       <div class="about__personal-body">
         <p class="about__intro" data-i18n="about.intro">${escapeHtml(tDe.about.intro)}</p>
-        <h3 class="about__label" data-i18n="about.interestsHeading">${escapeHtml(tDe.about.interestsHeading)}</h3>
-        <ul class="about__interests" id="profile-interests">
-          ${interestsHtml}
-        </ul>
       </div>
     </div>
     <div class="about__grid">
@@ -530,11 +558,20 @@ ${headExtras}
         </div>
       </div>
     </div>
+    <div class="about__interests-section">
+        <h3 class="about__label" data-i18n="about.interestsHeading">${escapeHtml(tDe.about.interestsHeading)}</h3>
+        <ul class="about__interests" id="profile-interests">
+          ${interestsHtml}
+        </ul>
+    </div>
+    </div>
   </section>
 
   <footer class="footer">
     <a href="/impressum.html" data-i18n="footer.impressum">${escapeHtml(tDe.footer.impressum)}</a>
   </footer>
+
+  ${facetSheetHtml}
 
   <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
   <aside class="drawer" id="project-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>

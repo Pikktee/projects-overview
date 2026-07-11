@@ -8,8 +8,8 @@
   <link rel="alternate" hreflang="de" href="https://www.henrikheil.net/" />
   <link rel="alternate" hreflang="en" href="https://www.henrikheil.net/?lang=en" />
   <script>(function(){var t=null;try{t=localStorage.getItem("portfolio-theme")}catch(e){}if(t!=="light"&&t!=="dark"){t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.setAttribute("data-theme",t)})();</script>
-  <link href="/fonts/fonts.css?v=ffbec236" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=ffbec236" />
+  <link href="/fonts/fonts.css?v=78e14381" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=78e14381" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#0f1114" media="(prefers-color-scheme: dark)" />
@@ -46,7 +46,7 @@
             <svg class="hero__me-ring" viewBox="0 0 116 116" fill="none" aria-hidden="true">
               <path class="hero__me-ring-path" pathLength="1" d="M58 9 C 90 7, 108 30, 109 58 C 110 86, 86 109, 58 110 C 30 109, 7 86, 9 58 C 11 30, 30 11, 58 9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
             </svg>
-            <img class="hero__me-photo" src="/me-thumb.jpg?v=ffbec236" alt="" width="106" height="106" />
+            <img class="hero__me-photo" src="/me-thumb.jpg?v=78e14381" alt="" width="106" height="106" />
           </span>
         </span>
         <span class="hero__me-note" data-i18n="hero.meNote">das bin ich</span>
@@ -93,32 +93,45 @@
     <h2 class="section__heading" id="section-current" data-i18n-section="current">Aktuelle Projekte</h2>
     
     <div class="catalog-toolbar">
-      <div class="facet-bar" role="group" data-i18n-aria="facets.filterAria" aria-label="Projekte nach Merkmal filtern">
+      <div class="catalog-toolbar__mobile">
+        <button type="button" class="facet-trigger" id="facet-open" aria-haspopup="dialog" aria-controls="facet-sheet" aria-expanded="false" data-i18n-aria="facets.openAria" aria-label="Projekte nach Merkmal filtern">
+          <span class="facet-trigger__label" data-i18n="facets.open">Filtern</span>
+          <svg class="facet-trigger__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button type="button" class="facet-active-chip" id="facet-active-chip" hidden>
+          <span class="facet-active-chip__icon" id="facet-active-chip-icon" aria-hidden="true"></span>
+          <span class="facet-active-chip__label" id="facet-active-chip-label"></span>
+          <span class="facet-active-chip__count" id="facet-active-chip-count" aria-hidden="true"></span>
+          <svg class="facet-active-chip__clear" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 4l8 8M12 4 4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      
+      <div class="facet-bar facet-bar--inline" role="group" data-i18n-aria="facets.filterAria" aria-label="Projekte nach Merkmal filtern">
         <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
           <span class="facet-chip__label">Alle</span>
           <span class="facet-chip__count">11</span>
         </button>
-        <button type="button" class="facet-chip" data-filter="ai" data-i18n-facet="ai">
+        <button type="button" class="facet-chip" data-filter="ai" data-i18n-facet="ai" aria-pressed="false">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5 9.7 6.3 14.5 8 9.7 9.7 8 14.5 6.3 9.7 1.5 8 6.3 6.3 8 1.5Z"/></svg>
           <span class="facet-chip__label">KI-gestützt</span>
           <span class="facet-chip__count">8</span>
         </button>
-<button type="button" class="facet-chip" data-filter="extension" data-i18n-facet="extension">
+<button type="button" class="facet-chip" data-filter="extension" data-i18n-facet="extension" aria-pressed="false">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a3 3 0 0 0-2.83 2H2.5v3.17a3 3 0 0 1 0 5.66V14.5h3.34a3 3 0 0 1 5.32 0H14.5v-3.34a3 3 0 0 0 0-5.32V2H10.83A3 3 0 0 0 8 1.5Z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
           <span class="facet-chip__label">Chrome-Erweiterung</span>
           <span class="facet-chip__count">4</span>
         </button>
-<button type="button" class="facet-chip" data-filter="android" data-i18n-facet="android">
+<button type="button" class="facet-chip" data-filter="android" data-i18n-facet="android" aria-pressed="false">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 6.5h8V12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5Zm-2 .5a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1Zm12 0a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1ZM5.5 13.5h2v1.5a1 1 0 1 1-2 0v-1.5Zm3 0h2V15a1 1 0 1 1-2 0v-1.5ZM5 3l-.8-1.3M11 3l.8-1.3M4.2 5.5C4.5 4 6.1 3 8 3s3.5 1 3.8 2.5H4.2Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <span class="facet-chip__label">Android-App</span>
           <span class="facet-chip__count">2</span>
         </button>
-<button type="button" class="facet-chip" data-filter="macos" data-i18n-facet="macos">
+<button type="button" class="facet-chip" data-filter="macos" data-i18n-facet="macos" aria-pressed="false">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.5 4.5h11a1 1 0 0 1 1 1v6.5H1.5V5.5a1 1 0 0 1 1-1Zm-1 9h13v1.5H1.5V13.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
           <span class="facet-chip__label">macOS-App</span>
           <span class="facet-chip__count">1</span>
         </button>
-<button type="button" class="facet-chip" data-filter="3d" data-i18n-facet="3d">
+<button type="button" class="facet-chip" data-filter="3d" data-i18n-facet="3d" aria-pressed="false">
           <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5 14 5v6l-6 3.5L2 11V5l6-3.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 5l6 3.5L14 5M8 8.5V14.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
           <span class="facet-chip__label">3D &amp; WebGL</span>
           <span class="facet-chip__count">2</span>
@@ -304,6 +317,7 @@
 
   <section class="about" id="ueber-mich" aria-labelledby="about-heading" tabindex="-1">
     <h2 class="section__heading" id="about-heading" data-i18n="about.title">Über mich</h2>
+    <div class="about__stack">
     <div class="about__personal">
       <figure class="about__photo" id="about-photo-pinned">
         <div class="about__photo-pin-mount" aria-hidden="true">
@@ -345,20 +359,13 @@
         </div>
         <div class="about__photo-swing">
           <div class="about__photo-card">
-            <img src="/me.jpg?v=ffbec236" alt="Porträt von Henrik Heil" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
+            <img src="/me.jpg?v=78e14381" alt="Porträt von Henrik Heil" data-i18n-alt="about.photoAlt" width="800" height="800" loading="lazy" />
             <figcaption>Henrik Heil</figcaption>
           </div>
         </div>
       </figure>
       <div class="about__personal-body">
         <p class="about__intro" data-i18n="about.intro">Ich lebe in Frankfurt am Main — nach vier Jahren als digitaler Nomade durch Asien, Süd- und Zentralamerika, in denen ich remote für meine Kunden gearbeitet habe. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen — und warum zugängliche Gestaltung kein Nice-to-have ist, sondern die Grundlage guter Produkte.</p>
-        <h3 class="about__label" data-i18n="about.interestsHeading">Abseits der Arbeit</h3>
-        <ul class="about__interests" id="profile-interests">
-          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.6" y="4.6" width="12.8" height="7" rx="0.8" stroke="currentColor" stroke-width="1.2"/><path d="M5.9 7.9v3.7M10.1 7.9v3.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M5.9 4.6v3.3M10.1 4.6v3.3M8 4.6v3.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><button type="button" class="about__interest-video" data-interest-key="piano"><span class="about__interest-label" data-interest-key="piano">Klavier spielen</span><span class="sr-only" data-i18n="videoModal.opens"> — Video abspielen</span></button></li>
-          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.6" y="5" width="8.8" height="6.4" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M10.4 7.2 14.4 5.2v5.6l-4-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="about__interest-label" data-interest-key="filming">Filmen</span></li>
-          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.6" stroke="currentColor" stroke-width="1.2"/><ellipse cx="8" cy="8" rx="2.3" ry="5.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.4 8h11.2M3.7 5.5h8.6M3.7 10.5h8.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="about__interest-label" data-interest-key="travel">Reisen</span></li>
-          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.4" y="2.4" width="11.2" height="11.2" rx="2" stroke="currentColor" stroke-width="1.2"/><circle cx="5.55" cy="5.55" r="1.05" fill="currentColor"/><circle cx="8" cy="8" r="1.05" fill="currentColor"/><circle cx="10.45" cy="10.45" r="1.05" fill="currentColor"/></svg><button type="button" class="about__interest-egg" id="egg-snake"><span class="about__interest-label" data-interest-key="games">Video- &amp; Brettspiele</span><span class="sr-only" data-i18n="snake.eggHint"> — psst: startet ein kleines Snake-Spiel auf dieser Seite</span></button></li>
-        </ul>
       </div>
     </div>
     <div class="about__grid">
@@ -383,7 +390,7 @@
             </div>
             <div class="skill-list__row">
               <dt class="skill-list__term" data-skill-term="media">Medienproduktion</dt>
-              <dd class="skill-list__items" data-skill-items="media">Video-Schnitt<span class="skill-list__sep" aria-hidden="true"> · </span>Videoproduktion<span class="skill-list__sep" aria-hidden="true"> · </span>Final Cut Pro<span class="skill-list__sep" aria-hidden="true"> · </span>Premiere</dd>
+              <dd class="skill-list__items" data-skill-items="media">Video-Schnitt<span class="skill-list__sep" aria-hidden="true"> · </span>Videoproduktion<span class="skill-list__sep" aria-hidden="true"> · </span>Final Cut Pro<span class="skill-list__sep" aria-hidden="true"> · </span>DaVinci Resolve</dd>
             </div>
         </dl>
       </div>
@@ -432,11 +439,66 @@
         </div>
       </div>
     </div>
+    <div class="about__interests-section">
+        <h3 class="about__label" data-i18n="about.interestsHeading">Abseits der Arbeit</h3>
+        <ul class="about__interests" id="profile-interests">
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.6" y="4.6" width="12.8" height="7" rx="0.8" stroke="currentColor" stroke-width="1.2"/><path d="M5.9 7.9v3.7M10.1 7.9v3.7" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M5.9 4.6v3.3M10.1 4.6v3.3M8 4.6v3.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><button type="button" class="about__interest-video" data-interest-key="piano"><span class="about__interest-label" data-interest-key="piano">Klavier spielen</span><span class="sr-only" data-i18n="videoModal.opens"> — Video abspielen</span></button></li>
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1.6" y="5" width="8.8" height="6.4" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M10.4 7.2 14.4 5.2v5.6l-4-2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg><span class="about__interest-label" data-interest-key="filming">Filmen</span></li>
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.6" stroke="currentColor" stroke-width="1.2"/><ellipse cx="8" cy="8" rx="2.3" ry="5.6" stroke="currentColor" stroke-width="1.2"/><path d="M2.4 8h11.2M3.7 5.5h8.6M3.7 10.5h8.6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg><span class="about__interest-label" data-interest-key="travel">Reisen</span></li>
+          <li><svg class="about__interest-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="2.4" y="2.4" width="11.2" height="11.2" rx="2" stroke="currentColor" stroke-width="1.2"/><circle cx="5.55" cy="5.55" r="1.05" fill="currentColor"/><circle cx="8" cy="8" r="1.05" fill="currentColor"/><circle cx="10.45" cy="10.45" r="1.05" fill="currentColor"/></svg><button type="button" class="about__interest-egg" id="egg-snake"><span class="about__interest-label" data-interest-key="games">Video- &amp; Brettspiele</span><span class="sr-only" data-i18n="snake.eggHint"> — psst: startet ein kleines Snake-Spiel auf dieser Seite</span></button></li>
+        </ul>
+    </div>
+    </div>
   </section>
 
   <footer class="footer">
     <a href="/impressum.html" data-i18n="footer.impressum">Impressum</a>
   </footer>
+
+  
+  <div class="facet-sheet" id="facet-sheet" role="dialog" aria-modal="true" aria-labelledby="facet-sheet-title" hidden inert>
+    <button type="button" class="facet-sheet__backdrop" id="facet-sheet-backdrop" tabindex="-1" aria-hidden="true"></button>
+    <div class="facet-sheet__panel">
+      <button type="button" class="facet-sheet__handle" id="facet-sheet-close" data-i18n-aria="facets.close" aria-label="Schließen">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="facet-sheet__body">
+        <h3 class="facet-sheet__title" id="facet-sheet-title" data-i18n="facets.heading">Filter</h3>
+        
+      <div class="facet-bar facet-bar--sheet" role="group" data-i18n-aria="facets.filterAria" aria-label="Projekte nach Merkmal filtern">
+        <button type="button" class="facet-chip facet-chip--all is-active" data-filter="all" data-i18n-facet="all" aria-pressed="true">
+          <span class="facet-chip__label">Alle</span>
+          <span class="facet-chip__count">11</span>
+        </button>
+        <button type="button" class="facet-chip" data-filter="ai" data-i18n-facet="ai" aria-pressed="false">
+          <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5 9.7 6.3 14.5 8 9.7 9.7 8 14.5 6.3 9.7 1.5 8 6.3 6.3 8 1.5Z"/></svg>
+          <span class="facet-chip__label">KI-gestützt</span>
+          <span class="facet-chip__count">8</span>
+        </button>
+<button type="button" class="facet-chip" data-filter="extension" data-i18n-facet="extension" aria-pressed="false">
+          <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a3 3 0 0 0-2.83 2H2.5v3.17a3 3 0 0 1 0 5.66V14.5h3.34a3 3 0 0 1 5.32 0H14.5v-3.34a3 3 0 0 0 0-5.32V2H10.83A3 3 0 0 0 8 1.5Z" fill="none" stroke="currentColor" stroke-width="1.3"/></svg>
+          <span class="facet-chip__label">Chrome-Erweiterung</span>
+          <span class="facet-chip__count">4</span>
+        </button>
+<button type="button" class="facet-chip" data-filter="android" data-i18n-facet="android" aria-pressed="false">
+          <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 6.5h8V12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6.5Zm-2 .5a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1Zm12 0a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V8a1 1 0 0 1 1-1ZM5.5 13.5h2v1.5a1 1 0 1 1-2 0v-1.5Zm3 0h2V15a1 1 0 1 1-2 0v-1.5ZM5 3l-.8-1.3M11 3l.8-1.3M4.2 5.5C4.5 4 6.1 3 8 3s3.5 1 3.8 2.5H4.2Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="facet-chip__label">Android-App</span>
+          <span class="facet-chip__count">2</span>
+        </button>
+<button type="button" class="facet-chip" data-filter="macos" data-i18n-facet="macos" aria-pressed="false">
+          <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M2.5 4.5h11a1 1 0 0 1 1 1v6.5H1.5V5.5a1 1 0 0 1 1-1Zm-1 9h13v1.5H1.5V13.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          <span class="facet-chip__label">macOS-App</span>
+          <span class="facet-chip__count">1</span>
+        </button>
+<button type="button" class="facet-chip" data-filter="3d" data-i18n-facet="3d" aria-pressed="false">
+          <svg class="facet-chip__icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5 14 5v6l-6 3.5L2 11V5l6-3.5Z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M2 5l6 3.5L14 5M8 8.5V14.5" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+          <span class="facet-chip__label">3D &amp; WebGL</span>
+          <span class="facet-chip__count">2</span>
+        </button>
+      </div>
+      </div>
+    </div>
+  </div>
 
   <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
   <aside class="drawer" id="project-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
@@ -516,7 +578,7 @@
     </div>
   </div>
 
-  <script>window.__ASSET_V = "ffbec236";</script>
-  <script src="/app.js?v=ffbec236" defer></script>
+  <script>window.__ASSET_V = "78e14381";</script>
+  <script src="/app.js?v=78e14381" defer></script>
 </body>
 </html>
