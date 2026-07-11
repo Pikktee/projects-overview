@@ -260,7 +260,7 @@
       }
     });
 
-    document.querySelectorAll('[data-interest-key]').forEach((el) => {
+    document.querySelectorAll('.about__interest-label[data-interest-key]').forEach((el) => {
       const item = site.personalInterests?.find((i) => i.key === el.dataset.interestKey);
       if (item) el.textContent = item[locale] || item.de;
     });
@@ -1537,7 +1537,8 @@
   function bindVideoTriggers() {
     document.querySelectorAll('.about__interest-video').forEach((btn) => {
       btn.addEventListener('click', () => {
-        const item = site.personalInterests?.find((i) => i.key === btn.dataset.interestKey);
+        const key = btn.querySelector('.about__interest-label')?.dataset.interestKey;
+        const item = site.personalInterests?.find((i) => i.key === key);
         if (!item?.youtubeId) return;
         openVideoModal(item.youtubeId, item[locale] || item.de);
       });

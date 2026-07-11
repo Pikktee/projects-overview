@@ -404,7 +404,7 @@ const backgroundHtml = (site.background || [])
 const interestsHtml = (site.personalInterests || [])
   .map((item) => {
     if (item.youtubeId) {
-      return `<li>${interestIcon(item.key)}<button type="button" class="about__interest-video" data-interest-key="${escapeHtml(item.key)}"><span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span><span class="sr-only" data-i18n="videoModal.opens"> ${escapeHtml(tDe.videoModal.opens)}</span></button></li>`;
+      return `<li>${interestIcon(item.key)}<button type="button" class="about__interest-video"><span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span><span class="sr-only" data-i18n="videoModal.opens"> ${escapeHtml(tDe.videoModal.opens)}</span></button></li>`;
     }
     const label = `${interestIcon(item.key)}<span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span>`;
     if (item.url) {
