@@ -1098,8 +1098,11 @@
 
     drawer.style.setProperty('--accent', project.accent);
     drawer.style.setProperty('--accent-light', project.accentCtaLight || project.accent);
+    drawer.style.setProperty('--accent-ink', project.accentInk || project.accentCtaLight || project.accent);
     drawer.style.setProperty('--accent-btn', project.accentBtn || project.accent);
     backdrop.style.setProperty('--accent', project.accent);
+    backdrop.style.setProperty('--accent-ink', project.accentInk || project.accentCtaLight || project.accent);
+    backdrop.style.setProperty('--accent-tint', project.accentInk || project.accentCtaLight || project.accent);
   }
 
   let savedScrollY = 0;

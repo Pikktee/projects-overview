@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync, copyFileSync, existsSync, cpSyn
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createHash } from 'crypto';
-import { accessibleButtonBg, accessibleCtaColor, accessibleCtaColorLight } from './a11y-colors.mjs';
+import { accessibleAccentInk, accessibleButtonBg, accessibleCtaColor, accessibleCtaColorLight } from './a11y-colors.mjs';
 import { optimizeImages } from './optimize-images.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -54,6 +54,7 @@ function mergeProject(p) {
     ...p,
     accentCta: accessibleCtaColor(p.accent),
     accentCtaLight: accessibleCtaColorLight(p.accent),
+    accentInk: accessibleAccentInk(p.accent),
     accentBtn: accessibleButtonBg(p.accent),
     facets: p.facets || [],
     github: m.github || p.github || null,
@@ -195,7 +196,7 @@ function renderCard(p) {
   const facetAttr = (p.facets || []).join(',');
 
   return `
-    <article class="card" style="--accent:${p.accent};--accent-cta:${p.accentCta};--accent-cta-light:${p.accentCtaLight};--accent-btn:${p.accentBtn}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
+    <article class="card" style="--accent:${p.accent};--accent-cta:${p.accentCta};--accent-cta-light:${p.accentCtaLight};--accent-ink:${p.accentInk};--accent-btn:${p.accentBtn}" data-slug="${p.slug}" data-facets="${escapeHtml(facetAttr)}">
       <button type="button" class="card__btn" data-open="${p.slug}" aria-haspopup="dialog" aria-controls="project-drawer" aria-expanded="false" aria-label="${escapeHtml(`${p.name}: ${p.description}`)}" data-default-aria="${escapeHtml(`${p.name}: ${p.description}`)}"${p.descriptionEn ? ` data-en-aria="${escapeHtml(`${p.name}: ${p.descriptionEn}`)}"` : ''}>
         <div class="card__media">${img}</div>
         <div class="card__body">

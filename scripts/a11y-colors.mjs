@@ -3,8 +3,11 @@
 const CARD_BG = '#171a1f';
 const BTN_TEXT = '#0f1114';
 const LIGHTEN_WITH = '#ece8e1';
-const LIGHT_CARD_BG = '#fffdf8';
+const LIGHT_CARD_BG = '#faf8f2';
+const LIGHT_TEXT_MUTED = '#5d5951';
+const LIGHT_BTN_TEXT = '#faf8f2';
 const DARKEN_WITH = '#23252c';
+const INK_BASE = '#0f1114';
 
 function parseHex(hex) {
   const h = hex.replace('#', '');
@@ -65,7 +68,7 @@ export function accessibleCtaColorLight(accent, background = LIGHT_CARD_BG, minR
   return DARKEN_WITH.toLowerCase();
 }
 
-/** Heller Button-Hintergrund für dunklen Text (#0f1114). */
+/** Heller Button-Hintergrund für dunklen Text (#0f1114) — Dark-Theme. */
 export function accessibleButtonBg(accent, text = BTN_TEXT, minRatio = 4.5) {
   const fg = parseHex(text);
   const accentRgb = parseHex(accent);
@@ -76,4 +79,34 @@ export function accessibleButtonBg(accent, text = BTN_TEXT, minRatio = 4.5) {
     if (contrast(fg, mixed) >= minRatio) return toHex(mixed);
   }
   return LIGHTEN_WITH.toLowerCase();
+}
+
+/**
+ * „Tinte"-Akzent für Light-Mode: Marker, Linien, Tinten-Buttons.
+ * Sucht die gesättigste Abdunkelung, die erfüllt:
+ * - ≥4,5:1 Papier-Text auf Tinten-Fläche (Button)
+ * - ≥3:1 gegen --bg-card (Flächenabhebung)
+ * Basis ist INK_BASE (#0f1114), damit Buttons klar vom Sheet abheben.
+ */
+export function accessibleAccentInk(
+  accent,
+  {
+    background = LIGHT_CARD_BG,
+    btnText = LIGHT_BTN_TEXT,
+    minTextRatio = 4.5,
+    minSurfaceRatio = 3,
+  } = {},
+) {
+  const fg = parseHex(accent);
+  const bg = parseHex(background);
+  const btnTextRgb = parseHex(btnText);
+  const ink = parseHex(INK_BASE);
+
+  for (let accentPct = 95; accentPct >= 8; accentPct -= 2) {
+    const mixed = mixColors(fg, ink, accentPct);
+    if (contrast(mixed, bg) >= minSurfaceRatio && contrast(btnTextRgb, mixed) >= minTextRatio) {
+      return toHex(mixed);
+    }
+  }
+  return INK_BASE.toLowerCase();
 }

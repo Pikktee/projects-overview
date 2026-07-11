@@ -1475,6 +1475,34 @@ html.js .card.is-visible {
   opacity: 0.7;
 }
 
+html[data-theme="light"] .card__placeholder {
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--accent-ink, var(--accent-cta-light)) 22%, var(--media-bg)),
+    var(--media-bg) 70%
+  );
+}
+
+html[data-theme="light"] .card__placeholder span {
+  color: color-mix(in srgb, var(--accent-ink, var(--accent-cta-light)) 75%, var(--text));
+  opacity: 0.85;
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme]) .card__placeholder {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent-ink, var(--accent-cta-light)) 22%, var(--media-bg)),
+      var(--media-bg) 70%
+    );
+  }
+
+  html:not([data-theme]) .card__placeholder span {
+    color: color-mix(in srgb, var(--accent-ink, var(--accent-cta-light)) 75%, var(--text));
+    opacity: 0.85;
+  }
+}
+
 .card__body {
   display: flex;
   flex-direction: column;
@@ -1866,6 +1894,7 @@ html.js .card.is-visible {
   inset: 0;
   z-index: 100;
   --accent: var(--accent-ui);
+  --accent-tint: var(--accent-ink, var(--accent, var(--accent-ui)));
   --backdrop-blur: 0px;
   opacity: 0;
   pointer-events: none;
@@ -1874,7 +1903,7 @@ html.js .card.is-visible {
   background:
     radial-gradient(
       ellipse 38% 70% at 100% 50%,
-      color-mix(in srgb, var(--accent) 0%, transparent),
+      color-mix(in srgb, var(--accent-tint) 0%, transparent),
       transparent 48%
     ),
     color-mix(in srgb, var(--backdrop-bg) 0%, transparent);
@@ -1893,11 +1922,22 @@ html.js .card.is-visible {
   background:
     radial-gradient(
       ellipse 38% 70% at 100% 50%,
-      color-mix(in srgb, var(--accent) 7%, transparent),
+      color-mix(in srgb, var(--accent-tint) 7%, transparent),
       transparent 48%
     ),
     var(--backdrop-bg);
   animation: drawer-backdrop-breathe 7s ease-in-out infinite;
+}
+
+html[data-theme="light"] .drawer-backdrop--visible {
+  animation: drawer-backdrop-breathe-light 7s ease-in-out infinite;
+  background:
+    radial-gradient(
+      ellipse 38% 70% at 100% 50%,
+      color-mix(in srgb, var(--accent-tint) 4%, transparent),
+      transparent 48%
+    ),
+    var(--backdrop-bg);
 }
 
 @keyframes drawer-backdrop-breathe {
@@ -1906,7 +1946,7 @@ html.js .card.is-visible {
     background:
       radial-gradient(
         ellipse 38% 70% at 100% 50%,
-        color-mix(in srgb, var(--accent) 5%, transparent),
+        color-mix(in srgb, var(--accent-tint) 5%, transparent),
         transparent 48%
       ),
       var(--backdrop-bg);
@@ -1916,7 +1956,30 @@ html.js .card.is-visible {
     background:
       radial-gradient(
         ellipse 38% 70% at 100% 50%,
-        color-mix(in srgb, var(--accent) 9%, transparent),
+        color-mix(in srgb, var(--accent-tint) 9%, transparent),
+        transparent 48%
+      ),
+      var(--backdrop-bg);
+  }
+}
+
+@keyframes drawer-backdrop-breathe-light {
+  0%,
+  100% {
+    background:
+      radial-gradient(
+        ellipse 38% 70% at 100% 50%,
+        color-mix(in srgb, var(--accent-tint) 3%, transparent),
+        transparent 48%
+      ),
+      var(--backdrop-bg);
+  }
+
+  50% {
+    background:
+      radial-gradient(
+        ellipse 38% 70% at 100% 50%,
+        color-mix(in srgb, var(--accent-tint) 5%, transparent),
         transparent 48%
       ),
       var(--backdrop-bg);
@@ -1929,7 +1992,17 @@ html.js .card.is-visible {
     background:
       radial-gradient(
         ellipse 38% 70% at 100% 50%,
-        color-mix(in srgb, var(--accent) 7%, transparent),
+        color-mix(in srgb, var(--accent-tint) 7%, transparent),
+        transparent 48%
+      ),
+      var(--backdrop-bg);
+  }
+
+  html[data-theme="light"] .drawer-backdrop--visible {
+    background:
+      radial-gradient(
+        ellipse 38% 70% at 100% 50%,
+        color-mix(in srgb, var(--accent-tint) 4%, transparent),
         transparent 48%
       ),
       var(--backdrop-bg);
@@ -1972,12 +2045,12 @@ html.js .card.is-visible {
     border-color 0.5s var(--ease-out),
     box-shadow 0.5s var(--ease-out);
   overflow: visible;
-  /* Projekt-Akzent: im Light-Theme die abgedunkelte, lesbare Variante. */
+  /* Projekt-Akzent: im Light-Theme die Tinten-Variante (Marker, Linien, Buttons). */
   --accent-current: var(--accent, var(--accent-ui));
 }
 
 html[data-theme="light"] .drawer {
-  --accent-current: var(--accent-light, var(--accent, var(--accent-ui)));
+  --accent-current: var(--accent-ink, var(--accent-light, var(--accent, var(--accent-ui))));
 }
 
 .drawer--open {
@@ -2327,9 +2400,19 @@ html[data-theme="light"] .drawer {
   transform: translate(calc(-100% - 1px), -50%);
 }
 
+html[data-theme="light"] .drawer__handle:hover,
+html[data-theme="light"] .drawer__handle:focus-visible {
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+}
+
 .drawer__handle:focus-visible {
   outline: 2px solid var(--accent-current);
   outline-offset: 2px;
+}
+
+html[data-theme="light"] .drawer__handle:focus-visible {
+  outline-color: var(--focus-ring);
 }
 
 .drawer__body {
@@ -2406,7 +2489,9 @@ html[data-theme="light"] .drawer {
 }
 
 html[data-theme="light"] .drawer__visit {
-  border-color: color-mix(in srgb, var(--accent-btn, var(--accent-ui)) 55%, #23252c);
+  color: var(--bg-card);
+  background: var(--accent-ink, var(--accent-current, var(--accent-ui)));
+  border-color: color-mix(in srgb, var(--accent-ink, var(--accent-current)) 65%, var(--text));
   box-shadow: none;
 }
 
@@ -2426,6 +2511,12 @@ html[data-theme="light"] .drawer__visit {
     0 4px 14px color-mix(in srgb, var(--accent-current) 35%, transparent);
   transform: translateY(-1px);
   outline: none;
+}
+
+html[data-theme="light"] .drawer__visit:hover,
+html[data-theme="light"] .drawer__visit:focus-visible {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--accent-ink, var(--accent-current)) 28%, transparent);
 }
 
 .drawer__visit:focus-visible {
@@ -2761,7 +2852,9 @@ html[data-theme="light"] .drawer__visit {
 }
 
 html[data-theme="light"] .btn--primary {
-  border-color: color-mix(in srgb, var(--accent-btn, var(--accent-ui)) 55%, #23252c);
+  color: var(--bg-card);
+  background: var(--accent-ink, var(--accent-btn, var(--accent-ui)));
+  border-color: color-mix(in srgb, var(--accent-ink, var(--accent-btn)) 65%, var(--text));
 }
 
 .btn--primary:hover,
