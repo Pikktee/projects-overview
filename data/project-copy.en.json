@@ -108,15 +108,15 @@
     ]
   },
   "quality-touch": {
-    "tagline": "The Three-Minute Game for couples: short, mindful moments of closeness — easy to try together.",
-    "summary": "A warm ritual for couples: pause, ask gently, and touch mindfully.",
-    "overview": "Quality Touch is built around one simple, warm idea: the Three-Minute Game. As a couple, you take a few minutes, take turns asking two questions — “How would you like to be touched?” and “How would you like to touch me?” — and give each other exactly that for three minutes each. No goal, no pressure, just the two of you.\n\nThe app gently guides you along the way: a calm timer counts quietly, short prompts accompany you, and clear boundaries help you both feel comfortable and safe. Everything is kept deliberately simple so you can start right away — whether you're newly in love or together for years.\n\nAround the Three-Minute Game there are more small rituals and conversation questions whenever you feel like it. Quality Touch is meant to inspire, not to treat — and everything stays private on your own device.",
-    "uxNarrative": "Quality Touch slows things down from the very first moment: soft colors, a gently breathing background, and calm guidance invite you in without overwhelm. The Three-Minute Game sits at the center — a quiet timer counts along, short prompts accompany you, and you always decide what feels right.\n\nThe emotional focus is connection, not perfection. The app celebrates the small moments: pausing, asking, and feeling each other. If you like, you can pair two devices and share the moment even across distance.",
+    "tagline": "Seven guided paths for couples: touch, conversation, rituals. Together or across distance.",
+    "summary": "A connection space for couples with guided exercises in touch, talk, and closeness.",
+    "overview": "Quality Touch is a connection space for couples who don't want to leave closeness to chance. Seven modules translate research-backed approaches into short, guided exercises: consent and touch (Betty Martin), slow presence (Diana Richardson), Arthur Aron's 36 Questions, Gottman's micro-rituals, EFT conversations (Sue Johnson), and the neuroscience of affectionate touch.\n\nA brief onboarding builds your connection profile using Sternberg's love triangle and recommends matching modules. No streaks, no scores: you choose what fits right now and can pause anytime. Inspiration, not therapy.\n\nIf you live apart, two devices pair for real-time rituals with video and touch signals. Profile and progress stay local in the browser at quality-touch.henrikheil.net.",
+    "uxNarrative": "The home page shows all seven modules plus a daily featured exercise. Each session walks you through step by step: consent gates before sensitive moments, quiet timers, clear roles.\n\nAfter onboarding, the connection profile visualizes intimacy, passion, and commitment and suggests matching exercises. At a distance, paired devices connect video, synchronized breathing, and shared rituals.",
     "highlights": [
-      "The Three-Minute Game: take turns asking, giving, and receiving",
-      "A gentle timer and calm prompts guide you step by step",
-      "Simple for any couple — no prior knowledge, no pressure",
-      "Private and local: everything stays on your own device"
+      "Seven modules: consent, slow touch, 36 questions, Gottman rituals, EFT",
+      "Onboarding with love triangle and tailored exercise recommendations",
+      "Closeness at a distance: pair devices, touch signals and video in real time",
+      "No performance pressure; profile and progress stay private and local"
     ]
   },
   "a11y-quiz": {

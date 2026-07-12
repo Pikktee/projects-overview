@@ -53,7 +53,7 @@
       "current": true,
       "period": { "de": "2026", "en": "2026" },
       "text": {
-        "de": "Weiterbildung „AI Process & Media Engineering“ — cimdata Bildungsakademie",
+        "de": "Weiterbildung „AI Process & Media Engineering“, cimdata Bildungsakademie",
         "en": "Professional training “AI Process & Media Engineering” — cimdata academy"
       }
     },
@@ -61,7 +61,7 @@
       "current": true,
       "period": { "de": "seit 2006", "en": "since 2006" },
       "text": {
-        "de": "Selbstständig als UX-Engineer und Software-Entwickler — von der Konzeption bis zum produktiven System",
+        "de": "Selbstständig als UX-Engineer und Software-Entwickler, von der Konzeption bis zum produktiven System",
         "en": "Self-employed as UX engineer and software developer — from concept to production system"
       }
     },
@@ -100,7 +100,7 @@
     "de": {
       "meta": {
         "title": "Henrik Heil · UX-Engineer & Software-Entwickler",
-        "description": "Henrik Heil — UX-Engineer & Software-Entwickler aus Frankfurt. Web-Apps, KI-Tools und Live-Demos: Patina, Velosia, hugur und mehr — barrierefrei umgesetzt."
+        "description": "Henrik Heil, UX-Engineer und Software-Entwickler aus Frankfurt. Web-Apps, KI-Tools und Live-Demos wie Patina, Velosia und hugur, barrierefrei umgesetzt."
       },
       "nav": {
         "profile": "Profil",
@@ -118,19 +118,19 @@
       },
       "profile": {
         "role": "UX-Engineer & Software-Entwickler",
-        "tagline": "UX-Engineer & Software-Entwickler — Konzeption, Code und Video aus einer Hand.",
-        "bioLead": "Ich gestalte und entwickle digitale Produkte",
-        "bioDetail": "— von der ersten Skizze bis zum barrierefreien Produktivsystem.",
+        "tagline": "UX-Engineer und Software-Entwickler. Konzeption, Code und Video aus einer Hand.",
+        "bioLead": "Ich gestalte und entwickle digitale Produkte,",
+        "bioDetail": "von der ersten Skizze bis zum barrierefreien Produktivsystem.",
         "more": "Schwerpunkte & Hintergrund",
         "credentials": ["Dipl.-Ing. (FH) Medieninformatik", "Frankfurt am Main"]
       },
       "hero": {
         "meNote": "das bin ich",
-        "meHint": "— mehr über mich"
+        "meHint": "mehr über mich"
       },
       "about": {
         "title": "Über mich",
-        "intro": "Ich lebe in Frankfurt am Main — nach vier Jahren als digitaler Nomade durch Asien, Süd- und Zentralamerika, in denen ich remote für meine Kunden gearbeitet habe. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen — und warum zugängliche Gestaltung kein Nice-to-have ist, sondern die Grundlage guter Produkte.",
+        "intro": "Ich lebe in Frankfurt am Main. Vier Jahre war ich digitaler Nomade in Asien, Süd- und Zentralamerika und habe remote für Kunden gearbeitet. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen, und warum zugängliche Gestaltung die Grundlage guter Produkte ist, nicht ein Extra.",
         "photoAlt": "Porträt von Henrik Heil",
         "interestsHeading": "Abseits der Arbeit"
       },
@@ -283,8 +283,8 @@
       "profile": {
         "role": "UX Engineer & Software Developer",
         "tagline": "UX engineer & software developer — concept, code, and video from one source.",
-        "bioLead": "I design and build digital products",
-        "bioDetail": "— from the first sketch to an accessible production system.",
+        "bioLead": "I design and build digital products,",
+        "bioDetail": "from the first sketch to an accessible production system.",
         "more": "Focus areas & background",
         "credentials": ["Dipl.-Ing. (FH) Media Informatics", "Frankfurt am Main"]
       },
@@ -438,7 +438,7 @@
       "cimdata-kurse": "Filter CIMDATA courses by start date, build a study plan, share via link.",
       "echt-oder-ki": "Daily duel: spot AI fakes in text and images — three levels, leaderboards.",
       "komorebi": "Find conservation roles worldwide — discover on a map, filter, apply directly.",
-      "quality-touch": "A warm ritual for couples: pause, ask gently, and touch mindfully.",
+      "quality-touch": "A connection space for couples with guided exercises in touch, talk, and closeness.",
       "a11y-quiz": "WCAG 2.2 quiz in ChatGPT with personal results and an accessible dashboard."
     }
   }

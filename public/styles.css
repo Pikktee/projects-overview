@@ -4408,6 +4408,99 @@ html[data-theme="light"] .btn--primary {
   }
 }
 
+/* Landscape-Handy: Breite > 640px, aber wenig Höhe — Side-Drawer lässt schwarze
+   Leerfläche und kollidiert mit Galerie-Pfeilen → Bottom-Sheet wie auf Mobile. */
+@media (orientation: landscape) and (max-height: 520px) and (min-width: 641px) {
+  .drawer {
+    width: 100vw;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    top: auto;
+    bottom: 0;
+    height: min(94dvh, 100dvh);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --drawer-handle-overhang: 1.2rem;
+    transform: translateY(calc(100% + var(--drawer-handle-overhang)));
+  }
+
+  .drawer--open {
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .drawer__handle {
+    left: 50%;
+    top: 0;
+    width: 2.85rem;
+    height: 1.2rem;
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 -4px 12px color-mix(in srgb, #000 10%, transparent);
+    transform: translate(-50%, -100%);
+  }
+
+  .drawer__handle-icon--side {
+    display: none;
+  }
+
+  .drawer__handle-icon--sheet {
+    display: block;
+  }
+
+  .drawer__handle:hover,
+  .drawer__handle:focus-visible {
+    transform: translate(-50%, calc(-100% - 1px));
+  }
+}
+
+/* Mobile Bottom-Sheet: größere Lasche (Touch-Ziel) + Luft nach oben.
+   Lasche sitzt oberhalb des Panels — top muss Lasche + Gap aufnehmen,
+   sonst clippt html.drawer-open { overflow: hidden } die Lasche weg. */
+@media (max-width: 640px),
+  (orientation: landscape) and (max-height: 520px) and (min-width: 641px) {
+  .drawer {
+    --drawer-sheet-top-gap: 1rem;
+    --drawer-handle-overhang: 2.75rem;
+    top: calc(var(--drawer-sheet-top-gap) + var(--drawer-handle-overhang));
+    bottom: 0;
+    height: auto;
+    max-height: none;
+  }
+
+  .drawer__handle {
+    width: 4.25rem;
+    height: var(--drawer-handle-overhang);
+    border-radius: 12px 12px 0 0;
+  }
+
+  .drawer__handle-icon--sheet svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+}
+
+/* Hero in Landscape: 16:9 auf voller Breite wäre höher als der Viewport. */
+@media (orientation: landscape) and (max-height: 520px) {
+  .drawer__gallery-viewport,
+  .drawer__media:not(.drawer__media--gallery) {
+    aspect-ratio: 2.15 / 1;
+    max-height: min(40dvh, 12.5rem);
+  }
+
+  .drawer__gallery-play svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.5rem;
+  }
+
+  .drawer__video-play {
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+}
+
 @media (min-width: 900px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
@@ -4461,7 +4554,8 @@ html[data-theme="light"] .btn--primary {
     display: none;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 640px),
+    (orientation: landscape) and (max-height: 520px) and (min-width: 641px) {
     .drawer.drawer--open {
       transform: none;
     }
