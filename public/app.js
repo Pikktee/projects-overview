@@ -1103,6 +1103,7 @@
     backdrop.style.setProperty('--accent', project.accent);
     backdrop.style.setProperty('--accent-ink', project.accentInk || project.accentCtaLight || project.accent);
     backdrop.style.setProperty('--accent-tint', project.accentInk || project.accentCtaLight || project.accent);
+    syncDrawerScrollGutter();
   }
 
   let savedScrollY = 0;
@@ -1227,7 +1228,25 @@
     scrollArea.scrollTo(0, 0);
     requestAnimationFrame(() => {
       scrollArea.scrollTo(0, 0);
+      syncDrawerScrollGutter();
     });
+  }
+
+  function syncDrawerScrollGutter() {
+    const scrollArea = drawer?.querySelector('.drawer__scroll');
+    if (!scrollArea) return;
+    const gutter = Math.max(0, scrollArea.offsetWidth - scrollArea.clientWidth);
+    scrollArea.style.setProperty('--drawer-scroll-gutter', `${gutter}px`);
+  }
+
+  let drawerScrollGutterObserver = null;
+
+  function bindDrawerScrollGutterSync() {
+    const scrollArea = drawer?.querySelector('.drawer__scroll');
+    if (!scrollArea || drawerScrollGutterObserver) return;
+    drawerScrollGutterObserver = new ResizeObserver(() => syncDrawerScrollGutter());
+    drawerScrollGutterObserver.observe(scrollArea);
+    syncDrawerScrollGutter();
   }
 
   function openDrawer(slug) {
@@ -1307,6 +1326,7 @@
 
   closeBtn?.addEventListener('click', closeDrawer);
   backdrop?.addEventListener('click', closeDrawer);
+  bindDrawerScrollGutterSync();
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
