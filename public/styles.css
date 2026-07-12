@@ -1087,7 +1087,7 @@ html:not(.js) .theme-toggle {
   letter-spacing: -0.01em;
   line-height: 1.25;
   text-wrap: balance;
-  color: color-mix(in srgb, var(--accent-text) 68%, var(--text-muted));
+  color: var(--text);
 }
 
 .about__label::after {
@@ -1096,7 +1096,7 @@ html:not(.js) .theme-toggle {
   width: clamp(2rem, 12vw, 3.5rem);
   height: 6px;
   background: var(--accent-ui);
-  opacity: 0.24;
+  opacity: 0.36;
   -webkit-mask: var(--scribble-mask) no-repeat center / 100% 100%;
   mask: var(--scribble-mask) no-repeat center / 100% 100%;
 }
@@ -1256,7 +1256,7 @@ html:not(.js) .theme-toggle {
   font-size: clamp(1.05rem, 2.2vw, 1.35rem);
   font-weight: 400;
   font-style: italic;
-  color: color-mix(in srgb, var(--accent-text) 68%, var(--text-muted));
+  color: var(--text);
   letter-spacing: -0.01em;
 }
 
@@ -1267,7 +1267,7 @@ html:not(.js) .theme-toggle {
   max-width: 3.5rem;
   height: 6px;
   background: var(--accent-ui);
-  opacity: 0.24;
+  opacity: 0.36;
   -webkit-mask: var(--scribble-mask) no-repeat center / 100% 100%;
   mask: var(--scribble-mask) no-repeat center / 100% 100%;
 }
@@ -1285,7 +1285,7 @@ html:not(.js) .theme-toggle {
   font-size: clamp(1.6rem, 3.5vw, 2.1rem);
   font-weight: 400;
   font-style: italic;
-  color: var(--accent-text);
+  color: var(--text);
   letter-spacing: -0.01em;
 }
 
@@ -1295,7 +1295,7 @@ html:not(.js) .theme-toggle {
   height: 8px;
   min-width: 2.5rem;
   background: var(--accent-ui);
-  opacity: 0.32;
+  opacity: 0.44;
   -webkit-mask: var(--scribble-mask) no-repeat center / 100% 100%;
   mask: var(--scribble-mask) no-repeat center / 100% 100%;
 }
@@ -3425,7 +3425,7 @@ html[data-theme="light"] .btn--primary {
   right: var(--gap);
   height: 7px;
   background: var(--accent-ui);
-  opacity: 0.3;
+  opacity: 0.36;
   pointer-events: none;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M0 5 C 14 2, 28 7, 42 4 S 70 2, 84 5 S 112 7, 126 4 S 154 2, 168 5 S 186 3, 200 4' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M0 5 C 14 2, 28 7, 42 4 S 70 2, 84 5 S 112 7, 126 4 S 154 2, 168 5 S 186 3, 200 4' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat center / 100% 100%;
