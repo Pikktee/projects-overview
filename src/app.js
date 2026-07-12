@@ -343,7 +343,7 @@
         if (!reduceMotion) {
           const x = (e.clientX - rect.left) / rect.width - 0.5;
           const y = (e.clientY - rect.top) / rect.height - 0.5;
-          const max = 7;
+          const max = 5;
           btn.style.setProperty('--tilt-x', `${(x * max * 2).toFixed(2)}deg`);
           btn.style.setProperty('--tilt-y', `${(-y * max * 2).toFixed(2)}deg`);
         }
@@ -1109,7 +1109,12 @@
   let scrollLockDepth = 0;
 
   function getScrollbarWidth() {
-    return Math.max(0, window.innerWidth - document.documentElement.clientWidth);
+    const html = document.documentElement;
+    const clientGap = window.innerWidth - html.clientWidth;
+    if (clientGap > 0) return clientGap;
+    // scrollbar-gutter: stable reserviert Platz über offsetWidth, nicht clientWidth.
+    const offsetGap = window.innerWidth - html.offsetWidth;
+    return Math.max(0, offsetGap);
   }
 
   // Scroll sperren ohne Layout-Shift: Scrollbar-Breite per Padding ausgleichen,
@@ -1117,13 +1122,16 @@
   function lockBodyScroll() {
     if (scrollLockDepth === 0) {
       savedScrollY = window.scrollY;
+      const scrollbarWidth = getScrollbarWidth();
       document.documentElement.classList.add('drawer-open');
       document.body.classList.add('drawer-open');
       if (savedScrollY > 0) {
-        const scrollbarWidth = getScrollbarWidth();
         document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
         document.documentElement.classList.add('drawer-open--scroll-lock');
         document.body.style.top = `-${savedScrollY}px`;
+      } else if (scrollbarWidth > 0) {
+        document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+        document.documentElement.classList.add('drawer-open--gutter-lock');
       }
     }
     scrollLockDepth += 1;
@@ -1138,6 +1146,7 @@
     body.classList.remove('drawer-open');
     html.classList.remove('drawer-open');
     html.classList.remove('drawer-open--scroll-lock');
+    html.classList.remove('drawer-open--gutter-lock');
     html.style.removeProperty('--scrollbar-width');
 
     if (scrollY > 0) {

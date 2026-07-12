@@ -278,7 +278,7 @@ const facetSheetHtml = `
     <button type="button" class="facet-sheet__backdrop" id="facet-sheet-backdrop" tabindex="-1" aria-hidden="true"></button>
     <div class="facet-sheet__panel">
       <button type="button" class="facet-sheet__handle" id="facet-sheet-close" data-i18n-aria="facets.close" aria-label="${escapeHtml(tDe.facets.close)}">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 10l6 6 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="facet-sheet__body">
         <h3 class="facet-sheet__title" id="facet-sheet-title" data-i18n="facets.heading">${escapeHtml(tDe.facets.heading)}</h3>
@@ -577,7 +577,7 @@ ${headExtras}
   <aside class="drawer" id="project-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" hidden>
     <button type="button" class="drawer__handle" id="drawer-close" data-i18n-aria="drawer.close" aria-label="${escapeHtml(tDe.drawer.close)}">
       <svg class="drawer__handle-icon drawer__handle-icon--side" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M10 6l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <svg class="drawer__handle-icon drawer__handle-icon--sheet" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 14l6-6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg class="drawer__handle-icon drawer__handle-icon--sheet" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 10l6 6 6-6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="drawer__scroll">
       <div class="drawer__hero">

@@ -199,10 +199,24 @@ body {
 
 html.drawer-open {
   overflow: hidden;
+  /* Gutter bleibt (scrollbar-gutter: stable), Track aber unsichtbar — sonst
+     graue Hauptseiten-Scrollbar neben dem Drawer. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html.drawer-open::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 body.drawer-open {
   overflow: hidden;
+}
+
+html.drawer-open.drawer-open--gutter-lock body.drawer-open {
+  padding-right: var(--scrollbar-width, 0px);
 }
 
 html.drawer-open.drawer-open--scroll-lock body.drawer-open {
@@ -2109,6 +2123,7 @@ html[data-theme="light"] .drawer {
 
 .drawer__gallery-viewport {
   position: relative;
+  width: 100%;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   touch-action: pan-y;
@@ -2117,6 +2132,7 @@ html[data-theme="light"] .drawer {
 
 .drawer__gallery-track {
   display: flex;
+  width: 100%;
   height: 100%;
   transition: transform 0.45s var(--ease-out);
   transform: translateX(calc(var(--gallery-index, 0) * -100%));
@@ -2124,6 +2140,8 @@ html[data-theme="light"] .drawer {
 
 .drawer__gallery-slide {
   flex: 0 0 100%;
+  width: 100%;
+  min-width: 100%;
   margin: 0;
   height: 100%;
   position: relative;
@@ -2142,6 +2160,7 @@ html[data-theme="light"] .drawer {
 }
 
 .drawer__gallery-hit--video {
+  overflow: hidden;
   cursor: pointer;
 }
 
@@ -2162,9 +2181,15 @@ html[data-theme="light"] .drawer {
 }
 
 .drawer__gallery-hit--video img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center center;
-  transform: scale(1.08);
+  transform: scale(1.12);
   transform-origin: center center;
 }
 
@@ -3785,9 +3810,11 @@ html[data-theme="light"] .btn--primary {
 }
 
 .shot-lightbox__media {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   line-height: 0;
 }
 
@@ -3902,12 +3929,16 @@ html[data-theme="light"] .btn--primary {
 }
 
 .shot-lightbox__video-preview img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
+  min-width: 100%;
+  min-height: 100%;
   object-fit: cover;
   object-position: center center;
-  transform: scale(1.08);
+  transform: scale(1.12);
   transform-origin: center center;
 }
 
