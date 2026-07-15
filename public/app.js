@@ -310,6 +310,7 @@
 
   // Scroll-Reveal: Elemente einmalig einblenden, sobald sie in den Viewport kommen.
   // Karten etwas kräftiger, About/Headings als .reveal-soft dezenter.
+  // Schwerpunkte & beruflicher Hintergrund bewusst ohne Reveal.
   const observeReveal = (elements, { soft = false } = {}) => {
     const targets = Array.from(elements);
     if (!targets.length) return;
@@ -338,6 +339,21 @@
     targets.forEach((el) => revealObserver.observe(el));
   };
 
+  // Auto-Scroll „das bin ich“: alle Reveals sofort sichtbar (keine Fade-Konflikte).
+  const revealAllInstant = () => {
+    document.querySelectorAll('.card, .reveal-soft').forEach((el) => {
+      el.style.setProperty('transition', 'none');
+      el.classList.add('is-visible');
+    });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.querySelectorAll('.card, .reveal-soft').forEach((el) => {
+          el.style.removeProperty('transition');
+        });
+      });
+    });
+  };
+
   observeReveal(cards);
   observeReveal(
     document.querySelectorAll(
@@ -345,9 +361,7 @@
         '.section__heading',
         '.section__subheading',
         '.about__intro',
-        '.about__label',
-        '.skill-list__row',
-        '.about__timeline-item',
+        '.about__interests-section .about__label',
         '.about__interests > li',
       ].join(', '),
     ),
@@ -391,6 +405,7 @@
   const SWING_MAX_VEL = 4.6;
   const SWING_MAX_ANGLE = 26;
   const SWING_SETTLE = 0.022;
+  let armNudgeOnArrival = null;
 
   if (aboutPhotoPinned && aboutPhotoSwing && !reduceMotion) {
     let angle = ABOUT_PHOTO_REST;
@@ -521,12 +536,64 @@
 
     setAngle(ABOUT_PHOTO_REST);
 
-    // Einmaliger, kleiner Pendelstoß beim Scroll-Reveal — wie frisch angepinnt.
-    const SWING_REVEAL_NUDGE = 1.15;
-    const nudgeFromScroll = () => {
-      if (grabbing) return;
-      angularVel += SWING_REVEAL_NUDGE;
-      ensureAnimating();
+    // Kleiner Pendelstoß — Scroll-Reveal einmalig, „das bin ich“ bei Sichtbarkeit.
+    const SWING_REVEAL_NUDGE = 1.05;
+    const SWING_LINK_NUDGE = 1.05;
+    let nudgeTimer = null;
+    let preferArrivalNudge = false;
+    let arrivalObserver = null;
+
+    // Feste Impulsstärke (kein +=), damit verzögerte Stöße nicht stärker werden.
+    const nudgePhoto = (amount, delay = 0) => {
+      window.clearTimeout(nudgeTimer);
+      nudgeTimer = window.setTimeout(() => {
+        if (grabbing) return;
+        angularVel = amount;
+        ensureAnimating();
+      }, delay);
+    };
+
+    const photoIsInView = () => {
+      const rect = aboutPhotoPinned.getBoundingClientRect();
+      const vh = window.innerHeight || 1;
+      return rect.top < vh * 0.82 && rect.bottom > vh * 0.18;
+    };
+
+    const disarmArrivalNudge = () => {
+      preferArrivalNudge = false;
+      arrivalObserver?.disconnect();
+      arrivalObserver = null;
+    };
+
+    armNudgeOnArrival = () => {
+      disarmArrivalNudge();
+      preferArrivalNudge = true;
+      window.clearTimeout(nudgeTimer);
+
+      const fire = () => {
+        disarmArrivalNudge();
+        aboutPhotoPinned.classList.add('is-visible');
+        nudgePhoto(SWING_LINK_NUDGE, 60);
+      };
+
+      if (photoIsInView()) {
+        fire();
+        return;
+      }
+
+      if (!('IntersectionObserver' in window)) {
+        fire();
+        return;
+      }
+
+      arrivalObserver = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          fire();
+        },
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.3 },
+      );
+      arrivalObserver.observe(aboutPhotoPinned);
     };
 
     aboutPhotoPinned.classList.add('reveal-soft');
@@ -535,7 +602,7 @@
         (entries) => {
           if (!entries.some((entry) => entry.isIntersecting)) return;
           aboutPhotoPinned.classList.add('is-visible');
-          window.setTimeout(nudgeFromScroll, 260);
+          if (!preferArrivalNudge) nudgePhoto(SWING_REVEAL_NUDGE, 180);
           photoReveal.disconnect();
         },
         { rootMargin: '0px 0px -10% 0px', threshold: 0.35 },
@@ -548,6 +615,13 @@
     aboutPhotoPinned.style.setProperty('--swing-angle', `${ABOUT_PHOTO_REST}deg`);
     aboutPhotoPinned.classList.add('reveal-soft', 'is-visible');
   }
+
+  document.querySelectorAll('a[href="#ueber-mich"]').forEach((link) => {
+    link.addEventListener('click', () => {
+      revealAllInstant();
+      armNudgeOnArrival?.();
+    });
+  });
 
   openButtons.forEach((btn) => {
     btn.addEventListener('click', () => openDrawer(btn.dataset.open));

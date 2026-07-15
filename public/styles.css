@@ -4160,10 +4160,14 @@ html[data-theme="light"] .btn--primary {
 /* ── Responsive ── */
 
 /* Hero: gestapelte Komposition bis 900px — dort wird die Pfeil-Zeile sonst zu eng.
-   Clean Break: Hero füllt den Viewport (svh), Inhalt bleibt oben gruppiert —
-   der freie Raum sitzt unter den Kontaktlinks, nicht dazwischen. */
+   Clean Break: Hero füllt den Viewport (svh). Intro-Block wird vertikal
+   zentriert; Theme/Sprache bleiben oben verankert. */
 @media (max-width: 900px) {
   .hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     min-height: 100vh; /* Fallback */
     min-height: 100svh;
     padding-top: 1rem;
@@ -4172,6 +4176,12 @@ html[data-theme="light"] .btn--primary {
   }
 
   .hero__bar {
+    position: absolute;
+    top: 1rem;
+    left: var(--gap);
+    right: var(--gap);
+    z-index: 1;
+    margin-bottom: 0;
     text-align: left;
   }
 
@@ -4233,7 +4243,13 @@ html[data-theme="light"] .btn--primary {
 @media (max-width: 900px) and (max-height: 580px) {
   .hero {
     min-height: 0;
+    justify-content: flex-start;
     padding-bottom: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  .hero__bar {
+    position: static;
+    margin-bottom: 1rem;
   }
 }
 
