@@ -111,7 +111,6 @@
       "a11y": {
         "langSwitch": "Sprache wählen",
         "skipLink": "Zum Hauptinhalt springen",
-        "externalHint": "(öffnet in neuem Tab)",
         "credentialsAria": "Qualifikationen",
         "contactAria": "Kontakt",
         "themeToggle": "Dunkles Design"
@@ -169,6 +168,7 @@
         "openAria": "Projekte nach Merkmal filtern",
         "close": "Schließen",
         "clearFilter": "Filter {label} entfernen",
+        "clearFilterIdle": "Aktiven Filter entfernen",
         "all": "Alle",
         "ai": "KI-gestützt",
         "extension": "Chrome-Erweiterung",
@@ -182,6 +182,7 @@
       },
       "videoModal": {
         "close": "Video schließen",
+        "defaultTitle": "Video",
         "opens": "— Video abspielen",
         "escHint": "↓ ESC schließt die Ansicht"
       },
@@ -275,7 +276,6 @@
       "a11y": {
         "langSwitch": "Choose language",
         "skipLink": "Skip to main content",
-        "externalHint": "(opens in new tab)",
         "credentialsAria": "Qualifications",
         "contactAria": "Contact",
         "themeToggle": "Dark theme"
@@ -333,6 +333,7 @@
         "openAria": "Filter projects by trait",
         "close": "Close",
         "clearFilter": "Remove filter {label}",
+        "clearFilterIdle": "Remove active filter",
         "all": "All",
         "ai": "AI-powered",
         "extension": "Chrome extension",
@@ -346,6 +347,7 @@
       },
       "videoModal": {
         "close": "Close video",
+        "defaultTitle": "Video",
         "opens": "— play video",
         "escHint": "↓ ESC closes the view"
       },

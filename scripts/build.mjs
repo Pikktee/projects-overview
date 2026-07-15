@@ -263,7 +263,7 @@ const catalogToolbarHtml = `
           <span class="facet-trigger__label" data-i18n="facets.open">${escapeHtml(tDe.facets.open)}</span>
           <svg class="facet-trigger__chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <button type="button" class="facet-active-chip" id="facet-active-chip" hidden>
+        <button type="button" class="facet-active-chip" id="facet-active-chip" hidden aria-label="${escapeHtml(tDe.facets.clearFilterIdle)}" data-i18n-aria="facets.clearFilterIdle">
           <span class="facet-active-chip__icon" id="facet-active-chip-icon" aria-hidden="true"></span>
           <span class="facet-active-chip__label" id="facet-active-chip-label"></span>
           <span class="facet-active-chip__count" id="facet-active-chip-count" aria-hidden="true"></span>
@@ -410,7 +410,7 @@ const interestsHtml = (site.personalInterests || [])
     const label = `${interestIcon(item.key)}<span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span>`;
     if (item.url) {
       const videoLabel = escapeHtml(item.videoLabel?.de || 'Video');
-      return `<li>${label} <a href="${escapeHtml(item.url)}" target="_blank" rel="noopener noreferrer">(<span data-interest-video-label="${escapeHtml(item.key)}">${videoLabel}</span>)<span class="sr-only" data-i18n="a11y.externalHint"> ${escapeHtml(tDe.a11y.externalHint)}</span></a></li>`;
+      return `<li>${label} <a href="${escapeHtml(item.url)}" rel="noopener noreferrer">(<span data-interest-video-label="${escapeHtml(item.key)}">${videoLabel}</span>)</a></li>`;
     }
     if (item.easterEgg) {
       return `<li>${interestIcon(item.key)}<button type="button" class="about__interest-egg" id="egg-snake"><span class="about__interest-label" data-interest-key="${escapeHtml(item.key)}">${escapeHtml(item.de)}</span><span class="sr-only" data-i18n="snake.eggHint"> ${escapeHtml(tDe.snake.eggHint)}</span></button></li>`;
@@ -463,19 +463,17 @@ ${headExtras}
           </a>
         </li>
         <li>
-          <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.github)}" target="_blank" rel="noopener noreferrer">
+          <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.github)}">
             ${heroLinkIcons.github}
             <span data-i18n="links.github">${escapeHtml(tDe.links.github)}</span>
             ${heroLinkIcons.external}
-            <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
           </a>
         </li>
         <li>
-          <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.linkedin)}" target="_blank" rel="noopener noreferrer">
+          <a class="hero__link hero__link--external" href="${escapeHtml(site.profile.linkedin)}">
             ${heroLinkIcons.linkedin}
             <span data-i18n="links.linkedin">${escapeHtml(tDe.links.linkedin)}</span>
             ${heroLinkIcons.external}
-            <span class="sr-only" data-i18n="a11y.externalHint">${escapeHtml(tDe.a11y.externalHint)}</span>
           </a>
         </li>
       </ul>
@@ -616,9 +614,9 @@ ${headExtras}
           <p class="video-modal__hint" id="video-modal-hint" aria-hidden="true" data-i18n="videoModal.escHint">↓ ESC schließt die Ansicht</p>
         </div>
         <div class="video-modal__dialog" id="video-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="video-modal-title" tabindex="-1">
-          <h2 class="sr-only" id="video-modal-title"></h2>
+          <h2 class="sr-only" id="video-modal-title" data-i18n="videoModal.defaultTitle">${escapeHtml(tDe.videoModal.defaultTitle)}</h2>
           <div class="video-modal__frame">
-            <iframe id="video-modal-iframe" title="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="video-modal-iframe" title="${escapeHtml(tDe.videoModal.defaultTitle)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
         </div>
       </div>
