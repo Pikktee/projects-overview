@@ -304,9 +304,25 @@
 
   Promise.all([siteReady, projectsReady]).then(() => handleHash());
 
-  // Scroll-Reveal: Karten tauchen gestaffelt auf, sobald sie in den Viewport
-  // kommen. Ohne IntersectionObserver werden alle sofort sichtbar.
-  if ('IntersectionObserver' in window) {
+  // Cursor-Licht + 3D-Kipp / Scroll-Reveal respektieren Systempräferenz.
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Scroll-Reveal: Elemente einmalig einblenden, sobald sie in den Viewport kommen.
+  // Karten etwas kräftiger, About/Headings als .reveal-soft dezenter.
+  const observeReveal = (elements, { soft = false } = {}) => {
+    const targets = Array.from(elements);
+    if (!targets.length) return;
+
+    if (soft) {
+      targets.forEach((el) => el.classList.add('reveal-soft'));
+    }
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-visible'));
+      return;
+    }
+
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries
@@ -319,15 +335,26 @@
       },
       { rootMargin: '0px 0px -8% 0px', threshold: 0.1 },
     );
-    cards.forEach((card) => revealObserver.observe(card));
-  } else {
-    cards.forEach((card) => card.classList.add('is-visible'));
-  }
+    targets.forEach((el) => revealObserver.observe(el));
+  };
+
+  observeReveal(cards);
+  observeReveal(
+    document.querySelectorAll(
+      [
+        '.section__heading',
+        '.section__subheading',
+        '.about__intro',
+        '.about__label',
+        '.skill-list__row',
+        '.about__timeline-item',
+        '.about__interests > li',
+      ].join(', '),
+    ),
+    { soft: true },
+  );
 
   // Cursor-Licht + 3D-Kipp: gemeinsame Mausposition auf den Karten.
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   if (finePointer) {
     document.querySelectorAll('.card__btn').forEach((btn) => {
       const resetTilt = () => {
@@ -493,8 +520,33 @@
     });
 
     setAngle(ABOUT_PHOTO_REST);
+
+    // Einmaliger, kleiner Pendelstoß beim Scroll-Reveal — wie frisch angepinnt.
+    const SWING_REVEAL_NUDGE = 1.15;
+    const nudgeFromScroll = () => {
+      if (grabbing) return;
+      angularVel += SWING_REVEAL_NUDGE;
+      ensureAnimating();
+    };
+
+    aboutPhotoPinned.classList.add('reveal-soft');
+    if ('IntersectionObserver' in window) {
+      const photoReveal = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          aboutPhotoPinned.classList.add('is-visible');
+          window.setTimeout(nudgeFromScroll, 260);
+          photoReveal.disconnect();
+        },
+        { rootMargin: '0px 0px -10% 0px', threshold: 0.35 },
+      );
+      photoReveal.observe(aboutPhotoPinned);
+    } else {
+      aboutPhotoPinned.classList.add('is-visible');
+    }
   } else if (aboutPhotoPinned) {
     aboutPhotoPinned.style.setProperty('--swing-angle', `${ABOUT_PHOTO_REST}deg`);
+    aboutPhotoPinned.classList.add('reveal-soft', 'is-visible');
   }
 
   openButtons.forEach((btn) => {
