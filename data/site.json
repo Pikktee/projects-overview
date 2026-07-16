@@ -100,7 +100,7 @@
     "de": {
       "meta": {
         "title": "Henrik Heil · UX-Engineer & Software-Entwickler",
-        "description": "Henrik Heil, UX-Engineer und Software-Entwickler aus Frankfurt. Web-Apps, KI-Tools und Live-Demos wie Patina, Velosia und hugur, barrierefrei umgesetzt."
+        "description": "Henrik Heil — UX-Engineer und Software-Entwickler aus Frankfurt. Web-Apps, KI-Tools und Live-Demos wie Patina, Velosia und hugur — zugänglich gebaut."
       },
       "nav": {
         "profile": "Profil",
@@ -119,7 +119,7 @@
         "role": "UX-Engineer & Software-Entwickler",
         "tagline": "UX-Engineer und Software-Entwickler. Konzeption, Code und Video aus einer Hand.",
         "bioLead": "Ich gestalte und entwickle digitale Produkte,",
-        "bioDetail": "von der ersten Skizze bis zum barrierefreien Produktivsystem.",
+        "bioDetail": "von der ersten Skizze bis zur fertigen, zugänglichen App.",
         "more": "Schwerpunkte & Hintergrund",
         "credentials": ["Dipl.-Ing. (FH) Medieninformatik", "Frankfurt am Main"]
       },
@@ -129,7 +129,7 @@
       },
       "about": {
         "title": "Über mich",
-        "intro": "Ich lebe in Frankfurt am Main. Vier Jahre war ich digitaler Nomade in Asien, Süd- und Zentralamerika und habe remote für Kunden gearbeitet. Diese Zeit hat meinen Blick dafür geschärft, wie unterschiedlich Menschen Technik nutzen, und warum zugängliche Gestaltung die Grundlage guter Produkte ist, nicht ein Extra.",
+        "intro": "Ich lebe in Frankfurt am Main. Vier Jahre war ich digitaler Nomade in Asien, Süd- und Zentralamerika und habe remote für Kunden gearbeitet. Dort habe ich gesehen, wie unterschiedlich Menschen Technik nutzen. Gute Produkte brauchen von Anfang an zugängliche Gestaltung — nicht erst später als Extra.",
         "photoAlt": "Porträt von Henrik Heil",
         "interestsHeading": "Abseits der Arbeit"
       },
@@ -178,7 +178,14 @@
         "filterAria": "Projekte nach Merkmal filtern"
       },
       "footer": {
-        "impressum": "Impressum"
+        "impressum": "Impressum",
+        "privacy": "Datenschutz"
+      },
+      "invite": {
+        "status": "Offen für neue Projekte",
+        "heading": "Lass uns sprechen.",
+        "lead": "Ob UX, barrierefreie Umsetzung oder ein KI-gestütztes Produkt — eine kurze Mail reicht.",
+        "cta": "E-Mail schreiben"
       },
       "videoModal": {
         "close": "Video schließen",
@@ -260,12 +267,30 @@
         "liabilityContentBody": "Als Diensteanbieter bin ich gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG bin ich als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.",
         "liabilityLinksHeading": "Haftung für Links",
         "liabilityLinksBody": "Diese Seite enthält Links zu externen Websites Dritter, auf deren Inhalte ich keinen Einfluss habe. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich."
+      },
+      "privacy": {
+        "pageTitle": "Datenschutz · Henrik Heil",
+        "heading": "Datenschutz",
+        "controllerHeading": "Verantwortlicher",
+        "controllerBody": "Verantwortlich für die Datenverarbeitung auf dieser Website ist Henrik Heil, Westendstraße 100, 60325 Frankfurt am Main, E-Mail: <a href=\"mailto:contact@henrikheil.net\">contact@henrikheil.net</a>.",
+        "generalHeading": "Allgemeines",
+        "generalBody": "Diese Portfolio-Website ist eine statische Seite. Beim bloßen Besuch werden von mir keine personenbezogenen Nutzungsprofile erstellt und keine Analyse- oder Marketing-Cookies gesetzt.",
+        "storageHeading": "Lokal gespeicherte Einstellungen",
+        "storageBody": "Theme (Hell/Dunkel) und Sprache werden in Ihrem Browser unter localStorage gespeichert, damit Ihre Wahl beim nächsten Besuch erhalten bleibt. Die Daten verlassen Ihren Rechner nicht und werden nicht an mich übermittelt. Sie können sie jederzeit in den Browser-Einstellungen löschen.",
+        "youtubeHeading": "YouTube-Videos",
+        "youtubeBody": "Eingebettete Videos (z. B. Produktvideos oder das Klavier-Video) werden erst geladen, wenn Sie sie bewusst starten. Dann stellt Ihr Browser eine Verbindung zu YouTube her (youtube-nocookie.com). Dabei können Daten wie IP-Adresse und Geräteinformationen an Google Ireland Limited bzw. Google LLC verarbeitet werden. Für diese Verarbeitung gelten die Datenschutzhinweise von Google: <a href=\"https://policies.google.com/privacy\" rel=\"noopener noreferrer\" target=\"_blank\">policies.google.com/privacy</a>.",
+        "linksHeading": "Externe Links",
+        "linksBody": "Links zu GitHub, LinkedIn und den Live-Demos der Projekte führen auf Seiten Dritter. Für deren Inhalte und Datenverarbeitung sind die jeweiligen Anbieter verantwortlich.",
+        "rightsHeading": "Ihre Rechte",
+        "rightsBody": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung, soweit gesetzlich vorgesehen. Außerdem besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde.",
+        "contactHeading": "Kontakt zum Datenschutz",
+        "contactBody": "Fragen zum Datenschutz richten Sie bitte an <a href=\"mailto:contact@henrikheil.net\">contact@henrikheil.net</a>."
       }
     },
     "en": {
       "meta": {
         "title": "Henrik Heil · UX Engineer & Software Developer",
-        "description": "Henrik Heil — UX engineer & software developer based in Frankfurt. Web apps, AI tools, and live demos: Patina, Velosia, hugur, and more — built accessibly."
+        "description": "Henrik Heil — UX engineer and software developer in Frankfurt. Web apps, AI tools, and live demos like Patina, Velosia, and hugur — built to be accessible."
       },
       "nav": {
         "profile": "Profile",
@@ -284,7 +309,7 @@
         "role": "UX Engineer & Software Developer",
         "tagline": "UX engineer & software developer — concept, code, and video from one source.",
         "bioLead": "I design and build digital products,",
-        "bioDetail": "from the first sketch to an accessible production system.",
+        "bioDetail": "from the first sketch to a finished, accessible app.",
         "more": "Focus areas & background",
         "credentials": ["Dipl.-Ing. (FH) Media Informatics", "Frankfurt am Main"]
       },
@@ -294,7 +319,7 @@
       },
       "about": {
         "title": "About me",
-        "intro": "I live in Frankfurt, Germany — after four years as a digital nomad across Asia, South and Central America, working remotely for my clients. That time sharpened my sense of how differently people use technology — and why accessible design is not a nice-to-have, but the foundation of good products.",
+        "intro": "I live in Frankfurt, Germany — after four years as a digital nomad across Asia, South and Central America, working remotely for my clients. There I saw how differently people use technology. Good products need accessible design from the start — not later as an add-on.",
         "photoAlt": "Portrait of Henrik Heil",
         "interestsHeading": "Away from work"
       },
@@ -343,7 +368,14 @@
         "filterAria": "Filter projects by trait"
       },
       "footer": {
-        "impressum": "Legal notice"
+        "impressum": "Legal notice",
+        "privacy": "Privacy"
+      },
+      "invite": {
+        "status": "Open to new projects",
+        "heading": "Let's talk.",
+        "lead": "Whether UX, accessible delivery, or an AI-powered product — a short email is enough.",
+        "cta": "Send an email"
       },
       "videoModal": {
         "close": "Close video",
@@ -425,21 +457,39 @@
         "liabilityContentBody": "As service provider I am responsible for my own content on these pages in accordance with § 7 (1) TMG (German Telemedia Act) under general law. However, pursuant to §§ 8 to 10 TMG, I am not obliged as service provider to monitor transmitted or stored third-party information or to investigate circumstances indicating illegal activity.",
         "liabilityLinksHeading": "Liability for links",
         "liabilityLinksBody": "This site contains links to external third-party websites over whose content I have no influence. The respective provider is always responsible for the content of linked pages."
+      },
+      "privacy": {
+        "pageTitle": "Privacy · Henrik Heil",
+        "heading": "Privacy",
+        "controllerHeading": "Controller",
+        "controllerBody": "The controller responsible for data processing on this website is Henrik Heil, Westendstraße 100, 60325 Frankfurt am Main, Germany. Email: <a href=\"mailto:contact@henrikheil.net\">contact@henrikheil.net</a>.",
+        "generalHeading": "General",
+        "generalBody": "This portfolio is a static website. Merely visiting the site does not create personal usage profiles on my side, and I do not set analytics or marketing cookies.",
+        "storageHeading": "Locally stored preferences",
+        "storageBody": "Theme (light/dark) and language are stored in your browser via localStorage so your choice persists on the next visit. These values never leave your device and are not sent to me. You can delete them anytime in your browser settings.",
+        "youtubeHeading": "YouTube videos",
+        "youtubeBody": "Embedded videos (for example product videos or the piano clip) load only after you deliberately start them. Your browser then connects to YouTube (youtube-nocookie.com). Data such as IP address and device information may be processed by Google Ireland Limited or Google LLC. Google’s privacy policy applies: <a href=\"https://policies.google.com/privacy\" rel=\"noopener noreferrer\" target=\"_blank\">policies.google.com/privacy</a>.",
+        "linksHeading": "External links",
+        "linksBody": "Links to GitHub, LinkedIn, and live project demos lead to third-party sites. Those providers are responsible for their own content and data processing.",
+        "rightsHeading": "Your rights",
+        "rightsBody": "Where applicable under law, you have the right to access, rectification, erasure, restriction of processing, data portability, and to object to processing. You may also lodge a complaint with a data protection supervisory authority.",
+        "contactHeading": "Privacy contact",
+        "contactBody": "For privacy questions, please email <a href=\"mailto:contact@henrikheil.net\">contact@henrikheil.net</a>."
       }
     }
   },
   "projectSummaries": {
     "en": {
-      "patina": "Checks historical novels for anachronisms — with DWDS evidence and your final call.",
+      "patina": "Finds words in historical novels that do not fit the period. DWDS provides evidence; you make the final call.",
       "velosia": "Snap a photo: AI drafts listings and fills Kleinanzeigen and Vinted via app or extension.",
       "schnappster": "Monitors classified searches, scores new listings with AI, and alerts you to real bargains.",
       "hugur": "Notes, links, and ideas in one searchable stream — browser, extension, and Android.",
       "tile-weave": "Generate fabric patterns with AI, check tile seams, preview them on 3D garments.",
-      "suntino": "Chrome extension: summarize pages, YouTube, and PDFs in the side panel.",
-      "luhambo": "GPS routes as 3D flythroughs with photo stops — open map data.",
+      "suntino": "Chrome extension: summarizes pages, YouTube, and PDFs in the side panel.",
+      "luhambo": "Turns GPS hikes into a 3D camera flight over the landscape, with stops at your photos.",
       "cimdata-kurse": "Filter CIMDATA courses by start date, build a study plan, share via link.",
       "echt-oder-ki": "Daily duel: spot AI fakes in text and images — three levels, leaderboards.",
-      "komorebi": "Find conservation roles worldwide — discover on a map, filter, apply directly.",
+      "komorebi": "Find nature conservation roles worldwide on a map. Filter them and apply directly.",
       "quality-touch": "A connection space for couples with guided exercises in touch, talk, and closeness.",
       "a11y-quiz": "WCAG 2.2 quiz in ChatGPT with personal results and an accessible dashboard."
     }

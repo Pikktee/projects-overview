@@ -131,11 +131,18 @@
 
   function applyI18n() {
     document.documentElement.lang = locale;
-    document.title = document.body.classList.contains('page-legal')
-      ? t('legal.pageTitle')
-      : t('meta.title');
+    const page = document.body.dataset.page;
+    if (page === 'privacy') document.title = t('privacy.pageTitle');
+    else if (page === 'impressum' || document.body.classList.contains('page-legal')) {
+      document.title = t('legal.pageTitle');
+    } else {
+      document.title = t('meta.title');
+    }
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', t('meta.description'));
+    if (metaDesc && page === 'privacy') metaDesc.setAttribute('content', t('privacy.generalBody'));
+    else if (metaDesc && !document.body.classList.contains('page-legal')) {
+      metaDesc.setAttribute('content', t('meta.description'));
+    }
 
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       if (el.id === 'video-modal-title' && videoModalOpen) return;

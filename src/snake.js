@@ -50,12 +50,14 @@
     '.skill-list__term',
     '.skill-list__items',
     '.about__timeline-item',
+    '.invite',
+    '.invite__cta',
     '.footer a',
   ].join(',');
   const CONTENT_SELECTORS = CONTENT_SELECTOR.split(',').map((s) => s.trim());
   const IGNORE_LAYERS = '.snake-canvas,.snake-hud,.snake-overlay,.aurora,.grain,.skip-link';
   const LAYOUT_CHROME =
-    'html,body,main,.work,.work__catalog,.facet-bar,.grid,.sections,.section,.about,.about__grid,.about__col,.about__personal,.about__personal-body,.about__photo-swing,.about__photo-card,.hero,.hero__bar,.hero__title-row,.hero__controls,.hero__contact,.hero__contact-list,.skill-list,.about__timeline,.card,.card__btn,.card__body,.card__media,.card__placeholder';
+    'html,body,main,.work,.work__catalog,.facet-bar,.grid,.sections,.section,.about,.about__grid,.about__col,.about__personal,.about__personal-body,.about__photo-swing,.about__photo-card,.invite,.hero,.hero__bar,.hero__title-row,.hero__controls,.hero__contact,.hero__contact-list,.skill-list,.about__timeline,.card,.card__btn,.card__body,.card__media,.card__placeholder';
 
   window.__startSnake = function startSnake(opts = {}) {
     if (window.__snakeActive) return;

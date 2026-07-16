@@ -1,7 +1,7 @@
 {
   "patina": {
     "tagline": "Anachronismen in historischen Romanen finden. DWDS liefert Belege, Sie entscheiden.",
-    "summary": "Historische Romane auf Anachronismen prüfen. KI markiert Verdachtsfälle, DWDS liefert Belege.",
+    "summary": "Findet alte Wörter in historischen Romanen, die damals nicht passten. Die KI markiert Verdachtsfälle, DWDS liefert Belege.",
     "overview": "Patina hilft Autorinnen, die Sprache historischer Romane an eine Epoche anzupassen. Kapitel für Kapitel schlägt die KI Verdachtsfälle vor; das Digitale Wörterbuch der deutschen Sprache (DWDS) zeigt Wortverlaufskurven als historische Evidenz. Am Ende entscheiden Sie, was bleibt.\n\nFrequenzkurven belegen, wann ein Wort häufiger wurde. Sie beweisen nicht, dass ein Ausdruck in Ihrer Szene unmöglich ist. Bedeutungswandel, historische Orthografie und der Unterschied zwischen gesprochener und gedruckter Sprache werden mitgedacht, nicht weggelassen.\n\nKeine stillen Korrekturen, kein Druck zur Massenänderung. Verdacht bleibt Verdacht, markiert in Bernstein statt Rot.",
     "uxNarrative": "Kapitel lassen sich geordnet bearbeiten; Prüfungen starten auf Abruf. Verdachtsfälle, Korpuskurven und Begründungen stehen nebeneinander, damit Sie vom Text zur Evidenz und zurück wechseln können.\n\nUnsichere Treffer wirken warnend, nicht alarmierend. Wo das Korpus bei Bedeutungswandel eine Lücke lässt, liefert die KI-Erklärung Kontext; das Stattdessen-Panel arbeitet mit Toleranz nach Epoche.",
     "highlights": [
@@ -61,7 +61,7 @@
   },
   "suntino": {
     "tagline": "Web, YouTube und PDFs im Chrome-Seitenfenster zusammenfassen. Stil, Sprache, Vorlesen.",
-    "summary": "Web, YouTube und PDFs im Chrome-Seitenfenster zusammenfassen und vorlesen.",
+    "summary": "Seiten, YouTube und PDFs im Chrome-Seitenfenster zusammenfassen und vorlesen.",
     "overview": "Öffnest du das Seitenfenster, startet die Zusammenfassung der aktuellen Seite automatisch. Beim Tab-Wechsel folgt Suntino der neuen Quelle.\n\nArtikel, YouTube-Videos und PDFs, markierter Text per Rechtsklick. Länge, Stil und Zielsprache stellst du im Panel ein; Änderungen erzeugen sofort eine neue Fassung.\n\nÜber 35 Sprachen, Leichte Sprache, anpassbare Schriftgröße, Vorlesen und Rückfragen im Kontext der Seite.",
     "uxNarrative": "Schmales Panel: Quelle oben, Stil- und Längenwahl als Dropdowns, darunter der scrollbare Text. Die Zusammenfassung streamt live ins Panel.\n\nLeichte Sprache, größere Leseschrift und Vorlesen in den Einstellungen. Teilen, Kopieren und Markdown-Export in der Aktionsleiste.",
     "highlights": [
@@ -97,7 +97,7 @@
   },
   "komorebi": {
     "tagline": "Geförderte Naturschutz-Stellen weltweit. Auf der Karte filtern und direkt bewerben.",
-    "summary": "Kostenlose Karte mit Naturschutz-Freiwilligendiensten und Praktika weltweit. Filtern und direkt zur Quelle springen.",
+    "summary": "Kostenlose Karte für Naturschutz-Einsätze und Praktika weltweit. Filtern und direkt zur Quelle springen.",
     "overview": "Komorebi sammelt ökologische Freiwilligendienste, Praktika und Forschungsassistenzen aus Quellen wie dem Europäischen Solidaritätskorps und internationalen Naturschutz-Portalen. Eine Python-Pipeline prüft und vereinheitlicht die Daten täglich.\n\nAuf der Karte filterst du nach Land, Programm, Kosten und Tätigkeitsfeld, siehst Details und springst zur Originalquelle. Nicht-kommerziell, auf Deutsch.\n\nReact-Frontend auf Leaflet, statisch ausgeliefert, täglich per GitHub Actions aktualisiert unter komorebi.henrikheil.net.",
     "uxNarrative": "Startseite mit Kennzahlen, dann Karte und Stellensuche. Filter wirken sofort; Marker und Detailseiten beantworten die Fragen vor einer Bewerbung.\n\nDu-Ansprache, warmes Grün-Gelb-Farbschema. Wer eine Stelle gefunden hat, hat einen konkreten nächsten Schritt.",
     "highlights": [
@@ -133,7 +133,7 @@
   },
   "luhambo": {
     "tagline": "GPS-Route als 3D-Kamerafahrt. Foto-Stopps, freies Terrain, Satellitenbild.",
-    "summary": "Verwandelt GPS-Wanderungen in eine 3D-Kamerafahrt über freiem Terrain, mit Foto-Stopps unterwegs.",
+    "summary": "Macht aus GPS-Wanderungen eine 3D-Kamerafahrt über der Landschaft, mit Stopps an deinen Fotos.",
     "overview": "Luhambo (Siswati für Reise) verwandelt GPS-Routen in 3D-Kamerafahrten. Esri-Satellit über AWS-Terrain-Tiles, gerendert mit MapLibre GL JS. Die Demo-Route führt vom Berner Oberland von Lauterbrunnen nach Grindelwald.\n\nIntro-Orbit, Verfolgung über die Strecke, Bremsungen an Foto-Stopps mit Ken-Burns-Overlays, Finale-Orbit. Fotos sind Wegpunkten zugeordnet.\n\nKameradistanz, Geschwindigkeit und Fortschritt per Scrubbing; Pause mit freier Kamera. Proof of Concept unter luhambo.henrikheil.net.",
     "uxNarrative": "Intro-Overlay, dann Karte mit vorgeladenen Fotos am nächsten Stopp. Steuerleiste: Play/Pause, Geschwindigkeit, Kameradistanz, Fortschrittsleiste mit Foto-Markern.\n\nAn Stopps verlangsamt die Fahrt, Ken-Burns-Karte als Atempause. Kilometerstand, Höhe, Höhenprofil, Hinweis auf den nächsten Stopp.",
     "highlights": [

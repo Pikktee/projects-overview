@@ -565,8 +565,20 @@ ${headExtras}
     </div>
   </section>
 
+  <section class="invite" id="zusammenarbeit" aria-labelledby="invite-heading">
+    <p class="invite__status" data-i18n="invite.status">${escapeHtml(tDe.invite.status)}</p>
+    <h2 class="invite__heading" id="invite-heading" data-i18n="invite.heading">${escapeHtml(tDe.invite.heading)}</h2>
+    <p class="invite__lead" data-i18n="invite.lead">${escapeHtml(tDe.invite.lead)}</p>
+    <a class="invite__cta" href="mailto:contact@henrikheil.net">
+      <svg class="invite__cta-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span data-i18n="invite.cta">${escapeHtml(tDe.invite.cta)}</span>
+    </a>
+  </section>
+
   <footer class="footer">
     <a href="/impressum.html" data-i18n="footer.impressum">${escapeHtml(tDe.footer.impressum)}</a>
+    <span class="footer__sep" aria-hidden="true">·</span>
+    <a href="/datenschutz.html" data-i18n="footer.privacy">${escapeHtml(tDe.footer.privacy)}</a>
   </footer>
 
   ${facetSheetHtml}
@@ -676,16 +688,16 @@ const impressum = `<!DOCTYPE html>
   <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
 ${headExtras}
 </head>
-<body class="page-legal">
+<body class="page-legal" data-page="impressum">
   <div class="grain" aria-hidden="true"></div>
-  <main class="legal">
-    <div class="legal__top">
-      <a class="legal__back" href="/" data-i18n="legal.back">${escapeHtml(tDe.legal.back)}</a>
-      <div class="hero__controls">
+  <div class="hero__bar">
+    <div class="hero__controls">
       ${themeToggleHtml}
       ${langSwitchHtml('nav')}
-      </div>
     </div>
+  </div>
+  <main class="legal">
+    <a class="legal__back" href="/" data-i18n="legal.back">${escapeHtml(tDe.legal.back)}</a>
     <h1 data-i18n="legal.heading">${escapeHtml(tDe.legal.heading)}</h1>
     <section>
       <h2 data-i18n="legal.providerHeading">${escapeHtml(tDe.legal.providerHeading)}</h2>
@@ -713,8 +725,66 @@ ${headExtras}
 </body>
 </html>`;
 
+const datenschutz = `<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Datenschutz · Henrik Heil</title>
+  <meta name="description" content="${escapeHtml(tDe.privacy.generalBody)}" />
+  ${themeInitScript}
+  <link href="${fontsHref}" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=${assetVersion}" />
+${headExtras}
+</head>
+<body class="page-legal" data-page="privacy">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="hero__bar">
+    <div class="hero__controls">
+      ${themeToggleHtml}
+      ${langSwitchHtml('nav')}
+    </div>
+  </div>
+  <main class="legal">
+    <a class="legal__back" href="/" data-i18n="legal.back">${escapeHtml(tDe.legal.back)}</a>
+    <h1 data-i18n="privacy.heading">${escapeHtml(tDe.privacy.heading)}</h1>
+    <section>
+      <h2 data-i18n="privacy.controllerHeading">${escapeHtml(tDe.privacy.controllerHeading)}</h2>
+      <p data-i18n-html="privacy.controllerBody">${tDe.privacy.controllerBody}</p>
+    </section>
+    <section>
+      <h2 data-i18n="privacy.generalHeading">${escapeHtml(tDe.privacy.generalHeading)}</h2>
+      <p data-i18n="privacy.generalBody">${escapeHtml(tDe.privacy.generalBody)}</p>
+    </section>
+    <section>
+      <h2 data-i18n="privacy.storageHeading">${escapeHtml(tDe.privacy.storageHeading)}</h2>
+      <p data-i18n="privacy.storageBody">${escapeHtml(tDe.privacy.storageBody)}</p>
+    </section>
+    <section>
+      <h2 data-i18n="privacy.youtubeHeading">${escapeHtml(tDe.privacy.youtubeHeading)}</h2>
+      <p data-i18n-html="privacy.youtubeBody">${tDe.privacy.youtubeBody}</p>
+    </section>
+    <section>
+      <h2 data-i18n="privacy.linksHeading">${escapeHtml(tDe.privacy.linksHeading)}</h2>
+      <p data-i18n="privacy.linksBody">${escapeHtml(tDe.privacy.linksBody)}</p>
+    </section>
+    <section>
+      <h2 data-i18n="privacy.rightsHeading">${escapeHtml(tDe.privacy.rightsHeading)}</h2>
+      <p data-i18n="privacy.rightsBody">${escapeHtml(tDe.privacy.rightsBody)}</p>
+    </section>
+    <section>
+      <h2 data-i18n="privacy.contactHeading">${escapeHtml(tDe.privacy.contactHeading)}</h2>
+      <p data-i18n-html="privacy.contactBody">${tDe.privacy.contactBody}</p>
+    </section>
+  </main>
+  <script>window.__ASSET_V = "${assetVersion}";</script>
+  <script src="/app.js?v=${assetVersion}" defer></script>
+</body>
+</html>`;
+
 writeFileSync(join(publicDir, 'index.html'), html);
 writeFileSync(join(publicDir, 'impressum.html'), impressum);
+writeFileSync(join(publicDir, 'datenschutz.html'), datenschutz);
 console.log(
   `Built portfolio: ${allProjects.length} projects, ${FACETS.filter((f) => allProjects.some((p) => (p.facets || []).includes(f.key))).length} facets, metrics for ${Object.keys(metrics).length} slugs → public/`,
 );
